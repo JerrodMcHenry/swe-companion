@@ -56,6 +56,21 @@ Application feature development is frozen. M0–M6 are complete.
 10. Do not refactor the repeated page helpers (`Section`, `List`, `ExternalLink`) at this stage.
 11. `npm run build`, `npx tsc --noEmit` and all content validation checks must pass for every batch.
 
+## Resource diversity and learning preferences
+
+Applies to every phase, topic, interview guide and career guide. This is a content requirement, not a feature requirement: no architectural changes are authorized.
+
+- Don't assume learners prefer video. For each topic, consider the best available video lectures, written tutorials, official documentation, GitHub repositories/code examples, free books, interactive exercises, visual explanations, programming assignments and interview problems.
+- Where high-quality options exist, offer a written and a video alternative plus hands-on practice.
+- Resources are alternatives, not cumulative assignments. Never expect learners to consume several resources teaching the same material.
+- Quality, accuracy, relevance, accessibility and efficiency over quantity. Never add an inferior resource just to fill a category.
+- Prefer specific lessons, chapters, articles, repository files and exercises over homepages.
+- Keep instructional resources, reference material, practice exercises and interview preparation clearly distinct (use the existing `resources`, `exercises` and `interviewQuestions` fields and the `Resource.type` label).
+- Never imply material is free unless the recommended material itself is freely accessible.
+- Learners who already know a topic must be able to go straight to practice and mastery criteria.
+- All interactive learning is external links to existing platforms. Never build, embed or integrate interactive functionality; the app is static guidance pages, and learners read, watch and practice elsewhere.
+- Reuse the existing `Resource` type and content architecture.
+
 ## Code rules
 
 - Minimize files, directories and dependencies. Justify every new dependency and significant architectural decision.
