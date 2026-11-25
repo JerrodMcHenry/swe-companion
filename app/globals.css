@@ -1,0 +1,9 @@
+@import "tailwindcss";
+
+body {
+  @apply bg-white text-stone-900 antialiased;
+}
+
+a:focus-visible {
+  @apply outline-2 outline-offset-2 outline-stone-900;
+}
