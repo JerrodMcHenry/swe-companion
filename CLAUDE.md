@@ -55,6 +55,11 @@ Application feature development is frozen. M0–M6 are complete.
 9. Interview Preparation owns the canonical Behavioral Interviews guide; Getting Hired will reference it.
 10. Do not refactor the repeated page helpers (`Section`, `List`, `ExternalLink`) at this stage.
 11. `npm run build`, `npx tsc --noEmit` and all content validation checks must pass for every batch.
+12. Required knowledge depth uses these standard levels. A topic's `depth` text is the level name followed by its definition:
+    - **Recognize:** Identify the concept, its purpose and when it is relevant.
+    - **Explain:** Accurately explain the concept, its behavior and common use cases without assistance.
+    - **Implement:** Independently write, test and debug code using the concept.
+    - **Master:** Apply the concept to unfamiliar problems, explain trade-offs and identify appropriate alternatives without assistance.
 
 ## Resource diversity and learning preferences
 

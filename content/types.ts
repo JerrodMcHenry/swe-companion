@@ -5,7 +5,7 @@ export type Resource = {
   title: string;
   url: string;
   provider: string;
-  type: "Documentation" | "Course" | "Video" | "Article" | "Book" | "Interactive";
+  type: "Documentation" | "Course" | "Video" | "Article" | "Book" | "Interactive" | "Repository" | "Visual explanation";
   instructions: string; // What to study and why.
   verifiedOn?: string; // YYYY-MM-DD. Only set after a person has actually reviewed the resource.
 };
