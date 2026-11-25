@@ -17,7 +17,7 @@ A curated, research-backed knowledge and navigation app giving the most efficien
 - Free, high-quality external resources only.
 - Extremely simple navigation and an extremely simple codebase.
 - Never fabricate sources, URLs, interview requirements, resource availability or verification dates. Leave a field empty rather than guess.
-- Do not generate the curriculum or bulk-populate resources. Content comes from the owner/ChatGPT.
+- Do not generate the curriculum or bulk-populate resources. Content comes from the owner/ChatGPT (see Curriculum publication rules).
 - Company interview guides must separate official hiring information from anecdotal candidate reports.
 
 ## Architecture
@@ -28,6 +28,33 @@ A curated, research-backed knowledge and navigation app giving the most efficien
 - Every published topic reachable within three clicks or via search.
 - Adding content should require no application code changes.
 - Four sections: Apprenticeship, Knowledge Library, Interview Preparation, Getting Hired.
+
+Content files (each list file holds the items, a lookup and build-time reference checks):
+
+| Section | List | Item files | Page |
+|---|---|---|---|
+| Library | `content/topics.ts` | `content/topics/` | `/library/[slug]` |
+| Apprenticeship | `content/curriculum.ts` | — | `/apprenticeship/[phase]` |
+| Interview Preparation | `content/interview-guides.ts` | `content/interview-guides/` | `/interview-prep/[slug]` |
+| Getting Hired | `content/career-guides.ts` | `content/career-guides/` | `/getting-hired/[slug]` |
+
+Unpublished items are `{ planned: ... }` entries and never link. To publish a topic: add its file, add it to `topics`, and replace its `{ planned }` entry in `curriculum.ts` with `{ slug }`.
+
+## Curriculum publication rules (M7 onward)
+
+Application feature development is frozen. M0–M6 are complete.
+
+1. Never independently generate or publish whole curriculum phases. Content is researched and approved in batches; implement only an approved batch specification.
+2. Use the existing content architecture and page templates. Change application architecture only when a genuine requirement cannot be supported by the current implementation, and get approval first.
+3. Every published topic must have a clear learning objective, required knowledge depth, curated learning resources, practice exercises, interview questions and measurable mastery criteria.
+4. Recommend freely accessible material. Never imply a whole platform is free when only part is.
+5. Prefer direct links to specific lessons, documentation sections and exercises over platform homepages.
+6. Never fabricate resource verification dates, hiring requirements or source claims.
+7. Distinguish verified accessibility (the link loads and the content is free) from verified educational relevance (a person reviewed it as suitable). Report which was checked; `verifiedOn` is set only from an approved specification.
+8. Do not duplicate educational content across topics, phases and guides; reference by slug instead.
+9. Interview Preparation owns the canonical Behavioral Interviews guide; Getting Hired will reference it.
+10. Do not refactor the repeated page helpers (`Section`, `List`, `ExternalLink`) at this stage.
+11. `npm run build`, `npx tsc --noEmit` and all content validation checks must pass for every batch.
 
 ## Code rules
 
@@ -49,6 +76,6 @@ The product owner exclusively controls staging, commits and pushes. Only read-on
 
 ## Milestone workflow
 
-M0 Inspection/plan · M1 App shell + navigation · M2 Content structure + topic page · M3 Apprenticeship navigation · M4 Knowledge Library + search · M5 Interview prep + guide template · M6 Getting Hired · M7 Initial validated content · M8 Responsive, accessibility, usability validation. Provisional; never implement a future milestone without approval.
+M0 Inspection/plan · M1 App shell + navigation · M2 Content structure + topic page · M3 Apprenticeship navigation · M4 Knowledge Library + search · M5 Interview prep + guide template · M6 Getting Hired · M7 Validated content, in approved batches (M7.1 Python Mastery next) · M8 Responsive, accessibility, usability validation. Provisional; never implement a future milestone or batch without approval.
 
 After each milestone report: (1) what was implemented, (2) why, (3) files created/modified, (4) project file tree, (5) app and content flow, (6) dependencies and justification, (7) tests/verification, (8) known limitations, (9) manual verification steps, (10) suggested commit message. Then stop and wait for approval.
