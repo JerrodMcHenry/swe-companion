@@ -1,24 +1,22 @@
-// The four primary sections. Used by the navigation, home page and section pages.
+// The three primary sections. Used by the navigation and section pages.
 export const sections = [
   {
     href: "/apprenticeship",
-    title: "Apprenticeship",
-    description: "Focused units with readiness checkpoints. Skip what you can already do and start interview preparation early.",
+    title: "My Apprenticeship",
+    shortTitle: "My Path",
+    description: "Your customized apprenticeship: what to study for your target employer and role, in what order and how deeply.",
   },
   {
     href: "/library",
     title: "Knowledge Library",
-    description: "A searchable reference of technical concepts, curated resources, exercises and interview questions.",
-  },
-  {
-    href: "/interview-prep",
-    title: "Interview Preparation",
-    description: "Choose your target employer and role to get one focused preparation path, with guides for each interview format.",
+    shortTitle: "Library",
+    description: "Every topic and interview-format guide, independent of your target.",
   },
   {
     href: "/getting-hired",
     title: "Getting Hired",
-    description: "Resumes, job description analysis, applications, networking and referrals, and recovering from unsuccessful interviews.",
+    shortTitle: "Getting Hired",
+    description: "Targeting, resumes, applications and recovering from rejections. Start these early — alongside your apprenticeship, not after it.",
   },
 ];
 

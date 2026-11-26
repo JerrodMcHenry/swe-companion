@@ -123,6 +123,20 @@ const guide: InterviewGuide = {
     { title: "Pinterest — Our philosophy on AI in hiring (official; designated AI sections)", url: "https://www.pinterestcareers.com/candidate-hub/our-philosophy-on-ai-in-hiring/" },
     { title: "GitLab — Technical interviews handbook (official; non-entry boundary evidence)", url: "https://handbook.gitlab.com/handbook/hiring/interviewing/technical/" },
   ],
+  atAGlance: [
+    { label: "Formats", value: "Coding and behavioral interviews; varies by company" },
+    { label: "AI", value: "Some allow AI in designated sections only (Pinterest, official)" },
+    { label: "Tip", value: "Use a company's own path if it has one" },
+  ],
+  parallel: ["Behavioral preparation", "Explaining your projects", "One substantial project (forthcoming: Unit 6)"],
+  stages: [
+    { template: "fluency", topics: ["python-lists", "python-debugging"] },
+    { template: "core", topics: ["problem-solving-process", "complexity-analysis", "arrays-strings-patterns", "hash-map-set-patterns", "automated-testing"] },
+    { template: "dsBreadth", topics: ["trees-binary-search-trees", "graphs-bfs-dfs", "stacks-queues", "binary-search", "recursion-backtracking", "heaps-priority-queues", "dynamic-programming-basics"] },
+    { template: "postingBasics", topics: ["classes-objects", "git-pull-requests", "databases-sql-concepts", "ai-assisted-engineering", "Rapid-fire technical knowledge questions"] },
+    { template: "simulate", topics: [], note: "If your target has its own company path, use that instead.", guides: ["coding-algorithms", "behavioral-interviews", "oop-low-level-design", "rapid-fire-technical-questions"] },
+    { template: "job", topics: ["reading-debugging-unfamiliar-code", "code-review"] },
+  ],
 };
 
 export default guide;

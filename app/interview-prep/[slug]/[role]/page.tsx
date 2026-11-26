@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getGuide, roles, targets } from "@/content/interview-guides";
-import { PathView } from "../../preparation";
+import Moved from "../../../moved";
+import { targetName } from "../../../targets";
 
-// One page per published employer target and published role. Nothing else exists.
+// Old combined target + role pages forward to the apprenticeship for the same combination.
 export const dynamicParams = false;
 
 export function generateStaticParams() {
@@ -12,21 +13,17 @@ export function generateStaticParams() {
 
 type Props = { params: Promise<{ slug: string; role: string }> };
 
-async function resolve(params: Props["params"]) {
+export const metadata: Metadata = { title: "Moved to My Apprenticeship" };
+
+export default async function OldPathPage({ params }: Props) {
   const { slug, role } = await params;
   const target = getGuide(slug);
-  const roleGuide = getGuide(role);
-  if (!target || !roleGuide || !targets.includes(target) || !roles.includes(roleGuide)) return undefined;
-  return { target, role: roleGuide };
-}
-
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const path = await resolve(params);
-  return path ? { title: `${path.target.title} · ${path.role.title}`, description: path.target.description } : {};
-}
-
-export default async function TargetRolePage({ params }: Props) {
-  const path = await resolve(params);
-  if (!path) notFound();
-  return <PathView target={path.target} role={path.role} />;
+  if (!target || !getGuide(role)) notFound();
+  return (
+    <Moved
+      href={`/apprenticeship/for/${slug}/${role}`}
+      title={`Your ${targetName(slug, target.title)} apprenticeship`}
+      text="Interview preparation is now part of My Apprenticeship: one customized learning path for this employer and role."
+    />
+  );
 }

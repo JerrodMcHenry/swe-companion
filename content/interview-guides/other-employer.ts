@@ -53,7 +53,7 @@ const guide: InterviewGuide = {
   ],
   studyTopics: [
     { title: "Problem-solving process and communication", priority: "Essential", depth: "Implement", slug: "problem-solving-process", reason: "Coding screens and online assessments are the most widely reported technical format across employer types in this curriculum's research.", exercises: ["Majority Element (LeetCode)"] },
-    { title: "Programming fluency in one language", priority: "Essential", depth: "Apply", slug: "python-lists", reason: "Every technical format depends on writing correct code fluently." },
+    { title: "Programming fluency in one language", priority: "Essential", depth: "Apply", slug: "python-lists", phase: "programming-fluency", reason: "Every technical format depends on writing correct code fluently." },
     { title: "Complexity analysis", priority: "Essential", depth: "Implement", slug: "complexity-analysis", reason: "Asked about in coding rounds of all kinds and needed to explain your choices." },
     { title: "Arrays and strings", priority: "Essential", depth: "Implement", slug: "arrays-strings-patterns", reason: "The most common inputs in coding screens.", exercises: ["Best Time to Buy and Sell Stock (LeetCode)", "Squares of a Sorted Array (LeetCode)", "Longest Substring Without Repeating Characters (LeetCode)"] },
     { title: "Hash maps and sets", priority: "Essential", depth: "Implement", slug: "hash-map-set-patterns", reason: "The most broadly useful pattern in coding screens and real code.", exercises: ["Longest Palindrome (LeetCode)", "Top K Frequent Elements (LeetCode)"] },
@@ -110,6 +110,19 @@ const guide: InterviewGuide = {
     "/getting-hired/application-strategy",
     "/getting-hired/resume",
     "/getting-hired/interview-failure-recovery",
+  ],
+  atAGlance: [
+    { label: "How it works", value: "The posting and your recruiter's confirmed format set the priorities" },
+    { label: "Default", value: "Balanced coding, practical and behavioral preparation" },
+  ],
+  parallel: ["Behavioral preparation", "Explaining your projects", "One substantial project (forthcoming: Unit 6)"],
+  stages: [
+    { template: "fluency", topics: ["python-lists", "python-debugging"] },
+    { template: "core", topics: ["problem-solving-process", "complexity-analysis", "arrays-strings-patterns", "hash-map-set-patterns"] },
+    { template: "dsBreadth", topics: ["stacks-queues", "binary-search", "trees-binary-search-trees", "recursion-backtracking", "graphs-bfs-dfs", "heaps-priority-queues", "sorting-algorithms-intervals", "linked-lists", "dynamic-programming-basics"] },
+    { template: "practical", topics: ["existing-codebase-drills", "reading-debugging-unfamiliar-code"], guides: ["debugging-code-review"] },
+    { template: "simulate", topics: [], note: "Read the posting and ask your recruiter about the format first: a confirmed format overrides these defaults.", guides: ["coding-algorithms", "behavioral-interviews", "oop-low-level-design", "ai-assisted-coding"] },
+    { template: "job", topics: ["git-pull-requests", "automated-testing", "code-review", "classes-objects", "ai-assisted-engineering"] },
   ],
 };
 

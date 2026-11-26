@@ -1,96 +1,62 @@
 "use client";
 
 import Link from "next/link";
-import { useRef, useState } from "react";
+import { useState } from "react";
 
-export type LibraryTopic = {
-  slug: string;
+export type LibraryGroup = {
   title: string;
-  category: string;
-  overview: string;
-  phaseTitle: string;
-  keywords: string[];
+  href?: string;
+  items: { href: string; title: string; text: string; terms: string[] }[];
 };
 
-// Client component because results update as the user types. Matching is plain
-// case-insensitive substring search over title, category, phase title and keywords.
-export default function LibrarySearch({ topics }: { topics: LibraryTopic[] }) {
+// Client component because results update as the learner types: case-insensitive substring search over titles and keywords.
+export default function LibrarySearch({ groups }: { groups: LibraryGroup[] }) {
   const [query, setQuery] = useState("");
-  const inputRef = useRef<HTMLInputElement>(null);
   const normalized = query.trim().toLowerCase();
-
-  const results = normalized
-    ? topics.filter((topic) =>
-        [topic.title, topic.category, topic.phaseTitle, ...topic.keywords].some((text) =>
-          text.toLowerCase().includes(normalized),
-        ),
-      )
-    : topics;
-
-  const categories = [...new Set(results.map((topic) => topic.category))].sort();
+  const matches = (item: LibraryGroup["items"][number]) =>
+    !normalized || [item.title, ...item.terms].some((text) => text.toLowerCase().includes(normalized));
+  const results = groups.map((group) => ({ ...group, items: group.items.filter(matches) })).filter((group) => group.items.length > 0);
+  const count = results.reduce((sum, group) => sum + group.items.length, 0);
 
   return (
-    <div className="mt-10 max-w-3xl">
-      <label htmlFor="library-search" className="block text-sm font-medium">
-        Search topics
+    <>
+      <label htmlFor="library-search" className="sr-only">
+        Search the Knowledge Library
       </label>
-      <div className="mt-2 flex gap-2">
-        <input
-          id="library-search"
-          ref={inputRef}
-          type="search"
-          value={query}
-          onChange={(event) => setQuery(event.target.value)}
-          placeholder="Search by topic, category or keyword"
-          autoComplete="off"
-          className="w-full rounded-md border border-stone-300 px-3 py-2 placeholder:text-stone-500 focus:border-stone-900 focus:outline-2 focus:outline-offset-1 focus:outline-stone-900"
-        />
-        {query && (
-          <button
-            type="button"
-            onClick={() => {
-              setQuery("");
-              inputRef.current?.focus(); // The button disappears, so return focus to the input.
-            }}
-            className="shrink-0 rounded-md border border-stone-300 px-4 py-2 text-sm font-medium hover:border-stone-500 hover:bg-stone-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-stone-900"
-          >
-            Clear
-          </button>
-        )}
-      </div>
-
-      <p aria-live="polite" className="mt-3 min-h-5 text-sm text-stone-600">
-        {normalized && `${results.length} ${results.length === 1 ? "topic" : "topics"} found`}
+      <input
+        id="library-search"
+        className="search"
+        type="search"
+        value={query}
+        onChange={(event) => setQuery(event.target.value)}
+        placeholder="Search topics, e.g. hash map, merge conflict, GIL…"
+        autoComplete="off"
+      />
+      <p aria-live="polite" className="small muted" style={{ minHeight: 22, margin: "8px 0 0" }}>
+        {normalized && `${count} ${count === 1 ? "result" : "results"}`}
       </p>
-
       {results.length === 0 ? (
-        <div className="mt-6 border-y border-stone-200 py-8">
-          <p className="font-medium">No topics match “{query.trim()}”.</p>
-          <p className="mt-1 text-stone-600">
-            Try a broader term or a different spelling. The library grows as new topics are published.
+        <div className="card" style={{ padding: 20, marginTop: 16 }}>
+          <b>Nothing matches “{query.trim()}”.</b>
+          <p className="small muted" style={{ margin: "4px 0 0" }}>
+            Try a broader term or a different spelling.
           </p>
         </div>
       ) : (
-        <div className="mt-6 space-y-10">
-          {categories.map((category) => (
-            <section key={category}>
-              <h2 className="text-sm font-semibold tracking-wide text-stone-600 uppercase">{category}</h2>
-              <ul className="mt-3 divide-y divide-stone-200 border-y border-stone-200">
-                {results
-                  .filter((topic) => topic.category === category)
-                  .map((topic) => (
-                    <li key={topic.slug}>
-                      <Link href={`/library/${topic.slug}`} className="block py-4 hover:bg-stone-50">
-                        <span className="font-medium">{topic.title}</span>
-                        <span className="mt-1 block text-stone-600">{topic.overview}</span>
-                      </Link>
-                    </li>
-                  ))}
-              </ul>
-            </section>
-          ))}
-        </div>
+        results.map((group) => (
+          <section key={group.title} className="libgroup">
+            <h2 className="eyebrow">{group.href ? <Link href={group.href}>{group.title}</Link> : group.title}</h2>
+            <div className="libgrid">
+              {group.items.map((item) => (
+                <Link key={item.href} className="card lib" href={item.href}>
+                  <b>{item.title}</b>
+                  <div className="d">{item.text}</div>
+                </Link>
+              ))}
+            </div>
+          </section>
+        ))
       )}
-    </div>
+    </>
   );
 }

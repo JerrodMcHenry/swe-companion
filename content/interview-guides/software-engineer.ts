@@ -37,7 +37,7 @@ const guide: InterviewGuide = {
     "Clear technical communication.",
   ],
   studyTopics: [
-    { title: "Programming fluency in one language", priority: "Essential", depth: "Apply", slug: "python-lists", reason: "Postings reviewed in this curriculum's research consistently require proficiency in at least one language, and all day-to-day work depends on it. Complete Programming Fluency or show equivalent fluency." },
+    { title: "Programming fluency in one language", priority: "Essential", depth: "Apply", slug: "python-lists", phase: "programming-fluency", reason: "Postings reviewed in this curriculum's research consistently require proficiency in at least one language, and all day-to-day work depends on it. Complete Programming Fluency or show equivalent fluency." },
     { title: "Testing and dry-running code", priority: "Essential", depth: "Implement", slug: "python-debugging", reason: "Debugging and testing are named in most postings and are a large part of the daily job." },
     { title: "Git and pull requests", priority: "Essential", depth: "Implement", slug: "git-pull-requests", reason: "Used from the first week of most jobs; Git (10/28) and code review (15/28) appear in the R4 posting sample." },
     { title: "Automated testing", priority: "Essential", depth: "Implement", slug: "automated-testing", reason: "Testing is named in 17 of 28 R4 postings, and teams expect tests with changes." },

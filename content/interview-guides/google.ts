@@ -62,7 +62,7 @@ const guide: InterviewGuide = {
   studyTopics: [
     { title: "Problem-solving process and communication", priority: "Essential", depth: "Apply", slug: "problem-solving-process", reason: "Google's official mock interview models this: clarify, explain, brute force, optimize, then code." },
     { title: "Complexity analysis", priority: "Essential", depth: "Apply", slug: "complexity-analysis", reason: "Reported in every reviewed coding round, including worst-case questions." },
-    { title: "Programming fluency in one language", priority: "Essential", depth: "Apply", slug: "python-lists", reason: "Write correct code without an IDE or AI. Complete Programming Fluency or show equivalent fluency in Java, C++, Go or JavaScript." },
+    { title: "Programming fluency in one language", priority: "Essential", depth: "Apply", slug: "python-lists", phase: "programming-fluency", reason: "Write correct code without an IDE or AI. Complete Programming Fluency or show equivalent fluency in Java, C++, Go or JavaScript." },
     { title: "Testing and dry-running code", priority: "Essential", depth: "Implement", slug: "python-debugging", reason: "Testing and error checking appear in official preparation material; candidates report being asked to dry-run their code.", exercises: ["Without running it, dry-run one of your earlier solutions on an edge-case input, writing each variable's value in a table."] },
     { title: "Arrays and strings, including two pointers and sliding window", priority: "Essential", depth: "Apply", slug: "arrays-strings-patterns", reason: "Core of reported coding problems (sliding window and array problems in several reports).", exercises: ["Longest Substring Without Repeating Characters (LeetCode)", "Product of Array Except Self (LeetCode)", "3Sum (LeetCode)"] },
     { title: "Hash maps and sets", priority: "Essential", depth: "Apply", slug: "hash-map-set-patterns", reason: "Hash-map problems appeared across the reviewed reports.", exercises: ["Longest Consecutive Sequence (LeetCode)", "Subarray Sum Equals K (LeetCode)"] },
@@ -181,6 +181,20 @@ const guide: InterviewGuide = {
     { title: "Candidate report — Google New Grad SWE (L3), 2026 (Aced)", url: "https://www.aced.io/experiences/google-software-engineer-interview-54740a" },
     { title: "Candidate report — Google SWE L3, 2025 (Roundz)", url: "https://roundz.substack.com/p/interview-experience-57-google-software-engineer-swe2-l3" },
     { title: "Candidate report — Google SDE L3, 2025 (Roundz)", url: "https://roundz.substack.com/p/interview-experience-100-google-sde-l3" },
+  ],
+  atAGlance: [
+    { label: "Interviews", value: "Coding interviews plus behavioral; the number of rounds varies" },
+    { label: "AI and Search", value: "Not permitted in interviews (official)" },
+    { label: "Eligibility", value: "Bachelor's or equivalent practical experience; check each posting" },
+  ],
+  parallel: ["Behavioral preparation", "Explaining your projects", "One substantial project (forthcoming: Unit 6)"],
+  stages: [
+    { template: "fluency", topics: ["python-lists", "python-debugging"] },
+    { template: "core", topics: ["problem-solving-process", "complexity-analysis", "arrays-strings-patterns", "hash-map-set-patterns"] },
+    { template: "dsDepth", topics: ["stacks-queues", "linked-lists", "binary-search", "trees-binary-search-trees", "heaps-priority-queues"] },
+    { template: "advDepth", topics: ["recursion-backtracking", "graphs-bfs-dfs", "sorting-algorithms-intervals", "dynamic-programming-basics", "union-find-shortest-paths"] },
+    { template: "simulate", topics: ["System design"], note: "Practise without AI, Search or a compiler for part of the time — Google states AI tools are not permitted in interviews.", guides: ["coding-algorithms", "behavioral-interviews"] },
+    { template: "job", topics: ["git-pull-requests", "automated-testing", "reading-debugging-unfamiliar-code", "code-review", "ai-assisted-engineering", "classes-objects"] },
   ],
 };
 

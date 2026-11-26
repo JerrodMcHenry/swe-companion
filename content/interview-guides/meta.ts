@@ -54,7 +54,7 @@ const guide: InterviewGuide = {
   ],
   studyTopics: [
     { title: "Problem-solving process and communication", priority: "Essential", depth: "Apply", slug: "problem-solving-process", reason: "Meta's guidance stresses explaining your approach and driving to a working solution efficiently." },
-    { title: "Programming fluency in one language", priority: "Essential", depth: "Apply", slug: "python-lists", reason: "Speed and accuracy depend on writing correct code without looking things up." },
+    { title: "Programming fluency in one language", priority: "Essential", depth: "Apply", slug: "python-lists", phase: "programming-fluency", reason: "Speed and accuracy depend on writing correct code without looking things up." },
     { title: "Complexity analysis", priority: "Essential", depth: "Apply", slug: "complexity-analysis", reason: "Big-O is part of Meta's published coding preparation." },
     { title: "Testing and dry-running code", priority: "Essential", depth: "Implement", slug: "python-debugging", reason: "Meta's guidance asks you to find and fix bugs yourself; debugging is named in its current interviews.", exercises: ["Without running it, dry-run one of your earlier solutions on an edge-case input, writing each variable's value in a table."] },
     { title: "Arrays and strings", priority: "Essential", depth: "Apply", slug: "arrays-strings-patterns", reason: "Arrays and strings are named in Meta's coding preparation.", exercises: ["Squares of a Sorted Array (LeetCode)", "Container With Most Water (LeetCode)", "Find All Anagrams in a String (LeetCode)"] },
@@ -129,6 +129,20 @@ const guide: InterviewGuide = {
     { title: "Meta — Job search, University Grad (official; checked 25 November 2026)", url: "https://www.metacareers.com/jobsearch/?q=software%20engineer%20university%20grad" },
     { title: "interviewing.io — Meta's AI-assisted coding interview (third-party)", url: "https://interviewing.io/blog/how-to-use-ai-in-meta-s-ai-assisted-coding-interview-with-real-prompts-and-examples" },
     { title: "Candidate report — Meta software engineer onsite questions (FastPrep)", url: "https://www.fastprep.io/experience/meta-software-engineer-onsite-questions-3-experiences-43fayxndgv" },
+  ],
+  atAGlance: [
+    { label: "Postings", value: "No generalist university-grad posting was open on 25 Nov 2026" },
+    { label: "AI", value: "Many interviews include a built-in AI assistant you are expected to use (official)" },
+    { label: "Coding", value: "Prepare with and without a compiler" },
+  ],
+  parallel: ["Behavioral preparation", "One substantial project (forthcoming: Unit 6)"],
+  stages: [
+    { template: "fluency", topics: ["python-lists", "python-debugging"] },
+    { template: "coreSpeed", topics: ["problem-solving-process", "complexity-analysis", "arrays-strings-patterns", "hash-map-set-patterns"] },
+    { template: "dsBreadth", topics: ["trees-binary-search-trees", "graphs-bfs-dfs", "stacks-queues", "linked-lists", "binary-search", "heaps-priority-queues", "recursion-backtracking", "sorting-algorithms-intervals", "dynamic-programming-basics", "union-find-shortest-paths"] },
+    { template: "aiRound", topics: ["reading-debugging-unfamiliar-code", "ai-assisted-engineering", "existing-codebase-drills"] },
+    { template: "simulate", topics: [], note: "Prepare both ways until your recruiter confirms your formats: without a compiler, and with the built-in assistant.", guides: ["coding-algorithms", "behavioral-interviews", "ai-assisted-coding"] },
+    { template: "job", topics: ["git-pull-requests", "automated-testing", "code-review", "classes-objects"] },
   ],
 };
 

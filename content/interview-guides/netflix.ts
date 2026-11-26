@@ -40,7 +40,7 @@ const guide: InterviewGuide = {
   ],
   studyTopics: [
     { title: "Problem-solving process and communication", priority: "Essential", depth: "Implement", slug: "problem-solving-process", reason: "The intern posting asks for data structures and algorithms; coding interviews are the most common format across large technology employers in this curriculum's research." },
-    { title: "Programming fluency in one language", priority: "Essential", depth: "Apply", slug: "python-lists", reason: "Required for any coding assessment." },
+    { title: "Programming fluency in one language", priority: "Essential", depth: "Apply", slug: "python-lists", phase: "programming-fluency", reason: "Required for any coding assessment." },
     { title: "Testing and dry-running code", priority: "Essential", depth: "Implement", slug: "python-debugging", reason: "The intern posting names debugging explicitly." },
     { title: "Behavioral preparation", priority: "Essential", reason: "Netflix publishes its culture and values (such as judgment, candor and selflessness); prepare true stories that show them. See Behavioral Interview Preparation." },
     { title: "Core data structures and complexity", priority: "Important", depth: "Implement", slug: "complexity-analysis", reason: "For coding priorities beyond the basics, follow the Other Employer path or the Coding & Algorithms guide." },
@@ -63,6 +63,10 @@ const guide: InterviewGuide = {
     { title: "Netflix — Software Engineer Intern, Summer 2027 (official posting)", url: "https://explore.jobs.netflix.net/careers/job/790318904468" },
     { title: "Netflix — Culture (official)", url: "https://jobs.netflix.com/culture" },
     { title: "Simplify — Netflix new grad software engineer guide (third-party)", url: "https://simplify.jobs/blog/netflix-new-grad-software-engineer-guide" },
+  ],
+  atAGlance: [
+    { label: "Postings", value: "No full-time new-grad SWE posting open on 25 Nov 2026" },
+    { label: "Route", value: "Internships for current students; check each posting's real requirements" },
   ],
 };
 

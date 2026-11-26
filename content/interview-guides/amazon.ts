@@ -56,7 +56,7 @@ const guide: InterviewGuide = {
   ],
   studyTopics: [
     { title: "Problem-solving process and communication", priority: "Essential", depth: "Apply", slug: "problem-solving-process", reason: "Every coding round; Amazon evaluates how you reach and test a solution, not just the answer." },
-    { title: "Programming fluency in one language", priority: "Essential", depth: "Apply", slug: "python-lists", reason: "Amazon asks for syntactically correct code without an IDE." },
+    { title: "Programming fluency in one language", priority: "Essential", depth: "Apply", slug: "python-lists", phase: "programming-fluency", reason: "Amazon asks for syntactically correct code without an IDE." },
     { title: "Complexity analysis", priority: "Essential", depth: "Apply", slug: "complexity-analysis", reason: "Amazon's topics page asks you to know runtimes and trade-offs." },
     { title: "Testing and dry-running code", priority: "Essential", depth: "Implement", slug: "python-debugging", reason: "Amazon asks for well-tested code with edge cases checked.", exercises: ["Without running it, dry-run one of your earlier solutions on an edge-case input, writing each variable's value in a table."] },
     { title: "Arrays and strings", priority: "Essential", depth: "Apply", slug: "arrays-strings-patterns", reason: "Core of coding assessments and interviews.", exercises: ["Longest Substring Without Repeating Characters (LeetCode)", "Product of Array Except Self (LeetCode)"] },
@@ -157,6 +157,22 @@ const guide: InterviewGuide = {
     { title: "Amazon — Students & graduates (official)", url: "https://www.amazon.jobs/content/en/career-programs/university" },
     { title: "ITPro — Amazon bans AI tools during job interviews (third-party report, 2025)", url: "https://www.itpro.com/business/careers-and-training/amazon-bans-ai-tools-during-job-interviews" },
     { title: "Candidate report — 2026 Amazon New Grad SDE I OA and virtual onsite (FastPrep)", url: "https://www.fastprep.io/experience/2026-amazon-new-grad-sde-i-oa-and-virtual-onsite-1-experience-4up84xayt9" },
+  ],
+  atAGlance: [
+    { label: "First step", value: "Online assessment: coding, Workstyles, Work Simulation (official)" },
+    { label: "Interviews", value: "Several 45–60 minute interviews, including a Bar Raiser" },
+    { label: "Behavioral", value: "Leadership Principles throughout" },
+    { label: "AI", value: "Not stated officially for live interviews; practise without it" },
+  ],
+  parallel: ["Behavioral preparation", "Explaining your projects", "One substantial project (forthcoming: Unit 6)"],
+  stages: [
+    { template: "fluency", topics: ["python-lists", "python-debugging"] },
+    { template: "core", topics: ["problem-solving-process", "complexity-analysis", "arrays-strings-patterns", "hash-map-set-patterns"] },
+    { template: "design", topics: ["classes-objects", "composition-inheritance-interfaces", "designing-small-systems", "solid-design-patterns"], note: "Amazon's official topics include object-oriented design, so it comes before the long data-structures list." },
+    { template: "dsBreadth", topics: ["trees-binary-search-trees", "graphs-bfs-dfs", "heaps-priority-queues", "recursion-backtracking", "binary-search", "stacks-queues", "linked-lists", "sorting-algorithms-intervals", "dynamic-programming-basics", "union-find-shortest-paths"] },
+    { template: "fundamentals", topics: ["internet-http", "databases-sql-concepts", "computer-science-essentials", "ai-assisted-engineering", "reading-debugging-unfamiliar-code"] },
+    { template: "simulate", topics: ["System design"], note: "Take Amazon's practice online assessment, including the Work Simulation, and map every story to Leadership Principles.", guides: ["coding-algorithms", "behavioral-interviews", "oop-low-level-design", "rapid-fire-technical-questions"] },
+    { template: "job", topics: ["git-pull-requests", "automated-testing", "code-review"] },
   ],
 };
 

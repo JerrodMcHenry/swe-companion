@@ -16,7 +16,7 @@ An employment-first software engineering learning and interview preparation comp
 
 - Entry-level engineers, new graduates, self-taught developers, career switchers seeking a first role, and candidates needing focused interview preparation.
 - Targets: general entry-level SWE, Big Tech, startup/growth-stage, enterprise, entry-level backend, entry-level full-stack.
-- Company guides: Google, Amazon, Meta, Microsoft, Apple, Startups & growth-stage, Enterprise programs. Netflix, AI Engineer, Solutions Engineer and Forward Deployed Engineer stay planned, not published.
+- Employer targets (published): Google, Amazon, Meta, Apple, Microsoft, Netflix (qualified eligibility guidance only, no invented roadmap), Early-Stage Startups (incl. YC-backed), AI-Focused Startups, Growth-Stage Companies, Established Technology Companies, Enterprise & Structured Early-Career Programs, Other Employer or Specific Job Posting. Roles: Software Engineer published; Backend and Full-Stack forthcoming; AI Engineer, Solutions Engineer and Forward Deployed Engineer planned.
 - Mid/senior-level preparation is out of scope. Never impose senior expectations. Entry-level still means real competence and independent problem-solving.
 
 ## Three readiness dimensions
@@ -61,21 +61,38 @@ Depth (separate from priority; a topic's `depth` text is the level name followed
 
 Never use "Master"/"Mastery" as a depth designation; Apply is not exhaustive expertise. Distinguish closed-book interview knowledge from professional tasks where documentation and approved tools are available.
 
+## Product direction (corrected after T4; approved prototype is the reference)
+
+The primary experience is a **customized apprenticeship**: the learner selects an employer target and a role and receives one clear learning path telling them what to study, in what order, how deeply, which resources, interview questions and exercises to use, when they know enough and what to skip. The learner never constructs a curriculum from research reports, and there are never two competing roadmaps.
+
+Journey: select employer → select role → customized apprenticeship (stages) → stage (topics in order) → topic (Learn, Resources, Interview Q&A, Practice, Ready?) → next topic in the target's sequence. Behavioral preparation, projects and applications run in parallel from day one. Applying never requires completing the curriculum. The last selected employer and role are remembered in the browser (localStorage); no accounts.
+
+Research informs the recommendations but does not dominate: essential eligibility warnings and assessment rules appear as at most four short facts; detailed eligibility, process, evidence, limitations and sources live in the secondary **About this employer** view. Never present candidate-reported processes as guaranteed or one posting's requirements as universal.
+
 ## Product architecture
 
 - Next.js (App Router) + TypeScript + Tailwind CSS, static export. No backend, database, auth or external APIs.
-- Four sections: **Apprenticeship** (focused sequence, prerequisites, readiness checkpoints, stopping points), **Knowledge Library** (canonical topics, resources, interview questions, exercises), **Interview Preparation** (by company, role, experience level and assessment format), **Getting Hired** (targeting, job description analysis, resumes, LinkedIn, GitHub/portfolio, networking, referrals, applications, recruiter screens, interview recovery, negotiation).
-- One shared knowledge base: topics are defined once in the Library and referenced by slug. Company, role and format guides reference canonical topics; never duplicate lessons.
+- Three primary sections: **My Apprenticeship** (target selection and the customized apprenticeship; interview preparation is integrated here; mobile label "My Path"), **Knowledge Library** (every canonical topic, unit and interview-format guide, independent of any target, with search), **Getting Hired** (targeting, job description analysis, resumes, applications, networking, interview recovery).
+- One shared knowledge base: topics are defined once in the Library and referenced by slug. Employer, role and format guides reference canonical topics; never duplicate lessons.
 - Every published topic reachable within three clicks or via search. Adding content should require no application code changes.
 
-| Section | List | Item files | Page |
+| Content | List | Item files | Pages |
 |---|---|---|---|
-| Library | `content/topics.ts` | `content/topics/` | `/library/[slug]` |
-| Apprenticeship | `content/curriculum.ts` | — | `/apprenticeship/[phase]` |
-| Interview Preparation | `content/interview-guides.ts` | `content/interview-guides/` | `/interview-prep/[slug]` |
-| Getting Hired | `content/career-guides.ts` | `content/career-guides/` | `/getting-hired/[slug]` |
+| Topics | `content/topics.ts` | `content/topics/` | `/library/[slug]` (`?path=<target>.<role>` adds the target's depth, reason, selected practice and previous/next) |
+| Units | `content/curriculum.ts` | — | `/apprenticeship/[phase]` (Library reference) |
+| Employer, role and format guides | `content/interview-guides.ts` | `content/interview-guides/` | Targets: `/apprenticeship/for/[target]/[role]`, `/stage/[n]`, `/unit/[phase]`, `/apprenticeship/for/[target]/about`. Format and role guides: `/interview-prep/[slug]`. Old target URLs forward to the apprenticeship. |
+| Apprenticeship stages | `content/roadmap.ts` (shared stage templates, roadmap building, build-time checks) | target guide files (`stages`, `parallel`, `atAGlance`) | as above |
+| Career guides | `content/career-guides.ts` | `content/career-guides/` | `/getting-hired/[slug]` |
 
-Each list file holds the items, a lookup and build-time reference checks. Unpublished items are `{ planned: ... }` entries and never link. To publish a topic: add its file, add it to `topics`, and replace its `{ planned }` entry in `curriculum.ts` with `{ slug }`. `research/` holds research and verification notes (one Markdown file per batch); the app never reads it.
+Each list file holds the items, a lookup and build-time reference checks. Unpublished items are `{ planned: ... }` entries and never link. To publish a topic: add its file, add it to `topics`, and replace its `{ planned }` entry in `curriculum.ts` with `{ slug }`; place it in each relevant target's `stages` where it has a deliberate employment reason. `research/` holds research and verification notes (one Markdown file per batch); the app never reads it.
+
+### Target apprenticeships
+
+- `composePath(target, role)` combines the target's interview priorities with the role's on-the-job competencies (each topic once).
+- Each target's `stages` lists shared stage templates in an explicit, deterministic order with the combined entries each contains (topic slug, or exact title for entries without a topic). Order is written by hand per target, preserving genuine prerequisites; there is no recommendation or prerequisite engine.
+- Every recommended topic is placed deliberately with an employment reason. Nothing is auto-collected: topics not placed stay in the Library. Build checks: keys resolve, nothing placed twice, no deferred entry placed, every Essential entry and every target Important entry placed, the first stage starts with a published topic.
+- `StudyTopic.phase` marks an entry that covers a whole unit (e.g. Programming Fluency); `InterviewGuide.atAGlance` holds at most four short facts; `parallel` lists day-one items. A target without `stages` (Netflix) shows its eligibility guidance instead of a roadmap.
+- Recruiter-confirmed formats and actual job requirements override these defaults.
 
 ## Apprenticeship structure
 
@@ -83,7 +100,9 @@ Ten units in three stages (approved in principle; implemented in S0). Units are 
 
 - **Foundations:** 1 Programming Fluency · 2 Data Structures, Algorithms & Complexity · 3 Object-Oriented Programming & Design · 4 Engineering Fundamentals · 5 Practical Software Engineering
 - **Applied Engineering:** 6 Build and Deploy One Project · 7 Backend Engineering · 8 Full-Stack Engineering
-- **Employment Preparation:** 9 Interview Preparation (points to the section) · 10 Getting Hired (points to the section)
+- **Employment Preparation:** 9 Interview Preparation (integrated into each customized apprenticeship) · 10 Getting Hired (points to the section)
+
+Units organize the Library; the learner's order comes from their target's stages, not from unit numbers.
 
 Programming Fluency replaces Programming Mastery. Preserve the eight published Python topics. The 24 Python topics are classified (R5) as 14 Essential, 6 Working, 2 Conditional, 2 Defer; do not require all 24 before algorithms. Learners fluent in another suitable language may skip redundant Python instruction. Create no additional units without approval.
 
@@ -140,7 +159,7 @@ Python for programming and interviews; Python, FastAPI and PostgreSQL for backen
 
 ## Feature freeze and exclusions
 
-The app is a static curated knowledge, navigation and preparation companion. Do not build: authentication, accounts, databases, backend services, AI tutors/interviewers, coding sandboxes or execution, interactive assessments, automated grading, flashcards, progress tracking, gamification, leaderboards, study schedulers, automated job analyzers, analytics, payments, voice, unnecessary animation. Preserve search. Any new feature or material architectural change requires explicit approval. Approved exception: an optional readiness field on `Phase` rendered near the top of unit pages (S0). Any other schema change, including for interview questions and answers, needs separate approval.
+The app is a static curated knowledge, navigation and preparation companion. Do not build: authentication, accounts, databases, backend services, AI tutors/interviewers, coding sandboxes or execution, interactive assessments, automated grading, flashcards, progress tracking, gamification, leaderboards, study schedulers, automated job analyzers, dynamic recommendation or personalization engines, analytics, payments, voice, unnecessary animation. Preserve search. Any new feature or material architectural change requires explicit approval. Approved: an optional readiness field on `Phase` (S0); the redesign fields `StudyTopic.phase`, `InterviewGuide.stages`, `parallel` and `atAGlance`, shared stage templates, `?path=` topic navigation and remembering the last selected target in localStorage. Any other schema change needs separate approval.
 
 ## Code rules
 
@@ -151,7 +170,7 @@ The app is a static curated knowledge, navigation and preparation companion. Do 
 
 ## Design
 
-Premium, minimal technical library: clear typography, readability, obvious navigation, consistent layouts, responsive, accessible contrast, fast. No decorative animation, heavy gradients, clutter, unnecessary cards/icons/illustrations, or gamification.
+A polished, modern learning companion, matching the approved prototype (design system in `app/globals.css`): strong visual hierarchy, restrained system typography, purposeful color (one indigo accent; one tone per stage type), clean cards for targets, stages and topics, obvious clickable elements, comfortable reading widths, responsive layouts. Progressive disclosure: the roadmap shows the sequence; topics appear when a stage opens; resources, questions, exercises and readiness appear in a topic's tabs; research is one click away. Show priority only where it helps a decision. No decorative animation, clutter, badges or metadata on every element, illustrations, or gamification. Long code must never cause page-level horizontal overflow.
 
 ## Git
 

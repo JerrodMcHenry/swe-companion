@@ -53,7 +53,7 @@ const guide: InterviewGuide = {
   ],
   studyTopics: [
     { title: "Problem-solving process and communication", priority: "Essential", depth: "Apply", slug: "problem-solving-process", reason: "Microsoft's guidance asks you to clarify ambiguity and plan before implementing." },
-    { title: "Programming fluency in one language", priority: "Essential", depth: "Apply", slug: "python-lists", reason: "You code in your strongest language with no pseudocode." },
+    { title: "Programming fluency in one language", priority: "Essential", depth: "Apply", slug: "python-lists", phase: "programming-fluency", reason: "You code in your strongest language with no pseudocode." },
     { title: "Testing and dry-running code", priority: "Essential", depth: "Implement", slug: "python-debugging", reason: "Microsoft says interviewers are likely to expect you to test your solution before saying you are done.", exercises: ["Without running it, dry-run one of your earlier solutions on an edge-case input, writing each variable's value in a table."] },
     { title: "Automated testing", priority: "Essential", depth: "Implement", slug: "automated-testing", reason: "Microsoft says interviewers are likely to expect you to test your solution; this topic teaches how to choose test cases (normal, boundary, empty, invalid) and write them." },
     { title: "AI-assisted engineering and verification", priority: "Defer", slug: "ai-assisted-engineering", reason: "Microsoft asks candidates to demonstrate their own skills without outside assistance unless explicitly permitted; practise interviews without AI. AI verification remains professional preparation." },
@@ -137,6 +137,20 @@ const guide: InterviewGuide = {
     { title: "Microsoft — Interview tips (official)", url: "https://careers.microsoft.com/v2/global/en/hiring-tips/interview-tips.html" },
     { title: "Microsoft — How we hire (official)", url: "https://careers.microsoft.com/v2/global/en/hiring-tips.html" },
     { title: "Exponent — Microsoft entry-level interview experiences (third-party, candidate reports)", url: "https://www.tryexponent.com/guides/microsoft-entry-level-software-engineer-interview/experiences" },
+  ],
+  atAGlance: [
+    { label: "Coding", value: "Runnable editor, no pseudocode, test your solution (official)" },
+    { label: "AI", value: "No outside assistance unless permitted (official)" },
+    { label: "Interviews", value: "2–4 conversations of up to an hour (official)" },
+  ],
+  parallel: ["Behavioral preparation", "Explaining your projects", "One substantial project (forthcoming: Unit 6)"],
+  stages: [
+    { template: "fluencyTested", topics: ["python-lists", "python-debugging", "automated-testing"] },
+    { template: "core", topics: ["problem-solving-process", "complexity-analysis", "arrays-strings-patterns", "hash-map-set-patterns"] },
+    { template: "dsBreadth", topics: ["trees-binary-search-trees", "recursion-backtracking", "sorting-algorithms-intervals", "graphs-bfs-dfs", "linked-lists", "stacks-queues", "binary-search", "heaps-priority-queues", "dynamic-programming-basics"] },
+    { template: "design", topics: ["classes-objects", "composition-inheritance-interfaces", "designing-small-systems"] },
+    { template: "simulate", topics: ["System design"], note: "Practise in an editor that runs code, finish every problem with explicit tests, and use STAR with a reflection.", guides: ["coding-algorithms", "behavioral-interviews"] },
+    { template: "job", topics: ["git-pull-requests", "reading-debugging-unfamiliar-code", "code-review", "ai-assisted-engineering"] },
   ],
 };
 

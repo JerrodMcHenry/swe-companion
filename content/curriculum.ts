@@ -268,7 +268,7 @@ export const phases: Phase[] = [
     description:
       "Preparation for your target companies, roles and interview formats. Start early: practise interview-style problem solving and behavioral stories from the first unit.",
     stage: "Employment Preparation",
-    sectionHref: "/interview-prep",
+    sectionHref: "/apprenticeship",
   },
   {
     slug: "getting-hired",

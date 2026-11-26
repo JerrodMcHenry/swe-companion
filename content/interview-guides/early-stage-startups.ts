@@ -117,6 +117,19 @@ const guide: InterviewGuide = {
     { title: "Y Combinator — Software engineer jobs list (official postings; experience requirements)", url: "https://www.ycombinator.com/jobs/role/software-engineer" },
     { title: "Corelayer — Founding Engineer posting on YC (official; interview process)", url: "https://www.ycombinator.com/companies/corelayer/jobs/d98zA8p-founding-engineer" },
   ],
+  atAGlance: [
+    { label: "Process", value: "No standard process; take-homes, work trials and project reviews are common" },
+    { label: "Eligibility", value: "Few roles accept new grads — 3 of 32 YC postings in one snapshot" },
+    { label: "AI", value: "Varies by company; ask" },
+  ],
+  parallel: ["One substantial project (forthcoming: Unit 6)", "Behavioral preparation"],
+  stages: [
+    { template: "fluencySetup", topics: ["python-lists", "python-debugging", "git-pull-requests", "command-line-environment"] },
+    { template: "realCode", topics: ["reading-debugging-unfamiliar-code", "automated-testing", "existing-codebase-drills", "code-review"] },
+    { template: "ship", topics: ["designing-small-systems", "internet-http", "ai-assisted-engineering", "classes-objects", "composition-inheritance-interfaces", "security-fundamentals", "databases-sql-concepts", "solid-design-patterns"] },
+    { template: "takeHome", topics: ["Take-home assignments (forthcoming: Take-Home Assignments guide)", "Explaining your projects"], guides: ["debugging-code-review", "behavioral-interviews"] },
+    { template: "coreScreen", topics: ["problem-solving-process", "arrays-strings-patterns", "hash-map-set-patterns", "complexity-analysis", "trees-binary-search-trees"], note: "Some startups run algorithmic screens. Increase this only for companies that confirm one.", guides: ["coding-algorithms"] },
+  ],
 };
 
 export default guide;

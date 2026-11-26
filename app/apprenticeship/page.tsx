@@ -1,50 +1,20 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { phases } from "@/content/curriculum";
-import { stages } from "@/content/types";
-import { getSection } from "../sections";
+import TargetPicker from "../target-picker";
+import { pickerCompanies, pickerEmployerTypes, pickerRoles } from "../picker-data";
 
-const section = getSection("/apprenticeship");
-
-export const metadata: Metadata = { title: section.title };
+export const metadata: Metadata = { title: "My Apprenticeship" };
 
 export default function ApprenticeshipPage() {
   return (
     <>
-      <h1 className="text-3xl font-semibold tracking-tight">{section.title}</h1>
-      <p className="mt-4 max-w-2xl text-lg leading-relaxed text-stone-600">{section.description}</p>
-      <p className="mt-4 max-w-2xl text-stone-600">
-        Preparing for a specific employer?{" "}
-        <Link href="/interview-prep" className="font-medium text-stone-900 underline underline-offset-4 hover:text-stone-600">
+      <div className="narrow">
+        <div className="eyebrow">My Apprenticeship</div>
+        <h1 className="title" style={{ marginTop: 10 }}>
           Choose your target
-        </Link>{" "}
-        to see which parts of the Apprenticeship you need and at what depth.
-      </p>
-
-      <div className="mt-12 max-w-3xl space-y-12">
-        {stages.map((stage) => (
-          <section key={stage}>
-            <h2 className="text-sm font-semibold tracking-wide text-stone-600 uppercase">{stage}</h2>
-            <ol className="mt-3 divide-y divide-stone-200 border-y border-stone-200">
-              {phases
-                .filter((phase) => phase.stage === stage)
-                .map((phase) => (
-                  <li key={phase.slug}>
-                    <Link href={`/apprenticeship/${phase.slug}`} className="flex gap-4 py-4 hover:bg-stone-50">
-                      <span className="w-6 shrink-0 font-mono text-sm leading-6 text-stone-500">
-                        {String(phase.number).padStart(2, "0")}
-                      </span>
-                      <span>
-                        <span className="font-medium">{phase.title}</span>
-                        <span className="mt-1 block text-stone-600">{phase.description}</span>
-                      </span>
-                    </Link>
-                  </li>
-                ))}
-            </ol>
-          </section>
-        ))}
+        </h1>
+        <p className="lead">Pick the employer and role you are preparing for. Your apprenticeship adapts to them; you can change them at any time.</p>
       </div>
+      <TargetPicker companies={pickerCompanies} employerTypes={pickerEmployerTypes} roles={pickerRoles} />
     </>
   );
 }

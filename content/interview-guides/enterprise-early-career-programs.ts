@@ -131,6 +131,19 @@ const guide: InterviewGuide = {
     { title: "JPMorganChase — Digital Handbook (official; recorded HireVue and/or HackerRank first round)", url: "https://www.jpmorganchase.com/content/dam/jpmorganchase/documents/careers/jpmc-digital-handbook.pdf" },
     { title: "Capital One TDP Power Day reports (candidate-reported, FastPrep)", url: "https://www.fastprep.io/experience/2027-cycle-capital-one-tdp-new-grad-oa-power-day-24-experiences-4opp91z6le" },
   ],
+  atAGlance: [
+    { label: "Formats", value: "Online assessment and behavioral; video or case at some programs (official)" },
+    { label: "Timing", value: "Fixed recruiting season — apply early" },
+    { label: "Evidence", value: "Mostly financial-services programs" },
+  ],
+  parallel: ["Behavioral preparation", "One substantial project (forthcoming: Unit 6)"],
+  stages: [
+    { template: "fluency", topics: ["python-lists", "python-debugging"] },
+    { template: "coreOA", topics: ["problem-solving-process", "arrays-strings-patterns", "hash-map-set-patterns", "complexity-analysis", "stacks-queues", "trees-binary-search-trees", "graphs-bfs-dfs"] },
+    { template: "enterpriseEng", topics: ["classes-objects", "reading-debugging-unfamiliar-code", "automated-testing", "git-pull-requests", "databases-sql-concepts", "security-fundamentals"] },
+    { template: "assessmentDay", topics: ["Recorded video interviews (conditional)", "Business case interviews (conditional)"], note: "Follow your program's published steps. Case, video and AI-assisted rounds are program-specific.", guides: ["behavioral-interviews", "coding-algorithms"] },
+    { template: "job", topics: ["code-review", "ai-assisted-engineering"] },
+  ],
 };
 
 export default guide;

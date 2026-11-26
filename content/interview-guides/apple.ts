@@ -46,7 +46,7 @@ const guide: InterviewGuide = {
     "Discussing your projects and motivation in depth.",
   ],
   studyTopics: [
-    { title: "Programming fluency in one language", priority: "Essential", depth: "Apply", slug: "python-lists", reason: "The reviewed early-career posting requires proficiency in a language area; use the team's language if it is not Python." },
+    { title: "Programming fluency in one language", priority: "Essential", depth: "Apply", slug: "python-lists", phase: "programming-fluency", reason: "The reviewed early-career posting requires proficiency in a language area; use the team's language if it is not Python." },
     { title: "Problem-solving process and communication", priority: "Essential", depth: "Implement", slug: "problem-solving-process", reason: "Coding interviews were reported, and explaining your reasoning applies to every format." },
     { title: "Behavioral preparation", priority: "Essential", reason: "A long behavioral conversation was reported, and motivation for the team matters in a team-based process. See Behavioral Interview Preparation." },
     { title: "Explaining your projects", priority: "Essential", depth: "Explain", reason: "Team-based hiring relies on evidence of what you have built; prepare to discuss projects relevant to the team. See the Engineering Projects guide." },
@@ -117,6 +117,20 @@ const guide: InterviewGuide = {
     { title: "Apple — Job search for \"early career\" (official; checked 25 November 2026)", url: "https://jobs.apple.com/en-us/search?search=%22early%20career%22&location=united-states-USA&sort=newest" },
     { title: "Candidate report — 2026 Apple new grad SWE: HR call, Java questions, coding and manager round (FastPrep)", url: "https://www.fastprep.io/experience/2026-apple-new-grad-swe-hr-call-java-questions-coding-and-manager-round-1-experi-52ej2p4ouy" },
     { title: "Candidate reports — Apple AI coding and related interviews (FastPrep, mixed levels)", url: "https://www.fastprep.io/experience/2024-2026-apple-ai-coding-related-interviews-17-experiences-new-grad-first-2hegeoa82n" },
+  ],
+  atAGlance: [
+    { label: "Process", value: "Set by each team; no official guide" },
+    { label: "Language", value: "Use your team's language" },
+    { label: "Postings", value: "Few early-career postings; team-specific" },
+  ],
+  parallel: ["Behavioral preparation", "Explaining your projects", "One substantial project (forthcoming: Unit 6)"],
+  stages: [
+    { template: "fluencyTeam", topics: ["python-lists", "Language fundamentals questions", "python-debugging"], note: "Apple teams use different languages (for example Swift for iOS). Confirm yours and practise in it." },
+    { template: "core", topics: ["problem-solving-process", "complexity-analysis", "arrays-strings-patterns", "hash-map-set-patterns"] },
+    { template: "dsDepth", topics: ["linked-lists", "stacks-queues", "trees-binary-search-trees", "graphs-bfs-dfs", "binary-search", "heaps-priority-queues"] },
+    { template: "oopFundamentals", topics: ["classes-objects", "composition-inheritance-interfaces", "computer-science-essentials"] },
+    { template: "simulate", topics: ["System design"], note: "Apple's process is set by each team. Ask your recruiter what to expect and prepare your motivation for that team.", guides: ["coding-algorithms", "behavioral-interviews", "rapid-fire-technical-questions"] },
+    { template: "job", topics: ["git-pull-requests", "automated-testing", "reading-debugging-unfamiliar-code", "code-review", "ai-assisted-engineering"] },
   ],
 };
 

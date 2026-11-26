@@ -115,6 +115,20 @@ const guide: InterviewGuide = {
     { title: "Plaud new-grad onsite (candidate-reported, FastPrep)", url: "https://www.fastprep.io/experience/plaud-new-grad-swe-onsite-interview-experience-1-experience-cx8d9z234f" },
     { title: "Notion new-grad and AI new-grad invitations (candidate-reported, FastPrep)", url: "https://www.fastprep.io/experience/2026-notion-new-grad-assessments-and-virtual-onsite-invitations-2-experiences-2tarwra7ip" },
   ],
+  atAGlance: [
+    { label: "Scope", value: "General software roles, not ML research" },
+    { label: "Formats", value: "Coding, debugging, basic design; AI-assisted builds at some (reported)" },
+    { label: "AI", value: "Only where the company explicitly allows it" },
+  ],
+  parallel: ["Behavioral preparation", "Explaining your projects", "One substantial project (forthcoming: Unit 6)"],
+  stages: [
+    { template: "fluency", topics: ["python-lists", "python-debugging"] },
+    { template: "core", topics: ["problem-solving-process", "complexity-analysis", "arrays-strings-patterns", "hash-map-set-patterns", "trees-binary-search-trees", "graphs-bfs-dfs", "dynamic-programming-basics"] },
+    { template: "verify", topics: ["reading-debugging-unfamiliar-code", "automated-testing", "existing-codebase-drills", "ai-assisted-engineering", "code-review"], note: "Practise independently first. Use AI in an interview only where the company explicitly allows it." },
+    { template: "designApis", topics: ["System design", "internet-http", "designing-small-systems", "classes-objects", "composition-inheritance-interfaces"] },
+    { template: "simulate", topics: [], guides: ["coding-algorithms", "behavioral-interviews", "ai-assisted-coding", "debugging-code-review"] },
+    { template: "job", topics: ["git-pull-requests", "security-fundamentals"] },
+  ],
 };
 
 export default guide;

@@ -116,6 +116,21 @@ const guide: InterviewGuide = {
     { title: "Notion new-grad onsite: debugging round (candidate-reported, FastPrep)", url: "https://www.fastprep.io/experience/2026-notion-new-grad-assessments-and-virtual-onsite-invitations-2-experiences-2tarwra7ip" },
     { title: "Scale AI new-grad onsite (candidate-reported, FastPrep)", url: "https://www.fastprep.io/experience/scale-ai-new-grad-swe-virtual-onsite-cwmvy27rd8" },
   ],
+  atAGlance: [
+    { label: "Formats", value: "Coding screen plus integration and debugging rounds (reported)" },
+    { label: "Eligibility", value: "Few new-grad openings at any time" },
+    { label: "AI", value: "Some run AI rounds; confirm with your recruiter" },
+  ],
+  parallel: ["Behavioral preparation", "Explaining your projects", "One substantial project (forthcoming: Unit 6)"],
+  stages: [
+    { template: "fluency", topics: ["python-lists", "python-debugging"] },
+    { template: "core", topics: ["problem-solving-process", "complexity-analysis", "arrays-strings-patterns", "hash-map-set-patterns"] },
+    { template: "realCode", topics: ["reading-debugging-unfamiliar-code", "existing-codebase-drills", "automated-testing", "code-review"] },
+    { template: "integration", topics: ["API integration tasks (forthcoming: Backend Engineering, Unit 7)", "internet-http", "ai-assisted-engineering"] },
+    { template: "dsBreadth", topics: ["trees-binary-search-trees", "graphs-bfs-dfs", "stacks-queues", "dynamic-programming-basics"] },
+    { template: "simulate", topics: ["System design"], guides: ["coding-algorithms", "behavioral-interviews", "debugging-code-review", "ai-assisted-coding"] },
+    { template: "job", topics: ["git-pull-requests", "classes-objects"] },
+  ],
 };
 
 export default guide;

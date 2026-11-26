@@ -77,6 +77,16 @@ export type StudyTopic = {
   reason?: string;
   slug?: string;
   exercises?: string[]; // Exact titles of exercises in the linked topic (requires slug; checked at build time).
+  phase?: string; // Apprenticeship unit this entry covers as a whole, e.g. "programming-fluency" (the roadmap lists the unit's topics).
+};
+
+// One stage of a target's apprenticeship, in recommended order. Templates live in content/roadmap.ts.
+// `topics` are keys of the target + role combined entries: a topic slug, or the exact title of an entry without one.
+export type StageRef = {
+  template: string;
+  topics: string[];
+  note?: string; // A short target-specific instruction shown on the stage page.
+  guides?: string[]; // Interview-format guide slugs to practise with.
 };
 
 // A titled block of short items, shared by interview and career guides.
@@ -100,6 +110,10 @@ export type InterviewGuide = {
   sources?: { title: string; url: string }[];
   relatedGuides?: string[]; // Paths of other guides, e.g. "/interview-prep/behavioral-interviews" or "/getting-hired/resume".
   verifiedOn?: string; // YYYY-MM-DD. Only set after a person has actually verified the guide.
+  // Employer targets only:
+  atAGlance?: { label: string; value: string }[]; // At most four short facts, taken from the guide's own text.
+  stages?: StageRef[]; // The apprenticeship in recommended order. A target without stages shows its eligibility guidance instead.
+  parallel?: string[]; // Entries to start from day one, alongside the stages (behavioral stories, a project).
 };
 
 // A landing-page entry: a published guide by slug, or a planned guide by name only.

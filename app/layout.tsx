@@ -15,15 +15,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body>
-        <header className="border-b border-stone-200">
-          <div className="mx-auto flex max-w-[1100px] flex-col gap-3 px-6 py-5 md:flex-row md:items-center md:justify-between">
-            <Link href="/" className="font-semibold tracking-tight">
-              SWE Apprenticeship
+        <header className="top">
+          <div className="in">
+            <Link href="/" className="brand">
+              <span className="logo" aria-hidden="true">
+                ◆
+              </span>
+              <span className="name">SWE Apprenticeship</span>
             </Link>
             <Nav />
           </div>
         </header>
-        <main className="mx-auto max-w-[1100px] px-6 py-12 md:py-16">{children}</main>
+        <main className="page">{children}</main>
       </body>
     </html>
   );
