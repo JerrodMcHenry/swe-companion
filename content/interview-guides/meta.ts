@@ -68,8 +68,8 @@ const guide: InterviewGuide = {
     { title: "Heaps and priority queues", priority: "Important", depth: "Implement", slug: "heaps-priority-queues", exercises: ["K Closest Points to Origin (LeetCode)"] },
     { title: "Recursion and backtracking", priority: "Important", depth: "Implement", slug: "recursion-backtracking", exercises: ["Subsets (LeetCode)", "Permutations (LeetCode)"] },
     { title: "Sorting and intervals", priority: "Important", depth: "Implement", slug: "sorting-algorithms-intervals", exercises: ["Non-overlapping Intervals (LeetCode)"] },
-    { title: "Reading and debugging unfamiliar code, and code review (forthcoming: Unit 5)", priority: "Important", depth: "Implement", reason: "Conditional on an AI-assisted round: Meta advises being comfortable reading, debugging and building on existing code. Not yet published." },
-    { title: "AI-assisted engineering and verification (forthcoming: Unit 5)", priority: "Important", depth: "Implement", reason: "Conditional on an AI-assisted round: use the assistant for well-defined subtasks and verify everything it produces. Not yet published." },
+    { title: "Reading and debugging unfamiliar code", priority: "Important", depth: "Apply", slug: "reading-debugging-unfamiliar-code", reason: "Conditional on an AI-assisted round being confirmed: Meta advises being comfortable reading, debugging and building on existing code.", exercises: ["Trace naturalsize in the humanize library"] },
+    { title: "AI-assisted engineering and verification", priority: "Important", depth: "Apply", slug: "ai-assisted-engineering", reason: "Conditional on an AI-assisted round being confirmed: Meta says many interviews include a built-in assistant candidates are expected to use; use it for well-defined subtasks and verify everything it produces.", exercises: ["AI-assisted mode: complete a comparable drill with an AI assistant and keep a verification log."] },
     { title: "Dynamic programming basics", priority: "Optional", depth: "Implement", slug: "dynamic-programming-basics", exercises: ["Climbing Stairs (LeetCode)", "Maximum Subarray (LeetCode)"] },
     { title: "Union-find and weighted shortest paths", priority: "Optional", depth: "Implement", slug: "union-find-shortest-paths", reason: "Advanced; study only after the core patterns." },
     { title: "Designing small systems", priority: "Optional", depth: "Implement", slug: "designing-small-systems", reason: "Conditional: no design round was observed in the reviewed new-grad report. Prepare only if your recruiter mentions one." },
@@ -117,6 +117,7 @@ const guide: InterviewGuide = {
   ],
   relatedGuides: [
     "/interview-prep/coding-algorithms",
+    "/interview-prep/ai-assisted-coding",
     "/interview-prep/behavioral-interviews",
     "/getting-hired/job-description-gap-analysis",
     "/getting-hired/application-strategy",

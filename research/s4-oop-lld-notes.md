@@ -23,7 +23,7 @@ Recorded 2026-11-25. Focused resource and question verification only. The app do
 
 ## Code validation
 
-- **Examples:** 26 new code examples (Unit 3 topics) were run on Python 3.13.5 and matched their `# ->` comments. The Library now has 207 examples: 205 pass and 2 are deliberately not run.
+- **Examples:** 34 new code examples (Unit 3 topics: 8 + 7 + 7 + 12; corrected from an earlier miscount of 26) were run on Python 3.13.5 and matched their `# ->` comments. The Library now has 207 examples: 205 pass and 2 are deliberately not run.
 - **Python behavior checked by execution:**
   - a shared mutable class attribute;
   - name mangling (`_Account__balance`);

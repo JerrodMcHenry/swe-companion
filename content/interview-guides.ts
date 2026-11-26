@@ -14,6 +14,8 @@ import netflix from "./interview-guides/netflix";
 import oopLowLevelDesign from "./interview-guides/oop-low-level-design";
 import otherEmployer from "./interview-guides/other-employer";
 import softwareEngineer from "./interview-guides/software-engineer";
+import debuggingCodeReview from "./interview-guides/debugging-code-review";
+import aiAssistedCoding from "./interview-guides/ai-assisted-coding";
 
 // Every published guide. To publish a guide, add its file in content/interview-guides/,
 // list it here, and replace its { planned } entry below with { slug }.
@@ -22,6 +24,8 @@ export const guides: InterviewGuide[] = [
   behavioralInterviews,
   rapidFireTechnicalQuestions,
   oopLowLevelDesign,
+  debuggingCodeReview,
+  aiAssistedCoding,
   google,
   amazon,
   meta,
@@ -62,8 +66,8 @@ export const guideListings: Record<GuideCategory, GuideListing[]> = {
   "Interview type": [
     { slug: "coding-algorithms" },
     { slug: "behavioral-interviews" },
-    { planned: "Debugging & Code Review" },
-    { planned: "AI-Assisted Coding" },
+    { slug: "debugging-code-review" },
+    { slug: "ai-assisted-coding" },
     { planned: "Practical Coding Assessments" },
     { slug: "oop-low-level-design" },
     { planned: "Project Deep Dives" },

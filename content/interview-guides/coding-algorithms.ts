@@ -159,6 +159,8 @@ const guide: InterviewGuide = {
   relatedGuides: [
     "/interview-prep/rapid-fire-technical-questions",
     "/interview-prep/behavioral-interviews",
+    "/interview-prep/debugging-code-review",
+    "/interview-prep/ai-assisted-coding",
     "/getting-hired/interview-failure-recovery",
   ],
   sources: [

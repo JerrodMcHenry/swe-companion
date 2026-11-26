@@ -58,6 +58,27 @@ Editorial guidance built on the cross-employer summaries in R3 §4 and §9 and R
 | Rapid-Fire Technical Questions | Amazon topics page; Apple and Google candidate reports | 2026-11-25 | 2027-05-25 |
 | OOP & Low-Level Design | Amazon interview topics (object-oriented design); candidate reports R2 A8–A9, R1 S15; question lists: Devinterview, GeeksforGeeks | 2026-11-25 | 2027-05-25 |
 
+## Unit 4 Engineering Fundamentals topics (S5)
+
+| Claim used | Source | Category | Accessed | Limitations | Review by |
+|---|---|---|---|---|---|
+| Testing 17/28, code review 15/28, SQL/relational 15/28, security 11/28, Git 10/28 | R4 posting sample (§6 keyword counts) | Official (postings) | 2026-11-25 | Backend/full-stack sample only; mostly US; keyword counts | 2027-05-25 |
+| Amazon topics: how the internet works, operating systems, relational vs non-relational databases (basic level); well-tested code | Amazon interview topics (R2 A1; re-checked T2) | Official | 2026-11-25 | Topic list, not question frequency | 2027-05-25 |
+| Microsoft: interviewers likely expect you to test your solution | Microsoft interview guidance (T2) | Official | 2026-11-25 | General guidance | 2027-05-25 |
+| No dedicated US new-grad SQL round found; SQL assessments in Accenture India OA, Wise (UK), Klaviyo internship | R4 §5, §14 | Candidate | 2026-11-25 | Absence of evidence, not proof | 2027-05-25 |
+| Free-threaded CPython: experimental in 3.13 (PEP 703), officially supported but optional in 3.14 (PEP 779) | What's New in Python 3.13 and 3.14 | Official documentation | 2026-11-25 | Status may change in 3.15+ | 2027-11-25 |
+| Password storage: Argon2id first; scrypt minimum N=2^17, r=8, p=1; bcrypt for legacy | OWASP Password Storage Cheat Sheet | Established guidance | 2026-11-25 | Parameters revised periodically | 2027-05-25 |
+
+## Unit 5 Practical Engineering topics and guides (S6)
+
+| Claim used | Source | Category | Accessed | Limitations | Review by |
+|---|---|---|---|---|---|
+| Debugging rounds (Stripe, Notion, Scale AI); Capital One technical case and agentic round | R3 C1–C4, C8–C9 (FastPrep) | Candidate | 2026-11-25 | Rewritten aggregator reports; prevalence unknown | 2027-02-25 |
+| Meta built-in AI assistant in many interviews; reading, debugging, building on existing code | Meta hiring process (R2 M1) | Official | 2026-11-25 | New-grad loop inclusion unconfirmed | 2027-02-25 |
+| Google AI not permitted; Microsoft no outside assistance unless permitted | R1 S1; R2 MS1 | Official | 2026-11-25 | Policies change quickly | 2027-02-25 |
+| Apple debugging existing code 3/17, AI-workflow questions 9/17 | R2 AP6 | Candidate (aggregated) | 2026-11-25 | Mixed levels and teams | 2027-05-25 |
+| Code review 15/28; AI-tool expectations ~8/18 | R4; R3 §5 | Official (postings) | 2026-11-25 | Samples; keyword counts | 2027-05-25 |
+
 ## T2 verification sources (paths to be published in T3/T4; details in t2-evidence-verification.md)
 
 | Target | Source | Category | Published | Accessed | Role / seniority | Geography | Limitations | Review by |

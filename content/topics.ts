@@ -30,6 +30,17 @@ import classesObjects from "./topics/classes-objects";
 import compositionInheritanceInterfaces from "./topics/composition-inheritance-interfaces";
 import designingSmallSystems from "./topics/designing-small-systems";
 import solidDesignPatterns from "./topics/solid-design-patterns";
+import gitPullRequests from "./topics/git-pull-requests";
+import commandLineEnvironment from "./topics/command-line-environment";
+import automatedTesting from "./topics/automated-testing";
+import internetHttp from "./topics/internet-http";
+import databasesSqlConcepts from "./topics/databases-sql-concepts";
+import computerScienceEssentials from "./topics/computer-science-essentials";
+import securityFundamentals from "./topics/security-fundamentals";
+import readingDebuggingUnfamiliarCode from "./topics/reading-debugging-unfamiliar-code";
+import codeReview from "./topics/code-review";
+import aiAssistedEngineering from "./topics/ai-assisted-engineering";
+import existingCodebaseDrills from "./topics/existing-codebase-drills";
 
 // Every published topic. To publish a new topic, add its file in content/topics/ and list it here.
 export const topics: Topic[] = [
@@ -64,6 +75,17 @@ export const topics: Topic[] = [
   compositionInheritanceInterfaces,
   designingSmallSystems,
   solidDesignPatterns,
+  gitPullRequests,
+  commandLineEnvironment,
+  automatedTesting,
+  internetHttp,
+  databasesSqlConcepts,
+  computerScienceEssentials,
+  securityFundamentals,
+  readingDebuggingUnfamiliarCode,
+  codeReview,
+  aiAssistedEngineering,
+  existingCodebaseDrills,
 ];
 
 const seen = new Set<string>();
