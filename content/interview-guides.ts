@@ -1,10 +1,11 @@
 import type { GuideCategory, GuideListing, InterviewGuide } from "./types";
 import { getTopic } from "./topics";
 import codingAlgorithms from "./interview-guides/coding-algorithms";
+import behavioralInterviews from "./interview-guides/behavioral-interviews";
 
 // Every published guide. To publish a guide, add its file in content/interview-guides/,
 // list it here, and replace its { planned } entry below with { slug }.
-export const guides: InterviewGuide[] = [codingAlgorithms];
+export const guides: InterviewGuide[] = [codingAlgorithms, behavioralInterviews];
 
 // What the Interview Preparation page lists, in order, for each category.
 export const guideListings: Record<GuideCategory, GuideListing[]> = {
@@ -28,7 +29,7 @@ export const guideListings: Record<GuideCategory, GuideListing[]> = {
   ],
   "Interview type": [
     { slug: "coding-algorithms" },
-    { planned: "Behavioral Interviews" },
+    { slug: "behavioral-interviews" },
     { planned: "Debugging & Code Review" },
     { planned: "AI-Assisted Coding" },
     { planned: "Practical Coding Assessments" },

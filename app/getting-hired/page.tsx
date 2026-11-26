@@ -13,7 +13,14 @@ export default function GettingHiredPage() {
       <h1 className="text-3xl font-semibold tracking-tight">{section.title}</h1>
       <p className="mt-4 max-w-2xl text-lg leading-relaxed text-stone-600">{section.description}</p>
       <p className="mt-4 max-w-2xl text-stone-600">
-        Preparing for behavioral or project interviews? Those guides live in{" "}
+        Preparing for behavioral or project interviews? See{" "}
+        <Link
+          href="/interview-prep/behavioral-interviews"
+          className="font-medium text-stone-900 underline underline-offset-4 hover:text-stone-600"
+        >
+          Behavioral Interview Preparation
+        </Link>{" "}
+        and the other guides in{" "}
         <Link href="/interview-prep" className="font-medium text-stone-900 underline underline-offset-4 hover:text-stone-600">
           Interview Preparation
         </Link>

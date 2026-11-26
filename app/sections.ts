@@ -18,7 +18,7 @@ export const sections = [
   {
     href: "/getting-hired",
     title: "Getting Hired",
-    description: "Resumes, portfolios, GitHub, networking, referrals, applications and behavioral interviews.",
+    description: "Resumes, job description analysis, applications, networking and referrals, and recovering from unsuccessful interviews.",
   },
 ];
 

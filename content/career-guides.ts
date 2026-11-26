@@ -1,29 +1,33 @@
 import type { CareerGuide, CareerListing } from "./types";
 import { getTopic } from "./topics";
 import engineeringProjects from "./career-guides/engineering-projects";
+import resume from "./career-guides/resume";
+import jobDescriptionGapAnalysis from "./career-guides/job-description-gap-analysis";
+import applicationStrategy from "./career-guides/application-strategy";
+import interviewFailureRecovery from "./career-guides/interview-failure-recovery";
 
 // Every published career guide. To publish a guide, add its file in content/career-guides/,
 // list it here, and give its entry below a slug instead of a description.
-export const careerGuides: CareerGuide[] = [engineeringProjects];
+export const careerGuides: CareerGuide[] = [
+  engineeringProjects,
+  resume,
+  jobDescriptionGapAnalysis,
+  applicationStrategy,
+  interviewFailureRecovery,
+];
 
 // What the Getting Hired page lists, in order. Published entries take their description from the guide.
 export const careerListings: CareerListing[] = [
   { title: "Career Strategy", description: "Choosing target roles and companies, and planning your path to them." },
-  {
-    title: "Job Description Gap Analysis",
-    description: "Reading a job description, separating required from preferred, and deciding whether to apply now or close a gap first.",
-  },
-  { title: "Resume", description: "Presenting your experience and projects clearly for engineering roles." },
+  { title: "Job Description Gap Analysis", slug: "job-description-gap-analysis" },
+  { title: "Resume Preparation", slug: "resume" },
   { title: "GitHub & Portfolio", description: "Making your code and projects easy for employers to evaluate." },
   { title: "Engineering Projects", slug: "engineering-projects" },
   { title: "LinkedIn & Personal Brand", description: "Presenting your profile and work professionally online." },
   { title: "Networking & Referrals", description: "Building professional relationships and asking for referrals." },
-  { title: "Job Applications", description: "Finding suitable openings and applying effectively." },
+  { title: "Job Application Strategy", slug: "application-strategy" },
   { title: "Recruiter Screens", description: "Preparing for the first conversation with a recruiter." },
-  {
-    title: "Interview Failure Recovery",
-    description: "Diagnosing what went wrong after an unsuccessful interview and returning to the right unit, without restarting.",
-  },
+  { title: "Interview Failure Recovery", slug: "interview-failure-recovery" },
   { title: "Offer Negotiation", description: "Evaluating offers and negotiating compensation." },
 ];
 
