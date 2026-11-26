@@ -45,14 +45,34 @@ Editorial guidance built on the cross-employer summaries in R3 §4 and §9 and R
 | Behavioral | Google interview tips; Meta prep blog (updated 2022); Amazon interview guide (2025-04-08) | 2026-11-25 | 2027-05-25 |
 | Rapid-Fire Technical Questions | Amazon topics page; Apple and Google candidate reports | 2026-11-25 | 2027-05-25 |
 
-## Known gaps (for T2)
+## T2 verification sources (paths to be published in T3/T4; details in t2-evidence-verification.md)
 
-- **Big Tech without dedicated paths:**
-  - Netflix: not researched.
-  - Meta and Microsoft: no current entry-level posting; candidate evidence weak.
-  - Apple: no official guidance found.
-- **Employer types:**
-  - Established-technology companies: new-grad interview content not verified.
-  - AI-focused startups: small sample.
-  - Enterprise: sample is finance-heavy.
-- **Roles:** for backend roles, whether US entry-level interviews include a dedicated SQL round.
+| Target | Source | Category | Published | Accessed | Role / seniority | Geography | Limitations | Review by |
+|---|---|---|---|---|---|---|---|---|
+| Amazon | SDE online assessment page (amazon.jobs …/university/sde-oa) | Official | Not stated | 2026-11-25 | University SDE | Global | OA content may vary by country | 2027-05-25 |
+| Amazon | Software development interview topics | Official guidance | Not stated | 2026-11-25 | SDE | Global | Generic; new-grad weighting inferred | 2027-05-25 |
+| Amazon | Interview loop and Leadership Principles pages | Official guidance | Not stated | 2026-11-25 | All roles | Global | Not SDE-specific | 2027-05-25 |
+| Amazon | 10 US early-career SDE postings (R2 A6) | Official (postings) | Aug–Nov 2026 | 2026-11-25 | Early career | US | One-day snapshot | 2027-05-25 |
+| Amazon | ITPro / Business Insider report on AI use in interviews | Third-party | 2025-02 | 2026-11-25 | All roles | Global | Secondary report of internal guidance; no official page found | 2027-02-25 |
+| Amazon | FastPrep new-grad reports (R2 A8, A9) | Candidate | 2026-11 | 2026-11-25 | SDE I new grad | US | 2 reports; one rewritten | 2027-05-25 |
+| Meta | Hiring process FAQ (AI assistant in many interviews) | Official | Current | 2026-11-25 | All roles | Global | New-grad applicability not stated | 2027-02-25 |
+| Meta | Job search: no generalist SWE University Grad posting | Official (absence) | — | 2026-11-25 | University grad | US | Seasonal | 2027-02-25 |
+| Meta | Preparing for your SWE interview (blog) | Official guidance | Updated 2022-10-06 | 2026-11-25 | SWE | Global | Predates AI-enabled rounds | 2027-05-25 |
+| Meta | Third-party guides on the AI-enabled coding round (interviewing.io, DEV, Prepfully) | Third-party / Candidate | 2025–2026 | 2026-11-25 | Mostly experienced | US | Conflicting; pilot status unclear | 2027-02-25 |
+| Microsoft | How we hire; Technical interviewing; Interview tips | Official guidance | Not stated | 2026-11-25 | All levels | Global | Not entry-level specific | 2027-05-25 |
+| Microsoft | Glassdoor new-grad reports (search summaries) | Candidate | 2026 | 2026-11-25 | New grad | Mixed (Denmark, India, US) | Anonymous; not read in full | 2027-05-25 |
+| Apple | Job search: 2 US "Early Career" engineering postings | Official (postings) | Aug–Oct 2026 | 2026-11-25 | Early career | US (Austin) | Team-specific; few postings | 2027-05-25 |
+| Apple | FastPrep new-grad and AI-interview reports (R2 AP5, AP6) | Candidate | 2024–2026 | 2026-11-25 | Mixed | US | Thin; aggregated | 2027-05-25 |
+| Netflix | Careers API: 139 SWE results, mostly L5/L6; no new-grad posting | Official (postings) | Current | 2026-11-25 | All levels | US + international | Seasonal | 2027-02-25 |
+| Netflix | Software Engineer Intern – Summer 2027 posting | Official (posting) | Current | 2026-11-25 | Students (grad Dec 2027–2028) | US (Los Gatos) | Internship, not full-time | 2027-02-25 |
+| Netflix | Culture page (jobs.netflix.com/culture) | Official | Current | 2026-11-25 | All roles | Global | Values, not interview format | 2027-11-25 |
+| Netflix | Simplify new-grad guide | Third-party | 2026-11 | 2026-11-25 | New grad | US | Secondary | 2027-05-25 |
+| Established tech | Pinterest AI-in-hiring page (R4 O1) | Official | Current | 2026-11-25 (R4) | All roles | US | Returned 403 to automated access in T2 | 2027-02-25 |
+| Established tech | Walmart Global Tech, DoorDash reports (Glassdoor search summaries) | Candidate | 2016–2026 | 2026-11-25 | Mostly new grad and intern | US | Anonymous; many old | 2027-05-25 |
+| Enterprise | Capital One student interview page | Official | Current | 2026-11-25 | Students | US | Single employer dominates the category | 2027-05-25 |
+
+## Known gaps after T2
+
+- Meta and Microsoft entry-level loop content; Apple team variation; Amazon's official AI-in-interview wording.
+- Established-tech new-grad formats and AI-focused startup processes (small, mostly candidate evidence).
+- Postings are seasonal snapshots (2026-11-25); re-check each company at T3 publication.

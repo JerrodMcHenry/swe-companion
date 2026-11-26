@@ -224,12 +224,17 @@ export function GuideBody({ guide }: { guide: InterviewGuide }) {
   );
 }
 
+// Guidance blocks shown before the roadmap; all other blocks follow it as supporting detail.
+const leadingBlocks = new Set(["Eligibility", "Evidence and limitations", "How to use this path"]);
+
 // One coherent preparation path: an employer target combined with a role.
 export function PathView({ target, role }: { target: InterviewGuide; role: InterviewGuide }) {
   const path: PreparationPath = composePath(target, role);
   const interviewItems = path.interview.filter((item) => item.priority !== "Defer");
   const roleItems = path.roleTopics.filter((item) => item.priority !== "Defer");
   const deferred = [...path.interview, ...path.roleTopics].filter((item) => item.priority === "Defer");
+  const leading = target.guidance?.filter((block) => leadingBlocks.has(block.heading));
+  const supporting = target.guidance?.filter((block) => !leadingBlocks.has(block.heading));
 
   return (
     <article className="max-w-3xl">
@@ -287,19 +292,7 @@ export function PathView({ target, role }: { target: InterviewGuide; role: Inter
       </header>
 
       <div className="mt-10 space-y-8">
-        <GuidanceBlocks blocks={target.guidance} />
-
-        {target.process && target.process.length > 0 && (
-          <Section title="Interview process">
-            <List items={target.process} ordered />
-          </Section>
-        )}
-
-        {target.competencies && target.competencies.length > 0 && (
-          <Section title="What the interviews assess">
-            <List items={target.competencies} />
-          </Section>
-        )}
+        <GuidanceBlocks blocks={leading} />
 
         <Section title="Interview preparation priorities">
           <p className="mb-4 text-sm text-stone-600">
@@ -337,6 +330,18 @@ export function PathView({ target, role }: { target: InterviewGuide; role: Inter
           </Section>
         )}
 
+        {target.process && target.process.length > 0 && (
+          <Section title="Interview process">
+            <List items={target.process} ordered />
+          </Section>
+        )}
+
+        {target.competencies && target.competencies.length > 0 && (
+          <Section title="What the interviews assess">
+            <List items={target.competencies} />
+          </Section>
+        )}
+
         {path.practice.length > 0 && (
           <Section title="Practice recommendations">
             <Practice items={path.practice} />
@@ -368,12 +373,14 @@ export function PathView({ target, role }: { target: InterviewGuide; role: Inter
           )}
         </Section>
 
+        <GuidanceBlocks blocks={supporting} />
+
         <Section title="How this path was combined">
           <List
             items={[
               `Interview priorities and depth come from the ${target.title} guide; role competencies come from the ${role.title} guide.`,
-              "Each topic appears once. If the employer already prioritizes a topic, the role's entry is merged into it with a note.",
-              "If a topic is not an interview priority for this employer but the role needs it, it stays in the role section: not tested here, but still needed on the job.",
+              "Each topic appears once. If the employer already prioritizes a topic for interviews, the role's requirement is merged into that entry with a note.",
+              "If a topic is a lower interview priority for this employer but the role needs it, it appears once in the role section, stating both priorities: it may not be tested here, but it is still needed on the job.",
               "A format confirmed by your recruiter, or a requirement in the actual posting, overrides these defaults.",
             ]}
           />

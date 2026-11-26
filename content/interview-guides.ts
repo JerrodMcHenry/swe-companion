@@ -103,14 +103,15 @@ function unique<T>(items: T[], id: (item: T) => string) {
 // Composition rules (also explained on the path page):
 // 1. Interview priorities and depth come from the target (company or employer-type evidence).
 // 2. Role competencies come from the role guide.
-// 3. A topic appears once. If the target already prioritizes it (Essential or Important), the role
-//    entry is dropped and a note is added; if the role needs more depth on the job, the note says so.
-// 4. If the target makes a topic Optional or Defer for interviews but the role needs it (Essential or
-//    Important), both stay: not an interview priority here, but still needed on the job. A role entry
-//    that is itself Optional stays without that note; a role entry marked Defer is dropped.
-// 5. Selected exercises come from the entry shown; if it has none, the other source's selection is used.
+// 3. Every topic appears once.
+//    - If the target prioritizes it (Essential or Important), the role entry is merged into the
+//      interview entry with a note; if the role needs more depth on the job, the note says so.
+//    - If the target rates it lower (Optional or Defer) and the role does not defer it, one entry is
+//      shown in the role section, stating both the interview priority and the on-the-job priority.
+//    - If the role defers it, the target's entry stands alone.
+// 4. Selected exercises come from the entry shown; if it has none, the other source's selection is used.
 export function composePath(target: InterviewGuide, role: InterviewGuide): PreparationPath {
-  const interview: PathEntry[] = (target.studyTopics ?? []).map((topic) => ({ ...topic }));
+  let interview: PathEntry[] = (target.studyTopics ?? []).map((topic) => ({ ...topic }));
   const roleTopics: PathEntry[] = [];
   for (const topic of role.studyTopics ?? []) {
     const match = interview.find((entry) => key(entry) === key(topic));
@@ -122,12 +123,13 @@ export function composePath(target: InterviewGuide, role: InterviewGuide): Prepa
       if (!match.exercises?.length && topic.exercises?.length) match.exercises = topic.exercises;
     } else if (match) {
       if (topic.priority === "Defer") continue; // Neither source needs it now; the target's entry stands.
-      if (covers(topic)) {
-        match.note = "Not an interview priority for this employer, but still needed on the job for this role (see role competencies).";
-        roleTopics.push({ ...topic, note: "Needed on the job even though it is not an interview priority for this employer." });
-      } else {
-        roleTopics.push({ ...topic });
-      }
+      interview = interview.filter((entry) => entry !== match);
+      const interviewPriority = match.priority === "Defer" ? "defer" : match.priority.toLowerCase();
+      roleTopics.push({
+        ...topic,
+        exercises: topic.exercises?.length ? topic.exercises : match.exercises,
+        note: `Interview priority for this employer: ${interviewPriority}${match.reason ? ` (${match.reason.replace(/\.$/, "")})` : ""}. On the job: ${topic.priority.toLowerCase()}.`,
+      });
     } else {
       roleTopics.push({ ...topic });
     }
