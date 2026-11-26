@@ -24,6 +24,6 @@ export function targetName(slug: string, fallback: string) {
 // Short role descriptions for the role step.
 export const roleCards: Record<string, string> = {
   "software-engineer": "General entry-level software engineering.",
-  "Backend Engineer": "APIs, data and services.",
-  "Full-Stack Engineer": "Backend plus a React frontend.",
+  "backend-engineer": "APIs, data and services.",
+  "full-stack-engineer": "Backend plus a React frontend.",
 };

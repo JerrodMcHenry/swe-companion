@@ -30,7 +30,7 @@ const topic: Topic = {
       provider: "MIT",
       type: "Video",
       instructions:
-        "Start here. Watch the lecture or read the notes: navigation, paths, permissions, pipes and redirection. Requires a Unix shell (macOS, Linux, or WSL on Windows). Free; no account.",
+        "Start here. Watch the lecture or read the notes: navigation, paths, pipes and redirection (file permissions appear in the exercises). Requires a Unix shell (macOS, Linux, or WSL on Windows). Free; no account.",
     },
     {
       title: "The Missing Semester — Command-line Environment (2026)",

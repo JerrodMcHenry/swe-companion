@@ -12,8 +12,8 @@ const guide: InterviewGuide = {
     {
       heading: "Evidence and limitations",
       items: [
-        "Official: Meta's hiring page says many of its interviews now include an AI assistant built into the interview environment that candidates are expected to use, and that interviews assess problem solving, coding, debugging and collaboration. Whether a given early-career loop includes such a round was not confirmed; ask your recruiter.",
-        "Official: Google states that AI tools are not permitted in its interviews. Microsoft asks candidates to demonstrate their own skills without outside assistance unless explicitly permitted.",
+        "Official (confirmed on the live page, 26 November 2026; recheck before interviews): Meta's hiring page says many of its interviews now include an AI assistant built into the interview environment that candidates are expected to use, and that interviews assess problem solving, coding, debugging and collaboration. Whether a given early-career loop includes such a round was not confirmed; ask your recruiter.",
+        "Official (checked 25 November 2026; policies change, so recheck): Google states that AI tools are not permitted in its interviews. Microsoft asks candidates to demonstrate their own skills without outside assistance unless explicitly permitted.",
         "Candidate-reported, not official: Capital One's early-career Power Day coding round became agentic from September 2026 (reports describe about 20 minutes fixing a bug and about 20 minutes adding a feature in a large application with an AI coding agent; several candidates ran out of time and some still received offers). AI coding rounds were also reported at Stripe, Decagon and xAI, and AI access during coding in a minority of Apple reports, mostly not new grad.",
         "Candidate-reported: Amazon candidates described questions about how they check AI output; secondary reporting says Amazon tells candidates not to use generative AI unless explicitly permitted.",
         "Policies change quickly. Treat everything here as a starting point and confirm the current rules for your interview.",
@@ -31,7 +31,7 @@ const guide: InterviewGuide = {
   process: [
     "Before the interview: confirm with your recruiter whether AI is allowed, which tool (a built-in assistant or your own), and what is assessed.",
     "Typical AI-allowed task (reported): extend or debug existing code, or build a small feature, with an assistant available in the environment.",
-    "Throughout: interviewers watch how you plan, prompt, review, test and explain, not only whether the code works.",
+    "Throughout (per Meta's official description and candidate reports): interviewers watch how you plan, prompt, review, test and explain, not only whether the code works.",
     "Some loops mix modes, for example a design discussion without AI followed by building with AI (candidate-reported at xAI).",
   ],
   competencies: [

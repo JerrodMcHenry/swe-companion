@@ -40,7 +40,7 @@ const topic: Topic = {
       provider: "GitHub Docs",
       type: "Documentation",
       instructions:
-        "Optional written alternative (vendor guidance). Read the sections on choosing the right tool for a task, giving context and checking Copilot's work; the advice applies to other assistants too. A paid subscription is not required (GitHub offers a limited free plan; any assistant you can access works).",
+        "Optional written alternative (vendor guidance). Read the sections Choose the right Copilot tool for the job, Create thoughtful prompts and Check Copilot's work; the advice applies to other assistants too. A paid subscription is not required (GitHub offers a limited free plan; any assistant you can access works).",
     },
   ],
   exercises: [
@@ -143,7 +143,7 @@ except ValueError:
     {
       question: "Can you use AI tools during technical interviews?",
       answer:
-        "Only when the employer explicitly allows it, and only in the way it allows. Policies differ and change: Google states AI tools are not permitted in its interviews; Microsoft asks candidates to demonstrate their own skills without outside assistance unless explicitly permitted; Meta says many of its interviews include a built-in AI assistant candidates are expected to use. Ask your recruiter, follow the written assessment instructions, and prepare in both modes (see the AI-Assisted Coding interview guide). When AI is allowed, interviewers typically still assess your own reasoning: explain your plan, review and test what the assistant produces, and catch its mistakes out loud.",
+        "Only when the employer explicitly allows it, and only in the way it allows. Policies differ and change (as checked on 25–26 November 2026; recheck before each interview): Google states AI tools are not permitted in its interviews; Microsoft asks candidates to demonstrate their own skills without outside assistance unless explicitly permitted; Meta says many of its interviews include a built-in AI assistant candidates are expected to use. Ask your recruiter, follow the written assessment instructions, and prepare in both modes (see the AI-Assisted Coding interview guide). When AI is allowed, interviewers typically still assess your own reasoning: explain your plan, review and test what the assistant produces, and catch its mistakes out loud.",
       followUps: ["In an AI-assisted round, the assistant gives a solution that looks right. What do you say and do before moving on?"],
       source: { title: "Meta Careers — Hiring process (official)", url: "https://www.metacareers.com/hiring-process/" },
     },

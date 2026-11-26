@@ -27,10 +27,11 @@ export default function TargetPicker({
 
   useEffect(() => {
     const value = readSavedPath();
-    if (value && names.has(value.target)) {
+    // Ignore a saved selection that no longer matches a published employer and role.
+    if (value && names.has(value.target) && roles.some((r) => r.slug === value.role)) {
       setSaved(value);
       setTarget(value.target);
-      if (roles.some((r) => r.slug === value.role)) setRole(value.role);
+      setRole(value.role);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -51,7 +52,7 @@ export default function TargetPicker({
       {saved && (
         <div className="continue">
           <span>
-            Continue your <b>{names.get(saved.target)}</b> apprenticeship
+            Continue your <b>{names.get(saved.target)}</b> · {roles.find((r) => r.slug === saved.role)?.title} apprenticeship
           </span>
           <Link className="btn" href={`/apprenticeship/for/${saved.target}/${saved.role}`}>
             Continue →

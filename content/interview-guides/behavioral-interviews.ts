@@ -10,8 +10,8 @@ const guide: InterviewGuide = {
     "Behavioral questions ask how you have handled real situations: working with others, solving hard problems, making mistakes and learning. Google, Amazon and Meta all describe behavioral questions as part of their interviews and recommend a structured format such as STAR (Situation, Task, Action, Result). Entry-level candidates are not expected to have years of professional stories: academic projects, team assignments, internships, part-time jobs, volunteering and previous careers all count, as long as the stories are true and specific. This is the general guide; employer-specific frameworks such as Amazon's Leadership Principles belong in the relevant company guide.",
   process: [
     "Recruiter screen: \"Tell me about yourself\" and motivation questions, often in a short call.",
-    "Dedicated behavioral round at many employers. Meta's official preparation material describes a 45-minute behavioral interview; Google describes behavioral and hypothetical questions; Amazon describes behavioral questions throughout its interview loop.",
-    "Behavioral questions inside technical rounds, often in the first or last few minutes.",
+    "Dedicated behavioral round at many employers. Meta's official preparation material (2022; may be outdated) describes a 45-minute behavioral interview; Google describes behavioral and hypothetical questions; Amazon describes behavioral questions throughout its interview loop.",
+    "Behavioral questions inside technical rounds, for example in the first or last few minutes.",
     "Hiring-manager or team-matching conversations, which focus on motivation, working style and fit with the team.",
     "Formats differ between employers and change over time; ask your recruiter what to expect.",
   ],
@@ -29,7 +29,7 @@ const guide: InterviewGuide = {
       title: "\"Tell me about yourself.\"",
       priority: "Essential",
       reason:
-        "Asked in almost every process. Give a 60–90 second summary: who you are now, the relevant experience and one project, and why this role. Follow-ups: Why this company? What are you looking for next?",
+        "A common opener. Give a 60–90 second summary: who you are now, the relevant experience and one project, and why this role. Follow-ups: Why this company? What are you looking for next?",
     },
     {
       title: "\"Why software engineering?\" / \"Why are you changing careers?\"",

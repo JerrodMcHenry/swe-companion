@@ -177,7 +177,7 @@ print(count, n * (n - 1) // 2)   # -> 10 10`,
     {
       question: "How does stopping early affect best-case and worst-case complexity?",
       answer:
-        "A linear search that returns as soon as it finds the target is O(1) in the best case (the first item matches) and O(n) in the worst case (the target is last or absent). Interviewers usually want the worst case unless they ask otherwise. Built-ins such as any() and all() also stop early.",
+        "A linear search that returns as soon as it finds the target is O(1) in the best case (the first item matches) and O(n) in the worst case (the target is last or absent). State the worst case unless asked otherwise. Built-ins such as any() and all() also stop early.",
       code: `print(any(n > 10 for n in [15, 4, 8]))   # stops after the first item  # -> True`,
       followUps: ["Why is average-case analysis harder to state precisely?"],
       source: { title: "Python Docs — Built-in functions: any()", url: "https://docs.python.org/3/library/functions.html#any" },

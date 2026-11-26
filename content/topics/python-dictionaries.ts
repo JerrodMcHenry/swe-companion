@@ -122,7 +122,7 @@ print(user.get("email"), "name" in user, "Ana" in user)   # -> None True False`,
     {
       question: "How do you count frequencies and group items with dictionaries?",
       answer:
-        "Count with counts[k] = counts.get(k, 0) + 1 or collections.Counter (which adds most_common). Group by appending to a list per key with setdefault or collections.defaultdict(list). Both are O(n) on average. Be able to write the plain version: some interviewers ask you to avoid library helpers.",
+        "Count with counts[k] = counts.get(k, 0) + 1 or collections.Counter (which adds most_common). Group by appending to a list per key with setdefault or collections.defaultdict(list). Both are O(n) on average. Be able to write the plain version too, in case you are asked not to use library helpers.",
       followUps: ["How would you find the k most frequent items?"],
       source: { title: "Python Docs — collections.Counter", url: "https://docs.python.org/3/library/collections.html#collections.Counter" },
     },

@@ -30,7 +30,7 @@ const topic: Topic = {
       provider: "Tech Interview Handbook",
       type: "Article",
       instructions:
-        "Start here. Read \"What to do during your coding interview\" steps 2–5: clarifying the question, working out the approach with the interviewer, coding while talking, and checking your code with test cases (about 15 minutes). Skim the before and after sections; skip the course advertisements. Free, no account.",
+        "Start here. Read \"What to do during a coding interview\" steps 2–5: clarifying the question, working out the approach with the interviewer, coding while talking, and checking your code with test cases (about 15 minutes). Skim the before and after sections; skip the course advertisements. Free, no account.",
     },
     {
       title: "Coding interview techniques",

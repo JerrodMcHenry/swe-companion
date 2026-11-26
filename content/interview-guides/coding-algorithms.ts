@@ -122,7 +122,7 @@ const guide: InterviewGuide = {
     {
       title: "Grind 75 (optional study plan)",
       url: "https://www.techinterviewhandbook.org/grind75/",
-      note: "A free, adjustable plan of commonly recommended problems, solved on LeetCode. Use it if you want a ready-made schedule; it overlaps heavily with the problems already linked in the Library topics.",
+      note: "A free, adjustable plan of commonly recommended problems, solved on LeetCode (a free account is needed to submit). Use it if you want a ready-made schedule; it overlaps heavily with the problems already linked in the Library topics.",
     },
   ],
   resources: [

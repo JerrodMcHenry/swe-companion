@@ -36,7 +36,7 @@ const topic: Topic = {
       url: "https://cs50.harvard.edu/python/weeks/3/",
       provider: "Harvard University",
       type: "Video",
-      instructions: "Video alternative to the tutorial: try, except, else, pass and raise, built around validating user input. Watch the lecture; the problem set is optional extra practice. It does not cover finally, chaining or custom exceptions — read tutorial sections 8.5–8.7 for those. Free; no account to watch.",
+      instructions: "Video alternative to the tutorial: try, except, else and pass, built around validating user input. Watch the lecture; the problem set is optional extra practice. It does not cover raise, finally, chaining or custom exceptions — read tutorial sections 8.4–8.7 for those. Free; no account to watch.",
     },
     {
       title: "Python Standard Library — Built-in Exceptions: exception hierarchy",

@@ -67,7 +67,7 @@ const guide: InterviewGuide = {
   ],
   readiness: [
     "You can write, test and debug programs in one language without help.",
-    "You can add a small feature and fix a bug in code you did not write, with tests (fully covered once Units 4–5 are published).",
+    "You can add a small feature and fix a bug in code you did not write, with tests.",
     "You can use Git branches and pull requests, and respond to review comments.",
     "You can demonstrate and explain one substantial project, including its design, testing and trade-offs.",
     "These are editorial readiness recommendations, not employer thresholds.",

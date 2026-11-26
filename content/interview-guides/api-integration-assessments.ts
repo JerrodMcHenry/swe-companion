@@ -30,7 +30,7 @@ const guide: InterviewGuide = {
     },
   ],
   process: [
-    "Usually a 45–90 minute round (time varies; editorial range), in your own editor or a provided repository, often with documentation and sometimes with AI allowed.",
+    "Often reported as 45–90 minutes (editorial range; time varies), in your own editor or a provided repository, often with documentation and sometimes with AI allowed.",
     "Typical shapes: call an API and transform its data; add or fix an endpoint in an existing service; extend the task in stages as the interviewer adds requirements.",
     "Follow-up questions on failure cases, testing and how your solution would change at larger scale.",
   ],

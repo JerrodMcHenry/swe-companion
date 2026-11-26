@@ -32,7 +32,7 @@ const guide: InterviewGuide = {
     "Fix and test: reproduce a reported bug, fix it and add a regression test.",
     "Integration task: call an API or read a data file, transform the data, handle errors and missing fields (reported at Stripe).",
     "Backend practical: extend a small service, for example add an endpoint (reported at Scale AI).",
-    "Usually 45–90 minutes in an editor that runs code; confirm the details with your recruiter.",
+    "Often reported as 45–90 minutes (editorial range) in an editor that runs code; confirm the details with your recruiter.",
   ],
   competencies: [
     "Getting oriented quickly in an unfamiliar repository and running its tests.",

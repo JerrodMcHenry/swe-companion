@@ -24,12 +24,12 @@ const topic: Topic = {
   depth: "Apply: Use the concept to solve unfamiliar problems and explain relevant trade-offs.",
   resources: [
     {
-      title: "Problem Solving with Algorithms and Data Structures using Python — 6.3 Vocabulary, 6.8 Tree Traversals, 6.12–6.14 Binary Search Trees",
+      title: "Problem Solving with Algorithms and Data Structures using Python — 6.3 Vocabulary, 6.8 Tree Traversals, 6.12–6.15 Binary Search Trees",
       url: "https://runestone.academy/ns/books/published/pythonds3/Trees/TreeTraversals.html",
       provider: "Brad Miller and David Ranum (Runestone Academy)",
       type: "Book",
       instructions:
-        "Start here. Read 6.3 (vocabulary), 6.8 (traversals) and 6.12–6.14 (binary search trees and their analysis). Skip parse trees, priority queues (covered in Heaps) and the AVL implementation. Free; reading needs no account.",
+        "Start here. Read 6.3 (vocabulary), 6.8 (traversals) and 6.12–6.15 (binary search trees: operations, implementation and analysis). Skip parse trees, priority queues (covered in Heaps) and the AVL implementation. Free; reading needs no account.",
     },
     {
       title: "Binary Tree Algorithms for Technical Interviews — Full Course",

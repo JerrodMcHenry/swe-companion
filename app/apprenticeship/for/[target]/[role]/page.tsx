@@ -172,6 +172,9 @@ export default async function ApprenticeshipPathPage({ params }: Props) {
               <div className="small body2">
                 <Bullets items={target.readiness} />
               </div>
+              <p className="xs muted" style={{ marginTop: 8 }}>
+                A format your recruiter confirms, or a requirement in the actual posting, overrides this plan.
+              </p>
             </div>
           )}
           <Link className="card" href={`/apprenticeship/for/${target.slug}/about`}>

@@ -43,7 +43,7 @@ const topic: Topic = {
       provider: "Total TypeScript (Matt Pocock)",
       type: "Interactive",
       instructions:
-        "Hands-on alternative to reading the Handbook: 18 short exercises, each with a problem introduction and a solution video. You need working JavaScript knowledge. Run the exercises locally by cloning the tutorial's repository and installing dependencies with npm (or in a browser-based environment linked from the page). Free tutorial; the site also sells paid workshops, which you do not need.",
+        "Hands-on alternative to reading the Handbook: 18 short exercises, each with a problem introduction and a solution video. You need working JavaScript knowledge. Run the exercises locally by cloning the tutorial's repository and installing dependencies with npm (or in the page's browser option, which uses Gitpod and needs an account). Free tutorial; the site also sells paid workshops, which you do not need.",
     },
     {
       title: "React — Using TypeScript",

@@ -71,7 +71,7 @@ const topic: Topic = {
     {
       question: "What does Big O notation mean?",
       answer:
-        "Big O describes an upper bound on how a cost grows as the input size grows, ignoring constant factors and lower-order terms: 3n² + 5n + 2 is O(n²) because the n² term dominates for large n. In interviews, \"the complexity\" usually means a tight bound on the worst case unless stated otherwise. Big O says nothing about actual speed for small inputs, where constants can matter.",
+        "Big O describes an upper bound on how a cost grows as the input size grows, ignoring constant factors and lower-order terms: 3n² + 5n + 2 is O(n²) because the n² term dominates for large n. When asked for \"the complexity\", give a tight bound on the worst case unless the question says otherwise. Big O says nothing about actual speed for small inputs, where constants can matter.",
       followUps: ["What are Big Omega and Big Theta, informally?"],
       source: { title: "USACO Guide — Time Complexity: Formal Definition of Big O", url: "https://usaco.guide/bronze/time-comp#formal-definition-of-big-o-notation" },
     },
@@ -129,7 +129,7 @@ print(has_pair_with_sum_slow([1, 4, 6], 10), has_pair_with_sum([1, 4, 6], 3))   
     {
       question: "What is the complexity of sorting, and of binary search?",
       answer:
-        "Comparison-based sorting needs O(n log n) comparisons in the worst case; Python's sort achieves this and uses up to O(n) extra memory. Binary search on a sorted array is O(log n) because each step halves the remaining range. So sorting once and then performing k binary searches costs O(n log n + k log n), which beats k linear scans (O(k × n)) when k is large.",
+        "Comparison-based sorting needs Ω(n log n) comparisons in the worst case (a lower bound); Python's sort achieves O(n log n) and uses up to O(n) extra memory. Binary search on a sorted array is O(log n) because each step halves the remaining range. So sorting once and then performing k binary searches costs O(n log n + k log n), which beats k linear scans (O(k × n)) when k is large.",
       followUps: ["Can any sorting algorithm beat O(n log n)? Under what conditions?"],
       source: { title: "Tech Interview Handbook — Sorting and searching: time complexity", url: "https://www.techinterviewhandbook.org/algorithms/sorting-searching/#time-complexity" },
     },

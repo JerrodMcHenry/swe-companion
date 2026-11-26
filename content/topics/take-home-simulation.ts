@@ -26,7 +26,7 @@ const topic: Topic = {
       url: "https://docs.python.org/3/howto/argparse.html",
       provider: "Python Software Foundation",
       type: "Documentation",
-      instructions: "Start here (reference, only if you build a command-line tool). Building the command-line entry point: positional arguments, options and help. Read the first half (up to combining positional and optional arguments).",
+      instructions: "Reference (only if you build a command-line tool; start with the simulation brief in Practice). Building the command-line entry point: positional arguments, options and help. Read the first half (up to combining positional and optional arguments).",
     },
     {
       title: "Python Standard Library — json",
@@ -121,7 +121,7 @@ const topic: Topic = {
     "A reviewer could run it and the tests from the README without asking you anything.",
     "You can defend the design for 15–30 minutes and add the uneven-split extension live in about 30 minutes.",
     "You can state what you would improve and which weaknesses you accepted, and why.",
-    "Skip the simulation if you have recently completed and defended a real take-home; use one public assignment instead if you want more practice.",
+    "Skip this topic if you have recently completed and defended a real take-home; use one public assignment instead if you want more practice.",
   ],
   deprioritize: [
     "Polishing beyond the brief (user interfaces, persistence, deployment) unless the assignment asks for it.",

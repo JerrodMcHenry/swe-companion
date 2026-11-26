@@ -133,3 +133,18 @@ Each path is a qualified default for a category, not a description of one employ
 | Project deep dives (Decagon; Microsoft internship reports) | R3 C5; R2 MS6 | Candidate | 2026-11-26 | Internship evidence is adjacent | 2027-05-26 |
 | CI/CD 8/28, cloud 9/28, Docker 3/28 | R4 §6 | Official (postings) | 2026-11-25 | Keyword counts | 2027-05-25 |
 | GitHub Actions free on standard runners for public repositories | GitHub Docs billing page | Official documentation | 2026-11-26 | Pricing can change | 2027-05-26 |
+
+## Role and format guides published in S8–S9
+
+| Guide | Main sources | Category | Accessed | Limitations | Review by |
+|---|---|---|---|---|---|
+| Backend Engineer (`/interview-prep/backend-engineer`) | R4 posting sample (REST 18/28, SQL 15/28, logging 12/28, security 11/28); Stripe, Scale AI reports | Official (postings); Candidate | 2026-11-25 | Keyword counts from 28 postings; single candidate reports | 2027-05-25 |
+| Full-Stack Engineer (`/interview-prep/full-stack-engineer`) | R4 (TypeScript 19/28, React 18/28, HTML/CSS 6/28, accessibility 4/28); Notion, Klaviyo (internship), Accenture India reports | Official (postings); Candidate | 2026-11-25 | As above; frontend interview formats from three employers only | 2027-05-25 |
+| API and Integration Assessments | Stripe (2 reports), Scale AI, Klaviyo (internship), Wise (UK) | Candidate (FastPrep) | 2026-11-25 | One aggregator; not independent; growth-stage only | 2027-02-25 |
+| Basic System Design (conditional) | Decagon, Plaud, xAI reports; Capital One AI/ML track; Amazon SDE II page | Candidate; Official | 2026-11-25 | Low confidence; not observed in Big Tech new-grad reports | 2027-02-25 |
+
+## S10 release review (2026-11-26)
+
+- Meta's official statement that many interviews include a built-in AI assistant was re-read on the live hiring page (FAQ data) on 2026-11-26. Google and Microsoft AI-policy wording was not re-fetched in S10 (their pages are client-rendered); it rests on the 2026-11-25 check.
+- Claims to recheck first, by their review dates: every AI-in-interview policy (Google, Microsoft, Meta, Amazon; 2027-02-25); Netflix and Meta new-grad posting availability (2027-02-25); Google's application limit (2027-05-25); format guides built on 2026 candidate reports (debugging and code review, practical coding, take-homes, API and integration, basic system design; 2027-02-25 to 2027-05-25).
+- Resources: link availability rechecked for new S8–S9 resources; Runestone section numbers confirmed in a browser on 2026-11-26. Commercial-but-free resources to recheck for paywalls about every twelve months: Hello Interview, NeetCode, Total TypeScript, Frontend Mentor, Exercism, AlgoMaster, LeetCode.

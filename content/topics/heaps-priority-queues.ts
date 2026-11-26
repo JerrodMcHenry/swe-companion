@@ -97,7 +97,7 @@ print([heapq.heappop(heap) for _ in range(len(heap))])   # -> [1, 2, 3, 5, 8]`,
     {
       question: "Python's heapq is a min-heap. How do you get a max-heap?",
       answer:
-        "Push negated numbers and negate again when you pop. For non-numeric priorities, push a key that reverses the order, such as (-score, name). Python 3.14 adds dedicated max-heap functions (heappush_max, heappop_max, heapify_max), but negation works in every version and is what most interview solutions use.",
+        "Push negated numbers and negate again when you pop. For non-numeric priorities, push a key that reverses the order, such as (-score, name). Python 3.14 adds dedicated max-heap functions (heappush_max, heappop_max, heapify_max), but negation works in every version, so it is the safe default.",
       code: `import heapq
 
 heap = [-s for s in [2, 7, 4]]

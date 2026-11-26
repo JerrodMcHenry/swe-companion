@@ -160,7 +160,7 @@ console.log(next()); // -> 2`,
     {
       question: "How does `this` work in a JavaScript function?",
       answer:
-        "For a regular function, `this` is decided by how the function is called, not where it is defined: in user.greet() it is user. If you take the method off the object — assign it to a variable or pass it as a callback — and call it on its own, `this` is undefined in strict mode and modules (the global object in old sloppy scripts). bind(user) returns a function with `this` fixed. Arrow functions have no `this` of their own; they use the surrounding one, which is why they are convenient for callbacks inside methods.",
+        "For a regular function, `this` is decided by how the function is called, not where it is defined: in user.greet() it is user. If you take the method off the object — assign it to a variable or pass it as a callback — and call it on its own, `this` is undefined in strict mode and modules (the global object in non-strict classic scripts; the output below assumes a module or Node). bind(user) returns a function with `this` fixed. Arrow functions have no `this` of their own; they use the surrounding one, which is why they are convenient for callbacks inside methods.",
       code: `const user = {
   name: "Ana",
   greet() {

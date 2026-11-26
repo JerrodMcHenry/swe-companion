@@ -27,7 +27,7 @@ const topic: Topic = {
       provider: "DigitalOcean",
       type: "Article",
       instructions:
-        "Start here for SOLID. Read the whole article: one section per principle, mostly built on one shapes example (in PHP; the ideas transfer directly). Then rewrite one example in Python yourself. Free, no account.",
+        "Start here for SOLID. Read the whole article: one section per principle, mostly built on one shapes example (in PHP; the ideas transfer directly). Then rewrite one example in Python yourself. A cloud provider's free tutorial: ignore the sign-up and product prompts; no account needed.",
     },
     {
       title: "Refactoring.Guru — Strategy, Factory Method, Observer, Adapter, Decorator, Singleton",

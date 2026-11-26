@@ -19,7 +19,7 @@ const guide: InterviewGuide = {
     {
       heading: "Evidence and limitations",
       items: [
-        "Official: Meta's hiring-process page and FAQ (current), including the statement about the AI assistant, and Meta's software engineering preparation post (last updated 2022, so its format details may be out of date).",
+        "Official: Meta's hiring-process page and FAQ (AI-assistant statement confirmed on the live page 26 November 2026), including the statement about the AI assistant, and Meta's software engineering preparation post (last updated 2022, so its format details may be out of date).",
         "Third-party and candidate reports describe an AI-enabled coding round piloted from October 2025 that replaces one onsite coding round for some candidates. Sources disagree on how widely it is used, and none confirms it for new graduates.",
         "One late-2025 new-grad report described several coding tasks and a behavioral conversation, with no design round. This is one report, not a rule.",
         "Priorities below are editorial recommendations built on this limited evidence.",
@@ -43,7 +43,7 @@ const guide: InterviewGuide = {
   process: [
     "Official: a recruiter call, an initial screen, then a full loop; Meta says the process typically takes 2–3 months.",
     "Official (2022 guidance): the initial coding screen was about 45 minutes and could include more than one problem; the loop included coding, a design interview matched to the candidate's background, and a behavioral interview. Treat these details as possibly outdated.",
-    "Official (current): many interviews now include a built-in AI assistant; these evaluate problem solving, coding, debugging and collaboration.",
+    "Official (confirmed 26 November 2026; recheck before interviews): many interviews now include a built-in AI assistant; these evaluate problem solving, coding, debugging and collaboration.",
   ],
   competencies: [
     "Solving coding problems accurately and efficiently, sometimes more than one per session.",

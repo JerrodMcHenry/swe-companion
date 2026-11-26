@@ -120,7 +120,7 @@ def test_average_of_empty_raises():
     {
       question: "What are fakes, stubs and mocks?",
       answer:
-        "They are test doubles that replace real dependencies. A stub returns fixed answers so the code under test can run. A fake is a simple working implementation, such as an in-memory store instead of a database. A mock records how it was called so the test can verify interactions, such as \"send was called once with this message\". Prefer fakes, stubs and checking results; overusing mocks ties tests to implementation details and makes refactoring painful.",
+        "They are test doubles that replace real dependencies. A stub returns fixed answers so the code under test can run. A fake is a simple working implementation, such as an in-memory store instead of a database. A mock (or spy) records how it was called so the test can verify interactions, such as \"send was called once with this message\". Prefer fakes, stubs and checking results; overusing mocks ties tests to implementation details and makes refactoring painful.",
       code: `from unittest.mock import Mock
 
 class InMemoryRepo:                       # fake

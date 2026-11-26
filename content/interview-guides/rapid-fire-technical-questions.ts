@@ -65,7 +65,7 @@ const guide: InterviewGuide = {
       priority: "Important",
       depth: "Explain",
       slug: "classes-objects",
-      reason: "Classes, encapsulation, the four pillars and Python's object model; continue with Composition, Inheritance and Interfaces and SOLID and Common Design Patterns. These questions are more common for Java and C# roles.",
+      reason: "Classes, encapsulation, the four pillars and Python's object model; continue with Composition, Inheritance and Interfaces and SOLID and Common Design Patterns.",
     },
     {
       title: "Testing, Git and engineering fundamentals",

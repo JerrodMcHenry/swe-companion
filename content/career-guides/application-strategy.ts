@@ -42,7 +42,7 @@ const guide: CareerGuide = {
       items: [
         "Keep a master resume and a tailored copy per role type (general, backend, full-stack); adjust the order of bullets and the featured project for each application rather than rewriting.",
         "Apply to roles where you meet eligibility and most required skills; quality of fit matters more than volume, but do not hold back waiting for a perfect match.",
-        "Check employer-specific rules. For example, Google's hiring page states a limit on how many roles you can apply to within a period; read such rules on the employer's site before applying.",
+        "Check employer-specific rules. For example, Google's hiring page stated a limit on how many roles you can apply to within a period (see the Google guide, checked 25 November 2026); read such rules on the employer's site before applying.",
         "Write a cover letter only when the employer asks for one or the role is a strong fit you want to explain; keep it short and specific.",
         "Apply soon after a role opens where you can; there is no reliable public data on exact timing effects, so do not delay an application to perfect it.",
       ],
