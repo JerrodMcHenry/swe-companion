@@ -16,6 +16,9 @@ import otherEmployer from "./interview-guides/other-employer";
 import softwareEngineer from "./interview-guides/software-engineer";
 import debuggingCodeReview from "./interview-guides/debugging-code-review";
 import aiAssistedCoding from "./interview-guides/ai-assisted-coding";
+import practicalCodingAssessments from "./interview-guides/practical-coding-assessments";
+import takeHomeAssignments from "./interview-guides/take-home-assignments";
+import projectDeepDives from "./interview-guides/project-deep-dives";
 import earlyStageStartups from "./interview-guides/early-stage-startups";
 import aiFocusedStartups from "./interview-guides/ai-focused-startups";
 import growthStageCompanies from "./interview-guides/growth-stage-companies";
@@ -31,6 +34,9 @@ export const guides: InterviewGuide[] = [
   oopLowLevelDesign,
   debuggingCodeReview,
   aiAssistedCoding,
+  practicalCodingAssessments,
+  takeHomeAssignments,
+  projectDeepDives,
   google,
   amazon,
   meta,
@@ -78,10 +84,10 @@ export const guideListings: Record<GuideCategory, GuideListing[]> = {
     { slug: "behavioral-interviews" },
     { slug: "debugging-code-review" },
     { slug: "ai-assisted-coding" },
-    { planned: "Practical Coding Assessments" },
+    { slug: "practical-coding-assessments" },
     { slug: "oop-low-level-design" },
-    { planned: "Project Deep Dives" },
-    { planned: "Take-Home Assignments" },
+    { slug: "project-deep-dives" },
+    { slug: "take-home-assignments" },
     { planned: "Basic System Design (conditional)" },
     { planned: "SQL & Database Assessments (conditional)" },
     { slug: "rapid-fire-technical-questions" },

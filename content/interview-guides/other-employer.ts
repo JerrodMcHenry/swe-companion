@@ -23,7 +23,7 @@ const guide: InterviewGuide = {
       items: [
         "Algorithmic coding interview or online assessment: follow the Coding & Algorithms guide; raise trees, graphs and recursion to Essential and aim for Apply depth in the core patterns.",
         "Debugging, code review or practical coding round: follow the Debugging & Code Review guide; put Reading and Debugging Unfamiliar Code and Existing-Codebase Drills first. Implement depth in data structures is usually enough.",
-        "Take-home assignment: prioritize your project skills, tests and a clear README (Unit 6, forthcoming); schedule the time in advance.",
+        "Take-home assignment: follow the Take-Home Assignments guide and complete the Take-Home Assessment Simulation first; schedule the time in advance.",
         "AI tools allowed or expected: follow the AI-Assisted Coding guide and practise directing an assistant and verifying its output. AI not allowed: practise without it. Prepare both if you do not know.",
         "Behavioral-heavy process (for example an assessment day): give extra time to your story bank and to explaining your projects.",
         "Object-oriented or low-level design round confirmed: follow the OOP & Low-Level Design guide and raise Designing Small Systems to Essential at Apply depth.",
@@ -64,7 +64,7 @@ const guide: InterviewGuide = {
     { title: "Trees and binary search trees", priority: "Important", depth: "Implement", slug: "trees-binary-search-trees", exercises: ["Maximum Depth of Binary Tree (LeetCode)", "Binary Tree Level Order Traversal (LeetCode)"] },
     { title: "Recursion and backtracking", priority: "Important", depth: "Implement", slug: "recursion-backtracking", exercises: ["Subsets (LeetCode)"] },
     { title: "Graphs: BFS, DFS and topological sort", priority: "Important", depth: "Implement", slug: "graphs-bfs-dfs", exercises: ["Flood Fill (LeetCode)", "Number of Islands (LeetCode)"] },
-    { title: "Explaining your projects", priority: "Important", depth: "Explain", reason: "Project discussions are common, especially at startups. See the Engineering Projects guide." },
+    { title: "Explaining your projects", slug: "explaining-project-architecture", priority: "Important", depth: "Explain", reason: "Project discussions are common, especially at startups. See the Engineering Projects guide." },
     { title: "Designing small systems", priority: "Optional", depth: "Implement", slug: "designing-small-systems", reason: "Raise to Essential if a design round is confirmed or the posting stresses object-oriented design." },
     { title: "Databases and SQL concepts", priority: "Optional", depth: "Explain", slug: "databases-sql-concepts", reason: "Raise to Important at Implement depth if the posting stresses SQL or a SQL round is confirmed." },
     { title: "Practical feature work and debugging in existing code", priority: "Important", depth: "Apply", slug: "existing-codebase-drills", reason: "Practical and debugging rounds are prominent outside Big Tech in this curriculum's research. Raise to Essential if your recruiter confirms one.", exercises: ["Drill 5 — Diagnose and fix a reported bug (historical bug)", "Drill 3 — Implement a small feature (Gilded Rose: Conjured items)"] },
@@ -74,6 +74,7 @@ const guide: InterviewGuide = {
     { title: "Dynamic programming basics", priority: "Optional", depth: "Implement", slug: "dynamic-programming-basics", reason: "Raise only for algorithm-heavy interviews." },
     { title: "Union-find and weighted shortest paths", priority: "Defer", slug: "union-find-shortest-paths", reason: "Advanced; relevant mainly to some Big Tech loops." },
     { title: "System design", priority: "Defer", reason: "Rare at entry level in this curriculum's research; prepare only if a round is confirmed." },
+    { title: "Take-home assignments", priority: "Optional", depth: "Implement", slug: "take-home-simulation", reason: "Raise to Essential if your recruiter confirms a take-home." },
   ],
   sequence: [
     "Analyse the posting and confirm the interview format.",
@@ -115,14 +116,14 @@ const guide: InterviewGuide = {
     { label: "How it works", value: "The posting and your recruiter's confirmed format set the priorities" },
     { label: "Default", value: "Balanced coding, practical and behavioral preparation" },
   ],
-  parallel: ["Behavioral preparation", "Explaining your projects", "One substantial project (forthcoming: Unit 6)"],
+  parallel: ["Behavioral preparation", "explaining-project-architecture", "build-deploy-project"],
   stages: [
     { template: "fluency", topics: ["python-lists", "python-debugging"] },
     { template: "core", topics: ["problem-solving-process", "complexity-analysis", "arrays-strings-patterns", "hash-map-set-patterns"] },
     { template: "dsBreadth", topics: ["stacks-queues", "binary-search", "trees-binary-search-trees", "recursion-backtracking", "graphs-bfs-dfs", "heaps-priority-queues", "sorting-algorithms-intervals", "linked-lists", "dynamic-programming-basics"] },
-    { template: "practical", topics: ["existing-codebase-drills", "reading-debugging-unfamiliar-code"], guides: ["debugging-code-review"] },
-    { template: "simulate", topics: [], note: "Read the posting and ask your recruiter about the format first: a confirmed format overrides these defaults.", guides: ["coding-algorithms", "behavioral-interviews", "oop-low-level-design", "ai-assisted-coding"] },
-    { template: "job", topics: ["git-pull-requests", "automated-testing", "code-review", "classes-objects", "ai-assisted-engineering"] },
+    { template: "practical", topics: ["existing-codebase-drills", "reading-debugging-unfamiliar-code", "take-home-simulation"], guides: ["debugging-code-review", "practical-coding-assessments", "take-home-assignments"] },
+    { template: "simulate", topics: [], note: "Read the posting and ask your recruiter about the format first: a confirmed format overrides these defaults.", guides: ["coding-algorithms", "behavioral-interviews", "oop-low-level-design", "ai-assisted-coding", "project-deep-dives"] },
+    { template: "job", topics: ["git-pull-requests", "automated-testing", "code-review", "classes-objects", "ai-assisted-engineering", "exceptions-error-handling"] },
   ],
 };
 

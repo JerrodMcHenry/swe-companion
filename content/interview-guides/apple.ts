@@ -49,7 +49,7 @@ const guide: InterviewGuide = {
     { title: "Programming fluency in one language", priority: "Essential", depth: "Apply", slug: "python-lists", phase: "programming-fluency", reason: "The reviewed early-career posting requires proficiency in a language area; use the team's language if it is not Python." },
     { title: "Problem-solving process and communication", priority: "Essential", depth: "Implement", slug: "problem-solving-process", reason: "Coding interviews were reported, and explaining your reasoning applies to every format." },
     { title: "Behavioral preparation", priority: "Essential", reason: "A long behavioral conversation was reported, and motivation for the team matters in a team-based process. See Behavioral Interview Preparation." },
-    { title: "Explaining your projects", priority: "Essential", depth: "Explain", reason: "Team-based hiring relies on evidence of what you have built; prepare to discuss projects relevant to the team. See the Engineering Projects guide." },
+    { title: "Explaining your projects", slug: "explaining-project-architecture", priority: "Essential", depth: "Explain", reason: "Team-based hiring relies on evidence of what you have built; prepare to discuss projects relevant to the team. See the Engineering Projects guide." },
     { title: "Language fundamentals questions", priority: "Important", depth: "Explain", reason: "A new-grad report described conceptual questions about the candidate's language. Use the Rapid-Fire Technical Questions guide and the Programming Fluency interview questions, adapted to the team's language." },
     { title: "Complexity analysis", priority: "Important", depth: "Implement", slug: "complexity-analysis" },
     { title: "Arrays and strings", priority: "Important", depth: "Implement", slug: "arrays-strings-patterns", exercises: ["Best Time to Buy and Sell Stock (LeetCode)", "Longest Substring Without Repeating Characters (LeetCode)"] },
@@ -69,6 +69,7 @@ const guide: InterviewGuide = {
     { title: "Heaps, sorting and dynamic programming", priority: "Optional", depth: "Implement", slug: "heaps-priority-queues", reason: "Raise if the recruiter describes algorithm-heavy coding rounds." },
     { title: "System design", priority: "Optional", depth: "Recognize", reason: "Team-dependent; prepare only if your recruiter mentions it." },
     { title: "Union-find and weighted shortest paths", priority: "Defer", slug: "union-find-shortest-paths", reason: "No Apple early-career evidence supports it." },
+    { title: "Exceptions and error handling", priority: "Important", depth: "Explain", slug: "exceptions-error-handling", reason: "One new-grad report described language-fundamentals questions that included exceptions; explain them in your team's language." },
   ],
   sequence: [
     "Find the team's posting and ask your recruiter about its language, platform and interview structure.",
@@ -123,13 +124,13 @@ const guide: InterviewGuide = {
     { label: "Language", value: "Use your team's language" },
     { label: "Postings", value: "Few early-career postings; team-specific" },
   ],
-  parallel: ["Behavioral preparation", "Explaining your projects", "One substantial project (forthcoming: Unit 6)"],
+  parallel: ["Behavioral preparation", "explaining-project-architecture", "build-deploy-project"],
   stages: [
-    { template: "fluencyTeam", topics: ["python-lists", "Language fundamentals questions", "python-debugging"], note: "Apple teams use different languages (for example Swift for iOS). Confirm yours and practise in it." },
+    { template: "fluencyTeam", topics: ["python-lists", "Language fundamentals questions", "exceptions-error-handling", "python-debugging"], note: "Apple teams use different languages (for example Swift for iOS). Confirm yours and practise in it." },
     { template: "core", topics: ["problem-solving-process", "complexity-analysis", "arrays-strings-patterns", "hash-map-set-patterns"] },
     { template: "dsDepth", topics: ["linked-lists", "stacks-queues", "trees-binary-search-trees", "graphs-bfs-dfs", "binary-search", "heaps-priority-queues"] },
     { template: "oopFundamentals", topics: ["classes-objects", "composition-inheritance-interfaces", "computer-science-essentials"] },
-    { template: "simulate", topics: ["System design"], note: "Apple's process is set by each team. Ask your recruiter what to expect and prepare your motivation for that team.", guides: ["coding-algorithms", "behavioral-interviews", "rapid-fire-technical-questions"] },
+    { template: "simulate", topics: ["System design"], note: "Apple's process is set by each team. Ask your recruiter what to expect and prepare your motivation for that team.", guides: ["coding-algorithms", "behavioral-interviews", "rapid-fire-technical-questions", "project-deep-dives"] },
     { template: "job", topics: ["git-pull-requests", "automated-testing", "reading-debugging-unfamiliar-code", "code-review", "ai-assisted-engineering"] },
   ],
 };

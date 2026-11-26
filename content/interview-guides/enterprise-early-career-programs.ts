@@ -86,6 +86,7 @@ const guide: InterviewGuide = {
     { title: "Graphs: BFS, DFS and topological sort", priority: "Optional", depth: "Implement", slug: "graphs-bfs-dfs" },
     { title: "Dynamic programming basics", priority: "Defer", slug: "dynamic-programming-basics", reason: "Beyond typical Easy-to-Medium online assessments unless your program says otherwise." },
     { title: "System design", priority: "Defer", reason: "Observed for a specialized AI/ML track, not general software programs." },
+    { title: "Deployment and CI/CD", priority: "Important", depth: "Explain", slug: "deployment-ci-cd", reason: "Enterprise postings list CI/CD and test automation as job expectations (official postings); new engineers work within existing pipelines." },
   ],
   sequence: [
     "Note your program's application dates and published stages; apply early in the season.",
@@ -136,13 +137,13 @@ const guide: InterviewGuide = {
     { label: "Timing", value: "Fixed recruiting season — apply early" },
     { label: "Evidence", value: "Mostly financial-services programs" },
   ],
-  parallel: ["Behavioral preparation", "One substantial project (forthcoming: Unit 6)"],
+  parallel: ["Behavioral preparation", "explaining-project-architecture", "build-deploy-project"],
   stages: [
     { template: "fluency", topics: ["python-lists", "python-debugging"] },
     { template: "coreOA", topics: ["problem-solving-process", "arrays-strings-patterns", "hash-map-set-patterns", "complexity-analysis", "stacks-queues", "trees-binary-search-trees", "graphs-bfs-dfs"] },
-    { template: "enterpriseEng", topics: ["classes-objects", "reading-debugging-unfamiliar-code", "automated-testing", "git-pull-requests", "databases-sql-concepts", "security-fundamentals"] },
+    { template: "enterpriseEng", topics: ["classes-objects", "reading-debugging-unfamiliar-code", "automated-testing", "exceptions-error-handling", "git-pull-requests", "databases-sql-concepts", "security-fundamentals"], guides: ["practical-coding-assessments"] },
     { template: "assessmentDay", topics: ["Recorded video interviews (conditional)", "Business case interviews (conditional)"], note: "Follow your program's published steps. Case, video and AI-assisted rounds are program-specific.", guides: ["behavioral-interviews", "coding-algorithms"] },
-    { template: "job", topics: ["code-review", "ai-assisted-engineering"] },
+    { template: "job", topics: ["code-review", "ai-assisted-engineering", "deployment-ci-cd"] },
   ],
 };
 

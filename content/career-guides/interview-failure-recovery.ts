@@ -33,7 +33,7 @@ const guide: CareerGuide = {
         "Practical engineering (take-home, working in an existing codebase, code review) → Units 5 and 6.",
         "Technical communication (silent, unclear or disorganized explanation) → practise solving problems aloud, ideally with another person.",
         "Behavioral answers (vague, no clear result, not your own contribution) → Behavioral Interview Preparation in Interview Preparation; improve your story bank.",
-        "Project explanations (could not explain design decisions or trade-offs) → Unit 6 and the Engineering Projects guide.",
+        "Project explanations (could not explain design decisions or trade-offs) → Explaining Project Architecture and the Project Deep Dives guide.",
         "Time management (spent too long clarifying, coding or perfecting) → timed practice with a visible clock and agreed checkpoints.",
         "Not reaching the interview at all → Resume Preparation, Job Description Gap Analysis and Job Application Strategy, not technical study.",
       ],

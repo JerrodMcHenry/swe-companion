@@ -34,9 +34,25 @@ function pathContexts(slug: string) {
       index >= 0
         ? { item: sequence[index].item, stage: sequence[index].stage }
         : roadmap.stages.flatMap((stage) => stage.items.filter((item) => item.slug === slug).map((item) => ({ item, stage: stage.index })))[0];
+    const base = `/apprenticeship/for/${target.slug}/${role.slug}`;
+    const parallel = roadmap.parallel.find((item) => item.slug === slug);
+    if (!placed && parallel) {
+      // Started from day one, alongside the stages: no previous/next within the sequence.
+      contexts[pathKey(target, role)] = {
+        name: targetName(target.slug, target.title),
+        pathHref: base,
+        stageTitle: "In parallel, from day one",
+        stageHref: base,
+        depth: parallel.depth,
+        priority: parallel.priority,
+        track: parallel.track,
+        reason: itemReason(parallel),
+        selected: parallel.exercises ?? [],
+      };
+      continue;
+    }
     if (!placed) continue;
     const { item, stage } = placed;
-    const base = `/apprenticeship/for/${target.slug}/${role.slug}`;
     contexts[pathKey(target, role)] = {
       name: targetName(target.slug, target.title),
       pathHref: base,

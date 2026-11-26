@@ -43,7 +43,7 @@ const guide: CareerGuide = {
         "Object-oriented design, design principles → Unit 3, Object-Oriented Programming & Design.",
         "Git, testing, command line, HTTP, SQL concepts, operating-system and security basics → Unit 4, Engineering Fundamentals.",
         "Working in existing codebases, code review, AI-assisted development tools → Unit 5, Practical Software Engineering.",
-        "No substantial project to discuss → Unit 6, Build and Deploy One Project.",
+        "No substantial project to discuss → Build and Deploy a Project (Unit 6).",
         "REST APIs, databases, authentication, backend frameworks → Unit 7, Backend Engineering.",
         "JavaScript, TypeScript, React, browser fundamentals → Unit 8, Full-Stack Engineering.",
         "Behavioral questions and interview formats → Interview Preparation. Resume wording → Resume Preparation.",

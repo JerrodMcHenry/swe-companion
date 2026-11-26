@@ -41,6 +41,12 @@ import readingDebuggingUnfamiliarCode from "./topics/reading-debugging-unfamilia
 import codeReview from "./topics/code-review";
 import aiAssistedEngineering from "./topics/ai-assisted-engineering";
 import existingCodebaseDrills from "./topics/existing-codebase-drills";
+import buildDeployProject from "./topics/build-deploy-project";
+import exceptionsErrorHandling from "./topics/exceptions-error-handling";
+import modulesPackagesProjectStructure from "./topics/modules-packages-project-structure";
+import deploymentCiCd from "./topics/deployment-ci-cd";
+import explainingProjectArchitecture from "./topics/explaining-project-architecture";
+import takeHomeSimulation from "./topics/take-home-simulation";
 
 // Every published topic. To publish a new topic, add its file in content/topics/ and list it here.
 export const topics: Topic[] = [
@@ -86,6 +92,12 @@ export const topics: Topic[] = [
   codeReview,
   aiAssistedEngineering,
   existingCodebaseDrills,
+  buildDeployProject,
+  exceptionsErrorHandling,
+  modulesPackagesProjectStructure,
+  deploymentCiCd,
+  explainingProjectArchitecture,
+  takeHomeSimulation,
 ];
 
 const seen = new Set<string>();

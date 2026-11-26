@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { topicHref, type RoadmapItem } from "@/content/roadmap";
+import type { InterviewGuide } from "@/content/types";
 import { getTopic } from "@/content/topics";
 import { Bullets, Crumbs, cleanTitle, StageNumber } from "../../../../ui";
 import RememberPath from "../../remember-path";
@@ -18,8 +19,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return path ? { title: `${path.name} · ${path.roleTitle} apprenticeship`, description: path.target.description } : {};
 }
 
-// Where a parallel item leads: the guide that teaches it.
-function parallelHref(item: RoadmapItem) {
+// Where a parallel item leads: its topic within this apprenticeship, or the guide that teaches it.
+function parallelHref(item: RoadmapItem, target: InterviewGuide, role: InterviewGuide) {
+  if (item.slug && getTopic(item.slug)) return topicHref(item.slug, target, role);
   if (/behavioral/i.test(item.title)) return "/interview-prep/behavioral-interviews";
   return "/getting-hired/engineering-projects";
 }
@@ -153,8 +155,8 @@ export default async function ApprenticeshipPathPage({ params }: Props) {
             <h2 className="h3">In parallel, from day one</h2>
             <div className="par" style={{ marginTop: 8 }}>
               {roadmap.parallel.map((item) => (
-                <Link key={item.key} href={parallelHref(item)}>
-                  <span>{cleanTitle(item.title)}</span>
+                <Link key={item.key} href={parallelHref(item, target, role)}>
+                  <span>{item.slug && getTopic(item.slug) ? getTopic(item.slug)!.title : cleanTitle(item.title)}</span>
                   <span className="muted">›</span>
                 </Link>
               ))}

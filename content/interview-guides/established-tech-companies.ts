@@ -83,12 +83,13 @@ const guide: InterviewGuide = {
     { title: "Git and pull requests", priority: "Important", depth: "Implement", slug: "git-pull-requests", reason: "Version control is named in postings in this segment (for example DoorDash)." },
     { title: "Databases and SQL concepts", priority: "Important", depth: "Explain", slug: "databases-sql-concepts", reason: "SQL is named in some postings (for example DoorDash) as a job requirement; prepare SQL interview questions only if a round is confirmed." },
     { title: "AI-assisted engineering and verification", priority: "Important", depth: "Implement", slug: "ai-assisted-engineering", reason: "Some companies (officially, Pinterest) invite AI use in designated interview parts and ask for AI judgment on the job; assume AI is not allowed elsewhere unless told." },
-    { title: "Explaining your projects", priority: "Important", depth: "Explain", reason: "Resume and project discussions were reported; a Project Deep Dives guide is forthcoming." },
+    { title: "Explaining your projects", slug: "explaining-project-architecture", priority: "Important", depth: "Explain", reason: "Resume and project discussions were reported." },
     { title: "Designing small systems", priority: "Optional", depth: "Implement", slug: "designing-small-systems", reason: "Raise to Essential if a design round is confirmed." },
     { title: "Rapid-fire technical knowledge questions", priority: "Optional", depth: "Explain", reason: "Knowledge questions were reported in one third-party screen; see the Rapid-Fire Technical Questions guide." },
     { title: "Heaps and priority queues", priority: "Optional", depth: "Implement", slug: "heaps-priority-queues" },
     { title: "Dynamic programming basics", priority: "Optional", depth: "Implement", slug: "dynamic-programming-basics", reason: "Raise only for algorithm-heavy loops." },
     { title: "System design", priority: "Defer", reason: "Rare for new grads; prepare only if a round is confirmed." },
+    { title: "Take-home assignments", priority: "Optional", depth: "Implement", slug: "take-home-simulation", reason: "Pinterest names a take-home as one place where it may invite AI use (official); prepare only if a take-home is confirmed." },
   ],
   sequence: [
     "Check whether your target has its own company guide; if so, use it. Otherwise, read the posting and ask the recruiter about the process.",
@@ -128,14 +129,14 @@ const guide: InterviewGuide = {
     { label: "AI", value: "Some allow AI in designated sections only (Pinterest, official)" },
     { label: "Tip", value: "Use a company's own path if it has one" },
   ],
-  parallel: ["Behavioral preparation", "Explaining your projects", "One substantial project (forthcoming: Unit 6)"],
+  parallel: ["Behavioral preparation", "explaining-project-architecture", "build-deploy-project"],
   stages: [
     { template: "fluency", topics: ["python-lists", "python-debugging"] },
     { template: "core", topics: ["problem-solving-process", "complexity-analysis", "arrays-strings-patterns", "hash-map-set-patterns", "automated-testing"] },
     { template: "dsBreadth", topics: ["trees-binary-search-trees", "graphs-bfs-dfs", "stacks-queues", "binary-search", "recursion-backtracking", "heaps-priority-queues", "dynamic-programming-basics"] },
     { template: "postingBasics", topics: ["classes-objects", "git-pull-requests", "databases-sql-concepts", "ai-assisted-engineering", "Rapid-fire technical knowledge questions"] },
-    { template: "simulate", topics: [], note: "If your target has its own company path, use that instead.", guides: ["coding-algorithms", "behavioral-interviews", "oop-low-level-design", "rapid-fire-technical-questions"] },
-    { template: "job", topics: ["reading-debugging-unfamiliar-code", "code-review"] },
+    { template: "simulate", topics: ["take-home-simulation"], note: "If your target has its own company path, use that instead.", guides: ["coding-algorithms", "behavioral-interviews", "oop-low-level-design", "rapid-fire-technical-questions", "project-deep-dives", "take-home-assignments"] },
+    { template: "job", topics: ["reading-debugging-unfamiliar-code", "code-review", "exceptions-error-handling"] },
   ],
 };
 

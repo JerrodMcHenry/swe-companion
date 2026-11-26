@@ -122,3 +122,14 @@ Each path is a qualified default for a category, not a description of one employ
 | Growth-Stage Companies (`/interview-prep/growth-stage-companies`) | Stripe, Notion, Scale AI reports (R3 C1–C4); Stripe Bug Squash (R3 O2, dated; re-checked 2026-11-25); entry-level posting snapshot (R3 §3.1) | Candidate; Official (dated) | Moderate | Mostly one aggregator; some companies keep Big Tech-style loops | 2027-05-25 |
 | Established Technology Companies (`/interview-prep/established-tech-companies`) | Pinterest AI-in-hiring page (official; read in browser 2026-11-25); DoorDash, Pinterest, Affirm postings (R3); GitLab handbook (non-entry); one retailer's third-party screen (T2) | Official; Candidate | Weak | New-grad interview content mostly unverified | 2027-05-25 |
 | Enterprise & Structured Early-Career Programs (`/interview-prep/enterprise-early-career-programs`) | Capital One interview pages (official, re-checked); JPMorganChase SEP page and Digital Handbook (HireVue/HackerRank round, re-checked 2026-11-25); Capital One Power Day and agentic reports (R3 C8–C9); BofA, Fidelity postings | Official; Candidate | Moderate (dominated by Capital One) | Finance-heavy; case, video and agentic formats not generalizable | 2027-05-25 (AI rounds 2027-02-25) |
+
+## Unit 6 topics and practical-format guides (S7, published 2026-11-26)
+
+| Claim used | Source | Category | Accessed | Limitations | Review by |
+|---|---|---|---|---|---|
+| Take-home + CTO interview + work trial (Corelayer); CTO deep dive + whiteboard take-home + paid trial (EQL) | YC posting (R3 O1); recruiter posting (R4 O2) | Official (postings) | 2026-11-26 | Individual startups; postings change | 2027-05-26 |
+| Take-home as an AI-designated section | Pinterest AI-in-hiring page (R4 O1) | Official | 2026-11-25 (browser) | 403 to automated access | 2027-02-26 |
+| Take-homes at Notion AI and xAI; practicals at Scale AI, Stripe, Klaviyo (intern); Capital One agentic bug fix + feature | R3 C1, C3, C4, C7, C9; R4 C1 | Candidate | 2026-11-26 | Aggregator, rewritten; small sample | 2027-02-26 |
+| Project deep dives (Decagon; Microsoft internship reports) | R3 C5; R2 MS6 | Candidate | 2026-11-26 | Internship evidence is adjacent | 2027-05-26 |
+| CI/CD 8/28, cloud 9/28, Docker 3/28 | R4 §6 | Official (postings) | 2026-11-25 | Keyword counts | 2027-05-25 |
+| GitHub Actions free on standard runners for public repositories | GitHub Docs billing page | Official documentation | 2026-11-26 | Pricing can change | 2027-05-26 |

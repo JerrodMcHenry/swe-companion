@@ -135,14 +135,14 @@ const guide: InterviewGuide = {
     { label: "AI", value: "Many interviews include a built-in AI assistant you are expected to use (official)" },
     { label: "Coding", value: "Prepare with and without a compiler" },
   ],
-  parallel: ["Behavioral preparation", "One substantial project (forthcoming: Unit 6)"],
+  parallel: ["Behavioral preparation", "explaining-project-architecture", "build-deploy-project"],
   stages: [
     { template: "fluency", topics: ["python-lists", "python-debugging"] },
     { template: "coreSpeed", topics: ["problem-solving-process", "complexity-analysis", "arrays-strings-patterns", "hash-map-set-patterns"] },
     { template: "dsBreadth", topics: ["trees-binary-search-trees", "graphs-bfs-dfs", "stacks-queues", "linked-lists", "binary-search", "heaps-priority-queues", "recursion-backtracking", "sorting-algorithms-intervals", "dynamic-programming-basics", "union-find-shortest-paths"] },
-    { template: "aiRound", topics: ["reading-debugging-unfamiliar-code", "ai-assisted-engineering", "existing-codebase-drills"] },
+    { template: "aiRound", topics: ["reading-debugging-unfamiliar-code", "ai-assisted-engineering", "existing-codebase-drills"], guides: ["practical-coding-assessments"] },
     { template: "simulate", topics: [], note: "Prepare both ways until your recruiter confirms your formats: without a compiler, and with the built-in assistant.", guides: ["coding-algorithms", "behavioral-interviews", "ai-assisted-coding"] },
-    { template: "job", topics: ["git-pull-requests", "automated-testing", "code-review", "classes-objects"] },
+    { template: "job", topics: ["git-pull-requests", "automated-testing", "code-review", "classes-objects", "exceptions-error-handling"] },
   ],
 };
 

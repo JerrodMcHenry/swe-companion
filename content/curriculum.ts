@@ -193,12 +193,12 @@ export const phases: Phase[] = [
       "You can walk an interviewer through the problem, design decisions, hardest bug and what you would change at larger scale.",
     ],
     topics: [
-      { planned: "Build and Deploy One Project (assignment)" },
-      { planned: "Exception Handling" },
-      { planned: "Modules and Packages" },
-      { planned: "Deployment and Continuous Integration" },
-      { planned: "Explaining Your Architecture (entry-level system design)" },
-      { planned: "Take-Home Assignment Simulation" },
+      { slug: "build-deploy-project" },
+      { slug: "exceptions-error-handling" },
+      { slug: "modules-packages-project-structure" },
+      { slug: "deployment-ci-cd" },
+      { slug: "explaining-project-architecture" },
+      { slug: "take-home-simulation" },
     ],
     mastery: [
       "Stop when your project is deployed, tested and documented and you can present it confidently. Build another project only to close a specific gap.",

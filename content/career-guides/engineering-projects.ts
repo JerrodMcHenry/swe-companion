@@ -5,7 +5,7 @@ const guide: CareerGuide = {
   title: "Building an Interview-Worthy Engineering Project",
   description: "What makes a project demonstrate engineering competence, and how to prepare to discuss it.",
   overview:
-    "A strong engineering project demonstrates your ability to solve a meaningful problem, make technical decisions and deliver working software. The objective is not to accumulate technologies or repositories, but to demonstrate engineering competence.",
+    "A strong engineering project demonstrates your ability to solve a meaningful problem, make technical decisions and deliver working software. The objective is not to accumulate technologies or repositories, but to demonstrate engineering competence. The step-by-step assignment and readiness checklist are in Build and Deploy a Project; how to explain it in interviews is in Explaining Project Architecture. This guide covers how a project helps your applications.",
   guidance: [
     {
       heading: "What a project should demonstrate",
@@ -61,7 +61,8 @@ const guide: CareerGuide = {
     "Explain testing and deployment decisions.",
     "Describe limitations and reasonable improvements.",
   ],
-  relatedGuides: ["/interview-prep/behavioral-interviews", "/getting-hired/resume"],
+  relatedTopics: ["build-deploy-project", "explaining-project-architecture", "deployment-ci-cd", "take-home-simulation"],
+  relatedGuides: ["/interview-prep/project-deep-dives", "/interview-prep/take-home-assignments", "/interview-prep/behavioral-interviews", "/getting-hired/resume"],
 };
 
 export default guide;

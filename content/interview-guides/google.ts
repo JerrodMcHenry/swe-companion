@@ -76,7 +76,7 @@ const guide: InterviewGuide = {
     { title: "Dynamic programming basics", priority: "Important", depth: "Implement", slug: "dynamic-programming-basics", reason: "Memoization and dynamic programming are named in official material; reported problems were mostly basic.", exercises: ["House Robber (LeetCode)", "Coin Change (LeetCode)"] },
     { title: "Stacks and queues", priority: "Important", depth: "Implement", slug: "stacks-queues", exercises: ["Daily Temperatures (LeetCode)", "Min Stack (LeetCode)"] },
     { title: "Linked lists", priority: "Important", depth: "Implement", slug: "linked-lists", exercises: ["Reverse Linked List (LeetCode)", "Linked List Cycle (LeetCode)"] },
-    { title: "Explaining your projects", priority: "Important", depth: "Explain", reason: "Your resume is screened against the posting, and projects come up in conversations. See the Engineering Projects guide." },
+    { title: "Explaining your projects", slug: "explaining-project-architecture", priority: "Important", depth: "Explain", reason: "Your resume is screened against the posting, and projects come up in conversations. See the Engineering Projects guide." },
     { title: "Union-find and weighted shortest paths", priority: "Optional", depth: "Implement", slug: "union-find-shortest-paths", reason: "Conditional: union-find and Dijkstra appeared in a small number of candidate reports. Study after the core patterns are solid.", exercises: ["Redundant Connection (LeetCode)", "Network Delay Time (LeetCode)"] },
     { title: "Designing small systems", priority: "Optional", depth: "Implement", slug: "designing-small-systems", reason: "Conditional: one of the reviewed early-career reports included a class-design round. Raise only if your recruiter mentions a design round." },
     { title: "System design", priority: "Optional", depth: "Recognize", reason: "Uncertain: system design appears in Google's general preparation videos, but not in any reviewed early-career report. Do not prepare senior-level distributed systems." },
@@ -187,14 +187,14 @@ const guide: InterviewGuide = {
     { label: "AI and Search", value: "Not permitted in interviews (official)" },
     { label: "Eligibility", value: "Bachelor's or equivalent practical experience; check each posting" },
   ],
-  parallel: ["Behavioral preparation", "Explaining your projects", "One substantial project (forthcoming: Unit 6)"],
+  parallel: ["Behavioral preparation", "explaining-project-architecture", "build-deploy-project"],
   stages: [
     { template: "fluency", topics: ["python-lists", "python-debugging"] },
     { template: "core", topics: ["problem-solving-process", "complexity-analysis", "arrays-strings-patterns", "hash-map-set-patterns"] },
     { template: "dsDepth", topics: ["stacks-queues", "linked-lists", "binary-search", "trees-binary-search-trees", "heaps-priority-queues"] },
     { template: "advDepth", topics: ["recursion-backtracking", "graphs-bfs-dfs", "sorting-algorithms-intervals", "dynamic-programming-basics", "union-find-shortest-paths"] },
-    { template: "simulate", topics: ["System design"], note: "Practise without AI, Search or a compiler for part of the time — Google states AI tools are not permitted in interviews.", guides: ["coding-algorithms", "behavioral-interviews"] },
-    { template: "job", topics: ["git-pull-requests", "automated-testing", "reading-debugging-unfamiliar-code", "code-review", "ai-assisted-engineering", "classes-objects"] },
+    { template: "simulate", topics: ["System design"], note: "Practise without AI, Search or a compiler for part of the time — Google states AI tools are not permitted in interviews.", guides: ["coding-algorithms", "behavioral-interviews", "project-deep-dives"] },
+    { template: "job", topics: ["git-pull-requests", "automated-testing", "reading-debugging-unfamiliar-code", "code-review", "ai-assisted-engineering", "classes-objects", "exceptions-error-handling"] },
   ],
 };
 
