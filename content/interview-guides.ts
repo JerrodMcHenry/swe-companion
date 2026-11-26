@@ -2,15 +2,24 @@ import type { GuideCategory, GuideListing, InterviewGuide } from "./types";
 import { getTopic } from "./topics";
 import codingAlgorithms from "./interview-guides/coding-algorithms";
 import behavioralInterviews from "./interview-guides/behavioral-interviews";
+import rapidFireTechnicalQuestions from "./interview-guides/rapid-fire-technical-questions";
+import google from "./interview-guides/google";
+import softwareEngineer from "./interview-guides/software-engineer";
 
 // Every published guide. To publish a guide, add its file in content/interview-guides/,
 // list it here, and replace its { planned } entry below with { slug }.
-export const guides: InterviewGuide[] = [codingAlgorithms, behavioralInterviews];
+export const guides: InterviewGuide[] = [
+  codingAlgorithms,
+  behavioralInterviews,
+  rapidFireTechnicalQuestions,
+  google,
+  softwareEngineer,
+];
 
 // What the Interview Preparation page lists, in order, for each category.
 export const guideListings: Record<GuideCategory, GuideListing[]> = {
   Company: [
-    { planned: "Google" },
+    { slug: "google" },
     { planned: "Amazon" },
     { planned: "Meta" },
     { planned: "Apple" },
@@ -20,7 +29,7 @@ export const guideListings: Record<GuideCategory, GuideListing[]> = {
     { planned: "Enterprise Programs" },
   ],
   Role: [
-    { planned: "Software Engineer" },
+    { slug: "software-engineer" },
     { planned: "Backend Engineer" },
     { planned: "Full-Stack Engineer" },
     { planned: "AI Engineer" },
@@ -38,7 +47,7 @@ export const guideListings: Record<GuideCategory, GuideListing[]> = {
     { planned: "Take-Home Assignments" },
     { planned: "Basic System Design (conditional)" },
     { planned: "SQL & Database Assessments (conditional)" },
-    { planned: "Rapid-Fire Technical Questions (conditional)" },
+    { slug: "rapid-fire-technical-questions" },
   ],
 };
 
