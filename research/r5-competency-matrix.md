@@ -1,10 +1,10 @@
 # R5 — Consolidated entry-level competency matrix
 
-Status: draft for product-owner review. Synthesis date: **2026-11-25**. Evidence base: R1 (Google L3), R2 (Big Tech), R3 (startups and enterprises), R4 (backend and full-stack). No new research batch was run; no targeted verification was required (§13 explains why). Nothing here has been published to the application.
+Status: preliminarily approved for curriculum design, with corrections applied (Python topic count reconciled; depth scale aligned with CLAUDE.md; AI-assisted engineering scope clarified). Synthesis date: **2026-11-25**. Evidence base: R1 (Google L3), R2 (Big Tech), R3 (startups and enterprises), R4 (backend and full-stack). No new research batch was run; no targeted verification was required (§13 explains why). Nothing here has been published to the application.
 
-**Everything in this report is an editorial recommendation** derived from R1–R4. Priorities, depths and readiness criteria are not official or universal hiring requirements. Evidence references use the source IDs from each report (e.g. R2-A1, R3-C8, R4-O1).
+**Everything in this report is an editorial recommendation** derived from R1–R4. Priorities, depths and readiness criteria are not official or universal hiring requirements. Where an employer requirement is cited, it is labelled with its source; all evidence limitations from R1–R4 continue to apply (§2, §13). Evidence references use the source IDs from each report (e.g. R2-A1, R3-C8, R4-O1).
 
-**Depth scale used here:** Recognize → Explain → Implement → Apply (the scale requested for R5). R1–R4 used "Master" for the top level; "Apply" replaces it with a narrower meaning: solve unfamiliar problems and explain trade-offs, not exhaustive mastery. CLAUDE.md still defines "Master"; aligning the two is an R6 decision (§14).
+**Depth scale used here:** Recognize → Explain → Implement → Apply. R1–R4 used "Master" for the top level; "Apply" replaces it with a narrower meaning: solve unfamiliar problems and explain trade-offs, not exhaustive mastery. CLAUDE.md has been updated to this approved scale; existing published topic depth text still reads "Master" and needs a content update in a later approved batch.
 
 **Path abbreviations:** **G** general entry-level SWE · **BT** Big Tech · **SU** startup / growth-stage · **EN** enterprise · **BE** backend · **FS** full-stack. Company paths (BT, SU, EN) and role paths (BE, FS) overlap: a candidate picks one or more of each.
 
@@ -17,7 +17,7 @@ Status: draft for product-owner review. Synthesis date: **2026-11-25**. Evidence
 1. **A single shared foundation serves every path.** One programming language to fluency, core data structures and algorithms with complexity analysis, testing and debugging, reading and modifying existing code, technical communication, a behavioral story bank, and AI-assisted engineering with verification. Every report converged on this independently.
 2. **Interviews and jobs test different things.** Interviews (especially Big Tech) emphasise DSA, complexity and communication under closed-book conditions. Jobs (all paths) require Git, testing, SQL, APIs, code review, debugging and verified AI use, usually with documentation available. Preparation must cover both, but at different depths and in different modes.
 3. **Practical assessments are now common outside Big Tech and spreading inside it.** Debugging rounds, integration tasks, agentic AI rounds, take-homes and work trials appear at growth-stage companies, enterprises (Capital One) and Meta. Codebase drills therefore belong in the foundation, not at the end.
-4. **AI policy splits by employer, so candidates need two modes.** Closed-book, AI-free problem solving (Google, Microsoft, most live questions at Pinterest) and AI-assisted work with explicit verification (Meta AI-native rounds, Capital One agentic round, Stripe AI round, startup expectations, Amazon postings).
+4. **AI-assisted engineering is recommended professional preparation; its interview relevance depends on the employer and assessment format.** Postings and job descriptions increasingly expect verified AI use (R1-S10, R2-A6, R3, R4), but interviews either prohibit AI or assess it, so candidates need two modes. Closed-book, AI-free problem solving (Google, Microsoft, most live questions at Pinterest) and AI-assisted work with explicit verification (Meta AI-native rounds, Capital One agentic round, Stripe AI round, startup expectations, Amazon postings).
 5. **Role specialisation adds a bounded layer.** Backend adds HTTP/REST, SQL and data modelling, validation, auth and security basics, logging and one deployment. Full-stack adds TypeScript and React. Both are demonstrated mainly through one deployed project.
 6. **Much of the conventional curriculum can be deferred.** Advanced language features, system design beyond basics, Kubernetes, microservices, advanced database tuning, design-pattern catalogs, multiple frameworks and cloud certifications are not needed for a first role, each with a stated condition for when they become relevant.
 7. **Curriculum completion is not an eligibility substitute.** Postings commonly require degrees, internships or 0–2 years of experience; several "junior" titles require 2+ years. Preparation improves interview and engineering readiness; it does not satisfy experience requirements (§3.1).
@@ -109,12 +109,12 @@ Priority by path (E/W/C/D) and minimum sufficient depth. "Interview" and "Engine
 | 14 | Application security fundamentals | W | W | W | W | E | E | L | M–H | Explain / Implement (basics) |
 | 15 | Deployment and cloud fundamentals | W | D–C | E | W | W | W | L | M (H at early-stage) | Recognize / Implement (one deploy) |
 | 16 | Entry-level system design | C | C | C (E for AI startups) | C | W | W | L–M (SU), low (BT) | M | Explain / Explain |
-| 17 | AI-assisted engineering and verification | E | E | E | E | E | E | H (format-dependent) | H | Implement (both modes) |
+| 17 | AI-assisted engineering and verification | E | E | E | E | E | E | Employer- and format-dependent (prohibited at some, assessed at others) | H | Implement (both modes) |
 | 18 | Technical communication | E | E | E | E | E | E | H | H | Apply / Apply |
 | 19 | Behavioral preparation | E | E | E | E | E | E | H | H (collaboration) | Implement |
 | 20 | Project and portfolio discussions | E | W | E | W | E | E | M (H at SU) | M | Explain |
 
-Notes: BE/FS rows assume the general foundation is already in place. A BT backend candidate takes the BT column for interview topics and the BE column for engineering readiness.
+Notes: Row 17 priority reflects recommended professional preparation; its interview relevance depends on employer and format (§5.17). BE/FS rows assume the general foundation is already in place. A BT backend candidate takes the BT column for interview topics and the BE column for engineering readiness.
 
 ---
 
@@ -334,7 +334,7 @@ Format per competency: why · eligibility / interview / engineering · priority 
 
 - **Why:** postings increasingly require it (R1-S10, R2-A6, R3 §3.2, R4 §3.2); interviews either prohibit AI (R1-S1, R2-MS1) or assess its use (R2-M1, R3-C8/C9, R4-O1).
 - **Eligibility:** listed as a minimum qualification in some postings (Google US, Amazon 5/10). **Interview:** H, mode depends on employer. **Engineering:** H (validate AI code: R2-A6).
-- **Priority:** E on all paths. **Depth:** Implement, in two separate modes.
+- **Priority:** E on all paths **as professional preparation**. Interview relevance is employer- and format-specific: practise AI-free for employers that prohibit AI (Google, Microsoft, live questions at Pinterest) and AI-assisted for formats that assess it (Meta AI-native, Capital One agentic, Stripe AI round, Pinterest designated sections). This is an editorial recommendation, not a universal employer requirement. **Depth:** Implement, in two separate modes.
 - **Concepts:** **AI-free mode:** solve and explain without assistance. **AI-assisted mode:** decompose the task; give precise instructions; review every change; test before trusting; detect hallucinated APIs and subtle bugs; check correctness before optimising (R2-M7); keep ownership and explain the result.
 - **Questions:** "How do you verify AI-generated code?" "What do you do when the AI is wrong?" (R2-A8)
 - **Tasks:** Assignment 2b with a verification log; complete one agentic bug-fix-plus-feature exercise in 40 minutes.
@@ -458,6 +458,8 @@ The 8 published topics remain unchanged. Priority applies to the **general and B
 | 23 | Python Debugging | Planned | **E** | Tracebacks, print/logging, debugger; supports §5.12 |
 | 24 | Integrated Programming Exercises | Planned | **E** as a checkpoint | Becomes the fluency gate below |
 
+**Inventory check:** the curriculum contains **24** Python topics (8 published, 16 planned), classified above as **14 Essential, 6 Working, 2 Conditional, 2 Defer** (total 24). An earlier summary outside this report stated 7 Working, which was an arithmetic error.
+
 **Fluency gate before DSA [Editorial]:** topics 1–6, 8, 10, 11, 12 (Explain), 14 and 23, plus the §5.1 readiness check (10 unseen easy problems, under 20 minutes each, no references). Topics 7, 9, 13, 15, 16, 17 can be learned alongside DSA or the project; 18–21 are learned only when needed; 22 is taught inside DSA. **Learners do not need to complete all 24 topics before progressing.**
 
 Distinctions: **language fluency** = gate topics; **language-specific interview preparation** = §5.2 question set; **advanced language knowledge** = topics 18–21 and beyond, deferred.
@@ -577,7 +579,7 @@ Backend criteria, plus:
 | Degree requirement | "Or equivalent" (Google, many) vs Amazon degree requirement | Eligibility varies; Getting Hired guidance should flag it. |
 | Real users for projects | R3 recommended real users; R5 brief requires them to be optional | Beneficial, not required (§10). |
 | Python vs TypeScript as primary language | TypeScript more frequent in R4 FS postings; Python common for interviews and the existing curriculum | Python primary; TypeScript added only for full-stack. |
-| Depth scale (Master vs Apply) | CLAUDE.md uses Master; R5 brief uses Apply | R6 decision; R5 uses Apply. |
+| Depth scale (Master vs Apply) | CLAUDE.md used Master; R5 brief used Apply | Resolved: CLAUDE.md updated to Apply; published topic depth text to be migrated in a later batch. |
 
 **Why no targeted verification was performed:** each apparent contradiction is explained by employer differences or by the interview-versus-job distinction, both already documented with official sources. Further sampling would not change the curriculum recommendation within this batch's scope.
 
@@ -598,7 +600,7 @@ Backend criteria, plus:
 3. **Trim Programming Mastery** to the fluency gate plus working-knowledge topics (§9); move deferred topics to the Knowledge Library as optional reference.
 4. **Add "apply now" checkpoints** tied to §11 criteria per path.
 5. **Keep all published content**; re-label priorities rather than delete.
-6. **Decide the depth scale** (adopt Apply in CLAUDE.md, or keep Master) before publishing new content.
+6. **Depth scale:** CLAUDE.md now uses Apply; migrate the six published topics whose depth text reads "Master" in the first content batch.
 7. **Flag possible content-structure needs for approval** (feature freeze applies): representing per-path priorities and checkpoints may require changes to the curriculum data or topic fields. R6 should first test whether the existing architecture can express the new structure (e.g. phases as path stages, planned entries for deferred topics) before proposing any schema change.
 8. **Interview Preparation and Getting Hired:** add format-based guides and employer add-ons; add guidance on reading postings (unreliable titles, scarcity of entry roles, eligibility vs readiness).
 9. **Revalidate weak areas** opportunistically (Meta new-grad AI-native, Microsoft new-grad loops, US SQL interview evidence) without a new broad research batch.

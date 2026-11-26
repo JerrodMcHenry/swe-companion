@@ -77,10 +77,10 @@ Application feature development is frozen. M0–M6 and M7.1A are complete. **Cur
 10. Do not refactor the repeated page helpers (`Section`, `List`, `ExternalLink`) at this stage.
 11. `npm run build`, `npx tsc --noEmit` and all content validation checks must pass for every batch.
 12. Required knowledge depth uses these standard levels. A topic's `depth` text is the level name followed by its definition:
-    - **Recognize:** Identify the concept, its purpose and when it is relevant.
-    - **Explain:** Accurately explain the concept, its behavior and common use cases without assistance.
-    - **Implement:** Independently write, test and debug code using the concept.
-    - **Master:** Apply the concept to unfamiliar problems, explain trade-offs and identify appropriate alternatives without assistance.
+    - **Recognize:** Identify the concept and understand its relevance.
+    - **Explain:** Accurately explain behavior, purpose and common uses.
+    - **Implement:** Independently perform appropriately scoped tasks.
+    - **Apply:** Use the concept to solve unfamiliar problems and explain relevant trade-offs.
 
 ## Resource diversity and learning preferences
 
