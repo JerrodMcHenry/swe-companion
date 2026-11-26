@@ -16,6 +16,11 @@ import otherEmployer from "./interview-guides/other-employer";
 import softwareEngineer from "./interview-guides/software-engineer";
 import debuggingCodeReview from "./interview-guides/debugging-code-review";
 import aiAssistedCoding from "./interview-guides/ai-assisted-coding";
+import earlyStageStartups from "./interview-guides/early-stage-startups";
+import aiFocusedStartups from "./interview-guides/ai-focused-startups";
+import growthStageCompanies from "./interview-guides/growth-stage-companies";
+import establishedTechCompanies from "./interview-guides/established-tech-companies";
+import enterpriseEarlyCareerPrograms from "./interview-guides/enterprise-early-career-programs";
 
 // Every published guide. To publish a guide, add its file in content/interview-guides/,
 // list it here, and replace its { planned } entry below with { slug }.
@@ -32,6 +37,11 @@ export const guides: InterviewGuide[] = [
   apple,
   microsoft,
   netflix,
+  earlyStageStartups,
+  aiFocusedStartups,
+  growthStageCompanies,
+  establishedTechCompanies,
+  enterpriseEarlyCareerPrograms,
   otherEmployer,
   softwareEngineer,
 ];
@@ -47,11 +57,11 @@ export const guideListings: Record<GuideCategory, GuideListing[]> = {
     { slug: "netflix" },
   ],
   "Employer type": [
-    { planned: "Early-Stage & YC Startups" },
-    { planned: "AI-Focused Startups" },
-    { planned: "Growth-Stage Startups" },
-    { planned: "Established Technology Companies" },
-    { planned: "Enterprise & Structured Early-Career Programs" },
+    { slug: "early-stage-startups" },
+    { slug: "ai-focused-startups" },
+    { slug: "growth-stage-companies" },
+    { slug: "established-tech-companies" },
+    { slug: "enterprise-early-career-programs" },
     { slug: "other-employer" },
   ],
   // The first three roles are the initial release; the rest are future paths.
@@ -122,6 +132,7 @@ function unique<T>(items: T[], id: (item: T) => string) {
 // 3. Every topic appears once.
 //    - If the target prioritizes it (Essential or Important), the role entry is merged into the
 //      interview entry with a note; if the role needs more depth on the job, the note says so.
+//      If the role defers it, the target's entry stands without a note.
 //    - If the target rates it lower (Optional or Defer) and the role does not defer it, one entry is
 //      shown in the role section, stating both the interview priority and the on-the-job priority.
 //    - If the role defers it, the target's entry stands alone.
@@ -132,6 +143,7 @@ export function composePath(target: InterviewGuide, role: InterviewGuide): Prepa
   for (const topic of role.studyTopics ?? []) {
     const match = interview.find((entry) => key(entry) === key(topic));
     if (match && covers(match)) {
+      if (topic.priority === "Defer") continue; // The role does not need it now; the target's entry stands.
       match.note =
         depthRank(topic) > depthRank(match) && topic.depth
           ? `Also required for this role; on the job you will need ${topic.depth} depth.`

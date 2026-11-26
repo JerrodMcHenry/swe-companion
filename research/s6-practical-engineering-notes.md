@@ -64,6 +64,7 @@ Interview questions are representative and editorial; none is attributed to an e
   - Gilded Rose rule: do not alter the Item class or items property.
   - Gilded Rose feature: the Conjured requirement exists.
   - humanize: `naturalsize` exists with `binary` and `gnu` options.
+- **Status (product owner, T4):** the Gilded Rose kata and humanize repositories are recorded as inspected but not execution-verified. Revisit them in S10.
 - `verifiedOn` not set.
 
 ## Target integration

@@ -15,7 +15,7 @@ const guide: InterviewGuide = {
         "Read the posting with Job Description Gap Analysis: separate eligibility from skills, and note the technologies and responsibilities it emphasizes.",
         "Ask the recruiter how the interview works: the number and type of rounds, whether you can run code, use documentation or use AI, and the language options.",
         "Start from the default priorities below, then apply the adjustments for the formats you have confirmed. A confirmed format always overrides the default.",
-        "If the employer is a startup, a large technology company or an enterprise graduate program, this curriculum's research suggests typical emphases (below), but individual employers vary widely.",
+        "If the employer clearly fits an employer type — early-stage startup, AI-focused startup, growth-stage company, established technology company or enterprise early-career program — use that path instead; use this one when it does not fit or you are preparing for one specific posting.",
       ],
     },
     {
@@ -34,10 +34,9 @@ const guide: InterviewGuide = {
     {
       heading: "Typical emphasis by employer type (this curriculum's research; varies by employer)",
       items: [
-        "Large technology companies: mostly algorithmic coding interviews plus a behavioral interview.",
-        "Startups and growth-stage companies: more practical tasks, debugging rounds, take-homes and project discussions; algorithmic screens still appear at some.",
-        "Enterprise graduate programs: often online coding assessments, behavioral interviews and assessment days; some include a case or debugging exercise.",
-        "Dedicated paths for these employer types are planned and will replace this summary.",
+        "Large technology companies: mostly algorithmic coding interviews plus a behavioral interview. See the company guides and Established Technology Companies.",
+        "Startups and growth-stage companies: more practical tasks, debugging rounds, take-homes and project discussions; algorithmic screens still appear at some. See Early-Stage Startups, AI-Focused Startups and Growth-Stage Companies.",
+        "Enterprise graduate programs: often online coding assessments, behavioral interviews and assessment days; some include a case or debugging exercise. See Enterprise & Structured Early-Career Programs.",
       ],
     },
     {

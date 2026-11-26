@@ -40,7 +40,7 @@ All five paths were last checked on 2026-11-25. None has a `verifiedOn` date; th
 
 ## Other Employer or Specific Job Posting (`/interview-prep/other-employer`)
 
-Editorial guidance built on the cross-employer summaries in R3 §4 and §9 and R4 §6. There are no employer-specific claims. Review it when the employer-type paths (T4) are published.
+Editorial guidance built on the cross-employer summaries in R3 §4 and §9 and R4 §6. There are no employer-specific claims. Updated in T4 to point to the five employer-type paths. Review by 2027-05-25.
 
 ## Entry-Level Software Engineer role (`/interview-prep/software-engineer`)
 
@@ -110,3 +110,15 @@ Editorial guidance built on the cross-employer summaries in R3 §4 and §9 and R
 - Meta and Microsoft entry-level loop content; Apple team variation; Amazon's official AI-in-interview wording.
 - Established-tech new-grad formats and AI-focused startup processes (small, mostly candidate evidence).
 - Postings are seasonal snapshots (2026-11-25); re-check each company at T3 publication.
+
+## Employer-type paths (T4, published 2026-11-25)
+
+Each path is a qualified default for a category, not a description of one employer's process. Details in t4-employer-type-notes.md.
+
+| Path | Main sources | Category | Evidence strength | Limitations | Review by |
+|---|---|---|---|---|---|
+| Early-Stage Startups (`/interview-prep/early-stage-startups`) | YC job list snapshot (3/32 accept new grads); YC job pages for Corelayer (re-checked 2026-11-25), Confido, Lamar Health, MSPilot (R3 O1) | Official (postings, individual companies) | Weak on interviews | YC listings only; four companies; DSA absence not evidence of no DSA | 2027-05-25 |
+| AI-Focused Startups (`/interview-prep/ai-focused-startups`) | Decagon, xAI, Plaud, Notion AI new-grad reports (R3 C3, C5–C7) | Candidate (aggregator, rewritten) | Weak | Small sample; no official process page found; AI policies change | 2027-02-25 |
+| Growth-Stage Companies (`/interview-prep/growth-stage-companies`) | Stripe, Notion, Scale AI reports (R3 C1–C4); Stripe Bug Squash (R3 O2, dated; re-checked 2026-11-25); entry-level posting snapshot (R3 §3.1) | Candidate; Official (dated) | Moderate | Mostly one aggregator; some companies keep Big Tech-style loops | 2027-05-25 |
+| Established Technology Companies (`/interview-prep/established-tech-companies`) | Pinterest AI-in-hiring page (official; read in browser 2026-11-25); DoorDash, Pinterest, Affirm postings (R3); GitLab handbook (non-entry); one retailer's third-party screen (T2) | Official; Candidate | Weak | New-grad interview content mostly unverified | 2027-05-25 |
+| Enterprise & Structured Early-Career Programs (`/interview-prep/enterprise-early-career-programs`) | Capital One interview pages (official, re-checked); JPMorganChase SEP page and Digital Handbook (HireVue/HackerRank round, re-checked 2026-11-25); Capital One Power Day and agentic reports (R3 C8–C9); BofA, Fidelity postings | Official; Candidate | Moderate (dominated by Capital One) | Finance-heavy; case, video and agentic formats not generalizable | 2027-05-25 (AI rounds 2027-02-25) |
