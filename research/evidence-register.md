@@ -26,6 +26,18 @@ A manual register of the employer evidence behind preparation paths and intervie
 | Roundz L3 reports (R1 S18, S19) | Candidate | 2025-05, 2025-06 | 2026-11-25 | L3 | US; India | Individual experiences | 2027-05-25 |
 | FastPrep L3 reports (R1 S15, S16) | Candidate | 2025-11, 2026-06 | 2026-11-25 | L3 new grad | Not stated | One aggregator's reposts; not independent of each other | 2027-05-25 |
 
+## Company paths published in T3 (sources detailed in the T2 table below)
+
+| Path | Evidence strength | Main official sources | Weakest points | Next review |
+|---|---|---|---|---|
+| Amazon (`/interview-prep/amazon`) | Moderate–strong official, weak candidate | OA page; interview topics; interview loop; Leadership Principles; 10 US postings | Live-interview AI rule only from secondary reporting; design rounds from 2 reports | 2027-02-25 (AI rule); 2027-05-25 otherwise |
+| Meta (`/interview-prep/meta`) | Weak | Hiring process FAQ; 2022 prep blog | No current generalist University Grad posting; AI-enabled round unconfirmed for new grads | 2027-02-25 |
+| Microsoft (`/interview-prep/microsoft`) | Moderate official (all levels), weak entry-level | How we hire; Technical interviewing; Interview tips | No entry-level posting reviewed; candidate evidence from search summaries only | 2027-05-25 |
+| Apple (`/interview-prep/apple`) | Weak | Postings only | No official interview guidance; one new-grad report | 2027-05-25 |
+| Netflix (`/interview-prep/netflix`) | Insufficient for an interview path (eligibility note only) | Careers postings; culture page | No new-grad posting or interview guidance | 2027-02-25 (hiring season) |
+
+All five paths were last checked on 2026-11-25. None has a `verifiedOn` date; that is reserved for review by a person.
+
 ## Other Employer or Specific Job Posting (`/interview-prep/other-employer`)
 
 Editorial guidance built on the cross-employer summaries in R3 §4 and §9 and R4 §6. There are no employer-specific claims. Review it when the employer-type paths (T4) are published.

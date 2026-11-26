@@ -6,6 +6,11 @@ import codingAlgorithms from "./interview-guides/coding-algorithms";
 import behavioralInterviews from "./interview-guides/behavioral-interviews";
 import rapidFireTechnicalQuestions from "./interview-guides/rapid-fire-technical-questions";
 import google from "./interview-guides/google";
+import amazon from "./interview-guides/amazon";
+import meta from "./interview-guides/meta";
+import apple from "./interview-guides/apple";
+import microsoft from "./interview-guides/microsoft";
+import netflix from "./interview-guides/netflix";
 import otherEmployer from "./interview-guides/other-employer";
 import softwareEngineer from "./interview-guides/software-engineer";
 
@@ -16,6 +21,11 @@ export const guides: InterviewGuide[] = [
   behavioralInterviews,
   rapidFireTechnicalQuestions,
   google,
+  amazon,
+  meta,
+  apple,
+  microsoft,
+  netflix,
   otherEmployer,
   softwareEngineer,
 ];
@@ -24,11 +34,11 @@ export const guides: InterviewGuide[] = [
 export const guideListings: Record<GuideCategory, GuideListing[]> = {
   Company: [
     { slug: "google" },
-    { planned: "Amazon" },
-    { planned: "Meta" },
-    { planned: "Apple" },
-    { planned: "Microsoft" },
-    { planned: "Netflix" },
+    { slug: "amazon" },
+    { slug: "meta" },
+    { slug: "apple" },
+    { slug: "microsoft" },
+    { slug: "netflix" },
   ],
   "Employer type": [
     { planned: "Early-Stage & YC Startups" },
