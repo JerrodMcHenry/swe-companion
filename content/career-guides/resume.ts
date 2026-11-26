@@ -36,7 +36,7 @@ const guide: CareerGuide = {
         "Quantify only with numbers you can explain and defend: test counts, response-time changes you measured, users, data size, time saved. If there is no honest number, describe the scope or the outcome instead.",
         "Show engineering competence: testing, debugging a hard problem, deployment, performance, code review, documentation and working with others.",
         "Keep each bullet to one or two lines. Three strong bullets beat six weak ones.",
-        "Write \"I\" work, not \"we\" work: describe your own contribution to team projects.",
+        "Resume bullets usually omit personal pronouns: start with the verb (\"Built…\", not \"I built…\"). They should still describe your own contribution to a team project, not the team's. In interviews, by contrast, say \"I\" when explaining what you personally did.",
       ],
     },
     {

@@ -12,6 +12,20 @@ import pythonDictionaries from "./topics/python-dictionaries";
 import pythonMutabilityReferencesCopying from "./topics/python-mutability-references-copying";
 import pythonSortingCustomKeys from "./topics/python-sorting-custom-keys";
 import pythonDebugging from "./topics/python-debugging";
+import problemSolvingProcess from "./topics/problem-solving-process";
+import complexityAnalysis from "./topics/complexity-analysis";
+import arraysStringsPatterns from "./topics/arrays-strings-patterns";
+import hashMapSetPatterns from "./topics/hash-map-set-patterns";
+import stacksQueues from "./topics/stacks-queues";
+import linkedLists from "./topics/linked-lists";
+import binarySearch from "./topics/binary-search";
+import recursionBacktracking from "./topics/recursion-backtracking";
+import treesBinarySearchTrees from "./topics/trees-binary-search-trees";
+import heapsPriorityQueues from "./topics/heaps-priority-queues";
+import graphsBfsDfs from "./topics/graphs-bfs-dfs";
+import sortingAlgorithmsIntervals from "./topics/sorting-algorithms-intervals";
+import dynamicProgrammingBasics from "./topics/dynamic-programming-basics";
+import unionFindShortestPaths from "./topics/union-find-shortest-paths";
 
 // Every published topic. To publish a new topic, add its file in content/topics/ and list it here.
 export const topics: Topic[] = [
@@ -28,6 +42,20 @@ export const topics: Topic[] = [
   pythonMutabilityReferencesCopying,
   pythonSortingCustomKeys,
   pythonDebugging,
+  problemSolvingProcess,
+  complexityAnalysis,
+  arraysStringsPatterns,
+  hashMapSetPatterns,
+  stacksQueues,
+  linkedLists,
+  binarySearch,
+  recursionBacktracking,
+  treesBinarySearchTrees,
+  heapsPriorityQueues,
+  graphsBfsDfs,
+  sortingAlgorithmsIntervals,
+  dynamicProgrammingBasics,
+  unionFindShortestPaths,
 ];
 
 const seen = new Set<string>();

@@ -18,7 +18,6 @@ export const careerGuides: CareerGuide[] = [
 
 // What the Getting Hired page lists, in order. Published entries take their description from the guide.
 export const careerListings: CareerListing[] = [
-  { title: "Career Strategy", description: "Choosing target roles and companies, and planning your path to them." },
   { title: "Job Description Gap Analysis", slug: "job-description-gap-analysis" },
   { title: "Resume Preparation", slug: "resume" },
   { title: "GitHub & Portfolio", description: "Making your code and projects easy for employers to evaluate." },
