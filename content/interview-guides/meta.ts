@@ -72,7 +72,7 @@ const guide: InterviewGuide = {
     { title: "AI-assisted engineering and verification (forthcoming: Unit 5)", priority: "Important", depth: "Implement", reason: "Conditional on an AI-assisted round: use the assistant for well-defined subtasks and verify everything it produces. Not yet published." },
     { title: "Dynamic programming basics", priority: "Optional", depth: "Implement", slug: "dynamic-programming-basics", exercises: ["Climbing Stairs (LeetCode)", "Maximum Subarray (LeetCode)"] },
     { title: "Union-find and weighted shortest paths", priority: "Optional", depth: "Implement", slug: "union-find-shortest-paths", reason: "Advanced; study only after the core patterns." },
-    { title: "Object-oriented programming and design (forthcoming: Unit 3)", priority: "Optional", depth: "Implement", reason: "Not observed in the reviewed new-grad report; still useful on the job. Not yet published." },
+    { title: "Designing small systems", priority: "Optional", depth: "Implement", slug: "designing-small-systems", reason: "Conditional: no design round was observed in the reviewed new-grad report. Prepare only if your recruiter mentions one." },
     { title: "System design", priority: "Defer", reason: "No design round was reported for new graduates; one third-party guide also says none at E3. Confirm with your recruiter." },
   ],
   sequence: [

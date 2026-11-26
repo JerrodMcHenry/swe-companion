@@ -61,9 +61,11 @@ const guide: InterviewGuide = {
       reason: "LEGB, global and nonlocal, and UnboundLocalError are classic short questions.",
     },
     {
-      title: "Object-oriented programming (forthcoming: Unit 3)",
+      title: "Object-oriented programming",
       priority: "Important",
-      reason: "Classes, encapsulation, inheritance versus composition and polymorphism. These questions are more common for Java and C# roles. The Library topics are not yet published.",
+      depth: "Explain",
+      slug: "classes-objects",
+      reason: "Classes, encapsulation, the four pillars and Python's object model; continue with Composition, Inheritance and Interfaces and SOLID and Common Design Patterns. These questions are more common for Java and C# roles.",
     },
     {
       title: "Testing, Git and engineering fundamentals (forthcoming: Unit 4)",
@@ -134,7 +136,7 @@ const guide: InterviewGuide = {
     "You handle an unknown question honestly and reason towards an answer.",
     "For roles that list them, you also cover the forthcoming OOP, testing, SQL and HTTP topics when they are published.",
   ],
-  relatedGuides: ["/interview-prep/coding-algorithms", "/getting-hired/resume"],
+  relatedGuides: ["/interview-prep/coding-algorithms", "/interview-prep/oop-low-level-design", "/getting-hired/resume"],
   sources: [
     { title: "Amazon — Software development interview topics (includes \"programming language\")", url: "https://amazon.jobs/content/en/how-we-hire/interview-prep/software-development-topics" },
     { title: "Candidate report — 2026 Apple new grad SWE: HR call, Java questions, coding and manager round (FastPrep)", url: "https://www.fastprep.io/experience/2026-apple-new-grad-swe-hr-call-java-questions-coding-and-manager-round-1-experi-52ej2p4ouy" },

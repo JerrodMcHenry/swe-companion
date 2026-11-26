@@ -26,6 +26,10 @@ import graphsBfsDfs from "./topics/graphs-bfs-dfs";
 import sortingAlgorithmsIntervals from "./topics/sorting-algorithms-intervals";
 import dynamicProgrammingBasics from "./topics/dynamic-programming-basics";
 import unionFindShortestPaths from "./topics/union-find-shortest-paths";
+import classesObjects from "./topics/classes-objects";
+import compositionInheritanceInterfaces from "./topics/composition-inheritance-interfaces";
+import designingSmallSystems from "./topics/designing-small-systems";
+import solidDesignPatterns from "./topics/solid-design-patterns";
 
 // Every published topic. To publish a new topic, add its file in content/topics/ and list it here.
 export const topics: Topic[] = [
@@ -56,6 +60,10 @@ export const topics: Topic[] = [
   sortingAlgorithmsIntervals,
   dynamicProgrammingBasics,
   unionFindShortestPaths,
+  classesObjects,
+  compositionInheritanceInterfaces,
+  designingSmallSystems,
+  solidDesignPatterns,
 ];
 
 const seen = new Set<string>();

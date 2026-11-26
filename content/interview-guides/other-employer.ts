@@ -26,6 +26,7 @@ const guide: InterviewGuide = {
         "Take-home assignment: prioritize your project skills, tests and a clear README (Unit 6, forthcoming); schedule the time in advance.",
         "AI tools allowed or expected: practise directing an AI assistant and checking its output. AI not allowed: practise without it. Prepare both if you do not know.",
         "Behavioral-heavy process (for example an assessment day): give extra time to your story bank and to explaining your projects.",
+        "Object-oriented or low-level design round confirmed: follow the OOP & Low-Level Design guide and raise Designing Small Systems to Essential at Apply depth.",
         "System design or SQL round confirmed: these guides are planned; until then, prepare the basics only and say how you would learn the rest.",
       ],
     },
@@ -64,6 +65,7 @@ const guide: InterviewGuide = {
     { title: "Recursion and backtracking", priority: "Important", depth: "Implement", slug: "recursion-backtracking", exercises: ["Subsets (LeetCode)"] },
     { title: "Graphs: BFS, DFS and topological sort", priority: "Important", depth: "Implement", slug: "graphs-bfs-dfs", exercises: ["Flood Fill (LeetCode)", "Number of Islands (LeetCode)"] },
     { title: "Explaining your projects", priority: "Important", depth: "Explain", reason: "Project discussions are common, especially at startups. See the Engineering Projects guide." },
+    { title: "Designing small systems", priority: "Optional", depth: "Implement", slug: "designing-small-systems", reason: "Raise to Essential if a design round is confirmed or the posting stresses object-oriented design." },
     { title: "Practical feature work and debugging in existing code (forthcoming: Unit 5)", priority: "Important", depth: "Implement", reason: "Practical and debugging rounds are prominent outside Big Tech in this curriculum's research. Not yet published." },
     { title: "Heaps and priority queues", priority: "Optional", depth: "Implement", slug: "heaps-priority-queues", reason: "Raise if your confirmed format is an algorithm-heavy coding interview." },
     { title: "Sorting and intervals", priority: "Optional", depth: "Implement", slug: "sorting-algorithms-intervals" },
@@ -99,6 +101,7 @@ const guide: InterviewGuide = {
   relatedGuides: [
     "/getting-hired/job-description-gap-analysis",
     "/interview-prep/coding-algorithms",
+    "/interview-prep/oop-low-level-design",
     "/interview-prep/behavioral-interviews",
     "/interview-prep/rapid-fire-technical-questions",
     "/getting-hired/application-strategy",

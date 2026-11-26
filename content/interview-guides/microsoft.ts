@@ -66,7 +66,9 @@ const guide: InterviewGuide = {
     { title: "Linked lists", priority: "Important", depth: "Implement", slug: "linked-lists", exercises: ["Reverse Linked List (LeetCode)", "LRU Cache (LeetCode)"] },
     { title: "Stacks and queues", priority: "Important", depth: "Implement", slug: "stacks-queues", exercises: ["Valid Parentheses (LeetCode)"] },
     { title: "Binary search", priority: "Important", depth: "Implement", slug: "binary-search", exercises: ["Search Insert Position (LeetCode)", "Search in Rotated Sorted Array (LeetCode)"] },
-    { title: "Object-oriented programming and design (forthcoming: Unit 3)", priority: "Important", depth: "Implement", reason: "Design questions appear in some candidate reports and object-oriented design matters on the job. Not yet published." },
+    { title: "Classes and objects", priority: "Important", depth: "Implement", slug: "classes-objects", reason: "Object-oriented code in your strongest language, with tests, is part of writing clean working solutions." },
+    { title: "Composition, inheritance and interfaces", priority: "Important", depth: "Implement", slug: "composition-inheritance-interfaces" },
+    { title: "Designing small systems", priority: "Important", depth: "Implement", slug: "designing-small-systems", reason: "Design questions appear in some candidate reports; this is not a confirmed universal round.", exercises: ["Shopping cart: requirements — add and remove items with quantities, compute the total, apply one discount code (percentage or fixed amount)."] },
     { title: "Explaining your projects", priority: "Important", depth: "Explain", reason: "Project and resume discussions were common in adjacent Microsoft internship reports. See the Engineering Projects guide." },
     { title: "Heaps and priority queues", priority: "Optional", depth: "Implement", slug: "heaps-priority-queues", exercises: ["Kth Largest Element in an Array (LeetCode)"] },
     { title: "Dynamic programming basics", priority: "Optional", depth: "Implement", slug: "dynamic-programming-basics", exercises: ["Coin Change (LeetCode)"] },
@@ -122,6 +124,7 @@ const guide: InterviewGuide = {
   ],
   relatedGuides: [
     "/interview-prep/coding-algorithms",
+    "/interview-prep/oop-low-level-design",
     "/interview-prep/behavioral-interviews",
     "/getting-hired/job-description-gap-analysis",
     "/getting-hired/application-strategy",

@@ -11,6 +11,7 @@ import meta from "./interview-guides/meta";
 import apple from "./interview-guides/apple";
 import microsoft from "./interview-guides/microsoft";
 import netflix from "./interview-guides/netflix";
+import oopLowLevelDesign from "./interview-guides/oop-low-level-design";
 import otherEmployer from "./interview-guides/other-employer";
 import softwareEngineer from "./interview-guides/software-engineer";
 
@@ -20,6 +21,7 @@ export const guides: InterviewGuide[] = [
   codingAlgorithms,
   behavioralInterviews,
   rapidFireTechnicalQuestions,
+  oopLowLevelDesign,
   google,
   amazon,
   meta,
@@ -63,7 +65,7 @@ export const guideListings: Record<GuideCategory, GuideListing[]> = {
     { planned: "Debugging & Code Review" },
     { planned: "AI-Assisted Coding" },
     { planned: "Practical Coding Assessments" },
-    { planned: "OOP & Low-Level Design" },
+    { slug: "oop-low-level-design" },
     { planned: "Project Deep Dives" },
     { planned: "Take-Home Assignments" },
     { planned: "Basic System Design (conditional)" },

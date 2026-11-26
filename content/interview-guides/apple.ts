@@ -58,7 +58,9 @@ const guide: InterviewGuide = {
     { title: "Linked lists", priority: "Important", depth: "Implement", slug: "linked-lists", exercises: ["Reverse Linked List (LeetCode)"] },
     { title: "Stacks and queues", priority: "Important", depth: "Implement", slug: "stacks-queues", exercises: ["Valid Parentheses (LeetCode)"] },
     { title: "Testing and dry-running code", priority: "Important", depth: "Implement", slug: "python-debugging" },
-    { title: "Object-oriented programming and design (forthcoming: Unit 3)", priority: "Important", depth: "Implement", reason: "Postings for some early-career roles have asked for object-oriented design skills, and a reported interview included object-oriented concept questions. Not yet published." },
+    { title: "Classes and objects", priority: "Important", depth: "Implement", slug: "classes-objects", reason: "A reported interview included object-oriented concept questions; learn how your team's language implements these ideas." },
+    { title: "Composition, inheritance and interfaces", priority: "Important", depth: "Implement", slug: "composition-inheritance-interfaces", reason: "Postings for some early-career roles have asked for object-oriented design skills." },
+    { title: "Designing small systems", priority: "Optional", depth: "Implement", slug: "designing-small-systems", reason: "Raise if your recruiter mentions a design round." },
     { title: "Computer science fundamentals (forthcoming: Unit 4)", priority: "Important", depth: "Explain", reason: "A reviewed posting lists computer science fundamentals as a requirement. Not yet published." },
     { title: "Graphs: BFS, DFS and topological sort", priority: "Optional", depth: "Implement", slug: "graphs-bfs-dfs", exercises: ["Number of Islands (LeetCode)"] },
     { title: "Binary search", priority: "Optional", depth: "Implement", slug: "binary-search" },
@@ -101,6 +103,7 @@ const guide: InterviewGuide = {
   ],
   relatedGuides: [
     "/interview-prep/rapid-fire-technical-questions",
+    "/interview-prep/oop-low-level-design",
     "/interview-prep/coding-algorithms",
     "/interview-prep/behavioral-interviews",
     "/getting-hired/engineering-projects",

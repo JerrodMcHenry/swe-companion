@@ -56,6 +56,7 @@ Editorial guidance built on the cross-employer summaries in R3 §4 and §9 and R
 | Coding & Algorithms | Google hiring page; Meta hiring FAQ (AI assistant); Amazon topics and OA pages | 2026-11-25 | 2027-02-25 (AI policies) |
 | Behavioral | Google interview tips; Meta prep blog (updated 2022); Amazon interview guide (2025-04-08) | 2026-11-25 | 2027-05-25 |
 | Rapid-Fire Technical Questions | Amazon topics page; Apple and Google candidate reports | 2026-11-25 | 2027-05-25 |
+| OOP & Low-Level Design | Amazon interview topics (object-oriented design); candidate reports R2 A8–A9, R1 S15; question lists: Devinterview, GeeksforGeeks | 2026-11-25 | 2027-05-25 |
 
 ## T2 verification sources (paths to be published in T3/T4; details in t2-evidence-verification.md)
 
