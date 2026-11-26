@@ -4,7 +4,7 @@ const topic: Topic = {
   slug: "python-scope",
   title: "Scope",
   category: "Python",
-  phase: "programming-mastery",
+  phase: "programming-fluency",
   overview:
     "Scope determines where a name is visible and which object it refers to. Python resolves a name by searching the local, enclosing, global and built-in scopes in that order.",
   whyItMatters:
@@ -21,7 +21,7 @@ const topic: Topic = {
     "Prefer explicit parameters and return values to unnecessary global state.",
     "Understand basic nested functions.",
   ],
-  depth: "Implement: Independently write, test and debug code using the concept.",
+  depth: "Implement: Independently perform appropriately scoped tasks.",
   resources: [
     {
       title: "Think Python — 3.5 Variables and parameters are local",

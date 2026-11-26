@@ -146,6 +146,7 @@ export default async function GuidePage({ params }: Props) {
               {guide.practice.map((exercise) => (
                 <li key={exercise.title}>
                   {exercise.url ? <ExternalLink href={exercise.url}>{exercise.title}</ExternalLink> : exercise.title}
+                  {exercise.note && <p className="mt-0.5 text-sm text-stone-600">{exercise.note}</p>}
                 </li>
               ))}
             </ul>

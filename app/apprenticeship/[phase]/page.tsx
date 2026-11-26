@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 function label(number: number) {
-  return `Phase ${String(number).padStart(2, "0")}`;
+  return `Unit ${String(number).padStart(2, "0")}`;
 }
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
@@ -69,6 +69,13 @@ export default async function PhasePage({ params }: Props) {
       </header>
 
       <div className="mt-10 space-y-8">
+        {phase.readiness && phase.readiness.length > 0 && (
+          <Section title="Can you already do this?">
+            <p className="mb-3">If you can already do everything below, skip this unit and move on to the next one or your target path.</p>
+            <List items={phase.readiness} />
+          </Section>
+        )}
+
         {phase.objectives && phase.objectives.length > 0 && (
           <Section title="Learning objectives">
             <List items={phase.objectives} />
@@ -101,7 +108,7 @@ export default async function PhasePage({ params }: Props) {
             </ol>
           ) : phase.sectionHref ? (
             <p>
-              This phase is covered in the{" "}
+              This unit is covered in the{" "}
               <Link
                 href={phase.sectionHref}
                 className="font-medium text-stone-900 underline underline-offset-4 hover:text-stone-600"
@@ -111,18 +118,18 @@ export default async function PhasePage({ params }: Props) {
               section.
             </p>
           ) : (
-            <p className="text-stone-600">Detailed curriculum content for this phase is forthcoming.</p>
+            <p className="text-stone-600">Detailed content for this unit is forthcoming.</p>
           )}
         </Section>
 
         {phase.mastery && phase.mastery.length > 0 && (
-          <Section title="Phase mastery criteria">
+          <Section title="Stopping point">
             <List items={phase.mastery} />
           </Section>
         )}
       </div>
 
-      <nav aria-label="Phases" className="mt-12 flex justify-between gap-6 border-t border-stone-200 pt-6 text-sm">
+      <nav aria-label="Units" className="mt-12 flex justify-between gap-6 border-t border-stone-200 pt-6 text-sm">
         {previous ? (
           <Link href={`/apprenticeship/${previous.slug}`} className="hover:underline">
             <span className="block text-stone-600">← Previous</span>

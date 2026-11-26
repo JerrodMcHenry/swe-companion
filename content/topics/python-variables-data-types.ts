@@ -4,12 +4,12 @@ const topic: Topic = {
   slug: "python-variables-data-types",
   title: "Variables and Data Types",
   category: "Python",
-  phase: "programming-mastery",
+  phase: "programming-fluency",
   overview:
     "Python variables are names bound to objects. Objects have types that determine their supported operations and behavior. Python uses dynamic typing, so a name can be rebound to objects of different types.",
   whyItMatters:
     "Every program stores and transforms data. Understanding how names, objects and types relate prevents a large class of everyday bugs and is the foundation for every later Python topic.",
-  prerequisites: ["None. This is the first Programming Mastery topic; you only need a way to run Python code."],
+  prerequisites: ["None. This is the first Programming Fluency topic; you only need a way to run Python code."],
   objectives: [
     "Create and reassign variables.",
     "Understand integers, floats, strings, booleans and None.",
@@ -22,8 +22,7 @@ const topic: Topic = {
     "Understand basic mutable versus immutable behavior.",
     "Follow readable variable naming conventions.",
   ],
-  depth:
-    "Master: Apply the concept to unfamiliar problems, explain trade-offs and identify appropriate alternatives without assistance.",
+  depth: "Apply: Use the concept to solve unfamiliar problems and explain relevant trade-offs.",
   resources: [
     {
       title: "Python Programming MOOC — More about variables",

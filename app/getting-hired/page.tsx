@@ -12,6 +12,13 @@ export default function GettingHiredPage() {
     <>
       <h1 className="text-3xl font-semibold tracking-tight">{section.title}</h1>
       <p className="mt-4 max-w-2xl text-lg leading-relaxed text-stone-600">{section.description}</p>
+      <p className="mt-4 max-w-2xl text-stone-600">
+        Preparing for behavioral or project interviews? Those guides live in{" "}
+        <Link href="/interview-prep" className="font-medium text-stone-900 underline underline-offset-4 hover:text-stone-600">
+          Interview Preparation
+        </Link>
+        .
+      </p>
 
       <ol className="mt-12 max-w-3xl divide-y divide-stone-200 border-y border-stone-200">
         {careerListings.map((item, index) => {

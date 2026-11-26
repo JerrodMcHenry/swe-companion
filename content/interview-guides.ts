@@ -15,8 +15,8 @@ export const guideListings: Record<GuideCategory, GuideListing[]> = {
     { planned: "Apple" },
     { planned: "Netflix" },
     { planned: "Microsoft" },
-    { planned: "Startups" },
-    { planned: "Enterprise" },
+    { planned: "Startups & Growth-Stage" },
+    { planned: "Enterprise Programs" },
   ],
   Role: [
     { planned: "Software Engineer" },
@@ -28,13 +28,16 @@ export const guideListings: Record<GuideCategory, GuideListing[]> = {
   ],
   "Interview type": [
     { slug: "coding-algorithms" },
-    { planned: "Object-Oriented Design" },
-    { planned: "System Design" },
-    { planned: "SQL & Databases" },
-    { planned: "Technical Knowledge" },
-    { planned: "Take-Home Assignments" },
-    { planned: "Portfolio & Project Discussions" },
     { planned: "Behavioral Interviews" },
+    { planned: "Debugging & Code Review" },
+    { planned: "AI-Assisted Coding" },
+    { planned: "Practical Coding Assessments" },
+    { planned: "OOP & Low-Level Design" },
+    { planned: "Project Deep Dives" },
+    { planned: "Take-Home Assignments" },
+    { planned: "Basic System Design (conditional)" },
+    { planned: "SQL & Database Assessments (conditional)" },
+    { planned: "Rapid-Fire Technical Questions (conditional)" },
   ],
 };
 

@@ -4,7 +4,7 @@ const topic: Topic = {
   slug: "python-loops",
   title: "Loops",
   category: "Python",
-  phase: "programming-mastery",
+  phase: "programming-fluency",
   overview:
     "Loops repeat code. A for loop iterates over the items of a sequence or other iterable; a while loop repeats for as long as its condition remains true.",
   whyItMatters:
@@ -23,8 +23,7 @@ const topic: Topic = {
     "Understand basic linear and nested-loop complexity.",
     "Recognize early termination and its effect on runtime.",
   ],
-  depth:
-    "Master: Apply the concept to unfamiliar problems, explain trade-offs and identify appropriate alternatives without assistance.",
+  depth: "Apply: Use the concept to solve unfamiliar problems and explain relevant trade-offs.",
   resources: [
     {
       title: "Python Programming MOOC — Loops with conditions",

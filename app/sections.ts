@@ -3,7 +3,7 @@ export const sections = [
   {
     href: "/apprenticeship",
     title: "Apprenticeship",
-    description: "A sequential software engineering curriculum, organized into phases, topics and learning objectives.",
+    description: "Focused units with readiness checkpoints. Skip what you can already do and start interview preparation early.",
   },
   {
     href: "/library",

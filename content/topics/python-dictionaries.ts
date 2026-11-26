@@ -4,7 +4,7 @@ const topic: Topic = {
   slug: "python-dictionaries",
   title: "Python Dictionaries",
   category: "Python",
-  phase: "programming-mastery",
+  phase: "programming-fluency",
   overview:
     "A Python dictionary is a mutable mapping that stores key-value pairs and supports efficient lookup by key.",
   whyItMatters:
@@ -19,8 +19,7 @@ const topic: Topic = {
     "Understand average-case lookup, insertion and deletion complexity.",
     "Understand when to choose a dictionary over a list or set.",
   ],
-  depth:
-    "Be able to independently implement dictionary-based solutions and explain their average-case and worst-case complexity.",
+  depth: "Apply: Use the concept to solve unfamiliar problems and explain relevant trade-offs.",
   resources: [
     {
       title: "The Python Tutorial — Dictionaries",

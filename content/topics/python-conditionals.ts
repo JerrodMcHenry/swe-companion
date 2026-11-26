@@ -4,7 +4,7 @@ const topic: Topic = {
   slug: "python-conditionals",
   title: "Conditional Statements",
   category: "Python",
-  phase: "programming-mastery",
+  phase: "programming-fluency",
   overview:
     "Conditional statements choose which code runs based on whether conditions are true. Python uses if, elif and else, with indentation defining each block.",
   whyItMatters:
@@ -21,8 +21,7 @@ const topic: Topic = {
     "Recognize conditional expressions.",
     "Recognize basic match syntax without requiring mastery.",
   ],
-  depth:
-    "Master: Apply the concept to unfamiliar problems, explain trade-offs and identify appropriate alternatives without assistance.",
+  depth: "Apply: Use the concept to solve unfamiliar problems and explain relevant trade-offs.",
   resources: [
     {
       title: "Python Programming MOOC — Conditional statements",

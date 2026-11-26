@@ -4,7 +4,7 @@ const topic: Topic = {
   slug: "python-functions-arguments",
   title: "Functions and Arguments",
   category: "Python",
-  phase: "programming-mastery",
+  phase: "programming-fluency",
   overview:
     "A function is a named, reusable block of code that receives inputs through parameters and can return a result. Python supports positional, keyword, default and variable-length arguments.",
   whyItMatters:
@@ -24,8 +24,7 @@ const topic: Topic = {
     "Explain Python's object-sharing argument behavior.",
     "Write clear function contracts and docstrings.",
   ],
-  depth:
-    "Master: Apply the concept to unfamiliar problems, explain trade-offs and identify appropriate alternatives without assistance.",
+  depth: "Apply: Use the concept to solve unfamiliar problems and explain relevant trade-offs.",
   resources: [
     {
       title: "Think Python — Chapter 3: Functions",

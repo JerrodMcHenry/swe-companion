@@ -9,6 +9,10 @@ export const careerGuides: CareerGuide[] = [engineeringProjects];
 // What the Getting Hired page lists, in order. Published entries take their description from the guide.
 export const careerListings: CareerListing[] = [
   { title: "Career Strategy", description: "Choosing target roles and companies, and planning your path to them." },
+  {
+    title: "Job Description Gap Analysis",
+    description: "Reading a job description, separating required from preferred, and deciding whether to apply now or close a gap first.",
+  },
   { title: "Resume", description: "Presenting your experience and projects clearly for engineering roles." },
   { title: "GitHub & Portfolio", description: "Making your code and projects easy for employers to evaluate." },
   { title: "Engineering Projects", slug: "engineering-projects" },
@@ -16,8 +20,10 @@ export const careerListings: CareerListing[] = [
   { title: "Networking & Referrals", description: "Building professional relationships and asking for referrals." },
   { title: "Job Applications", description: "Finding suitable openings and applying effectively." },
   { title: "Recruiter Screens", description: "Preparing for the first conversation with a recruiter." },
-  { title: "Behavioral Interviews", description: "Preparing to discuss your experience, decisions and working style." },
-  { title: "Project Interviews", description: "Walking interviewers through the projects you have built." },
+  {
+    title: "Interview Failure Recovery",
+    description: "Diagnosing what went wrong after an unsuccessful interview and returning to the right unit, without restarting.",
+  },
   { title: "Offer Negotiation", description: "Evaluating offers and negotiating compensation." },
 ];
 

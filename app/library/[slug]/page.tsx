@@ -18,9 +18,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return topic ? { title: topic.title, description: topic.overview } : {};
 }
 
-function Section({ title, children }: { title: string; children: React.ReactNode }) {
+function Section({ title, id, children }: { title: string; id?: string; children: React.ReactNode }) {
   return (
-    <section className="border-t border-stone-200 pt-8">
+    <section id={id} className="scroll-mt-8 border-t border-stone-200 pt-8">
       <h2 className="text-xl font-semibold tracking-tight">{title}</h2>
       <div className="mt-3 leading-relaxed text-stone-700">{children}</div>
     </section>
@@ -71,6 +71,13 @@ export default async function TopicPage({ params }: Props) {
           </Link>
         </p>
         <p className="mt-6 text-lg leading-relaxed text-stone-700">{topic.overview}</p>
+        <p className="mt-4 text-sm text-stone-600">
+          Already comfortable with this topic?{" "}
+          <a href="#readiness" className="font-medium text-stone-900 underline underline-offset-4 hover:text-stone-600">
+            Check the readiness criteria
+          </a>{" "}
+          and skip to practice.
+        </p>
       </header>
 
       <div className="mt-10 space-y-8">
@@ -110,16 +117,49 @@ export default async function TopicPage({ params }: Props) {
             {topic.exercises.map((exercise) => (
               <li key={exercise.title}>
                 {exercise.url ? <ExternalLink href={exercise.url}>{exercise.title}</ExternalLink> : exercise.title}
+                {exercise.note && <p className="mt-0.5 text-sm text-stone-600">{exercise.note}</p>}
               </li>
             ))}
           </ul>
         </Section>
 
         <Section title="Interview questions">
-          <List items={topic.interviewQuestions} />
+          <ul className="list-disc space-y-4 pl-5">
+            {topic.interviewQuestions.map((item) =>
+              typeof item === "string" ? (
+                <li key={item}>{item}</li>
+              ) : (
+                <li key={item.question}>
+                  <p className="font-medium text-stone-900">{item.question}</p>
+                  <p className="mt-1">{item.answer}</p>
+                  {item.code && (
+                    <pre className="mt-2 overflow-x-auto rounded-md bg-stone-100 p-3 text-sm leading-relaxed text-stone-800">
+                      <code>{item.code}</code>
+                    </pre>
+                  )}
+                  {item.followUps && item.followUps.length > 0 && (
+                    <div className="mt-2 text-sm">
+                      <p className="text-stone-600">Follow-up questions:</p>
+                      <ul className="mt-1 list-[circle] space-y-1 pl-5">
+                        {item.followUps.map((followUp) => (
+                          <li key={followUp}>{followUp}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </li>
+              ),
+            )}
+          </ul>
         </Section>
 
-        <Section title="Mastery criteria">
+        {topic.mistakes && topic.mistakes.length > 0 && (
+          <Section title="Common mistakes">
+            <List items={topic.mistakes} />
+          </Section>
+        )}
+
+        <Section title="Readiness criteria" id="readiness">
           <List items={topic.mastery} />
         </Section>
 

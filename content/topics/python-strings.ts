@@ -4,7 +4,7 @@ const topic: Topic = {
   slug: "python-strings",
   title: "Strings",
   category: "Python",
-  phase: "programming-mastery",
+  phase: "programming-fluency",
   overview:
     "A Python string is an immutable sequence of Unicode code points. Strings support indexing, slicing and a large set of methods for searching, transforming and formatting text.",
   whyItMatters:
@@ -23,8 +23,7 @@ const topic: Topic = {
     "Process empty strings and whitespace correctly.",
     "Understand basic Unicode versus bytes distinctions.",
   ],
-  depth:
-    "Master: Apply the concept to unfamiliar problems, explain trade-offs and identify appropriate alternatives without assistance.",
+  depth: "Apply: Use the concept to solve unfamiliar problems and explain relevant trade-offs.",
   resources: [
     {
       title: "Python Programming MOOC — Working with strings",

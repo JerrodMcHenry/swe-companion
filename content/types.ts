@@ -13,13 +13,19 @@ export type Resource = {
 export type Exercise = {
   title: string;
   url?: string; // Omit for exercises without an external page.
+  note?: string; // Pattern, expected complexity or practice instructions.
 };
+
+// A plain question, or a question with a model answer, optional follow-ups and an optional code example.
+export type InterviewQuestion =
+  | string
+  | { question: string; answer: string; followUps?: string[]; code?: string };
 
 export type Topic = {
   slug: string; // URL segment: /library/<slug>
   title: string;
   category: string;
-  phase: string; // Slug of the curriculum phase this topic belongs to, e.g. "programming-mastery".
+  phase: string; // Slug of the Apprenticeship unit this topic belongs to, e.g. "programming-fluency".
   overview: string;
   whyItMatters: string;
   prerequisites: string[]; // Plain text until the prerequisite topics exist.
@@ -27,8 +33,9 @@ export type Topic = {
   depth: string;
   resources: Resource[];
   exercises: Exercise[];
-  interviewQuestions: string[];
-  mastery: string[];
+  interviewQuestions: InterviewQuestion[];
+  mistakes?: string[]; // Common conceptual and implementation mistakes.
+  mastery: string[]; // Rendered as "Readiness criteria".
   deprioritize?: string[];
   keywords?: string[]; // Extra search terms, e.g. "hash map" for dictionaries.
 };
@@ -47,9 +54,10 @@ export type Phase = {
   title: string;
   description: string;
   stage: Stage;
+  readiness?: string[]; // Observable abilities; learners who can already demonstrate them may skip the unit.
   objectives?: string[];
   topics?: PhaseTopic[];
-  mastery?: string[];
+  mastery?: string[]; // Rendered as "Stopping point".
   sectionHref?: string; // Main site section that holds this phase's content, e.g. "/getting-hired".
 };
 

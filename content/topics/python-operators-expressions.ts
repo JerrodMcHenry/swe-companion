@@ -4,7 +4,7 @@ const topic: Topic = {
   slug: "python-operators-expressions",
   title: "Operators and Expressions",
   category: "Python",
-  phase: "programming-mastery",
+  phase: "programming-fluency",
   overview:
     "Operators combine values into expressions, which Python evaluates to a single result. Python provides arithmetic, comparison, Boolean, identity and membership operators, evaluated according to precedence rules.",
   whyItMatters:
@@ -24,8 +24,7 @@ const topic: Topic = {
     "Recognize negative floor-division and modulo behavior.",
     "Understand expressions versus statements.",
   ],
-  depth:
-    "Master: Apply the concept to unfamiliar problems, explain trade-offs and identify appropriate alternatives without assistance.",
+  depth: "Apply: Use the concept to solve unfamiliar problems and explain relevant trade-offs.",
   resources: [
     {
       title: "Python Programming MOOC — Arithmetic operations",
