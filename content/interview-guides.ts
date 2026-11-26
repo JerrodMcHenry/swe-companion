@@ -27,6 +27,7 @@ import enterpriseEarlyCareerPrograms from "./interview-guides/enterprise-early-c
 import backendEngineer from "./interview-guides/backend-engineer";
 import apiIntegrationAssessments from "./interview-guides/api-integration-assessments";
 import basicSystemDesign from "./interview-guides/basic-system-design";
+import fullStackEngineer from "./interview-guides/full-stack-engineer";
 
 // Every published guide. To publish a guide, add its file in content/interview-guides/,
 // list it here, and replace its { planned } entry below with { slug }.
@@ -56,6 +57,7 @@ export const guides: InterviewGuide[] = [
   otherEmployer,
   softwareEngineer,
   backendEngineer,
+  fullStackEngineer,
 ];
 
 // What the Interview Preparation page lists, in order, for each category.
@@ -80,7 +82,7 @@ export const guideListings: Record<GuideCategory, GuideListing[]> = {
   Role: [
     { slug: "software-engineer" },
     { slug: "backend-engineer" },
-    { planned: "Full-Stack Engineer" },
+    { slug: "full-stack-engineer" },
     { planned: "AI Engineer" },
     { planned: "Solutions Engineer" },
     { planned: "Forward Deployed Engineer" },

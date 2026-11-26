@@ -78,7 +78,7 @@ const topic: Topic = {
     {
       question: "What kind of project fits my target role?",
       answer:
-        "General software engineering: a small application with real logic and persistent data, such as a study planner that schedules reviews, an expense splitter or a booking tool — a command-line tool or simple web app is enough if it is tested, documented and explainable. Backend: a REST API with a relational database, validation, consistent error responses, authentication and tests (Backend Engineering, forthcoming, teaches these; build alongside it). Full-stack: the same API with a small React frontend handling forms, loading and error states (Full-Stack Engineering, forthcoming). One project can grow from the general version into the backend or full-stack version instead of starting again.",
+        "General software engineering: a small application with real logic and persistent data, such as a study planner that schedules reviews, an expense splitter or a booking tool — a command-line tool or simple web app is enough if it is tested, documented and explainable. Backend: a REST API with a relational database, validation, consistent error responses, authentication and tests (Backend Engineering teaches these; build alongside it). Full-stack: the same API with a small React frontend handling forms, loading and error states, accessible and tested, deployed with the API (Full-Stack Engineering). One project can grow from the general version into the backend or full-stack version instead of starting again.",
       followUps: ["Why is a deployed API with tests more convincing than a larger app without them?"],
     },
     {

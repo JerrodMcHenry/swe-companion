@@ -157,7 +157,12 @@ export default async function StagePage({ params }: Props) {
           <summary className="sumrow">
             Optional for {name} ({optional.length})
           </summary>
-          <div style={{ padding: "0 10px 10px" }}>{optional.map((item) => row(item, "+"))}</div>
+          <div style={{ padding: "0 10px 10px" }}>
+            <p className="small muted" style={{ margin: "0 4px 10px" }}>
+              You can skip these. Study one only when the job posting, your recruiter or your project calls for it.
+            </p>
+            {optional.map((item) => row(item, "+"))}
+          </div>
         </details>
       )}
 

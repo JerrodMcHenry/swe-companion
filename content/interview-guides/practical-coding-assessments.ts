@@ -15,6 +15,7 @@ const guide: InterviewGuide = {
         "Candidate-reported (2026, mostly rewritten by an aggregator): a backend practical at Scale AI; integration rounds at Stripe (multi-part data and API tasks); Klaviyo internship final rounds that extended or fixed a small Python web application, often with SQL; Capital One's agentic round, reported as fixing a bug and then adding a feature in a large application with an AI coding agent.",
         "These are a handful of companies, mostly growth-stage and one enterprise program. Big Tech early-career loops reviewed here centre on algorithmic coding, although Meta's official guidance mentions building on existing code in AI-assisted interviews.",
         "Formats, tools, language choice and AI rules vary; ask your recruiter what the round involves and whether you can run code, use documentation or use AI.",
+        "Full-stack candidates: the reported frontend variants are debugging an existing React/TypeScript codebase (Notion), a small frontend-plus-API build (Klaviyo internship) and an HTML/CSS/JS edit in an online assessment (Accenture India). Practise them in the React topics and your own project.",
       ],
     },
     {

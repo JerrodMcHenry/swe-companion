@@ -55,6 +55,14 @@ import dataModeling from "./topics/data-modeling";
 import authenticationAuthorization from "./topics/authentication-authorization";
 import loggingConfiguration from "./topics/logging-configuration";
 import asyncProgrammingBasics from "./topics/async-programming-basics";
+import javascriptFundamentals from "./topics/javascript-fundamentals";
+import typescriptFundamentals from "./topics/typescript-fundamentals";
+import htmlCssFundamentals from "./topics/html-css-fundamentals";
+import browserDomFundamentals from "./topics/browser-dom-fundamentals";
+import reactFundamentals from "./topics/react-fundamentals";
+import formsApiIntegrationUiStates from "./topics/forms-api-integration-ui-states";
+import frontendTestingDebugging from "./topics/frontend-testing-debugging";
+import webAccessibilityFundamentals from "./topics/web-accessibility-fundamentals";
 
 // Every published topic. To publish a new topic, add its file in content/topics/ and list it here.
 export const topics: Topic[] = [
@@ -114,6 +122,14 @@ export const topics: Topic[] = [
   authenticationAuthorization,
   loggingConfiguration,
   asyncProgrammingBasics,
+  javascriptFundamentals,
+  typescriptFundamentals,
+  htmlCssFundamentals,
+  browserDomFundamentals,
+  reactFundamentals,
+  formsApiIntegrationUiStates,
+  frontendTestingDebugging,
+  webAccessibilityFundamentals,
 ];
 
 const seen = new Set<string>();

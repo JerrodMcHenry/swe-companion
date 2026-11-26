@@ -71,7 +71,7 @@ const guide: InterviewGuide = {
     },
     { title: "Git and pull requests", priority: "Optional", depth: "Implement", slug: "git-pull-requests", reason: "Reading diffs and using history (blame, bisect) helps, but is rarely assessed directly." },
     { title: "Security fundamentals", priority: "Optional", depth: "Explain", slug: "security-fundamentals", reason: "Review rounds may include an injection or secrets issue to spot." },
-    { title: "Framework-specific debugging (React, web backends)", priority: "Defer", reason: "Only when the role and round use that stack (for example, a full-stack debugging round); covered in the Backend and Full-Stack units." },
+    { title: "Frontend debugging (React, browser developer tools)", priority: "Optional", depth: "Implement", slug: "frontend-testing-debugging", reason: "Only when the role and round use that stack — for example the candidate-reported Notion round in a React/TypeScript codebase." },
   ],
   sequence: [
     "Make sure you can debug your own code with Python Debugging and write tests with Automated Testing.",
