@@ -2,7 +2,7 @@
 
 *Stop searching. Start learning. Get hired.*
 
-A curated, research-backed knowledge and navigation app giving the most efficient path to becoming an employable software engineer. Not a bootcamp or interactive learning platform. Success metric: job-relevant competence gained per hour of study.
+A curated, research-backed knowledge and navigation app providing a direct, efficient, evidence-based path to becoming an employable software engineer. The objective is interview readiness and practical engineering competence, not programming language mastery, academic completeness or course completion. Not a bootcamp or interactive learning platform. Success metric: job-relevant competence gained per hour of study.
 
 ## Roles
 
@@ -12,8 +12,8 @@ A curated, research-backed knowledge and navigation app giving the most efficien
 
 ## Principles
 
-- Employment-oriented; mastery over course completion; quality over quantity.
-- Comprehensive knowledge, minimal presentation. The content is the product.
+- Employment-first; demonstrated competence over course completion; quality over quantity.
+- Minimum effective knowledge, minimal presentation. The content is the product.
 - Free, high-quality external resources only.
 - Extremely simple navigation and an extremely simple codebase.
 - Never fabricate sources, URLs, interview requirements, resource availability or verification dates. Leave a field empty rather than guess.
@@ -38,11 +38,32 @@ Content files (each list file holds the items, a lookup and build-time reference
 | Interview Preparation | `content/interview-guides.ts` | `content/interview-guides/` | `/interview-prep/[slug]` |
 | Getting Hired | `content/career-guides.ts` | `content/career-guides/` | `/getting-hired/[slug]` |
 
+`research/` holds employment-requirements research and verification notes (one Markdown file per batch); it is never read by the app and is not published content.
+
 Unpublished items are `{ planned: ... }` entries and never link. To publish a topic: add its file, add it to `topics`, and replace its `{ planned }` entry in `curriculum.ts` with `{ slug }`.
+
+## Employment-first curriculum principles
+
+These supersede any earlier guidance that prioritized comprehensive programming language mastery over employment readiness.
+
+1. Work backward from actual hiring requirements, interview expectations and professional engineering responsibilities.
+2. Prioritize the minimum effective knowledge required to demonstrate competence.
+3. Programming languages are tools for solving engineering problems, not the educational objective. Do not require exhaustive language mastery before progressing to other competencies.
+4. Distinguish essential knowledge, working knowledge and material that can be learned as needed.
+5. Priorities must account for target role, company and seniority.
+6. Every core learning unit has a measurable readiness checkpoint and a clear stopping point.
+7. Encourage learners who can already demonstrate competence to skip redundant instructional material.
+8. Incorporate interview preparation and practical engineering exercises throughout the learning path, and reinforce earlier knowledge through later practical assignments rather than isolated topic completion.
+9. Prioritize independent implementation, problem-solving, debugging, testing and technical communication over passive course consumption.
+10. Recommend specific resource sections rather than entire courses when only selected material is needed.
+11. Do not add topics simply because they appear in a conventional programming or computer science curriculum.
+12. The Knowledge Library may hold supporting and advanced material without making it mandatory in the Apprenticeship.
+13. Clearly distinguish verified employer requirements, candidate-reported experiences and editorial curriculum recommendations.
+14. Encourage applying for jobs once relevant readiness criteria are met. Completing the whole curriculum is not an employment prerequisite.
 
 ## Curriculum publication rules (M7 onward)
 
-Application feature development is frozen. M0–M6 are complete.
+Application feature development is frozen. M0–M6 and M7.1A are complete. **Curriculum publication is paused** (including M7.1B) until M7.R, Employment Requirements Research, is reviewed and approved. The revised curriculum, priorities and depth requirements will come from that research; never redesign the curriculum independently. Existing published content stays as is.
 
 1. Never independently generate or publish whole curriculum phases. Content is researched and approved in batches; implement only an approved batch specification.
 2. Use the existing content architecture and page templates. Change application architecture only when a genuine requirement cannot be supported by the current implementation, and get approval first.
@@ -96,6 +117,6 @@ The product owner exclusively controls staging, commits and pushes. Only read-on
 
 ## Milestone workflow
 
-M0 Inspection/plan · M1 App shell + navigation · M2 Content structure + topic page · M3 Apprenticeship navigation · M4 Knowledge Library + search · M5 Interview prep + guide template · M6 Getting Hired · M7 Validated content, in approved batches (M7.1 Python Mastery next) · M8 Responsive, accessibility, usability validation. Provisional; never implement a future milestone or batch without approval.
+M0 Inspection/plan · M1 App shell + navigation · M2 Content structure + topic page · M3 Apprenticeship navigation · M4 Knowledge Library + search · M5 Interview prep + guide template · M6 Getting Hired · M7 Validated content, in approved batches (M7.1A done; M7.1B paused) · M7.R Employment Requirements Research (next; gates all further publication) · M8 Responsive, accessibility, usability validation. Provisional; never implement a future milestone or batch without approval.
 
 After each milestone report: (1) what was implemented, (2) why, (3) files created/modified, (4) project file tree, (5) app and content flow, (6) dependencies and justification, (7) tests/verification, (8) known limitations, (9) manual verification steps, (10) suggested commit message. Then stop and wait for approval.

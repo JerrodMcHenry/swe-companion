@@ -1,6 +1,6 @@
 # R1 — Google L3 / early-career software engineer: employment requirements research
 
-Status: draft for product-owner review. Research date (all sources accessed): **2026-11-25**. Nothing in this report has been published to the application.
+Status: approved as preliminary research (clarifications added before R2). Research date (all sources accessed): **2026-11-25**. Nothing in this report has been published to the application.
 
 Evidence labels used throughout:
 
@@ -8,6 +8,15 @@ Evidence labels used throughout:
 - **[Candidate]** Candidate-reported interview experiences (third-party sites). Individual, unverified, may be edited or aggregated by the publisher.
 - **[Third-party]** Unofficial data or guides not written by Google or by an identified candidate (e.g. compensation aggregators, prep-company guides).
 - **[Editorial]** Our own recommendation, derived from the evidence above. Not a Google requirement.
+
+### How to read this report
+
+- **Interview preparation vs professional competency.** The matrix in §6 rates each competency twice: what is likely assessed in the hiring process, and what an L3 engineer needs on the job. A low interview priority does not mean a skill is unimportant at work.
+- **Official vs candidate-reported.** Only [Official] sources state Google requirements. [Candidate] reports describe individual experiences; patterns across them are observations, not rules.
+- **Absence of evidence is not evidence of absence.** Where a competency does not appear in the reviewed sources (for example, system design rounds in the five candidate reports), this report says "not observed". It does **not** mean Google L3 candidates are never assessed on it. Only Google stating that a topic is excluded would establish that, and no such statement was found.
+- **Editorial benchmarks vs hiring thresholds.** Google does not publish pass thresholds. The readiness criteria in §9 are our editorial benchmarks for deciding when to apply, not validated Google hiring bars.
+- **US vs international.** Of the 14 postings reviewed, one is in the US. US requirements in this report come from that single posting (S10); the other 13 are international observations and may not reflect US hiring.
+- **Independent vs duplicated candidate reports.** S15 and S16 are reposted and rewritten by one aggregator (both "shared by" the same account), so they may not be independent of each other. Independent reports: S17, S18, S19 (and the outlier S20). Counts in §5 are given out of five reports, with this caveat.
 
 ---
 
@@ -67,7 +76,7 @@ Not used as evidence: third-party "L3 interview guide" pages (crackingwalnuts.co
 
 **Level and title.** Google does not publish its level ladder. Current early-career postings use the title **"Software Engineer II"** (and "Software Developer II" in Canada) [Official, S10–S11], and a third-party compensation source maps L3 to "SWE II (Entry Level)" [Third-party, S14]. Treat "L3 = Software Engineer II" as well-supported but unofficial.
 
-**Market snapshot.** On 2026-11-25 there were 14 open early-career software engineering postings worldwide and **one** in the US [Official, S10–S11]. Campus/new-grad postings surfaced in search (e.g. "Software Engineer, Early Career, Campus") had closed ("Job not found"). Availability is seasonal and the sample is small.
+**Market snapshot.** On 2026-11-25 there were 14 open early-career software engineering postings worldwide, of which **one** was in the US [Official, S10–S11]. Campus/new-grad postings surfaced in search (e.g. "Software Engineer, Early Career, Campus") had closed ("Job not found"). Availability is seasonal and the sample is small.
 
 **Minimum qualifications across the 14 postings** [Official, S10–S11]:
 
@@ -79,6 +88,8 @@ Not used as evidence: third-party "L3 interview guide" pages (crackingwalnuts.co
 | Team-specific experience (back-end, mobile, ML/AI, distributed systems, compilers, GenAI/LLM integration) | Most | Varies by team |
 | Experience using AI productivity tools / integrating GenAI or LLM interfaces | 7 / 14 (MQ or PQ) | New relative to older postings; includes the US posting's MQs |
 | English fluency (or additional languages) | Several | Location-specific |
+
+**US vs international.** The table combines all 14 postings. The single US posting (S10) requires: bachelor's or equivalent practical experience; 1 year of software development **in an industry setting**; experience in one or more listed areas; and experience using AI productivity tools. It does **not** list data structures and algorithms among its minimums. The 13 international postings are observations of Google's early-career hiring elsewhere and should not be read as US requirements.
 
 **Preferred qualifications** commonly include a master's degree, accessible-technology experience, testing/maintaining/launching software, software design, Linux, distributed systems and communication skills.
 
@@ -104,7 +115,7 @@ Google's official material does **not** state how many interviews an L3 candidat
 
 ## 5. Recent candidate-reported interview patterns
 
-Based on five accessible reports from 2025–2026 (S15–S19); S20 is treated separately as a systems-team outlier. All are **[Candidate]** evidence.
+Based on five accessible reports from 2025–2026 (S15–S19); S20 is treated separately as a systems-team outlier. All are **[Candidate]** evidence. S15 and S16 come from one aggregator and may not be independent; only three reports (S17–S19) are clearly independent. Counts below describe this small sample, not Google's process.
 
 | Pattern | Reports | Notes |
 |---|---|---|
@@ -117,7 +128,7 @@ Based on five accessible reports from 2025–2026 (S15–S19); S20 is treated se
 | Interviewer pushes from a working solution toward the optimal one | 4 / 5 | |
 | Emphasis on clarifying, communicating, dry-running code, complexity analysis, code readability | 5 / 5 | One report: coding in a Google Doc **without a compiler** |
 | Object-oriented / class design round | 1 / 5 | Room-allocation design focused on classes, data structures and logic |
-| System design round | 0 / 5 | No accessible L3 report described one |
+| System design round | 0 / 5 | **Not observed** in these reports. This is absence of evidence only, not proof that L3 candidates never receive system design questions |
 | Language trivia | Rare | One interviewer questioned the candidate's use of a Python built-in — i.e. correctness of what the candidate chose to use, not language trivia |
 | Hiring committee and team matching after the onsite | 2 / 5 | Team matching can take weeks or months |
 
@@ -127,28 +138,28 @@ Outlier: an L3 candidate with 3 years of experience reported a systems-focused l
 
 ## 6. Competency priority matrix
 
-Priority: **Essential** (likely assessed; failing it likely fails the loop), **Working** (needed for the job or sometimes assessed; working-level familiarity), **Deferrable** (can be learned as needed after hire or for specific teams).
+Priorities are rated separately for **interview preparation** (likely assessed in the hiring process) and **professional competency** (needed to work effectively as an L3 engineer). Levels: **Essential**, **Working** (working-level familiarity), **Deferrable** (learn as needed or for specific teams). "Not observed" means absent from the reviewed sources, not confirmed as unassessed.
 
-| # | Competency | Interview relevance | Job relevance | Priority for Google L3 | Evidence | Confidence |
+| # | Competency | Interview evidence | Interview-prep priority | Professional priority | Evidence | Confidence |
 |---|---|---|---|---|---|---|
-| 1 | Programming language proficiency (one language) | Very high — all coding rounds; possibly without a compiler | High | **Essential** | S10–S11, S17, S19 | High |
-| 2 | Language-specific technical questions | Low — rare; interviewers check the candidate uses chosen features correctly | Medium | Working | S17 | Medium |
-| 3 | Data structures and algorithms | Very high — the core of 3–4 rounds | Medium–high | **Essential** | S4, S5, S7, S11, S15–S19 | High |
-| 4 | Time and space complexity | Very high — asked in every reported round | High | **Essential** | S5, S17, S19 | High |
-| 5 | Object-oriented programming | Medium — one OOD round reported | High | Working | S15 | Low–medium |
-| 6 | SOLID and software design principles | Low — not reported | Medium | Deferrable (recognize) | None for interviews; S13 for review culture | Medium |
-| 7 | Low-level design (class/API design) | Medium — one report | High | Working | S15 | Low–medium |
-| 8 | System design | Low at L3 — named in an official generic video; no L3 report | Medium (grows with level) | Deferrable (recognize basics) | S4, S8; absent in S15–S19 | Medium–low |
-| 9 | Operating systems and memory | Low for generalists; high on some systems teams | Medium | Deferrable / team-dependent | S20; S11 PQs | Medium |
-| 10 | Networking and HTTP | Low for generalists; team-dependent | Medium | Deferrable / team-dependent | S20; S10–S11 option lists | Medium |
-| 11 | SQL and databases | Not observed in Google L3 evidence | Team-dependent | Deferrable for Google L3 (revisit in R4) | S11 PQs only | Medium |
-| 12 | Testing and debugging | High — testing named officially; dry-running and edge cases assessed | High | **Essential** | S4, S7, S13, S17 | High |
-| 13 | Git and engineering workflows | Not assessed | High (Google uses internal tooling) | Working (learn before/at hire) | S12, S13 | Medium |
-| 14 | Practical application development | Indirect — resume/MQ screening ("1 year of software development") | High | Working (for screening and the job) | S10–S11 | High |
-| 15 | Cloud and deployment | Not assessed for generalists | Team-dependent | Deferrable | S11 (cloud teams' PQs) | Medium |
-| 16 | Project and portfolio discussions | Medium — resume screening, behavioral and lunch interviews | Medium | Working | S1, S2, S20 | Medium |
-| 17 | Behavioral interviews | High — one dedicated round; behavioral questions in all roles | High | **Essential** | S1, S2, S6, S15–S19 | High |
-| 18 | Technical communication | Very high — repeatedly named as decisive | Very high | **Essential** | S2, S5, S7, S15–S19 | High |
+| 1 | Programming language proficiency (one language) | All coding rounds; possibly without a compiler | **Essential** | **Essential** | S10–S11, S17, S19 | High |
+| 2 | Language-specific technical questions | Rare; interviewers checked correct use of chosen features | Working | Working | S17 | Medium |
+| 3 | Data structures and algorithms | Core of 3–4 reported rounds; named officially | **Essential** | Working | S4, S5, S7, S11, S15–S19 | High |
+| 4 | Time and space complexity | Asked in every reported round | **Essential** | Working | S5, S17, S19 | High |
+| 5 | Object-oriented programming | One OOD round reported | Working | **Essential** | S15 | Low–medium |
+| 6 | SOLID and software design principles | Not observed | Deferrable (recognize) | Working | S13 (review culture) | Medium |
+| 7 | Low-level design (class/API design) | One report | Working | **Essential** | S15 | Low–medium |
+| 8 | System design | Named in an official generic video; not observed in L3 reports | Deferrable (recognize basics) — uncertain | Working (grows with level) | S4, S8 | Low |
+| 9 | Operating systems and memory | Observed only in a systems-team loop (S20) | Deferrable / team-dependent | Working / team-dependent | S20; S11 PQs | Medium |
+| 10 | Networking and HTTP | Observed only in a systems-team loop (S20) | Deferrable / team-dependent | Working / team-dependent | S20; S10–S11 option lists | Medium |
+| 11 | SQL and databases | Not observed | Deferrable for Google L3 (revisit in R4) | Team-dependent | S11 PQs only | Medium |
+| 12 | Testing and debugging | Testing named officially; dry-running and edge cases assessed | **Essential** | **Essential** | S4, S7, S13, S17 | High |
+| 13 | Git and engineering workflows | Not observed | Deferrable | **Essential** (Google uses internal tooling) | S12, S13 | Medium |
+| 14 | Practical application development | Indirect: resume/MQ screening | Working (screening) | **Essential** | S10–S11 | High |
+| 15 | Cloud and deployment | Not observed for generalists | Deferrable | Team-dependent | S11 (cloud teams' PQs) | Medium |
+| 16 | Project and portfolio discussions | Resume screening, behavioral and lunch interviews | Working | Working | S1, S2, S20 | Medium |
+| 17 | Behavioral interviews | One dedicated round; behavioral questions in all roles | **Essential** | n/a (collaboration skills: **Essential**) | S1, S2, S6, S15–S19 | High |
+| 18 | Technical communication | Repeatedly named as decisive | **Essential** | **Essential** | S2, S5, S7, S15–S19 | High |
 
 Additional finding outside the 18 categories: **use of AI productivity tools** appears in 7 of 14 postings' qualifications (including the US posting's minimums), while AI tools are banned during interviews (S1, S2, S10–S11). Interview preparation must therefore be done without AI assistance, while job readiness includes effective, reviewed AI use.
 
@@ -194,7 +205,7 @@ Uses the standard depth levels in CLAUDE.md. **[Editorial]** recommendations for
 
 ## 9. Proposed readiness criteria
 
-**[Editorial]** A candidate is reasonably ready to apply for Google L3 when they can, without notes, AI tools or a compiler:
+**[Editorial benchmark — not a Google hiring threshold.]** Google does not publish pass thresholds. These criteria are our recommendation for when to apply. A candidate is reasonably ready to apply for Google L3 when they can, without notes, AI tools or a compiler:
 
 1. Solve at least two out of three unfamiliar LeetCode-Medium-level problems within 45 minutes each, covering hash maps, two pointers/sliding window, trees, graphs (BFS/DFS), heaps, intervals, binary search and recursion.
 2. Begin every problem by clarifying inputs, outputs, constraints and edge cases, and state a brute-force approach before optimizing.
@@ -213,7 +224,7 @@ Stopping point: once these criteria are met, further DSA volume has diminishing 
 
 ## 10. Topics candidates can deprioritize (for Google L3)
 
-**[Editorial]**, based on absence from L3 evidence:
+**[Editorial]**, for interview preparation only, based on these topics not being observed in the reviewed L3 evidence. This is not evidence that they are never assessed, and several remain professionally relevant (see §6):
 
 - Full system design preparation (keep to Recognize).
 - SOLID principles and design-pattern catalogs beyond basic OOP.
@@ -227,7 +238,7 @@ Stopping point: once these criteria are met, further DSA volume has diminishing 
 
 ## 11. Conflicting evidence and uncertainties
 
-- **System design at L3.** Official videos include system design generically (S4, S8); third-party guides disagree (one says none at L3, another says one "lightweight" round); no accessible L3 candidate report included one. Resolution pending more evidence; currently Recognize-level.
+- **System design at L3.** Official videos include system design generically (S4, S8); third-party guides disagree (one says none at L3, another says one "lightweight" round); no accessible L3 candidate report included one. That absence is not proof that L3 candidates never receive system design questions. Resolution pending more evidence; currently Recognize-level for preparation.
 - **OOD round frequency.** One of five reports (S15). Insufficient to judge frequency.
 - **Degree requirement.** Postings say "or equivalent practical experience", but new-grad transcripts are reviewed (S1). How strongly a degree affects screening is unknown.
 - **Experience requirement.** The US SWE II posting requires 1 year of **industry** development; other early-career postings do not specify industry. Whether new graduates without internships are screened out is unknown.
