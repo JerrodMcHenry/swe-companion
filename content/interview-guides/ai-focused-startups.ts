@@ -67,7 +67,7 @@ const guide: InterviewGuide = {
     { title: "Graphs: BFS, DFS and topological sort", priority: "Important", depth: "Implement", slug: "graphs-bfs-dfs", reason: "Graph coding (including topological sort) was reported in one onsite.", exercises: ["Number of Islands (LeetCode)", "Course Schedule (LeetCode)"] },
     { title: "Trees and binary search trees", priority: "Important", depth: "Implement", slug: "trees-binary-search-trees", exercises: ["Binary Tree Level Order Traversal (LeetCode)"] },
     { title: "Existing-codebase drills", priority: "Important", depth: "Apply", slug: "existing-codebase-drills", exercises: ["Repeat any drill in AI-assisted mode with a verification log"] },
-    { title: "System design", priority: "Important", depth: "Explain", reason: "Basic level only (a Basic System Design guide is forthcoming). Candidates reported basic system design in several AI-focused new-grad loops (Decagon, Plaud, xAI) — more often than at Big Tech for new grads. Until the guide is published, be able to sketch your own project's components, data flow and trade-offs." },
+    { title: "System design", priority: "Important", depth: "Explain", reason: "Basic level only; see the Basic System Design guide. Candidates reported basic system design in several AI-focused new-grad loops (Decagon, Plaud, xAI) — more often than at Big Tech for new grads. Start by sketching your own project's components, data flow and trade-offs." },
     { title: "How the internet and HTTP work", priority: "Important", depth: "Explain", slug: "internet-http", reason: "AI products are usually web and API products; integration work calls model and third-party APIs." },
     { title: "Explaining your projects", slug: "explaining-project-architecture", priority: "Important", depth: "Explain", reason: "A project deep dive was reported; explain architecture and decisions." },
     { title: "Designing small systems", priority: "Optional", depth: "Implement", slug: "designing-small-systems", reason: "Useful for take-home design documents; raise if one is confirmed." },
@@ -126,7 +126,8 @@ const guide: InterviewGuide = {
     { template: "fluency", topics: ["python-lists", "python-debugging"] },
     { template: "core", topics: ["problem-solving-process", "complexity-analysis", "arrays-strings-patterns", "hash-map-set-patterns", "trees-binary-search-trees", "graphs-bfs-dfs", "dynamic-programming-basics"] },
     { template: "verify", topics: ["reading-debugging-unfamiliar-code", "automated-testing", "exceptions-error-handling", "existing-codebase-drills", "ai-assisted-engineering", "code-review"], note: "Practise independently first. Use AI in an interview only where the company explicitly allows it.", guides: ["practical-coding-assessments"] },
-    { template: "designApis", topics: ["System design", "internet-http", "designing-small-systems", "classes-objects", "composition-inheritance-interfaces"] },
+    { template: "role", topics: [] }, // Role-specific stages (for example Backend Engineer) go here.
+    { template: "designApis", topics: ["System design", "internet-http", "designing-small-systems", "classes-objects", "composition-inheritance-interfaces"], guides: ["basic-system-design"] },
     { template: "takeHome", topics: ["take-home-simulation"], guides: ["take-home-assignments"] },
     { template: "simulate", topics: [], guides: ["coding-algorithms", "behavioral-interviews", "ai-assisted-coding", "debugging-code-review", "project-deep-dives"] },
     { template: "job", topics: ["git-pull-requests", "security-fundamentals"] },

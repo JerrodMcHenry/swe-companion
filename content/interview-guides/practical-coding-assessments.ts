@@ -53,7 +53,7 @@ const guide: InterviewGuide = {
     { title: "Automated testing", priority: "Essential", depth: "Implement", slug: "automated-testing", reason: "A tested change is what distinguishes a practical round answer from a quick hack.", exercises: ["Write a test for code that calls an external weather API, using a fake client instead of the network."] },
     { title: "Exceptions and error handling", priority: "Important", depth: "Implement", slug: "exceptions-error-handling", reason: "Practical tasks are judged on how invalid input and failures are handled." },
     { title: "How the internet and HTTP work", priority: "Important", depth: "Explain", slug: "internet-http", reason: "Integration and backend tasks involve HTTP requests, status codes and JSON." },
-    { title: "API integration tasks (forthcoming: Backend Engineering, Unit 7)", priority: "Important", depth: "Implement", reason: "Reported integration rounds call APIs and process their data; until Unit 7 is published, practise with the fake-client testing exercise and How the Internet and HTTP Work." },
+    { title: "API integration tasks", priority: "Important", depth: "Implement", slug: "fastapi-http-apis", reason: "Reported integration rounds call APIs and process their data; see the API and Integration Assessments guide." },
     { title: "Modules, packages and project structure", priority: "Optional", depth: "Implement", slug: "modules-packages-project-structure", reason: "Helps you find your way and resolve import errors in a new repository." },
     { title: "AI-assisted engineering and verification", priority: "Optional", depth: "Apply", slug: "ai-assisted-engineering", reason: "Only when the round allows or provides an AI assistant (for example Capital One's reported agentic round)." },
   ],
@@ -79,7 +79,7 @@ const guide: InterviewGuide = {
     "You can complete a basic integration task — fetch data, transform it, handle failures — with tests.",
     "When time runs out you can say clearly what works, what is missing and how you would finish it.",
   ],
-  relatedGuides: ["/interview-prep/debugging-code-review", "/interview-prep/take-home-assignments", "/interview-prep/ai-assisted-coding", "/interview-prep/coding-algorithms"],
+  relatedGuides: ["/interview-prep/api-integration-assessments", "/interview-prep/debugging-code-review", "/interview-prep/take-home-assignments", "/interview-prep/ai-assisted-coding", "/interview-prep/coding-algorithms"],
   sources: [
     { title: "Scale AI new-grad onsite: backend practical (candidate-reported, FastPrep)", url: "https://www.fastprep.io/experience/scale-ai-new-grad-swe-virtual-onsite-cwmvy27rd8" },
     { title: "Stripe new-grad onsite: integration round (candidate-reported, FastPrep)", url: "https://www.fastprep.io/experience/2026-stripe-new-grad-swe-phone-screen-and-virtual-onsite-2-experiences-4bh59j9rh0" },

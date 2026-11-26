@@ -28,7 +28,7 @@ const guide: InterviewGuide = {
         "Behavioral-heavy process (for example an assessment day): give extra time to your story bank and to explaining your projects.",
         "Object-oriented or low-level design round confirmed: follow the OOP & Low-Level Design guide and raise Designing Small Systems to Essential at Apply depth.",
         "SQL round confirmed or SQL stressed in the posting: work through Databases and SQL Concepts at Implement depth, including its SQL practice problems.",
-        "System design round confirmed: a guide is planned; until then, prepare the basics only and say how you would learn the rest.",
+        "System design round confirmed: use the Basic System Design guide; prepare the basics only and say how you would learn the rest.",
       ],
     },
     {
@@ -122,6 +122,7 @@ const guide: InterviewGuide = {
     { template: "core", topics: ["problem-solving-process", "complexity-analysis", "arrays-strings-patterns", "hash-map-set-patterns"] },
     { template: "dsBreadth", topics: ["stacks-queues", "binary-search", "trees-binary-search-trees", "recursion-backtracking", "graphs-bfs-dfs", "heaps-priority-queues", "sorting-algorithms-intervals", "linked-lists", "dynamic-programming-basics"] },
     { template: "practical", topics: ["existing-codebase-drills", "reading-debugging-unfamiliar-code", "take-home-simulation"], guides: ["debugging-code-review", "practical-coding-assessments", "take-home-assignments"] },
+    { template: "role", topics: [] }, // Role-specific stages (for example Backend Engineer) go here.
     { template: "simulate", topics: [], note: "Read the posting and ask your recruiter about the format first: a confirmed format overrides these defaults.", guides: ["coding-algorithms", "behavioral-interviews", "oop-low-level-design", "ai-assisted-coding", "project-deep-dives"] },
     { template: "job", topics: ["git-pull-requests", "automated-testing", "code-review", "classes-objects", "ai-assisted-engineering", "exceptions-error-handling"] },
   ],

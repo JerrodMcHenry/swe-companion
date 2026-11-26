@@ -130,6 +130,7 @@ const guide: InterviewGuide = {
     { template: "core", topics: ["problem-solving-process", "complexity-analysis", "arrays-strings-patterns", "hash-map-set-patterns"] },
     { template: "dsDepth", topics: ["linked-lists", "stacks-queues", "trees-binary-search-trees", "graphs-bfs-dfs", "binary-search", "heaps-priority-queues"] },
     { template: "oopFundamentals", topics: ["classes-objects", "composition-inheritance-interfaces", "computer-science-essentials"] },
+    { template: "role", topics: [] }, // Role-specific stages (for example Backend Engineer) go here.
     { template: "simulate", topics: ["System design"], note: "Apple's process is set by each team. Ask your recruiter what to expect and prepare your motivation for that team.", guides: ["coding-algorithms", "behavioral-interviews", "rapid-fire-technical-questions", "project-deep-dives"] },
     { template: "job", topics: ["git-pull-requests", "automated-testing", "reading-debugging-unfamiliar-code", "code-review", "ai-assisted-engineering"] },
   ],

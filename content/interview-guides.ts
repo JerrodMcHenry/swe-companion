@@ -24,6 +24,9 @@ import aiFocusedStartups from "./interview-guides/ai-focused-startups";
 import growthStageCompanies from "./interview-guides/growth-stage-companies";
 import establishedTechCompanies from "./interview-guides/established-tech-companies";
 import enterpriseEarlyCareerPrograms from "./interview-guides/enterprise-early-career-programs";
+import backendEngineer from "./interview-guides/backend-engineer";
+import apiIntegrationAssessments from "./interview-guides/api-integration-assessments";
+import basicSystemDesign from "./interview-guides/basic-system-design";
 
 // Every published guide. To publish a guide, add its file in content/interview-guides/,
 // list it here, and replace its { planned } entry below with { slug }.
@@ -37,6 +40,8 @@ export const guides: InterviewGuide[] = [
   practicalCodingAssessments,
   takeHomeAssignments,
   projectDeepDives,
+  apiIntegrationAssessments,
+  basicSystemDesign,
   google,
   amazon,
   meta,
@@ -50,6 +55,7 @@ export const guides: InterviewGuide[] = [
   enterpriseEarlyCareerPrograms,
   otherEmployer,
   softwareEngineer,
+  backendEngineer,
 ];
 
 // What the Interview Preparation page lists, in order, for each category.
@@ -73,7 +79,7 @@ export const guideListings: Record<GuideCategory, GuideListing[]> = {
   // The first three roles are the initial release; the rest are future paths.
   Role: [
     { slug: "software-engineer" },
-    { planned: "Backend Engineer" },
+    { slug: "backend-engineer" },
     { planned: "Full-Stack Engineer" },
     { planned: "AI Engineer" },
     { planned: "Solutions Engineer" },
@@ -88,7 +94,8 @@ export const guideListings: Record<GuideCategory, GuideListing[]> = {
     { slug: "oop-low-level-design" },
     { slug: "project-deep-dives" },
     { slug: "take-home-assignments" },
-    { planned: "Basic System Design (conditional)" },
+    { slug: "api-integration-assessments" },
+    { slug: "basic-system-design" },
     { planned: "SQL & Database Assessments (conditional)" },
     { slug: "rapid-fire-technical-questions" },
   ],

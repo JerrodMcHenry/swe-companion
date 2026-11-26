@@ -150,6 +150,7 @@ const guide: InterviewGuide = {
     { template: "core", topics: ["problem-solving-process", "complexity-analysis", "arrays-strings-patterns", "hash-map-set-patterns"] },
     { template: "dsBreadth", topics: ["trees-binary-search-trees", "recursion-backtracking", "sorting-algorithms-intervals", "graphs-bfs-dfs", "linked-lists", "stacks-queues", "binary-search", "heaps-priority-queues", "dynamic-programming-basics"] },
     { template: "design", topics: ["classes-objects", "composition-inheritance-interfaces", "designing-small-systems"] },
+    { template: "role", topics: [] }, // Role-specific stages (for example Backend Engineer) go here.
     { template: "simulate", topics: ["System design"], note: "Practise in an editor that runs code, finish every problem with explicit tests, and use STAR with a reflection.", guides: ["coding-algorithms", "behavioral-interviews", "project-deep-dives"] },
     { template: "job", topics: ["git-pull-requests", "reading-debugging-unfamiliar-code", "code-review", "ai-assisted-engineering"] },
   ],

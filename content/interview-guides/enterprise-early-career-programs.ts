@@ -142,6 +142,7 @@ const guide: InterviewGuide = {
     { template: "fluency", topics: ["python-lists", "python-debugging"] },
     { template: "coreOA", topics: ["problem-solving-process", "arrays-strings-patterns", "hash-map-set-patterns", "complexity-analysis", "stacks-queues", "trees-binary-search-trees", "graphs-bfs-dfs"] },
     { template: "enterpriseEng", topics: ["classes-objects", "reading-debugging-unfamiliar-code", "automated-testing", "exceptions-error-handling", "git-pull-requests", "databases-sql-concepts", "security-fundamentals"], guides: ["practical-coding-assessments"] },
+    { template: "role", topics: [] }, // Role-specific stages (for example Backend Engineer) go here.
     { template: "assessmentDay", topics: ["Recorded video interviews (conditional)", "Business case interviews (conditional)"], note: "Follow your program's published steps. Case, video and AI-assisted rounds are program-specific.", guides: ["behavioral-interviews", "coding-algorithms"] },
     { template: "job", topics: ["code-review", "ai-assisted-engineering", "deployment-ci-cd"] },
   ],

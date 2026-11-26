@@ -1,10 +1,12 @@
 // A target's apprenticeship: the target + role combination from composePath, arranged into the
-// explicit stage order written in the target's guide (InterviewGuide.stages). Nothing is inferred:
-// every recommended topic is placed deliberately, and anything not placed stays in the Library.
+// explicit stage order written in the target's guide (InterviewGuide.stages). A role guide may define
+// its own stages (for example Backend Engineer); the target decides where they go with one
+// { template: "role" } marker. Nothing is inferred: every recommended topic is placed deliberately,
+// and anything not placed stays in the Library.
 import { composePath, getGuide, roles, targets, type PathEntry } from "./interview-guides";
 import { getPhase } from "./curriculum";
 import { getTopic } from "./topics";
-import type { InterviewGuide } from "./types";
+import type { InterviewGuide, StageRef } from "./types";
 
 export type Tone = "sky" | "indigo" | "violet" | "rose" | "teal" | "emerald" | "amber" | "slate";
 type StageTemplate = { title: string; goal: string; skipIf: string; tone: Tone; practice?: boolean };
@@ -38,6 +40,9 @@ export const stageTemplates: Record<string, StageTemplate> = {
   takeHome: { title: "Take-homes and project deep dives", goal: "Scope, build, test and defend work in a take-home or project conversation.", skipIf: "You can build a small feature in 3–4 hours with tests and a README, and defend it (editorial guide).", tone: "amber" },
   assessmentDay: { title: "Assessment day and video interviews", goal: "Structured answers on camera, in back-to-back interviews and in case discussions.", skipIf: "You have practised recorded answers and your program's listed formats.", tone: "amber", practice: true },
   simulate: { title: "Interview simulation", goal: "Practise in the exact conditions you expect, then apply.", skipIf: "You meet the readiness criteria below.", tone: "amber", practice: true },
+  backendApis: { title: "Backend: APIs and validation", goal: "Build, validate, test and document a small HTTP API, and call other APIs safely.", skipIf: "You can build a small tested CRUD API with validation and clear error responses without following a tutorial.", tone: "teal" },
+  backendData: { title: "Backend: SQL and data modeling", goal: "Write and explain PostgreSQL queries and design a schema for a small domain.", skipIf: "You can write joins, aggregations and subqueries unaided and justify a schema's keys, constraints and indexes.", tone: "violet" },
+  backendProduction: { title: "Backend: security and production basics", goal: "Protect endpoints, configure and log the service, and know when async helps.", skipIf: "Your project has working authentication and authorization, environment-based configuration and useful logs, and you can explain each.", tone: "rose" },
   job: { title: "Engineering for the job", goal: "Needed from your first week, though rarely tested in this employer's interviews. Continue while you apply.", skipIf: "You already use these at work or in a team project. Not required before applying.", tone: "slate" },
 };
 
@@ -83,10 +88,31 @@ export function hasRoadmap(target: InterviewGuide) {
   return (target.stages?.length ?? 0) > 0;
 }
 
+export const ROLE_MARKER = "role";
+
+// The target's stages with the role's stages expanded at the marker. The earliest placement wins: a role
+// stage leaves out topics the target places before the marker (or in parallel), and takes over topics the
+// target places after it, so prerequisites come first. Deferred topics are left out, and a stage left
+// with nothing is dropped.
+function expandedStages(target: InterviewGuide, role: InterviewGuide, map: Map<string, RoadmapItem>) {
+  const own = target.stages ?? [];
+  const marker = own.findIndex((stage) => stage.template === ROLE_MARKER);
+  if (marker < 0) return own;
+  const earlier = new Set([...own.slice(0, marker).flatMap((stage) => stage.topics), ...(target.parallel ?? [])]);
+  const roleStages = (role.stages ?? []).map((stage) => ({
+    ...stage,
+    topics: stage.topics.filter((key) => !earlier.has(key) && map.get(key)?.priority !== "Defer"),
+  }));
+  const taken = new Set(roleStages.flatMap((stage) => stage.topics));
+  const later = own.slice(marker + 1).map((stage) => ({ ...stage, topics: stage.topics.filter((key) => !taken.has(key)) }));
+  const keep = (stage: StageRef) => stage.topics.length > 0 || Boolean(stageTemplates[stage.template]?.practice);
+  return [...own.slice(0, marker), ...roleStages.filter(keep), ...later.filter(keep)];
+}
+
 export function buildRoadmap(target: InterviewGuide, role: InterviewGuide): Roadmap {
   const { map, path } = entries(target, role);
   const resolve = (key: string) => map.get(key)!; // Checked at build time below.
-  const stages = (target.stages ?? []).map((stage, index) => ({
+  const stages = expandedStages(target, role, map).map((stage, index) => ({
     ...stageTemplates[stage.template],
     index,
     template: stage.template,
@@ -134,34 +160,40 @@ for (const target of targets) {
     if (target.parallel?.length) throw new Error(`Target "${target.slug}" has parallel items but no stages`);
     continue;
   }
+  const markers = target.stages!.filter((stage) => stage.template === ROLE_MARKER);
+  if (markers.length > 1) throw new Error(`Target "${target.slug}" has more than one role marker`);
+  if (markers.some((stage) => stage.topics.length || stage.note || stage.guides)) throw new Error(`Target "${target.slug}": the role marker takes no topics, note or guides`);
   for (const role of roles) {
     const { map } = entries(target, role);
     const where = `Roadmap "${target.slug}" + "${role.slug}"`;
-    const placed = new Set<string>();
-    const place = (key: string) => {
-      const item = map.get(key);
-      if (!item) throw new Error(`${where} references "${key}", which is not in the combined path`);
-      if (item.priority === "Defer") throw new Error(`${where} places deferred entry "${key}"`);
-      if (placed.has(key)) throw new Error(`${where} places "${key}" twice`);
-      placed.add(key);
-      return item;
-    };
-    target.stages!.forEach((stage, index) => {
-      if (!stageTemplates[stage.template]) throw new Error(`${where}: unknown stage template "${stage.template}"`);
-      stage.topics.forEach(place);
+    if (role.stages?.length && !markers.length) throw new Error(`${where}: the role has stages but the target has no role marker`);
+    // Every key written by the target or the role must exist in the combined path.
+    const written = [...target.stages!.flatMap((stage) => stage.topics), ...(target.parallel ?? []), ...(role.stages ?? []).flatMap((stage) => stage.topics)];
+    for (const key of written) if (!map.has(key)) throw new Error(`${where} references "${key}", which is not in the combined path`);
+    for (const stage of [...target.stages!, ...(role.stages ?? [])]) {
+      if (stage.template !== ROLE_MARKER && !stageTemplates[stage.template]) throw new Error(`${where}: unknown stage template "${stage.template}"`);
       for (const slug of stage.guides ?? []) {
-        if (getGuide(slug)?.category !== "Interview type") throw new Error(`${where}: stage ${index + 1} links unknown format guide "${slug}"`);
+        if (getGuide(slug)?.category !== "Interview type") throw new Error(`${where}: a stage links unknown format guide "${slug}"`);
       }
-      if (!stage.topics.length && !stageTemplates[stage.template].practice) throw new Error(`${where}: stage ${index + 1} is empty`);
+    }
+    const roadmap = buildRoadmap(target, role);
+    const placed = new Set<string>();
+    for (const item of [...roadmap.stages.flatMap((stage) => stage.items), ...roadmap.parallel]) {
+      if (item.priority === "Defer") throw new Error(`${where} places deferred entry "${item.key}"`);
+      if (placed.has(item.key)) throw new Error(`${where} places "${item.key}" twice`);
+      placed.add(item.key);
+    }
+    roadmap.stages.forEach((stage) => {
+      if (!stage.items.length && !stage.practice) throw new Error(`${where}: stage ${stage.index + 1} is empty`);
     });
-    (target.parallel ?? []).forEach(place);
     // Nothing required may be left out: Essential entries from either source, and the target's Important ones.
     for (const [key, item] of map) {
       const required = item.priority === "Essential" || (item.priority === "Important" && item.track === "interview");
       if (required && !placed.has(key)) throw new Error(`${where} does not place required entry "${key}" (${item.priority})`);
     }
-    const first = buildRoadmap(target, role).stages[0].items[0];
+    const first = roadmap.stages[0].items[0];
     const firstSlug = first.unitTopics?.[0] ?? first.slug;
     if (!firstSlug || !getTopic(firstSlug)) throw new Error(`${where}: the first stage must start with a published topic`);
   }
 }
+

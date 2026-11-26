@@ -47,6 +47,14 @@ import modulesPackagesProjectStructure from "./topics/modules-packages-project-s
 import deploymentCiCd from "./topics/deployment-ci-cd";
 import explainingProjectArchitecture from "./topics/explaining-project-architecture";
 import takeHomeSimulation from "./topics/take-home-simulation";
+import fastapiHttpApis from "./topics/fastapi-http-apis";
+import validationErrorResponses from "./topics/validation-error-responses";
+import pythonTypeHints from "./topics/python-type-hints";
+import postgresqlSqlPractice from "./topics/postgresql-sql-practice";
+import dataModeling from "./topics/data-modeling";
+import authenticationAuthorization from "./topics/authentication-authorization";
+import loggingConfiguration from "./topics/logging-configuration";
+import asyncProgrammingBasics from "./topics/async-programming-basics";
 
 // Every published topic. To publish a new topic, add its file in content/topics/ and list it here.
 export const topics: Topic[] = [
@@ -98,6 +106,14 @@ export const topics: Topic[] = [
   deploymentCiCd,
   explainingProjectArchitecture,
   takeHomeSimulation,
+  fastapiHttpApis,
+  validationErrorResponses,
+  pythonTypeHints,
+  postgresqlSqlPractice,
+  dataModeling,
+  authenticationAuthorization,
+  loggingConfiguration,
+  asyncProgrammingBasics,
 ];
 
 const seen = new Set<string>();

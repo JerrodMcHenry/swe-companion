@@ -127,6 +127,7 @@ const guide: InterviewGuide = {
   stages: [
     { template: "fluencySetup", topics: ["python-lists", "python-debugging", "exceptions-error-handling", "git-pull-requests", "command-line-environment"] },
     { template: "realCode", topics: ["reading-debugging-unfamiliar-code", "automated-testing", "existing-codebase-drills", "code-review"] },
+    { template: "role", topics: [] }, // Role-specific stages (for example Backend Engineer) go here.
     { template: "ship", topics: ["designing-small-systems", "internet-http", "modules-packages-project-structure", "deployment-ci-cd", "ai-assisted-engineering", "classes-objects", "composition-inheritance-interfaces", "security-fundamentals", "databases-sql-concepts", "solid-design-patterns"] },
     { template: "takeHome", topics: ["take-home-simulation", "explaining-project-architecture"], guides: ["take-home-assignments", "project-deep-dives", "practical-coding-assessments", "behavioral-interviews"] },
     { template: "coreScreen", topics: ["problem-solving-process", "arrays-strings-patterns", "hash-map-set-patterns", "complexity-analysis", "trees-binary-search-trees"], note: "Some startups run algorithmic screens. Increase this only for companies that confirm one.", guides: ["coding-algorithms"] },

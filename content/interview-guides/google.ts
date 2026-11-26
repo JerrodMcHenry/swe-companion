@@ -193,6 +193,7 @@ const guide: InterviewGuide = {
     { template: "core", topics: ["problem-solving-process", "complexity-analysis", "arrays-strings-patterns", "hash-map-set-patterns"] },
     { template: "dsDepth", topics: ["stacks-queues", "linked-lists", "binary-search", "trees-binary-search-trees", "heaps-priority-queues"] },
     { template: "advDepth", topics: ["recursion-backtracking", "graphs-bfs-dfs", "sorting-algorithms-intervals", "dynamic-programming-basics", "union-find-shortest-paths"] },
+    { template: "role", topics: [] }, // Role-specific stages (for example Backend Engineer) go here.
     { template: "simulate", topics: ["System design"], note: "Practise without AI, Search or a compiler for part of the time — Google states AI tools are not permitted in interviews.", guides: ["coding-algorithms", "behavioral-interviews", "project-deep-dives"] },
     { template: "job", topics: ["git-pull-requests", "automated-testing", "reading-debugging-unfamiliar-code", "code-review", "ai-assisted-engineering", "classes-objects", "exceptions-error-handling"] },
   ],

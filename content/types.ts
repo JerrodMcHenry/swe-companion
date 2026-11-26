@@ -114,7 +114,8 @@ export type InterviewGuide = {
   verifiedOn?: string; // YYYY-MM-DD. Only set after a person has actually verified the guide.
   // Employer targets only:
   atAGlance?: { label: string; value: string }[]; // At most four short facts, taken from the guide's own text.
-  stages?: StageRef[]; // The apprenticeship in recommended order. A target without stages shows its eligibility guidance instead.
+  stages?: StageRef[]; // Targets: the apprenticeship in recommended order, with at most one { template: "role" } marker where the
+  // role's own stages go. Roles: role-specific stages inserted at that marker. A target without stages shows its eligibility guidance.
   parallel?: string[]; // Entries to start from day one, alongside the stages (behavioral stories, a project).
 };
 

@@ -141,6 +141,7 @@ const guide: InterviewGuide = {
     { template: "coreSpeed", topics: ["problem-solving-process", "complexity-analysis", "arrays-strings-patterns", "hash-map-set-patterns"] },
     { template: "dsBreadth", topics: ["trees-binary-search-trees", "graphs-bfs-dfs", "stacks-queues", "linked-lists", "binary-search", "heaps-priority-queues", "recursion-backtracking", "sorting-algorithms-intervals", "dynamic-programming-basics", "union-find-shortest-paths"] },
     { template: "aiRound", topics: ["reading-debugging-unfamiliar-code", "ai-assisted-engineering", "existing-codebase-drills"], guides: ["practical-coding-assessments"] },
+    { template: "role", topics: [] }, // Role-specific stages (for example Backend Engineer) go here.
     { template: "simulate", topics: [], note: "Prepare both ways until your recruiter confirms your formats: without a compiler, and with the built-in assistant.", guides: ["coding-algorithms", "behavioral-interviews", "ai-assisted-coding"] },
     { template: "job", topics: ["git-pull-requests", "automated-testing", "code-review", "classes-objects", "exceptions-error-handling"] },
   ],

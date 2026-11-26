@@ -172,6 +172,7 @@ const guide: InterviewGuide = {
     { template: "design", topics: ["classes-objects", "composition-inheritance-interfaces", "designing-small-systems", "solid-design-patterns"], note: "Amazon's official topics include object-oriented design, so it comes before the long data-structures list." },
     { template: "dsBreadth", topics: ["trees-binary-search-trees", "graphs-bfs-dfs", "heaps-priority-queues", "recursion-backtracking", "binary-search", "stacks-queues", "linked-lists", "sorting-algorithms-intervals", "dynamic-programming-basics", "union-find-shortest-paths"] },
     { template: "fundamentals", topics: ["internet-http", "databases-sql-concepts", "computer-science-essentials", "ai-assisted-engineering", "reading-debugging-unfamiliar-code"] },
+    { template: "role", topics: [] }, // Role-specific stages (for example Backend Engineer) go here.
     { template: "simulate", topics: ["System design"], note: "Take Amazon's practice online assessment, including the Work Simulation, and map every story to Leadership Principles.", guides: ["coding-algorithms", "behavioral-interviews", "oop-low-level-design", "rapid-fire-technical-questions", "project-deep-dives"] },
     { template: "job", topics: ["git-pull-requests", "automated-testing", "code-review"] },
   ],

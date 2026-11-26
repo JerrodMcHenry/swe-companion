@@ -135,6 +135,7 @@ const guide: InterviewGuide = {
     { template: "core", topics: ["problem-solving-process", "complexity-analysis", "arrays-strings-patterns", "hash-map-set-patterns", "automated-testing"] },
     { template: "dsBreadth", topics: ["trees-binary-search-trees", "graphs-bfs-dfs", "stacks-queues", "binary-search", "recursion-backtracking", "heaps-priority-queues", "dynamic-programming-basics"] },
     { template: "postingBasics", topics: ["classes-objects", "git-pull-requests", "databases-sql-concepts", "ai-assisted-engineering", "Rapid-fire technical knowledge questions"] },
+    { template: "role", topics: [] }, // Role-specific stages (for example Backend Engineer) go here.
     { template: "simulate", topics: ["take-home-simulation"], note: "If your target has its own company path, use that instead.", guides: ["coding-algorithms", "behavioral-interviews", "oop-low-level-design", "rapid-fire-technical-questions", "project-deep-dives", "take-home-assignments"] },
     { template: "job", topics: ["reading-debugging-unfamiliar-code", "code-review", "exceptions-error-handling"] },
   ],
