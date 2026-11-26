@@ -149,6 +149,7 @@ const guide: CareerGuide = {
       instructions: "Free, frequently updated list of new-grad software roles. Use it for discovery only and confirm every detail on the employer's page; links to the maintainer's own product are optional.",
     },
   ],
+  relatedGuides: ["/getting-hired/resume", "/getting-hired/job-description-gap-analysis", "/interview-prep/behavioral-interviews", "/getting-hired/interview-failure-recovery"],
 };
 
 export default guide;

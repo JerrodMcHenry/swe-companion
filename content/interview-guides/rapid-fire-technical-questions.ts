@@ -134,6 +134,7 @@ const guide: InterviewGuide = {
     "You handle an unknown question honestly and reason towards an answer.",
     "For roles that list them, you also cover the forthcoming OOP, testing, SQL and HTTP topics when they are published.",
   ],
+  relatedGuides: ["/interview-prep/coding-algorithms", "/getting-hired/resume"],
   sources: [
     { title: "Amazon — Software development interview topics (includes \"programming language\")", url: "https://amazon.jobs/content/en/how-we-hire/interview-prep/software-development-topics" },
     { title: "Candidate report — 2026 Apple new grad SWE: HR call, Java questions, coding and manager round (FastPrep)", url: "https://www.fastprep.io/experience/2026-apple-new-grad-swe-hr-call-java-questions-coding-and-manager-round-1-experi-52ej2p4ouy" },

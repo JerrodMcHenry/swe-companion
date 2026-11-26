@@ -10,6 +10,14 @@ export default function HomePage() {
       <p className="mt-5 max-w-2xl text-lg leading-relaxed text-stone-600 sm:text-xl">
         A curated, research-backed path to becoming an employable software engineer.
       </p>
+      <p className="mt-6">
+        <Link
+          href="/interview-prep"
+          className="inline-block rounded-md border border-stone-900 px-4 py-2 font-medium text-stone-900 hover:bg-stone-900 hover:text-white"
+        >
+          Choose your target employer and role <span aria-hidden="true">→</span>
+        </Link>
+      </p>
       <ul className="mt-12 grid gap-4 md:mt-16 md:grid-cols-2">
         {sections.map((section) => (
           <li key={section.href}>

@@ -61,18 +61,26 @@ export type Phase = {
   sectionHref?: string; // Main site section that holds this phase's content, e.g. "/getting-hired".
 };
 
-export const guideCategories = ["Company", "Role", "Interview type"] as const;
+export const guideCategories = ["Company", "Employer type", "Role", "Interview type"] as const;
 
 export type GuideCategory = (typeof guideCategories)[number];
 
+export const depthLevels = ["Recognize", "Explain", "Implement", "Apply"] as const;
+
 // A study priority. The title is always shown as text; `slug` optionally links a published
 // Library topic that helps with it (it need not cover the whole subject).
+// Essential entries must give a reason (checked at build time).
 export type StudyTopic = {
   title: string;
-  priority: "Essential" | "Important" | "Optional";
+  priority: "Essential" | "Important" | "Optional" | "Defer";
+  depth?: (typeof depthLevels)[number]; // Depth required for this guide's target, not the topic's own depth.
   reason?: string;
   slug?: string;
+  exercises?: string[]; // Exact titles of exercises in the linked topic (requires slug; checked at build time).
 };
+
+// A titled block of short items, shared by interview and career guides.
+export type GuidanceBlock = { heading: string; items: string[] };
 
 export type InterviewGuide = {
   slug: string; // URL segment: /interview-prep/<slug>
@@ -81,6 +89,7 @@ export type InterviewGuide = {
   description: string; // One line for the landing page.
   level?: string; // e.g. "Entry level". Omit when the guide applies to all levels.
   overview: string;
+  guidance?: GuidanceBlock[]; // e.g. eligibility, evidence and limitations, role requirements.
   process?: string[]; // Interview stages, in order.
   competencies?: string[];
   studyTopics?: StudyTopic[];
@@ -89,6 +98,7 @@ export type InterviewGuide = {
   resources?: Resource[];
   readiness?: string[];
   sources?: { title: string; url: string }[];
+  relatedGuides?: string[]; // Paths of other guides, e.g. "/interview-prep/behavioral-interviews" or "/getting-hired/resume".
   verifiedOn?: string; // YYYY-MM-DD. Only set after a person has actually verified the guide.
 };
 
@@ -100,13 +110,14 @@ export type CareerGuide = {
   title: string;
   description: string; // One line, used in page metadata.
   overview: string;
-  guidance?: { heading: string; items: string[] }[]; // Practical guidance, each block with its own heading.
+  guidance?: GuidanceBlock[]; // Practical guidance, each block with its own heading.
   recommendations?: string[];
   interviewQuestions?: string[];
   mistakes?: string[];
   readiness?: string[];
   resources?: Resource[];
   relatedTopics?: string[]; // Published Library topic slugs.
+  relatedGuides?: string[]; // Paths of other guides, as on InterviewGuide.
 };
 
 // A Getting Hired landing entry: a published career guide by slug, or a planned one by name.

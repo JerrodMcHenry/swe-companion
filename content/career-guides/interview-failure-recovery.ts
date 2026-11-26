@@ -78,6 +78,7 @@ const guide: CareerGuide = {
     "You have retested the weak area in interview-like conditions.",
   ],
   relatedTopics: ["python-debugging", "python-dictionaries", "python-sorting-custom-keys", "python-mutability-references-copying"],
+  relatedGuides: ["/interview-prep/coding-algorithms", "/interview-prep/behavioral-interviews", "/getting-hired/engineering-projects", "/getting-hired/application-strategy"],
 };
 
 export default guide;

@@ -100,6 +100,7 @@ const guide: CareerGuide = {
     "You can map each essential gap to an Apprenticeship unit or Library topic.",
     "You can make and justify an apply-now or close-a-gap-first decision in a few minutes.",
   ],
+  relatedGuides: ["/interview-prep/other-employer", "/getting-hired/resume", "/getting-hired/application-strategy"],
 };
 
 export default guide;

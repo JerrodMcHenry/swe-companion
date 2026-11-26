@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { careerGuides, getCareerGuide } from "@/content/career-guides";
 import { getTopic } from "@/content/topics";
+import { getGuideByPath } from "@/content/interview-guides";
 
 // Only slugs listed in content/career-guides.ts exist; anything else is a 404.
 export const dynamicParams = false;
@@ -126,6 +127,23 @@ export default async function CareerGuidePage({ params }: Props) {
                     <Link href={`/library/${slug}`} className={linkClass}>
                       {topic.title}
                     </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </Section>
+        )}
+        {hasItems(guide.relatedGuides) && (
+          <Section title="Related guides">
+            <ul className="list-disc space-y-1.5 pl-5">
+              {guide.relatedGuides.map((href) => {
+                const related = getGuideByPath(href)!; // Existence is checked at build time in interview-guides.ts.
+                return (
+                  <li key={href}>
+                    <Link href={href} className={linkClass}>
+                      {related.title}
+                    </Link>
+                    <span className="text-stone-600"> — {related.description}</span>
                   </li>
                 );
               })}

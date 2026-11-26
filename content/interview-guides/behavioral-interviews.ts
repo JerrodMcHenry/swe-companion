@@ -177,6 +177,11 @@ const guide: InterviewGuide = {
     "You have practised aloud with at least one other person.",
     "You have two or three genuine questions for the interviewer.",
   ],
+  relatedGuides: [
+    "/getting-hired/engineering-projects",
+    "/getting-hired/resume",
+    "/getting-hired/interview-failure-recovery",
+  ],
   sources: [
     { title: "Google — Interviewing at Google: best practices, advice and tips", url: "https://www.google.com/about/careers/applications/interview-tips" },
     { title: "Google — Our hiring process", url: "https://www.google.com/about/careers/applications/how-we-hire/" },

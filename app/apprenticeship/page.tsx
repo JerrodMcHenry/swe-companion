@@ -13,6 +13,13 @@ export default function ApprenticeshipPage() {
     <>
       <h1 className="text-3xl font-semibold tracking-tight">{section.title}</h1>
       <p className="mt-4 max-w-2xl text-lg leading-relaxed text-stone-600">{section.description}</p>
+      <p className="mt-4 max-w-2xl text-stone-600">
+        Preparing for a specific employer?{" "}
+        <Link href="/interview-prep" className="font-medium text-stone-900 underline underline-offset-4 hover:text-stone-600">
+          Choose your target
+        </Link>{" "}
+        to see which parts of the Apprenticeship you need and at what depth.
+      </p>
 
       <div className="mt-12 max-w-3xl space-y-12">
         {stages.map((stage) => (

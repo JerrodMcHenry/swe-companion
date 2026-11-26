@@ -13,7 +13,7 @@ export const sections = [
   {
     href: "/interview-prep",
     title: "Interview Preparation",
-    description: "Preparation guides by company, role, experience level and interview type.",
+    description: "Choose your target employer and role to get one focused preparation path, with guides for each interview format.",
   },
   {
     href: "/getting-hired",

@@ -61,6 +61,7 @@ const guide: CareerGuide = {
     "Explain testing and deployment decisions.",
     "Describe limitations and reasonable improvements.",
   ],
+  relatedGuides: ["/interview-prep/behavioral-interviews", "/getting-hired/resume"],
 };
 
 export default guide;

@@ -124,6 +124,7 @@ const guide: CareerGuide = {
       instructions: "Official employer guidance. Read the advice on describing achievements with the X-Y-Z structure.",
     },
   ],
+  relatedGuides: ["/getting-hired/job-description-gap-analysis", "/getting-hired/engineering-projects"],
 };
 
 export default guide;

@@ -46,6 +46,7 @@ const guide: InterviewGuide = {
       title: "Arrays and strings: two pointers, sliding window, prefix sums",
       priority: "Essential",
       slug: "arrays-strings-patterns",
+      reason: "The most common inputs in coding interviews and online assessments.",
     },
     {
       title: "Hash maps and sets",
@@ -53,11 +54,11 @@ const guide: InterviewGuide = {
       slug: "hash-map-set-patterns",
       reason: "Membership, counting, complement lookup and grouping; many optimal solutions are a single pass with a dictionary.",
     },
-    { title: "Trees and binary search trees", priority: "Essential", slug: "trees-binary-search-trees" },
-    { title: "Graphs: BFS, DFS and topological sort", priority: "Essential", slug: "graphs-bfs-dfs" },
-    { title: "Recursion and backtracking", priority: "Essential", slug: "recursion-backtracking" },
-    { title: "Binary search", priority: "Essential", slug: "binary-search" },
-    { title: "Stacks and queues", priority: "Essential", slug: "stacks-queues" },
+    { title: "Trees and binary search trees", priority: "Essential", slug: "trees-binary-search-trees", reason: "A frequent problem category in preparation lists and candidate reports; tests recursion." },
+    { title: "Graphs: BFS, DFS and topological sort", priority: "Essential", slug: "graphs-bfs-dfs", reason: "Named in official employer preparation material and common in reports, including grid problems." },
+    { title: "Recursion and backtracking", priority: "Essential", slug: "recursion-backtracking", reason: "Underlies trees, graphs and dynamic programming; named in official preparation material." },
+    { title: "Binary search", priority: "Essential", slug: "binary-search", reason: "A common optimization step and a test of precise boundary handling." },
+    { title: "Stacks and queues", priority: "Essential", slug: "stacks-queues", reason: "Matching, monotonic-stack and queue-based traversal problems recur in preparation lists." },
     {
       title: "Testing and dry-running your code",
       priority: "Essential",
@@ -154,6 +155,11 @@ const guide: InterviewGuide = {
     "Editorial practice guide, general entry-level roles: solve two of three unseen Easy-to-Medium problems in about 45 minutes each, explaining complexity.",
     "Editorial practice guide, Big Tech: solve two of three unseen Medium problems in about 45 minutes each, without AI or running code, explaining complexity and handling a follow-up.",
     "These guides are this curriculum's recommendations, not employer passing thresholds. Once you meet yours consistently, more problem volume has diminishing returns; apply and keep up mixed review.",
+  ],
+  relatedGuides: [
+    "/interview-prep/rapid-fire-technical-questions",
+    "/interview-prep/behavioral-interviews",
+    "/getting-hired/interview-failure-recovery",
   ],
   sources: [
     { title: "Google — Our hiring process (AI tools not permitted in interviews)", url: "https://www.google.com/about/careers/applications/how-we-hire/" },
