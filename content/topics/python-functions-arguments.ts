@@ -6,78 +6,73 @@ const topic: Topic = {
   category: "Python",
   phase: "programming-fluency",
   overview:
-    "A function is a named, reusable block of code that receives inputs through parameters and can return a result. Python supports positional, keyword, default and variable-length arguments, and passes every argument as a reference to an object.",
+    "A function is a named, reusable block of code that takes inputs through parameters and returns a result. Interview answers are written as functions, and functions are the unit you test, review and reuse at work.",
   whyItMatters:
     "Nearly every coding interview answer is written as a function with a clear signature, and splitting a problem into small helper functions is one of the clearest signals of good engineering. Misunderstanding return values, default arguments or how arguments are shared causes common bugs that interviewers like to probe. At work, functions are the basic unit you test, review and reuse.",
   prerequisites: ["Variables and Data Types", "Conditional Statements", "Loops"],
   objectives: [
-    "Define and call functions, and distinguish parameters from arguments.",
-    "Return values deliberately, and explain implicit None and the difference between returning and printing.",
-    "Use positional, keyword and default arguments, and recognize keyword-only parameters.",
-    "Explain why mutable default values are shared between calls, and use None as a safe default.",
-    "Use *args and **kwargs to accept, and * and ** to unpack, variable numbers of arguments.",
-    "Explain Python's argument passing (call by object reference) and predict when a caller sees changes.",
-    "Distinguish pure functions from functions with side effects, and keep input and output separate from computation.",
-    "Decompose a problem into small, named, testable functions with a clear contract or docstring.",
+    "Defining and calling functions; parameters (names in the definition) versus arguments (values in the call).",
+    "return hands a value to the caller; print only displays it. A function that reaches its end without return returns None.",
+    "Positional, keyword and default arguments; parameters after a bare * are keyword-only.",
+    "Default values are evaluated once, at definition time, so a mutable default ([] or {}) is shared between calls. Use None and create the object inside.",
+    "*args collects extra positional arguments into a tuple and **kwargs extra keyword arguments into a dict; * and ** unpack in a call.",
+    "Argument passing is by object reference (\"by assignment\"): mutating a passed list is visible to the caller; rebinding the parameter is not.",
+    "Pure functions versus side effects; keep input and output separate from computation so the logic can be tested.",
+    "Decomposing a problem into small, named helpers with a clear contract or one-line docstring.",
+    "Skip for now: decorators, closures, functional programming techniques and positional-only parameters (/) beyond recognizing them.",
   ],
   depth: "Apply: Use the concept to solve unfamiliar problems and explain relevant trade-offs.",
   resources: [
     {
-      title: "Think Python — Chapter 3: Functions",
-      url: "https://allendowney.github.io/ThinkPython/chap03.html",
-      provider: "Allen B. Downey",
-      type: "Book",
-      instructions: "Written. Read sections 3.1–3.3 and 3.8 on defining functions, parameters, calling functions and why functions are useful.",
+      title: "Python Programming MOOC — Part 3: Defining functions",
+      url: "https://programming-26.mooc.fi/part-3/4-defining-functions",
+      provider: "University of Helsinki",
+      type: "Course",
+      instructions:
+        "Start here. Read the whole section and do its exercises, then continue in Part 4 with \"More functions\" (parameters versus arguments, return values, the difference between return and print) and its exercises. Free; reading needs no account, submitting exercises needs a free MOOC.fi account.",
     },
     {
-      title: "Think Python — Chapter 6: Return Values",
-      url: "https://allendowney.github.io/ThinkPython/chap06.html",
-      provider: "Allen B. Downey",
-      type: "Book",
-      instructions: "Written, continued. Read sections 6.1–6.5 on return values, None and Boolean functions. Skip the recursion sections.",
-    },
-    {
-      title: "CS50's Introduction to Programming with Python — Week 0: Functions",
-      url: "https://cs50.harvard.edu/python/weeks/0/",
-      provider: "Harvard University",
-      type: "Video",
-      instructions: "Video alternative. Focus on functions, parameters, arguments, return values and side effects.",
-    },
-    {
-      title: "The Python Tutorial — More on Defining Functions",
+      title: "The Python Tutorial — 4.9 More on Defining Functions",
       url: "https://docs.python.org/3/tutorial/controlflow.html#more-on-defining-functions",
       provider: "Python Software Foundation",
       type: "Documentation",
       instructions:
-        "Reference for default values (including the mutable default warning), keyword arguments, *args and **kwargs. Special parameters (/ and *) are optional reading.",
+        "Read after the MOOC, not instead of it: the MOOC does not cover these. Read 4.9.1 Default Argument Values (including the shared mutable default warning), 4.9.2 Keyword Arguments, 4.9.4 Arbitrary Argument Lists and 4.9.5 Unpacking Argument Lists. 4.9.3 Special parameters is optional; skip 4.9.6 onwards.",
     },
     {
-      title: "Python Programming FAQ — Why are default values shared between objects?",
-      url: "https://docs.python.org/3/faq/programming.html#why-are-default-values-shared-between-objects",
-      provider: "Python Software Foundation",
-      type: "Documentation",
+      title: "CS50's Introduction to Programming with Python — Week 0: Functions, Variables",
+      url: "https://cs50.harvard.edu/python/weeks/0/",
+      provider: "Harvard University",
+      type: "Video",
       instructions:
-        "Official explanation of the mutable default pitfall. The neighbouring answers on arguments versus parameters and on output parameters are also worth reading.",
+        "Video alternative to the MOOC sections. Watch the parts the notes title \"Strings and Parameters\", \"Def\" and \"Returning Values\". Free, no account needed.",
     },
   ],
   exercises: [
     {
       title: "University of Helsinki, Defining functions: The first character; Mean; Print many times; A square of hashes",
       url: "https://programming-26.mooc.fi/part-3/4-defining-functions",
-      note: "Instructions are readable without an account; submitting requires logging in.",
-    },
-    { title: "Write a function that calculates a final price with optional discount and tax keyword arguments, and test the defaults." },
-    { title: "Refactor a 40-line script with repeated code into small functions, each with a one-line docstring." },
-    { title: "Implement a function that accepts any number of numbers and returns their mean, deciding what happens with none." },
-    {
-      title: "Diagnose and repair a mutable default argument bug.",
-      note: "Debugging. Predict the output of three calls before running, then fix it with a None default.",
+      note: "Defining functions with parameters. Instructions are readable without an account; submitting requires a free MOOC.fi account.",
     },
     {
-      title: "Write two versions of a function that removes negative numbers: one that returns a new list and one that modifies the list in place.",
-      note: "Explain which one you would choose for a shared list and why. Reinforces mutability.",
+      title: "University of Helsinki, More functions: The greatest number; Same characters; First, second and last words",
+      url: "https://programming-26.mooc.fi/part-4/2-more-functions",
+      note: "Returning values instead of printing them. Free MOOC.fi account to submit.",
     },
-    { title: "Separate input and output from computation in a small program so that the computation can be tested without typing input." },
+    {
+      title: "Two Fer (Exercism, Python track)",
+      url: "https://exercism.org/tracks/python/exercises/two-fer",
+      note: "A default argument value; the tests call the function with and without a name. Solving needs a free Exercism account.",
+    },
+    {
+      title: "Locomotive Engineer (Exercism, Python track)",
+      url: "https://exercism.org/tracks/python/exercises/locomotive-engineer",
+      note: "Optional stretch: *args, **kwargs and unpacking. It uses lists and dictionaries, so it fits best after those topics. Free Exercism account.",
+    },
+    {
+      title: "Apply it to your own code: split one script you have written into small functions, with input and output kept out of the computation.",
+      note: "Call the computation from a few test lines without typing input. No suitable external exercise was found for this skill.",
+    },
   ],
   interviewQuestions: [
     {
@@ -89,6 +84,7 @@ const topic: Topic = {
 
 print(area(3, height=4))      # arguments: 3 and 4  # -> 12`,
       followUps: ["What happens if you pass the wrong number of arguments?"],
+      source: { title: "Python Programming FAQ — What is the difference between arguments and parameters?", url: "https://docs.python.org/3/faq/programming.html#what-is-the-difference-between-arguments-and-parameters" },
     },
     {
       question: "What is the difference between print and return? What does a function without return give back?",
@@ -104,6 +100,7 @@ result = show_total(2, 3)   # -> 5
 print(result)               # -> None
 print(total(2, 3) * 10)     # -> 50`,
       followUps: ["Can a function return more than one value?"],
+      source: { title: "Python Programming MOOC — The difference between return and print", url: "https://programming-26.mooc.fi/part-4/2-more-functions#the-difference-between-return-and-print" },
     },
     {
       question: "How do positional and keyword arguments differ?",
@@ -116,6 +113,7 @@ print(connect("db", 6543))             # -> db:6543 (timeout 10s)
 print(connect(port=1, host="local"))   # -> local:1 (timeout 10s)
 print(connect("db", timeout=3))        # -> db:5432 (timeout 3s)`,
       followUps: ["Why might keyword-only parameters make an API safer?"],
+      source: { title: "The Python Tutorial — 4.9.2 Keyword Arguments", url: "https://docs.python.org/3/tutorial/controlflow.html#keyword-arguments" },
     },
     {
       question: "Why are mutable default arguments dangerous?",
@@ -136,6 +134,7 @@ def add(item, items=None):
 
 print(add("a"), add("b"))   # -> ['a'] ['b']`,
       followUps: ["Is there ever a legitimate use for a shared mutable default?"],
+      source: { title: "Python Programming FAQ — Why are default values shared between objects?", url: "https://docs.python.org/3/faq/programming.html#why-are-default-values-shared-between-objects" },
     },
     {
       question: "What are *args and **kwargs?",
@@ -148,6 +147,7 @@ print(report(1, 2, unit="ms"))   # -> ((1, 2), {'unit': 'ms'})
 values = [3, 4]
 print(max(*values, 10))          # -> 10`,
       followUps: ["In what order must regular, *args, keyword-only and **kwargs parameters appear?"],
+      source: { title: "The Python Tutorial — 4.9.4 Arbitrary Argument Lists", url: "https://docs.python.org/3/tutorial/controlflow.html#arbitrary-argument-lists" },
     },
     {
       question: "Does Python pass arguments by value or by reference?",
@@ -164,6 +164,7 @@ mutate(data)
 rebind(data)
 print(data)                # -> [1, 99]`,
       followUps: ["How would you write a function that must not change its caller's list?"],
+      source: { title: "Python Programming FAQ — How do I write a function with output parameters (call by reference)?", url: "https://docs.python.org/3/faq/programming.html#how-do-i-write-a-function-with-output-parameters-call-by-reference" },
     },
     {
       question: "What is a side effect, and why do pure functions matter?",
@@ -176,19 +177,12 @@ prices = [10.0, 20.0]
 print(apply_discount(prices, 0.1))   # -> [9.0, 18.0]
 print(prices)                        # -> [10.0, 20.0]`,
       followUps: ["How does separating input and output from logic help testing?"],
+      source: { title: "Python Docs — Functional Programming HOWTO: Introduction", url: "https://docs.python.org/3/howto/functional.html#introduction" },
     },
     {
       question: "How would you structure a solution into functions during a coding interview?",
       answer:
         "Write the main function with a clear signature first, then extract a helper when a step has its own purpose, such as normalizing input, checking validity or processing one item. Name helpers after what they do, keep each short, and state your assumptions about inputs. Helpers make your explanation clearer and let you test pieces separately; avoid extracting trivial one-line steps.",
-      code: `def normalize(word):
-    return "".join(ch for ch in word.lower() if ch.isalnum())
-
-def is_palindrome(text):
-    cleaned = normalize(text)
-    return cleaned == cleaned[::-1]
-
-print(is_palindrome("Race car!"))   # -> True`,
       followUps: ["When does adding helper functions make code harder to follow?"],
     },
   ],
@@ -201,11 +195,10 @@ print(is_palindrome("Race car!"))   # -> True`,
     "Relying on global variables instead of passing parameters.",
   ],
   mastery: [
-    "Translate a problem statement into a function with appropriate parameters and return value.",
-    "Use default and keyword arguments correctly, including a safe None default.",
-    "Predict whether a caller sees changes made inside a function, and explain why.",
-    "Decompose a small program into reusable, testable functions.",
-    "Answer the interview questions above aloud with your own examples.",
+    "You complete the MOOC function exercises and Two Fer without help, returning results rather than printing them.",
+    "Without running them, you predict the output of the mutable-default and mutate-versus-rebind snippets in the interview questions, and fix the mutable default with None.",
+    "You can translate a problem statement into a function with appropriate parameters, defaults and return value, and split a small program into testable helpers.",
+    "Skip this topic if you can already do all of the above.",
   ],
   deprioritize: [
     "Writing decorators, complex closures and functional programming techniques.",

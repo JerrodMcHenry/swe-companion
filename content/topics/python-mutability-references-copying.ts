@@ -11,14 +11,15 @@ const topic: Topic = {
     "Shared references cause some of the most confusing bugs in Python: a function that unexpectedly changes its caller's list, a grid where editing one row edits every row, or test data that changes between tests. Interviewers use these situations as code-reading questions, and backtracking solutions in Unit 2 depend on copying a path at the right moment. You need to explain behavior, not memorize rules.",
   prerequisites: ["Variables and Data Types", "Functions and Arguments", "Lists", "Dictionaries"],
   objectives: [
-    "Explain that variables are names bound to objects and that assignment creates another reference, not a copy.",
-    "Distinguish rebinding a name from mutating an object, including how += behaves for lists versus integers and strings.",
-    "Identify aliasing in code and predict its effects.",
-    "Create shallow copies (slicing, list(), dict(), .copy(), copy.copy) and deep copies (copy.deepcopy), and choose correctly.",
-    "Build nested lists without accidentally repeating the same inner list.",
-    "Predict when a function's changes to an argument are visible to the caller.",
-    "Distinguish identity (is) from equality (==) using references.",
-    "Explain why a tuple containing a mutable object can still change and is not hashable.",
+    "Variables are names bound to objects; assignment adds another reference and never copies.",
+    "Rebinding a name versus mutating an object, including += on lists (mutates) versus ints and strings (new object).",
+    "Aliasing: spotting when two names or containers refer to the same object, and predicting the effect.",
+    "Shallow copies (slicing, list(), dict(), .copy(), copy.copy) versus deep copies (copy.deepcopy), and when each is right.",
+    "Building nested lists without repeating the same inner list ([[0] * n for _ in range(m)]).",
+    "Arguments are passed by assignment: a function can mutate the caller's object but cannot rebind the caller's name.",
+    "Identity (is) versus equality (==); use is mainly for None.",
+    "A tuple containing a mutable object can still appear to change and is not hashable.",
+    "Skip for now: reference counting and garbage collection, __copy__/__deepcopy__, and small-integer caching or string interning.",
   ],
   depth: "Explain: Accurately explain behavior, purpose and common uses.",
   resources: [
@@ -28,36 +29,22 @@ const topic: Topic = {
       provider: "Ned Batchelder",
       type: "Article",
       instructions:
-        "Written. The clearest single explanation of names, values, assignment and mutation, with diagrams. Read it all (about 30 minutes).",
+        "Start here. The clearest single explanation of names, values, assignment and mutation, with diagrams. Read it all (about 30 minutes). Free; no account needed.",
     },
     {
       title: "Facts and Myths about Python names and values — PyCon 2015",
       url: "https://www.youtube.com/watch?v=_AEJHKGk9ns",
       provider: "Ned Batchelder (PyCon US)",
       type: "Video",
-      instructions: "Video alternative to the article (about 25 minutes). Watch the whole talk.",
+      instructions: "Video alternative to the article, covering the same material (about 25 minutes). Watch one or the other, not both.",
     },
     {
-      title: "Think Python — 9.9–9.11 Objects and values, Aliasing, List arguments",
-      url: "https://allendowney.github.io/ThinkPython/chap09.html#objects-and-values",
-      provider: "Allen B. Downey",
-      type: "Book",
-      instructions: "Written alternative. Read sections 9.9–9.11 only.",
-    },
-    {
-      title: "Python Programming MOOC — References",
-      url: "https://programming-26.mooc.fi/part-5/2-references",
-      provider: "University of Helsinki",
-      type: "Course",
-      instructions: "Written lesson with exercises on references, lists as arguments and copying.",
-    },
-    {
-      title: "Python Programming FAQ — Why did changing list 'y' also change list 'x'?",
-      url: "https://docs.python.org/3/faq/programming.html#why-did-changing-list-y-also-change-list-x",
-      provider: "Python Software Foundation",
-      type: "Documentation",
+      title: "Python Tutor",
+      url: "https://pythontutor.com/python-compiler.html",
+      provider: "Philip Guo",
+      type: "Visual explanation",
       instructions:
-        "Official explanation of aliasing. Also read the answers on output parameters, copying objects and creating multidimensional lists on the same page.",
+        "Free tool (no account needed) that draws names, objects and references as code runs. Paste each snippet in the interview questions below into it and step through until the diagram matches your prediction.",
     },
     {
       title: "Python Standard Library — copy: Shallow and deep copy operations",
@@ -66,36 +53,17 @@ const topic: Topic = {
       type: "Documentation",
       instructions: "Reference. Read the opening explanation of shallow versus deep copies; skip the sections on customizing copying.",
     },
-    {
-      title: "Python Tutor",
-      url: "https://pythontutor.com/python-compiler.html",
-      provider: "Philip Guo",
-      type: "Visual explanation",
-      instructions:
-        "Free tool that draws names, objects and references as code runs. Paste each example on this page into it and step through until the diagrams match your prediction.",
-    },
   ],
   exercises: [
     {
-      title: "University of Helsinki, References: Items multiplied by two; Remove the smallest; Sudoku: add number to a copy of the grid",
+      title: "University of Helsinki, References: Items multiplied by two; Remove the smallest; Sudoku: add number to a copy of the grid; Transpose a matrix",
       url: "https://programming-26.mooc.fi/part-5/2-references",
-      note: "Instructions are readable without an account; submitting requires logging in.",
+      note: "Read the References section first. These exercises practise returning a new list versus changing the argument, copying a nested grid and modifying a matrix in place. Instructions are readable without an account; submitting requires a free MOOC.fi account and the VS Code TMC plugin.",
     },
     {
-      title: "Predict the output of five snippets that mix assignment, mutation, slicing and function calls, then check them in Python Tutor.",
-      note: "Code reading. Explain each wrong prediction in one sentence.",
-    },
-    {
-      title: "Write a function that returns a copy of a nested settings dictionary with one nested value changed, leaving the original untouched.",
-      note: "Practical task. Test that the original is unchanged; decide between a shallow and a deep copy.",
-    },
-    {
-      title: "Fix a program that builds a 3 × 3 game board with [[\" \"] * 3] * 3.",
-      note: "Debugging. Explain the cause with a reference diagram before fixing it.",
-    },
-    {
-      title: "Explain aloud, in under two minutes, why a function can change a caller's list but not a caller's integer.",
-      note: "Technical explanation practice.",
+      title: "Subsets (LeetCode)",
+      url: "https://leetcode.com/problems/subsets/",
+      note: "Optional stretch and a preview of backtracking in Unit 2. Append path[:] (a copy), not path, to the results, and explain what goes wrong without the copy. LeetCode needs a free account to submit.",
     },
   ],
   interviewQuestions: [
@@ -112,6 +80,7 @@ c = a.copy()
 c.append(5)
 print(a)         # -> [1, 2, 3, 4]`,
       followUps: ["How would you show that two names refer to the same object?"],
+      source: { title: "Python FAQ — Why did changing list 'y' also change list 'x'?", url: "https://docs.python.org/3/faq/programming.html#why-did-changing-list-y-also-change-list-x" },
     },
     {
       question: "What is the difference between mutating an object and rebinding a name?",
@@ -128,11 +97,12 @@ print(b)             # -> [1, 2]
 a = a + [3]          # + builds a new list and rebinds a
 print(b)             # -> [1, 2]`,
       followUps: ["Why does a_tuple[0] += [1] raise an error even though the list inside changes?"],
+      source: { title: "Ned Batchelder — Facts and Myths about Python names and values", url: "https://nedbatchelder.com/text/names.html" },
     },
     {
       question: "What is the difference between a shallow copy and a deep copy?",
       answer:
-        "A shallow copy creates a new outer container but fills it with references to the same inner objects. A deep copy recursively copies the inner objects too. For a flat list of numbers or strings, a shallow copy is enough. For nested mutable data, such as a list of lists or a dictionary of lists, changes to inner objects leak through a shallow copy, so use copy.deepcopy or build new inner objects. Deep copies cost more time and memory.",
+        "A shallow copy creates a new outer container but fills it with references to the same inner objects. A deep copy recursively copies the inner objects too. A shallow copy is enough for a flat list of immutable values such as numbers or strings. For nested mutable data, such as a list of lists, changes to inner objects leak through a shallow copy, so use copy.deepcopy or build new inner objects, at extra time and memory cost.",
       code: `import copy
 grid = [[1, 2], [3, 4]]
 shallow = grid.copy()
@@ -141,6 +111,7 @@ grid[0].append(99)
 print(shallow[0])   # -> [1, 2, 99]
 print(deep[0])      # -> [1, 2]`,
       followUps: ["When would a deep copy be the wrong choice?"],
+      source: { title: "Python Docs — copy: Shallow and deep copy operations", url: "https://docs.python.org/3/library/copy.html" },
     },
     {
       question: "Why does `[[0] * 3] * 3` create a grid that behaves strangely?",
@@ -153,6 +124,7 @@ good = [[0] * 3 for _ in range(3)]
 good[0][0] = 1
 print(good)   # -> [[1, 0, 0], [0, 0, 0], [0, 0, 0]]`,
       followUps: ["How would you check whether two rows are the same object?"],
+      source: { title: "Python FAQ — How do I create a multidimensional list?", url: "https://docs.python.org/3/faq/programming.html#how-do-i-create-a-multidimensional-list" },
     },
     {
       question: "Can a function change its caller's data? How do you avoid surprising callers?",
@@ -170,6 +142,7 @@ print(with_tax(cart), cart)   # -> [12.0, 6.0] [10.0, 5.0]
 add_tax_in_place(cart)
 print(cart)                   # -> [12.0, 6.0]`,
       followUps: ["In a backtracking solution, why do you append path.copy() or path[:] to the results?"],
+      source: { title: "Python FAQ — How do I write a function with output parameters (call by reference)?", url: "https://docs.python.org/3/faq/programming.html#how-do-i-write-a-function-with-output-parameters-call-by-reference" },
     },
     {
       question: "Is a tuple that contains a list immutable?",
@@ -183,6 +156,7 @@ try:
 except TypeError as error:
     print(type(error).__name__)   # -> TypeError`,
       followUps: ["What makes an object hashable?"],
+      source: { title: "Python FAQ — Why does a_tuple[i] += ['item'] raise an exception when the addition works?", url: "https://docs.python.org/3/faq/programming.html#why-does-a-tuple-i-item-raise-an-exception-when-the-addition-works" },
     },
     {
       question: "When should you use `is` instead of ==?",
@@ -194,6 +168,7 @@ print(a == b, a is b)   # -> True False
 value = None
 print(value is None)    # -> True`,
       followUps: ["How does id() relate to is?"],
+      source: { title: "Python FAQ — When can I rely on identity tests with the is operator?", url: "https://docs.python.org/3/faq/programming.html#when-can-i-rely-on-identity-tests-with-the-is-operator" },
     },
   ],
   mistakes: [
@@ -205,11 +180,11 @@ print(value is None)    # -> True`,
     "Comparing values with `is`.",
   ],
   mastery: [
-    "Draw names, objects and references for a short snippet and predict its output.",
-    "Explain aliasing, rebinding versus mutation, and shallow versus deep copies with examples.",
-    "Find and fix shared-reference bugs, including the repeated-row grid bug.",
-    "Decide whether a function should return a new object or mutate its argument, and justify it.",
-    "Answer the interview questions above aloud without notes.",
+    "You predict the output of every snippet on this page before checking it in Python Tutor, and can draw the names-and-objects diagram for each.",
+    "You can explain aliasing, rebinding versus mutation, and shallow versus deep copies with an example of each.",
+    "You complete the MOOC References exercises, and can fix the repeated-row grid bug and explain its cause.",
+    "You can decide whether a function should return a new object or mutate its argument, and justify it.",
+    "Skip this topic if you can already do all of the above.",
   ],
   deprioritize: [
     "Reference counting, garbage collection and memory management internals.",

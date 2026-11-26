@@ -66,6 +66,11 @@ const guide: InterviewGuide = {
       note: "For a 3-hour brief, roughly: 15 minutes reading, listing questions and assumptions; 2 hours building the core with tests; 30 minutes on error handling and cleanup; 15 minutes on the README. Adjust to the brief.",
     },
     {
+      title: "Practise on real published briefs",
+      url: "https://github.com/CollabCodeTech/backend-challenges",
+      note: "After the simulation, pick one company brief from this community-maintained list of openly published back-end take-home assignments (many are Brazilian and in Portuguese; links can go stale; a listing does not mean the company still uses it). Apply the same timebox, rubric and follow-up practice.",
+    },
+    {
       title: "Write the README as you go",
       note: "Keep a running list of decisions, assumptions and things you would do next; it becomes the README and your follow-up notes.",
     },

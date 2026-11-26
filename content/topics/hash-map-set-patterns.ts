@@ -19,6 +19,7 @@ const topic: Topic = {
     "Combine prefix sums with a dictionary to count subarrays with a target sum, including negative numbers.",
     "Explain the time-space trade-off and the average-case versus worst-case qualification.",
     "Recognize when sorting, two pointers or a fixed-size array is simpler or uses less memory.",
+    "Skip for now: implementing a hash table, probing strategies and consistent hashing.",
   ],
   depth: "Apply: Use the concept to solve unfamiliar problems and explain relevant trade-offs.",
   resources: [
@@ -27,22 +28,24 @@ const topic: Topic = {
       url: "https://www.techinterviewhandbook.org/algorithms/hash-table/",
       provider: "Tech Interview Handbook",
       type: "Article",
-      instructions: "Free. Read the techniques and corner cases sections (about 10 minutes).",
+      instructions:
+        "Start here. Read Introduction (hashing as a space-time trade-off) and Time complexity (about 10 minutes); skip the course advertisements. The patterns themselves are learned by doing the exercises below and checking each attempt against an explanation (see the NeetCode alternative). How dictionaries and sets work was covered in Programming Fluency.",
     },
     {
-      title: "Problem Solving with Algorithms and Data Structures using Python — 5.5 Hashing",
-      url: "https://runestone.academy/ns/books/published/pythonds3/SortSearch/Hashing.html",
-      provider: "Brad Miller and David Ranum (Runestone Academy)",
-      type: "Book",
+      title: "NeetCode roadmap — Arrays & Hashing",
+      url: "https://neetcode.io/roadmap",
+      provider: "NeetCode",
+      type: "Video",
       instructions:
-        "Free interactive textbook. Read the introduction to hash functions, collisions and load factor so you can explain the average and worst case; skip implementing the map ADT.",
+        "Video explanations for most of the exercises below (for example Top K Frequent Elements, Longest Consecutive Sequence, Valid Sudoku). Open the Arrays & Hashing node and watch a problem's free video only after attempting it yourself. The videos are free on YouTube; paid NeetCode features are not needed.",
     },
     {
       title: "VisuAlgo — Hash Table",
       url: "https://visualgo.net/en/hashtable",
       provider: "VisuAlgo (National University of Singapore)",
       type: "Visual explanation",
-      instructions: "Optional. Step through insertions with separate chaining to see why collisions slow lookups.",
+      instructions:
+        "Optional. Use the Separate Chaining mode to insert keys that collide and watch lookups slow down — enough to explain average-case O(1) versus worst-case O(n). Skip the probing modes. No account needed.",
     },
   ],
   exercises: [
@@ -53,7 +56,7 @@ const topic: Topic = {
     {
       title: "Longest Palindrome (LeetCode)",
       url: "https://leetcode.com/problems/longest-palindrome/",
-      note: "Foundation, Easy. Frequency counting and parity.",
+      note: "Foundation, Easy. Frequency counting and parity. LeetCode problems need a free account to submit.",
     },
     {
       title: "Top K Frequent Elements (LeetCode)",
@@ -94,90 +97,44 @@ const topic: Topic = {
         seen.add(item)
     return None
 
-print(first_repeated([3, 1, 4, 1, 5]), first_repeated([]), first_repeated([2, 2]))
-# -> 1 None 2`,
+print(first_repeated([3, 1, 4, 1, 5]), first_repeated([]))   # -> 1 None`,
       followUps: ["What is the worst-case complexity, and when could it happen?"],
+      source: { title: "Tech Interview Handbook — Hash table: Introduction", url: "https://www.techinterviewhandbook.org/algorithms/hash-table/#introduction" },
     },
     {
       question: "What is the complement-lookup pattern?",
       answer:
-        "While scanning, store each element (or its index) in a dictionary; for the current element, compute what partner it needs and check whether that partner has already been stored. Checking before inserting prevents pairing an element with itself. It solves pair problems in one pass: O(n) average time and O(n) space.",
-      code: `def count_pairs_with_difference(nums, k):
-    counts = {}
-    pairs = 0
-    for x in nums:
-        pairs += counts.get(x - k, 0) + (counts.get(x + k, 0) if k else 0)
-        counts[x] = counts.get(x, 0) + 1
-    return pairs
-
-print(count_pairs_with_difference([1, 2, 2, 1], 1), count_pairs_with_difference([1, 1, 1], 0))
-# -> 4 3`,
-      followUps: ["How does the answer change if pairs must use distinct values?"],
+        "While scanning, store each element (or its index) in a dictionary; for the current element, compute the partner it needs and check whether that partner is already stored. Checking before inserting prevents pairing an element with itself. It solves pair problems such as Two Sum in one pass: O(n) average time and O(n) space.",
+      followUps: ["How does the approach change if you must count all pairs, including duplicates?"],
+      source: { title: "NeetCode — Two Sum (video explanation)", url: "https://www.youtube.com/watch?v=KLlXCFG5TnA" },
     },
     {
       question: "How would you group words that are anagrams of each other?",
       answer:
-        "Compute a canonical key that is identical for all anagrams and hashable, then append each word to a list under that key. The sorted letters as a string or tuple work (O(k log k) per word of length k), or a tuple of 26 letter counts (O(k) per word, assuming lowercase English letters). Total time is O(n × k log k) or O(n × k), with O(n × k) space.",
-      code: `from collections import defaultdict
-
-def group_anagrams(words):
-    groups = defaultdict(list)
-    for word in words:
-        groups["".join(sorted(word))].append(word)
-    return list(groups.values())
-
-print(group_anagrams(["eat", "tea", "tan", "ate", "nat", "bat"]))
-# -> [['eat', 'tea', 'ate'], ['tan', 'nat'], ['bat']]`,
+        "Compute a canonical key that is identical for all anagrams and hashable, then append each word to a list under that key (defaultdict(list) works well). The sorted letters as a string work (O(k log k) per word of length k), or a tuple of 26 letter counts (O(k) per word, assuming lowercase English letters). Total time is O(n × k log k) or O(n × k), with O(n × k) space. A list of counts must be converted to a tuple because lists are unhashable.",
       followUps: ["Why can't you use a list of counts as the key directly?"],
+      source: { title: "NeetCode — Group Anagrams (video explanation)", url: "https://www.youtube.com/watch?v=vzdNOK2oB2E" },
     },
     {
       question: "How do you count subarrays whose sum equals k, including negative numbers?",
       answer:
-        "Keep a running prefix sum and a dictionary counting how many times each prefix sum has occurred, starting with {0: 1}. A subarray ending here sums to k exactly when an earlier prefix equals current - k, so add that count. It is O(n) average time and O(n) space. A sliding window does not work because negative numbers mean growing the window can decrease the sum.",
-      code: `def subarray_sum(nums, k):
-    seen = {0: 1}
-    total = count = 0
-    for x in nums:
-        total += x
-        count += seen.get(total - k, 0)
-        seen[total] = seen.get(total, 0) + 1
-    return count
-
-print(subarray_sum([1, 1, 1], 2), subarray_sum([1, -1, 0], 0), subarray_sum([], 0))
-# -> 2 3 0`,
+        "Keep a running prefix sum and a dictionary counting how many times each prefix sum has occurred, starting with {0: 1} for the empty prefix. A subarray ending here sums to k exactly when an earlier prefix equals current - k, so add that count before recording the current prefix. It is O(n) average time and O(n) space. A sliding window does not work because negative numbers mean growing the window can decrease the sum.",
       followUps: ["How would you return the longest such subarray instead of the count?"],
+      source: { title: "Hello Interview — Subarray Sum Equals K", url: "https://www.hellointerview.com/learn/code/prefix-sum/subarray-sum-equals-k" },
     },
     {
       question: "When is a hash map not the best choice?",
       answer:
-        "When the input is already sorted (two pointers or binary search use O(1) extra space), when keys are small integers or lowercase letters (a fixed-size list is simpler and fast), when memory is tight, or when you need ordered traversal or range queries (sorting or a balanced tree fits better). Hash map costs are also average-case; adversarial collisions can degrade them.",
-      code: `def letter_counts(word):           # 26 fixed slots instead of a dict
-    counts = [0] * 26
-    for ch in word:
-        counts[ord(ch) - ord("a")] += 1
-    return counts
-
-print(letter_counts("abca")[:3])     # -> [2, 1, 1]`,
+        "When the input is already sorted (two pointers or binary search use O(1) extra space), when keys are small integers or lowercase letters (a fixed-size list of counts is simpler and fast), when memory is tight, or when you need ordered traversal or range queries (sorting or a balanced tree fits better). Hash map costs are also average-case; heavy collisions degrade them to O(n).",
       followUps: ["What does \"ordered traversal\" require that a dictionary does not provide?"],
+      source: { title: "Python Docs — Time complexity: dict (average and worst case)", url: "https://docs.python.org/3/builtins/time-complexity.html#dict-frozendict" },
     },
     {
       question: "Explain an O(n) solution for Longest Consecutive Sequence.",
       answer:
-        "Put all numbers in a set. Only start counting from numbers that begin a sequence (n - 1 is not in the set), then extend while n + 1 is present. Each number is visited a constant number of times overall, so it is O(n) average time and O(n) space, compared with O(n log n) for sorting.",
-      code: `def longest_consecutive(nums):
-    values = set(nums)
-    best = 0
-    for n in values:
-        if n - 1 not in values:          # start of a run
-            length = 1
-            while n + length in values:
-                length += 1
-            best = max(best, length)
-    return best
-
-print(longest_consecutive([100, 4, 200, 1, 3, 2]), longest_consecutive([]), longest_consecutive([5, 5]))
-# -> 4 0 1`,
+        "Put all numbers in a set. Only start counting from numbers that begin a sequence (n - 1 is not in the set), then extend while n + 1 is present. Each number is visited a constant number of times overall, so the nested loop is still O(n) average time in total, with O(n) space, compared with O(n log n) for sorting.",
       followUps: ["Why does the inner while loop not make this O(n²)?"],
+      source: { title: "NeetCode — Longest Consecutive Sequence (video explanation)", url: "https://www.youtube.com/watch?v=P6RZZMu_maU" },
     },
   ],
   mistakes: [
@@ -193,6 +150,7 @@ print(longest_consecutive([100, 4, 200, 1, 3, 2]), longest_consecutive([]), long
     "You implement each pattern correctly, including duplicates and empty input.",
     "You explain the average-case time, the extra space and when another approach is better.",
     "You solve the Reinforcement problems above independently and Subarray Sum Equals K without hints.",
+    "Skip this topic if you can already name the pattern for an unseen hash map problem and solve it with correct average-case complexity.",
   ],
   deprioritize: [
     "Implementing a hash table from scratch, probing strategies and hash function design; explaining collisions and load factor is enough.",

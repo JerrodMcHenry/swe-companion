@@ -6,83 +6,76 @@ const topic: Topic = {
   category: "Python",
   phase: "programming-fluency",
   overview:
-    "A string is an immutable sequence of characters. You can index and slice it, search it, compare it, and build new strings with methods, joining and formatting.",
+    "A string is an immutable sequence of characters that you index, slice, search and transform with methods. Text processing is a common interview problem category and part of almost every real program.",
   whyItMatters:
     "String manipulation is one of the most common categories of coding interview problems (palindromes, anagrams, parsing, reversing words), and nearly all real programs clean, parse and format text from users, files or APIs. You are expected to use slicing and common methods fluently and to know the cost of building strings.",
   prerequisites: ["Variables and Data Types", "Operators and Expressions", "Loops (for iterating over characters)"],
   objectives: [
-    "Index and slice strings, including negative indexes and steps, and predict results.",
-    "Explain immutability and its consequences: methods return new strings.",
-    "Use common methods: lower, upper, casefold, strip, split, join, replace, find, startswith, endswith, isdigit, isalpha, isalnum and count.",
-    "Split text into parts and join parts back together, including edge cases with repeated separators.",
-    "Compare strings, including case-insensitive comparison and lexicographic ordering.",
-    "Format output with f-strings, including numeric precision and alignment.",
-    "State the cost of indexing, slicing, searching and concatenation, and build strings efficiently with join.",
-    "Recognize the difference between str (text) and bytes (raw data).",
+    "Indexing and slicing s[start:stop:step]: negative indexes, the excluded stop index, s[::-1], and that slices clamp out-of-range bounds while single indexes raise IndexError.",
+    "Immutability: s[0] = \"x\" raises TypeError, and methods return new strings that you must assign.",
+    "Common methods: lower, upper, casefold, strip, split, join, replace, find, startswith, endswith, count, isdigit, isalpha, isalnum.",
+    "split() with no argument splits on runs of whitespace; split(\",\") keeps empty strings between repeated separators; join is called on the separator and needs strings.",
+    "Comparison: == compares content; < and sorting compare Unicode code points, so \"Z\" < \"a\" and \"10\" < \"9\". Normalize with lower() or casefold() for case-insensitive comparison.",
+    "f-strings with format specifications such as :.2f, :>8 and :,.",
+    "Costs: indexing and len are O(1); slicing is O(k); searching is O(n); building a string with repeated + is quadratic in the total length, while ''.join(parts) is linear.",
+    "str holds text and bytes holds raw bytes; encode and decode convert between them (usually UTF-8).",
+    "Skip for now: regular expressions, Unicode normalization and string algorithms such as KMP.",
   ],
   depth: "Apply: Use the concept to solve unfamiliar problems and explain relevant trade-offs.",
   resources: [
     {
-      title: "Python Programming MOOC — Working with strings",
+      title: "Python Programming MOOC — Part 3: Working with strings",
       url: "https://programming-26.mooc.fi/part-3/2-working-with-strings",
       provider: "University of Helsinki",
       type: "Course",
-      instructions: "Written lesson on string operations, indexing, slices, searching for substrings and methods.",
-    },
-    {
-      title: "Think Python — Chapter 8: Strings and Regular Expressions",
-      url: "https://allendowney.github.io/ThinkPython/chap08.html",
-      provider: "Allen B. Downey",
-      type: "Book",
       instructions:
-        "Written alternative. Read sections 8.1–8.5 on sequences, slices, immutability, comparison and methods. Skip regular expressions.",
+        "Start here. Read the whole section (string operations, length and indexing, slices, searching for substrings, methods) and do its exercises. Later, in Part 4, the section \"More strings and lists\" covers slices with a step, immutability and more methods; read its string parts when you reach lists. Free; reading needs no account, submitting exercises needs a free MOOC.fi account.",
     },
     {
-      title: "CS50's Introduction to Programming with Python — Week 0: Functions",
+      title: "CS50's Introduction to Programming with Python — Week 0: Functions, Variables",
       url: "https://cs50.harvard.edu/python/weeks/0/",
       provider: "Harvard University",
       type: "Video",
-      instructions: "Video alternative. Focus on strings, string methods and f-string formatting.",
+      instructions:
+        "Video alternative for string methods and f-strings. Watch the parts the notes title \"Strings and Parameters\", \"Formatting Strings\" and \"More on Strings\". It does not cover slicing in depth. Free, no account needed.",
     },
     {
-      title: "Python Standard Library — Text Sequence Type (str)",
-      url: "https://docs.python.org/3/library/stdtypes.html#text-sequence-type-str",
+      title: "Python Standard Library — String Methods",
+      url: "https://docs.python.org/3/library/stdtypes.html#string-methods",
       provider: "Python Software Foundation",
       type: "Documentation",
       instructions:
-        "Supplemental reference. Use for exact str method behavior and for str versus bytes; bytes are described under Binary Sequence Types on the same page.",
+        "Reference: look up exact method behavior (for example split with and without a separator). Do not read it end to end.",
     },
     {
-      title: "Python Design FAQ — Why are Python strings immutable?",
-      url: "https://docs.python.org/3/faq/design.html#why-are-python-strings-immutable",
-      provider: "Python Software Foundation",
-      type: "Documentation",
-      instructions: "Short official answer. Read it to explain immutability in your own words.",
-    },
-    {
-      title: "Time complexity of operations on built-in types — str",
-      url: "https://docs.python.org/3/builtins/time-complexity.html",
+      title: "Time complexity of operations on built-in types — str, bytes, bytearray",
+      url: "https://docs.python.org/3/builtins/time-complexity.html#str-bytes-bytearray",
       provider: "Python Software Foundation",
       type: "Documentation",
       instructions:
-        "Reference. Read the str, bytes, bytearray table and its notes on concatenation and substring search. The costs are for CPython.",
+        "Reference for the costs you will be asked to state: read the str table and its note on concatenation in a loop. The costs are for CPython.",
     },
   ],
   exercises: [
     {
       title: "University of Helsinki, Working with strings: End to beginning; Substrings, part 1; Does it contain vowels; Find all the substrings",
       url: "https://programming-26.mooc.fi/part-3/2-working-with-strings",
-      note: "Instructions are readable without an account; submitting requires logging in.",
+      note: "Indexing, slicing and substring search. Instructions are readable without an account; submitting requires a free MOOC.fi account.",
     },
-    { title: "Reverse a string without calling reversed() or slicing, then explain the cost of your approach." },
-    { title: "Count vowels in a string without a regular expression.", note: "Use a set of vowels for membership." },
-    { title: "Normalize inconsistent whitespace and capitalization in a list of names." },
-    { title: "Extract the username and domain from an email address, and decide what to do with invalid input." },
-    { title: "Build a formatted report line from a name, a quantity and a price with two decimal places." },
+    {
+      title: "Little Sister's Vocabulary (Exercism, Python track)",
+      url: "https://exercism.org/tracks/python/exercises/little-sisters-vocab",
+      note: "Concatenation, join and slicing off a suffix, with automated tests. Solving in the online editor or CLI needs a free Exercism account.",
+    },
+    {
+      title: "Little Sister's Essay (Exercism, Python track)",
+      url: "https://exercism.org/tracks/python/exercises/little-sisters-essay",
+      note: "String methods: title-casing, endswith, strip and replace. Free Exercism account.",
+    },
     {
       title: "Valid Palindrome (LeetCode)",
       url: "https://leetcode.com/problems/valid-palindrome/",
-      note: "Easy. Try a cleaned copy first, then a two-pointer version that uses O(1) extra space.",
+      note: "Easy. Try a cleaned copy first, then a two-pointer version that uses O(1) extra space. Free account required to submit.",
     },
     {
       title: "Merge Strings Alternately (LeetCode)",
@@ -110,6 +103,7 @@ print(s)           # -> java
 s = s.capitalize()
 print(s)           # -> Java`,
       followUps: ["How would you change one character in a string?"],
+      source: { title: "Python Design FAQ — Why are Python strings immutable?", url: "https://docs.python.org/3/faq/design.html#why-are-python-strings-immutable" },
     },
     {
       question: "How does slicing work? What does s[::-1] do?",
@@ -125,6 +119,7 @@ try:
 except IndexError as error:
     print(type(error).__name__)   # -> IndexError`,
       followUps: ["What is the time and space cost of checking a palindrome with s == s[::-1]?"],
+      source: { title: "The Python Tutorial — 3.1.2 Text (indexing and slicing)", url: "https://docs.python.org/3/tutorial/introduction.html#text" },
     },
     {
       question: "What is the difference between split() and join()?",
@@ -135,6 +130,7 @@ print("a,,b".split(","))       # -> ['a', '', 'b']
 print("-".join(["2026", "11", "25"]))   # -> 2026-11-25
 print(" ".join(str(n) for n in [1, 2, 3]))   # -> 1 2 3`,
       followUps: ["How would you reverse the order of words in a sentence?"],
+      source: { title: "Python Docs — str.split", url: "https://docs.python.org/3/library/stdtypes.html#str.split" },
     },
     {
       question: "Why can building a string with += in a loop be slow? What should you do instead?",
@@ -146,6 +142,7 @@ for word in words:
     pieces.append(word.upper())
 print(" ".join(pieces))   # -> FAST STRING BUILDING`,
       followUps: ["What is the time complexity of ''.join(pieces)?"],
+      source: { title: "Python Docs — Common sequence operations (notes on concatenating immutable sequences)", url: "https://docs.python.org/3/library/stdtypes.html#common-sequence-operations" },
     },
     {
       question: "How are strings compared? How do you compare them ignoring case?",
@@ -155,6 +152,7 @@ print(" ".join(pieces))   # -> FAST STRING BUILDING`,
 print("10" < "9")          # -> True
 print("Straße".casefold() == "STRASSE".casefold())   # -> True`,
       followUps: ["How would you sort numeric strings by their numeric value?"],
+      source: { title: "Python Language Reference — Value comparisons", url: "https://docs.python.org/3/reference/expressions.html#value-comparisons" },
     },
     {
       question: "How do you format strings in modern Python?",
@@ -165,6 +163,7 @@ print(f"{name}: {qty} x {price:.2f} = {qty * price:.2f}")   # -> Widget: 3 x 4.5
 print(f"[{name:>8}]")      # -> [  Widget]
 print(f"{1234567:,}")      # -> 1,234,567`,
       followUps: ["Why should you not build SQL queries with f-strings?"],
+      source: { title: "The Python Tutorial — Formatted string literals", url: "https://docs.python.org/3/tutorial/inputoutput.html#formatted-string-literals" },
     },
     {
       question: "What is the difference between str and bytes?",
@@ -175,6 +174,7 @@ data = text.encode("utf-8")
 print(len(text), len(data))   # -> 4 5
 print(data.decode("utf-8") == text)   # -> True`,
       followUps: ["Why can the length of a string and its encoded bytes differ?"],
+      source: { title: "Python Docs — Unicode HOWTO", url: "https://docs.python.org/3/howto/unicode.html" },
     },
   ],
   mistakes: [
@@ -186,11 +186,10 @@ print(data.decode("utf-8") == text)   # -> True`,
     "Forgetting empty strings and single characters when testing string functions.",
   ],
   mastery: [
-    "Manipulate unfamiliar string inputs using slicing and methods without looking them up.",
-    "Predict slicing results, including negative indexes and steps.",
-    "Handle empty strings, whitespace and case differences deliberately.",
-    "Explain immutability and why join is preferred for building strings.",
-    "State the time and space cost of slicing, searching and building strings.",
+    "You complete the MOOC and Exercism string exercises and Valid Palindrome without help, including empty and single-character inputs.",
+    "Without running them, you predict the slicing, split and comparison snippets in the interview questions.",
+    "You can explain immutability and why ''.join beats += in a loop, and state the cost of slicing, searching and building strings.",
+    "Skip this topic if you can already do all of the above.",
   ],
   deprioritize: [
     "Advanced regular expressions, detailed Unicode normalization and specialized text-processing libraries.",

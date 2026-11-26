@@ -6,51 +6,30 @@ const topic: Topic = {
   category: "Python",
   phase: "programming-fluency",
   overview:
-    "Loops repeat work: a for loop iterates over the items of a sequence or other iterable, and a while loop repeats until a condition becomes false. Most algorithms are built from a few loop patterns: accumulating, counting, searching and comparing pairs.",
+    "A for loop iterates over the items of an iterable; a while loop repeats until a condition becomes false. Loops are in almost every interview solution, and counting how often they run is where complexity analysis starts.",
   whyItMatters:
     "Almost every coding interview solution contains a loop, and your first complexity analysis comes from counting how many times loops run. Interviewers expect you to trace a loop by hand, avoid off-by-one and infinite loops, and stop early when the answer is known. At work, loops process records, retry operations and transform data.",
   prerequisites: ["Variables and Data Types", "Operators and Expressions", "Conditional Statements"],
   objectives: [
-    "Choose between for and while, and write each without an infinite loop.",
-    "Use range() with start, stop and step, and predict exactly which values it produces.",
-    "Use enumerate() for index and value together, and zip() to walk sequences in parallel.",
-    "Use break, continue and early return, and explain how break behaves in nested loops.",
-    "Implement accumulators, counters, running maximums and linear search.",
-    "Avoid modifying a list while iterating over it.",
-    "Trace loop variables by hand on a small input.",
-    "Count how many times loops run and express it as O(n), O(n × m) or O(n²), including best and worst cases.",
+    "Choosing for (known collection or count) versus while (condition-driven), and making sure every while loop's condition eventually becomes false.",
+    "range(start, stop, step): stop is excluded, a negative step counts down, and a range computes values on demand instead of building a list.",
+    "enumerate() for index and value; zip() to walk sequences in parallel (it stops at the shortest input).",
+    "break leaves only the innermost loop; continue skips to the next iteration; return leaves every loop in a function.",
+    "Loop patterns: accumulator, counter, running maximum (start from the first item, not 0), linear search with early exit.",
+    "Never add or remove items in a list while iterating over it; build a new list or iterate over a copy.",
+    "Tracing loop variables by hand on a small input.",
+    "Counting iterations: O(n), O(n × m), O(n²) (an inner loop from i + 1 still runs n(n - 1)/2 times), and best versus worst case for early exit.",
+    "Skip for now: the iterator protocol, generators, async iteration and for/else beyond recognizing it.",
   ],
   depth: "Apply: Use the concept to solve unfamiliar problems and explain relevant trade-offs.",
   resources: [
     {
-      title: "Python Programming MOOC — Loops with conditions",
-      url: "https://programming-26.mooc.fi/part-3/1-loops-with-conditions",
-      provider: "University of Helsinki",
-      type: "Course",
-      instructions: "Written, part 1: while loops — initialisation, condition and update.",
-    },
-    {
-      title: "Python Programming MOOC — More loops",
-      url: "https://programming-26.mooc.fi/part-3/3-more-loops",
-      provider: "University of Helsinki",
-      type: "Course",
-      instructions: "Written, part 2: break, continue and nested loops.",
-    },
-    {
-      title: "Python Programming MOOC — Definite iteration",
-      url: "https://programming-26.mooc.fi/part-4/4-definite-iteration",
+      title: "Python Programming MOOC — Part 2: Simple loops",
+      url: "https://programming-26.mooc.fi/part-2/4-simple-loops",
       provider: "University of Helsinki",
       type: "Course",
       instructions:
-        "Written, part 3: for loops and range(). Some examples iterate over lists, which are introduced in the preceding lesson; the basics are enough here.",
-    },
-    {
-      title: "Think Python — Chapter 7: Iteration and Search",
-      url: "https://allendowney.github.io/ThinkPython/chap07.html",
-      provider: "Allen B. Downey",
-      type: "Book",
-      instructions:
-        "Written alternative to part 3, for for loops, counting and early-exit search. It does not cover while loops, range() or break.",
+        "Start here, and do the exercises in each section as you go. Read this section (while True with break, helper variables, debugging prints), then in Part 3 \"Loops with conditions\" (initialisation, condition and update) and \"More loops\" (break, continue, nested loops), then in Part 4 \"Definite iteration\" (for and range; its examples use lists, introduced in the section before it). Free; reading needs no account, submitting exercises needs a free MOOC.fi account.",
     },
     {
       title: "CS50's Introduction to Programming with Python — Week 2: Loops",
@@ -58,43 +37,45 @@ const topic: Topic = {
       provider: "Harvard University",
       type: "Video",
       instructions:
-        "Video alternative. Focus on while and for loops, range(), break and continue. Lists and dictionaries are covered in later topics.",
+        "Video alternative to the MOOC sections, not an addition. Watch the parts the notes title \"While Loops\", \"For Loops\", \"Improving with User Input\" and \"Mario\" (nested loops). The lists and dictionaries parts belong to later topics. Free, no account needed.",
     },
     {
-      title: "The Python Tutorial — for Statements and Looping Techniques",
+      title: "Python Tutor — code visualizer",
+      url: "https://pythontutor.com/visualize.html",
+      provider: "Philip Guo",
+      type: "Interactive",
+      instructions:
+        "A tool, not a course: paste a short loop and step through it to see each variable change. Use it to check your hand traces, not to replace them. Free, no account needed.",
+    },
+    {
+      title: "The Python Tutorial — 4.2 for Statements to 4.4 break and continue",
       url: "https://docs.python.org/3/tutorial/controlflow.html#for-statements",
       provider: "Python Software Foundation",
       type: "Documentation",
       instructions:
-        "Reference. Read for statements, the range() function, and break and continue. For enumerate() and zip(), see the Looping Techniques section of the Data Structures page.",
+        "Reference for for, range() and break/continue, including the warning about modifying a collection while iterating. For enumerate() and zip(), see 5.6 Looping Techniques in the Data Structures chapter.",
     },
   ],
   exercises: [
     {
       title: "University of Helsinki, Loops with conditions: Fix the code: Countdown; Powers of two; The sum of consecutive numbers, version 1",
       url: "https://programming-26.mooc.fi/part-3/1-loops-with-conditions",
-      note: "Instructions are readable without an account; submitting requires logging in.",
+      note: "while loops with a correct initialisation, condition and update. Instructions are readable without an account; submitting requires a free MOOC.fi account.",
     },
     {
-      title: "University of Helsinki, More loops: Factorial",
+      title: "University of Helsinki, More loops: Factorial; Multiplication",
       url: "https://programming-26.mooc.fi/part-3/3-more-loops",
-      note: "Instructions are readable without an account; submitting requires logging in.",
+      note: "An accumulator with an exit condition, and nested loops. Free MOOC.fi account to submit.",
     },
     {
-      title: "Find the maximum value without using max().",
-      note: "Decide what an empty input should do before you start, and test negative numbers.",
-    },
-    { title: "Search for a target and stop as soon as it is found; state the best and worst cases." },
-    { title: "Determine whether a positive integer is prime, and explain why checking up to the square root is enough." },
-    { title: "Generate every unique pair from a sequence using nested loops, then count the pairs for n items." },
-    {
-      title: "Trace a nested loop by hand in a table of variable values, then calculate how many times the inner body runs.",
-      note: "Code reading. Use an inner loop that starts at i + 1.",
+      title: "Making the Grade (Exercism, Python track)",
+      url: "https://exercism.org/tracks/python/exercises/making-the-grade",
+      note: "for and while loops, enumerate(), break and continue over lists of scores, with automated tests. Uses basic lists. Solving needs a free Exercism account.",
     },
     {
       title: "Running Sum of 1d Array (LeetCode)",
       url: "https://leetcode.com/problems/running-sum-of-1d-array/",
-      note: "Easy. Accumulator pattern.",
+      note: "Easy. Accumulator pattern. Free account required to submit.",
     },
     {
       title: "Find the Highest Altitude (LeetCode)",
@@ -105,6 +86,11 @@ const topic: Topic = {
       title: "Number of Good Pairs (LeetCode)",
       url: "https://leetcode.com/problems/number-of-good-pairs/",
       note: "Easy. Solve it with nested loops first and state the complexity; you will revisit it with a dictionary.",
+    },
+    {
+      title: "Trace one of your solutions above with an inner loop that starts at i + 1: write each variable's value in a table, then check it in Python Tutor.",
+      url: "https://pythontutor.com/visualize.html",
+      note: "Code reading. Also count how many times the inner body runs for n items.",
     },
   ],
   interviewQuestions: [
@@ -119,6 +105,7 @@ while n > 0:       # unknown number of steps
     digits += 1
 print(digits)      # -> 2`,
       followUps: ["What usually causes an infinite while loop?"],
+      source: { title: "The Python Tutorial — 4.2 for Statements", url: "https://docs.python.org/3/tutorial/controlflow.html#for-statements" },
     },
     {
       question: "How do range() boundaries work?",
@@ -129,6 +116,7 @@ print(list(range(2, 8, 2)))     # -> [2, 4, 6]
 print(list(range(5, 0, -1)))    # -> [5, 4, 3, 2, 1]
 print(len(range(3, 10)))        # -> 7`,
       followUps: ["How would you loop over a list's indexes in reverse?"],
+      source: { title: "Python Docs — Ranges", url: "https://docs.python.org/3/library/stdtypes.html#ranges" },
     },
     {
       question: "What do enumerate() and zip() provide?",
@@ -142,6 +130,7 @@ for i, name in enumerate(names, start=1):
 # -> 2 ben
 print(list(zip(names, scores)))   # -> [('ana', 91), ('ben', 78)]`,
       followUps: ["Why is silently stopping at the shortest input sometimes a bug?"],
+      source: { title: "Python Docs — Built-in functions: zip()", url: "https://docs.python.org/3/library/functions.html#zip" },
     },
     {
       question: "What is the difference between break and continue, and how do you exit nested loops?",
@@ -156,6 +145,7 @@ print(list(zip(names, scores)))   # -> [('ana', 91), ('ben', 78)]`,
 
 print(find_pair([[1, 2], [3, 4]], 3))   # -> (1, 0)`,
       followUps: ["What does an else clause on a for loop do?"],
+      source: { title: "The Python Tutorial — 4.4 break and continue Statements", url: "https://docs.python.org/3/tutorial/controlflow.html#break-and-continue-statements" },
     },
     {
       question: "Why is removing items from a list while iterating over it a bug?",
@@ -169,6 +159,7 @@ print(nums)                     # -> [4, 5]
 nums = [2, 4, 5, 6]
 print([n for n in nums if n % 2 != 0])   # -> [5]`,
       followUps: ["What is the time complexity of removing items one at a time with list.remove()?"],
+      source: { title: "The Python Tutorial — 4.2 for Statements (modifying a collection while iterating)", url: "https://docs.python.org/3/tutorial/controlflow.html#for-statements" },
     },
     {
       question: "Does every nested loop have O(n²) time complexity?",
@@ -181,20 +172,15 @@ for i in range(n):
         count += 1
 print(count, n * (n - 1) // 2)   # -> 10 10`,
       followUps: ["What is the complexity if the inner loop calls `x in some_list`?"],
+      source: { title: "USACO Guide — Time Complexity: Complexity Calculations", url: "https://usaco.guide/bronze/time-comp#complexity-calculations" },
     },
     {
       question: "How does stopping early affect best-case and worst-case complexity?",
       answer:
         "A linear search that returns as soon as it finds the target is O(1) in the best case (the first item matches) and O(n) in the worst case (the target is last or absent). Interviewers usually want the worst case unless they ask otherwise. Built-ins such as any() and all() also stop early.",
-      code: `def contains(items, target):
-    for item in items:
-        if item == target:
-            return True
-    return False
-
-print(contains([4, 8, 15], 4), contains([4, 8, 15], 16))   # -> True False
-print(any(n > 10 for n in [4, 8, 15]))   # -> True`,
+      code: `print(any(n > 10 for n in [15, 4, 8]))   # stops after the first item  # -> True`,
       followUps: ["Why is average-case analysis harder to state precisely?"],
+      source: { title: "Python Docs — Built-in functions: any()", url: "https://docs.python.org/3/library/functions.html#any" },
     },
   ],
   mistakes: [
@@ -206,11 +192,11 @@ print(any(n > 10 for n in [4, 8, 15]))   # -> True`,
     "Using range(len(items)) when enumerate() or direct iteration would be clearer.",
   ],
   mastery: [
-    "Implement loops from written requirements without assistance.",
-    "Trace loop variables accurately on a small input in a table.",
-    "Diagnose infinite loops and off-by-one errors.",
-    "Implement counters, accumulators, running maximums and linear searches, including empty input.",
-    "Count loop iterations and explain simple O(n), O(n × m) and O(n²) examples, with best and worst cases.",
+    "You complete the MOOC loop exercises, Making the Grade and the three LeetCode problems above without help, including empty input.",
+    "You trace a nested loop by hand on a small input and your table matches Python Tutor.",
+    "You can find and fix an infinite loop or an off-by-one range() bound.",
+    "You can count loop iterations and state O(n), O(n × m) or O(n²), with best and worst cases for early exit.",
+    "Skip this topic if you can already do all of the above.",
   ],
   deprioritize: [
     "Advanced iterator protocol implementation and specialized asynchronous iteration.",

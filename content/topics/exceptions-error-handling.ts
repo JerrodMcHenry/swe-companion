@@ -6,7 +6,7 @@ const topic: Topic = {
   category: "Python",
   phase: "build-and-deploy-a-project",
   overview:
-    "Exceptions are how Python signals that something could not be done: a missing key, bad input, a file that will not open, a network call that fails. This topic covers when to use exceptions instead of ordinary checks, try/except/else/finally, raising exceptions (including your own), how exceptions propagate, catching specific exceptions, cleaning up resources with with, useful messages and logging, and where in an application to handle errors. Reading tracebacks is covered in Python Debugging.",
+    "Exceptions are how Python signals that an operation could not be done. Handling invalid input and failures deliberately — specific exceptions, clean-up, clear messages, errors handled at the application boundary — is part of what interviewers and reviewers mean by robust code. Reading tracebacks is covered in Python Debugging.",
   whyItMatters:
     "Code that handles invalid input and failures deliberately is part of what interviewers mean by robust or production-quality code, and exception questions appear among language-fundamentals questions (one Apple new-grad report described them). On the job, every feature has an error path: what happens when input is wrong or a dependency fails is often where bugs and security problems hide.",
   prerequisites: ["Functions and Arguments", "Python Debugging", "Classes and Objects (for custom exceptions)"],
@@ -20,6 +20,7 @@ const topic: Topic = {
     "Release resources reliably with with statements, and recognize a context manager.",
     "Write error messages that help the user or the developer, and log failures without leaking secrets.",
     "Handle errors at application boundaries (a request handler, a command-line entry point) and let lower layers raise.",
+    "Skip for now: exception groups (except*), warnings, class-based context managers and retry libraries.",
   ],
   depth: "Implement: Independently perform appropriately scoped tasks.",
   resources: [
@@ -28,7 +29,14 @@ const topic: Topic = {
       url: "https://docs.python.org/3/tutorial/errors.html",
       provider: "Python Software Foundation",
       type: "Documentation",
-      instructions: "Written, primary. Read Handling Exceptions through Predefined Clean-up Actions: try/except/else/finally, raising, chaining, user-defined exceptions and with. About 30 minutes. Skip exception groups and notes (8.9 and 8.10) unless you need them.",
+      instructions: "Start here. Read 8.3 Handling Exceptions through 8.8 Predefined Clean-up Actions: try/except/else/finally, raising, chaining, user-defined exceptions and with. About 30 minutes. Skip exception groups and notes (8.9 and 8.10). Free; no account.",
+    },
+    {
+      title: "CS50's Introduction to Programming with Python — Week 3: Exceptions",
+      url: "https://cs50.harvard.edu/python/weeks/3/",
+      provider: "Harvard University",
+      type: "Video",
+      instructions: "Video alternative to the tutorial: try, except, else, pass and raise, built around validating user input. Watch the lecture; the problem set is optional extra practice. It does not cover finally, chaining or custom exceptions — read tutorial sections 8.5–8.7 for those. Free; no account to watch.",
     },
     {
       title: "Python Standard Library — Built-in Exceptions: exception hierarchy",
@@ -40,20 +48,27 @@ const topic: Topic = {
   ],
   exercises: [
     {
-      title: "Write parse_duration(text) that accepts \"90\", \"1h\" or \"1h30m\" and returns minutes, raising ValueError with a helpful message for anything else; test every branch with pytest, including pytest.raises.",
-      note: "Foundation.",
+      title: "Exercism Python — Error Handling",
+      url: "https://exercism.org/tracks/python/exercises/error-handling",
+      note: "Easy. Raising and catching exceptions and cleaning up a file-like resource when an exception is raised; the tests define the requirements. Free; needs a free Exercism account to submit (in the browser editor or the CLI).",
+    },
+    {
+      title: "Exercism Python — Wordy",
+      url: "https://exercism.org/tracks/python/exercises/wordy",
+      note: "Easy. Parse simple word problems and raise ValueError with the specific messages the tests expect (\"unknown operation\", \"syntax error\"). Demonstrates validating input and raising precise errors. Free account.",
+    },
+    {
+      title: "Exercism Python — Bank Account",
+      url: "https://exercism.org/tracks/python/exercises/bank-account",
+      note: "Medium. Raise ValueError with messages for invalid operations (closed account, invalid amounts); the Python track runs no concurrency tests. Demonstrates choosing and testing error paths in stateful code. Free account.",
     },
     {
       title: "Find every bare except or except Exception in one of your projects (grep -rn \"except\"), and replace each with a specific exception or a documented boundary handler.",
-      note: "Practical.",
+      note: "Apply to your own project.",
     },
     {
       title: "Add a boundary handler to your project's entry point or request handler that turns expected errors into clear messages and logs unexpected ones, then write a test for each path.",
-      note: "Practical: application boundaries.",
-    },
-    {
-      title: "Write a context manager with contextlib.contextmanager that times a block and prints the duration even when the block raises; prove it with a test.",
-      note: "Reinforcement: cleanup.",
+      note: "Apply to your own project: application boundaries. No external exercise covers this well.",
     },
   ],
   interviewQuestions: [
@@ -61,21 +76,8 @@ const topic: Topic = {
       question: "When should you use an exception rather than an ordinary check?",
       answer:
         "Use an exception when a function cannot do what its name promises — the input is invalid, a file is missing, a service is down — so the caller must decide what to do. Use an ordinary check or return value for expected, normal outcomes, such as a lookup that often finds nothing. Python commonly uses \"easier to ask forgiveness than permission\": try the operation and handle the specific failure, which also avoids race conditions between checking and acting.",
-      code: `prices = {"apple": 0.5}
-
-print(prices.get("pear", 0.0))         # a missing price is a normal case here  # -> 0.0
-
-def parse_quantity(text):
-    try:
-        return int(text)
-    except ValueError:
-        raise ValueError(f"quantity must be a whole number, got {text!r}") from None
-
-try:
-    parse_quantity("three")
-except ValueError as error:
-    print(error)                          # -> quantity must be a whole number, got 'three'`,
       followUps: ["Why can checking os.path.exists before opening a file still fail?"],
+      source: { title: "Python Glossary — EAFP", url: "https://docs.python.org/3/glossary.html#term-EAFP" },
     },
     {
       question: "Explain try, except, else and finally. When does each run?",
@@ -102,6 +104,7 @@ print(divide(1, 0))
 # -> finished
 # -> None`,
       followUps: ["What happens if finally contains a return statement?"],
+      source: { title: "The Python Tutorial — 8.7 Defining Clean-up Actions", url: "https://docs.python.org/3/tutorial/errors.html#defining-clean-up-actions" },
     },
     {
       question: "How do you raise an exception, and when would you define a custom exception?",
@@ -110,45 +113,19 @@ print(divide(1, 0))
       code: `class InsufficientFunds(ValueError):
     """Raised when a withdrawal is larger than the balance."""
 
-def withdraw(balance, amount):
-    if amount <= 0:
-        raise ValueError("amount must be positive")
-    if amount > balance:
-        raise InsufficientFunds(f"balance {balance} is less than {amount}")
-    return balance - amount
-
-for amount in (30, 500, -5):
-    try:
-        print(withdraw(100, amount))
-    except InsufficientFunds as error:
-        print("declined:", error)
-    except ValueError as error:
-        print("invalid:", error)
-# -> 70
-# -> declined: balance 100 is less than 500
-# -> invalid: amount must be positive`,
-      followUps: ["Why does the order of the except clauses matter here?"],
+try:
+    raise InsufficientFunds("balance 100 is less than 500")
+except InsufficientFunds as error:        # must come before a plain "except ValueError"
+    print("declined:", error)             # -> declined: balance 100 is less than 500`,
+      followUps: ["Why must except InsufficientFunds come before except ValueError?"],
+      source: { title: "The Python Tutorial — 8.6 User-defined Exceptions and 8.5 Exception Chaining", url: "https://docs.python.org/3/tutorial/errors.html#user-defined-exceptions" },
     },
     {
       question: "How does an exception propagate?",
       answer:
         "When an exception is raised and not handled in the current function, Python stops that function and looks for a handler in its caller, then the caller's caller, up the call stack. If no handler is found, the program stops and prints a traceback. This lets low-level code raise and a higher level that has the context — a request handler, a command-line entry point — decide how to respond.",
-      code: `def read_age(raw):
-    return int(raw)                       # raises ValueError for bad input
-
-def load_user(record):
-    return {"name": record["name"], "age": read_age(record["age"])}
-
-def handle(record):
-    try:
-        return load_user(record)
-    except (KeyError, ValueError) as error:
-        return f"bad record: {type(error).__name__}"
-
-print(handle({"name": "Ana", "age": "31"}))   # -> {'name': 'Ana', 'age': 31}
-print(handle({"name": "Ben", "age": "x"}))    # -> bad record: ValueError
-print(handle({"age": "40"}))                  # -> bad record: KeyError`,
-      followUps: ["Which function should handle the error, and why not read_age?"],
+      followUps: ["A parsing helper raises ValueError three calls below the request handler. Which function should handle it, and why not the helper?"],
+      source: { title: "The Python Tutorial — 8.3 Handling Exceptions", url: "https://docs.python.org/3/tutorial/errors.html#handling-exceptions" },
     },
     {
       question: "Why should you catch specific exceptions instead of using a bare except or except Exception?",
@@ -169,60 +146,21 @@ def total_price_fixed(items):
 print(total_price([{"price": 2, "qty": 3}]))         # wrong answer, no error  # -> 0
 print(total_price_fixed([{"price": 2, "qty": 3}]))   # -> 6`,
       followUps: ["Where in an application is a broad handler acceptable?"],
+      source: { title: "Python Docs — Built-in Exceptions: exception hierarchy", url: "https://docs.python.org/3/library/exceptions.html#exception-hierarchy" },
     },
     {
       question: "How do you make sure resources are cleaned up?",
       answer:
         "Use a with statement: the object's context manager releases the resource — closes the file, releases the lock, rolls back the transaction — when the block ends, even if an exception is raised. try/finally does the same by hand. contextlib.contextmanager lets you write your own context manager as a generator.",
-      code: `from contextlib import contextmanager
-
-@contextmanager
-def opened(name):
-    print(f"open {name}")
-    try:
-        yield name
-    finally:
-        print(f"close {name}")            # runs even when the block raises
-
-try:
-    with opened("report.csv"):
-        raise RuntimeError("disk full")
-except RuntimeError as error:
-    print("handled:", error)
-# -> open report.csv
-# -> close report.csv
-# -> handled: disk full`,
       followUps: ["What does a database connection's with block do on an exception?"],
+      source: { title: "The Python Tutorial — 8.8 Predefined Clean-up Actions", url: "https://docs.python.org/3/tutorial/errors.html#predefined-clean-up-actions" },
     },
     {
       question: "Where should an application handle errors, and what should it tell the user?",
       answer:
         "Lower layers should raise specific exceptions and not decide how to present them. At the boundary — the request handler, command-line entry point or job runner — translate expected errors into a clear response (for example 400 with \"amount must be positive\") and log unexpected ones with enough context to debug, then return a generic message (500 \"something went wrong\") without stack traces, secrets or personal data. Never silently swallow an error.",
-      code: `import logging, sys
-
-logging.basicConfig(stream=sys.stdout, format="%(levelname)s %(message)s", force=True)
-log = logging.getLogger("app")
-
-def transfer(amount):
-    if amount <= 0:
-        raise ValueError("amount must be positive")
-    raise ConnectionError("payments service timed out")
-
-def handle_transfer(amount):
-    try:
-        transfer(amount)
-        return 200, "ok"
-    except ValueError as error:
-        return 400, str(error)                      # the user can fix this
-    except ConnectionError:
-        log.error("transfer failed: payments unavailable (amount=%s)", amount)
-        return 503, "Please try again shortly."    # no internal details
-
-print(handle_transfer(-5))    # -> (400, 'amount must be positive')
-print(handle_transfer(20))
-# -> ERROR transfer failed: payments unavailable (amount=20)
-# -> (503, 'Please try again shortly.')`,
       followUps: ["What should never appear in an error message or log line?"],
+      source: { title: "OWASP Error Handling Cheat Sheet", url: "https://cheatsheetseries.owasp.org/cheatsheets/Error_Handling_Cheat_Sheet.html" },
     },
   ],
   mistakes: [
@@ -240,6 +178,8 @@ print(handle_transfer(20))
     "You raise specific exceptions with useful messages and test them with pytest.raises.",
     "Your code has no bare except, and every broad handler is a deliberate boundary that logs.",
     "You can explain propagation and choose where an error should be handled in your own project.",
+    "You can pass the Exercism Error Handling and Wordy exercises without help.",
+    "Skip this topic if you can already do all of the above.",
   ],
   deprioritize: [
     "The full exception hierarchy, exception groups (except*) and warnings.",

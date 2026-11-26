@@ -6,21 +6,22 @@ const topic: Topic = {
   category: "Engineering Fundamentals",
   phase: "engineering-fundamentals",
   overview:
-    "Most applications store their data in a database. This topic covers relational databases — tables, keys, relationships, constraints and normalization — and the SQL you need to read and write everyday queries: CRUD, filtering, sorting, joins, aggregation and NULL handling. It also explains indexes, transactions, ACID and safe parameterized queries, and when a non-relational database is a better fit. Building a backend on PostgreSQL comes in Backend Engineering. The examples run in SQLite (built into Python); comments mark where PostgreSQL or other databases behave differently.",
+    "Most applications keep their data in a relational database and query it with SQL, so reading and writing everyday queries and explaining keys, indexes and transactions is a core backend job skill. The code examples run in SQLite (built into Python); comments mark where PostgreSQL behaves differently.",
   whyItMatters:
     "SQL and relational databases appear in many backend and full-stack postings (15 of 28 in this curriculum's R4 sample), and Amazon's official interview topics include database concepts such as relational versus non-relational databases. Dedicated SQL interview rounds, however, were not found in the US entry-level evidence reviewed; the SQL assessments found were in non-US online assessments (Accenture India, Wise UK) and one internship (Klaviyo). So treat SQL as an essential job skill for backend work and a conditional interview topic: prepare it for interviews when the posting stresses SQL or your recruiter confirms a SQL round.",
   prerequisites: ["Dictionaries and Lists (for thinking in records)", "Command Line and Development Environment"],
   objectives: [
-    "Explain tables, rows, columns, schemas, primary keys, foreign keys and constraints (NOT NULL, UNIQUE, CHECK).",
-    "Model one-to-many and many-to-many relationships, and explain normalization at a basic level (avoid duplicated data).",
-    "Write CRUD statements: INSERT, SELECT, UPDATE and DELETE, including WHERE on every UPDATE and DELETE.",
-    "Filter, sort and limit results (WHERE, ORDER BY, LIMIT), and handle NULL correctly (IS NULL, COUNT(*) versus COUNT(column)).",
-    "Write INNER and LEFT joins, and explain the difference.",
-    "Aggregate with COUNT, SUM, AVG, MIN, MAX and GROUP BY, and filter groups with HAVING.",
-    "Explain what an index is, when it helps reads, and what it costs on writes and storage.",
-    "Explain transactions and ACID, and give a basic example of an isolation problem.",
-    "Use parameterized queries from Python and explain why string formatting causes SQL injection.",
-    "Compare relational and non-relational (document, key-value) databases and choose sensibly.",
+    "Tables, rows, columns and schemas; primary keys, foreign keys and constraints (NOT NULL, UNIQUE, CHECK).",
+    "One-to-many (foreign key on the \"many\" side) and many-to-many (join table) relationships; normalization at a basic level (do not duplicate data).",
+    "CRUD: INSERT, SELECT, UPDATE, DELETE — always with a WHERE on UPDATE and DELETE.",
+    "WHERE, ORDER BY, LIMIT; NULL is unknown, so use IS NULL, and COUNT(*) counts rows while COUNT(column) skips NULLs.",
+    "INNER JOIN (matches only) versus LEFT JOIN (all left rows, NULLs where no match).",
+    "COUNT, SUM, AVG, MIN, MAX with GROUP BY; WHERE filters rows before grouping, HAVING filters groups after.",
+    "Indexes speed up selective reads but cost storage and slow writes.",
+    "Transactions and ACID; a lost update as an example of an isolation problem.",
+    "Parameterized queries from Python (sqlite3 uses ?, psycopg uses %s passed separately); string formatting causes SQL injection.",
+    "Relational versus document and key-value databases, and when each fits.",
+    "Skip for now: window functions and complex subqueries (learn them if a SQL round is confirmed), query planning, replication, sharding and ORM details.",
   ],
   depth: "Explain: Accurately explain behavior, purpose and common uses.",
   resources: [
@@ -30,7 +31,7 @@ const topic: Topic = {
       provider: "SQLBolt",
       type: "Interactive",
       instructions:
-        "Free external interactive lessons, primary for SQL practice. Do lessons 1–12 (queries, joins, NULLs, expressions, aggregates) with their exercises; lessons 13–18 (inserting, updating, deleting, creating tables) are quick and worth doing too.",
+        "Start here. Free interactive lessons in the browser; no account. Do lessons 1–12 (queries, constraints, joins, outer joins, NULLs, expressions, aggregates, order of execution) with every exercise, then lessons 13–18 (inserting, updating, deleting, creating, altering and dropping tables), which are quick.",
     },
     {
       title: "CS50's Introduction to Databases with SQL",
@@ -38,33 +39,33 @@ const topic: Topic = {
       provider: "Harvard University",
       type: "Video",
       instructions:
-        "Free video alternative. Watch lectures 0 (Querying), 1 (Relating), 2 (Designing) and 5 (Optimizing: indexes and transactions). Skip the rest unless you are targeting backend roles.",
+        "Video alternative, and the place to learn schema design and indexes in more depth. Watch lectures 0 (Querying), 1 (Relating), 2 (Designing) and 5 (Optimizing: indexes and transactions). Skip the rest unless you are targeting backend roles. Free; lectures need no account.",
     },
     {
       title: "PostgreSQL Documentation — Tutorial: 3.4 Transactions",
       url: "https://www.postgresql.org/docs/current/tutorial-transactions.html",
       provider: "PostgreSQL Global Development Group",
       type: "Documentation",
-      instructions: "Short official explanation of transactions with a bank-transfer example. The neighbouring tutorial pages are useful references.",
+      instructions: "Short official explanation of transactions with a bank-transfer example. Read the page; skip savepoints if short on time.",
     },
     {
       title: "OWASP — SQL Injection Prevention Cheat Sheet",
       url: "https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html",
       provider: "OWASP",
       type: "Documentation",
-      instructions: "Read the introduction and Option 1 (prepared statements with parameterized queries).",
+      instructions: "Read the introduction and Option 1 (prepared statements with parameterized queries). Skip the language-specific and stored-procedure details.",
     },
   ],
   exercises: [
     {
       title: "SQLBolt exercises for lessons 1–12",
       url: "https://sqlbolt.com/lesson/select_queries_introduction",
-      note: "Foundation. Free and in the browser.",
+      note: "Foundation: filtering, sorting, joins, NULLs and aggregates. Free and in the browser; no account.",
     },
     {
       title: "Combine Two Tables (LeetCode)",
       url: "https://leetcode.com/problems/combine-two-tables/",
-      note: "Easy. LEFT JOIN with NULLs.",
+      note: "Easy. LEFT JOIN with NULLs. LeetCode needs a free account to submit.",
     },
     {
       title: "Customers Who Never Order (LeetCode)",
@@ -77,15 +78,21 @@ const topic: Topic = {
       note: "Easy. GROUP BY with HAVING.",
     },
     {
-      title: "Design the tables for a small library (books, members, loans), including keys and constraints, then write queries for overdue loans and the most-borrowed books.",
-      note: "Practical. Use Python's built-in sqlite3 module to run them.",
+      title: "CS50 SQL — Problem Set 2: ATL, Happy to Connect, Union Square Donuts",
+      url: "https://cs50.harvard.edu/sql/psets/2/",
+      note: "Design schemas from written requirements: tables, keys, relationships and constraints, in SQLite. Free; working and submitting use CS50's browser-based codespace, which requires a free GitHub account. Do at least one of the three.",
+    },
+    {
+      title: "Python documentation — sqlite3 Tutorial",
+      url: "https://docs.python.org/3/library/sqlite3.html#sqlite3-tutorial",
+      note: "Create a database, insert with placeholders, commit and query from Python. Then read \"How to use placeholders to bind values in SQL queries\" in the same page. No installation beyond Python.",
     },
   ],
   interviewQuestions: [
     {
       question: "What are primary keys and foreign keys?",
       answer:
-        "A primary key uniquely identifies each row in a table and cannot be NULL. A foreign key is a column that refers to the primary key of another table, linking rows and letting the database enforce that the referenced row exists. Together they model relationships: a one-to-many relationship (one customer, many orders) puts a foreign key on the \"many\" side; a many-to-many relationship (students and courses) uses a join table with two foreign keys.",
+        "A primary key uniquely identifies each row in a table and cannot be NULL. A foreign key is a column that refers to the primary key of another table, linking rows and letting the database enforce that the referenced row exists. A one-to-many relationship (one customer, many orders) puts the foreign key on the \"many\" side; a many-to-many relationship (students and courses) uses a join table with two foreign keys.",
       code: `-- One customer has many orders
 -- Dialect: in SQLite, INTEGER PRIMARY KEY auto-assigns ids; PostgreSQL uses
 -- id INTEGER GENERATED ALWAYS AS IDENTITY (or SERIAL). SQLite enforces foreign keys
@@ -95,13 +102,9 @@ CREATE TABLE orders (
   id INTEGER PRIMARY KEY,
   customer_id INTEGER NOT NULL REFERENCES customers(id),
   total REAL NOT NULL CHECK (total >= 0)   -- use NUMERIC(10, 2) for money in PostgreSQL
-);
-INSERT INTO customers VALUES (1, 'Ana'), (2, 'Ben');
-INSERT INTO orders VALUES (10, 1, 25.0), (11, 1, 40.0);
-SELECT name, COUNT(orders.id) FROM customers LEFT JOIN orders ON orders.customer_id = customers.id GROUP BY customers.id ORDER BY name;
--- -> ('Ana', 2)
--- -> ('Ben', 0)`,
+);`,
       followUps: ["How would you model students enrolling in many courses?"],
+      source: { title: "PostgreSQL Documentation — Tutorial: 3.3 Foreign Keys", url: "https://www.postgresql.org/docs/current/tutorial-fk.html" },
     },
     {
       question: "What is the difference between an INNER JOIN and a LEFT JOIN?",
@@ -120,6 +123,7 @@ SELECT c.name, o.total FROM customers c LEFT JOIN orders o ON o.customer_id = c.
 SELECT c.name FROM customers c LEFT JOIN orders o ON o.customer_id = c.id WHERE o.id IS NULL;
 -- -> ('Ben',)`,
       followUps: ["How would you write the last query with NOT EXISTS instead?"],
+      source: { title: "SQLBolt — Lesson 7: OUTER JOINs", url: "https://sqlbolt.com/lesson/select_queries_with_outer_joins" },
     },
     {
       question: "What is the difference between WHERE and HAVING? How does GROUP BY work?",
@@ -132,6 +136,7 @@ SELECT customer, COUNT(*), SUM(total) FROM orders WHERE total >= 10 GROUP BY cus
 -- -> ('Ana', 2, 50.0)
 -- -> ('Cy', 3, 75.0)`,
       followUps: ["SELECT customer, total FROM orders GROUP BY customer runs in SQLite (and MySQL without ONLY_FULL_GROUP_BY) but PostgreSQL rejects it. Why is the strict behavior safer?"],
+      source: { title: "SQLBolt — Lesson 11: Queries with aggregates (Pt. 2)", url: "https://sqlbolt.com/lesson/select_queries_with_aggregates_pt_2" },
     },
     {
       question: "How does NULL behave in SQL?",
@@ -147,45 +152,21 @@ SELECT name FROM users WHERE phone IS NULL ORDER BY name;
 -- -> ('Ben',)
 -- -> ('Cy',)`,
       followUps: ["What does COALESCE do?"],
+      source: { title: "SQLBolt — Lesson 8: A short note on NULLs", url: "https://sqlbolt.com/lesson/select_queries_with_nulls" },
     },
     {
       question: "What is an index, and what are its trade-offs?",
       answer:
-        "An index is a separate data structure, usually a B-tree, that lets the database find rows by the indexed columns without scanning the whole table, turning a full scan into a fast lookup for selective queries. The costs are extra storage and slower inserts, updates and deletes, because every index must be updated too. Index columns that are frequently used to filter, join or sort; avoid indexing everything.",
-      code: `-- An index on email turns a table scan into an index search
--- Dialect: inspect the plan with EXPLAIN QUERY PLAN in SQLite, EXPLAIN (or EXPLAIN ANALYZE) in PostgreSQL
-CREATE TABLE users (id INTEGER PRIMARY KEY, email TEXT, name TEXT);
-CREATE INDEX idx_users_email ON users(email);
-INSERT INTO users (email, name) VALUES ('ana@example.com', 'Ana');
-SELECT name FROM users WHERE email = 'ana@example.com';
--- -> ('Ana',)`,
+        "An index is a separate data structure, usually a B-tree, that lets the database find rows by the indexed columns without scanning the whole table, turning a full scan into a fast lookup for selective queries. The costs are extra storage and slower inserts, updates and deletes, because every index must be kept in sync. Index columns frequently used to filter, join or sort; avoid indexing everything. Check whether a query uses an index with EXPLAIN QUERY PLAN in SQLite or EXPLAIN (ANALYZE) in PostgreSQL.",
       followUps: ["Why might the database not use an index for a query that filters on that column?"],
+      source: { title: "PostgreSQL Documentation — 11.1 Indexes: Introduction", url: "https://www.postgresql.org/docs/current/indexes-intro.html" },
     },
     {
       question: "What is a transaction, and what does ACID mean?",
       answer:
-        "A transaction groups several statements so they succeed or fail as one unit. ACID describes the guarantees: Atomicity (all or nothing), Consistency (constraints hold before and after), Isolation (concurrent transactions do not see each other's partial work, to a configurable degree) and Durability (committed data survives crashes). The classic example is a money transfer: debiting one account and crediting another must both happen or neither. Weaker isolation levels can allow anomalies such as two transactions reading a balance and both overwriting it (a lost update).",
-      code: `import sqlite3
-
-db = sqlite3.connect(":memory:")
-db.execute("CREATE TABLE accounts (name TEXT PRIMARY KEY, balance INTEGER CHECK (balance >= 0))")
-db.executemany("INSERT INTO accounts VALUES (?, ?)", [("ana", 100), ("ben", 0)])
-db.commit()
-
-def transfer(amount):
-    try:
-        with db:                                  # commits on success, rolls back on error
-            db.execute("UPDATE accounts SET balance = balance + ? WHERE name = 'ben'", (amount,))
-            db.execute("UPDATE accounts SET balance = balance - ? WHERE name = 'ana'", (amount,))
-    except sqlite3.IntegrityError:
-        print("transfer failed, rolled back")
-
-transfer(30)
-transfer(500)                                     # would make ana negative, so it is rolled back
-print(db.execute("SELECT name, balance FROM accounts ORDER BY name").fetchall())
-# -> transfer failed, rolled back
-# -> [('ana', 70), ('ben', 30)]`,
+        "A transaction groups several statements so they succeed or fail as one unit. ACID describes the guarantees: Atomicity (all or nothing), Consistency (constraints hold before and after), Isolation (concurrent transactions do not see each other's partial work, to a configurable degree) and Durability (committed data survives crashes). The classic example is a money transfer: the debit and the credit must both happen or neither. Weaker isolation levels can allow anomalies such as two transactions reading a balance and both overwriting it (a lost update). In Python's sqlite3, using the connection as a context manager (with db:) commits on success and rolls back on an exception.",
       followUps: ["What is a lost update, and how can a transaction or a lock prevent it?"],
+      source: { title: "PostgreSQL Documentation — Tutorial: 3.4 Transactions", url: "https://www.postgresql.org/docs/current/tutorial-transactions.html" },
     },
     {
       question: "How do you run SQL safely from application code?",
@@ -202,15 +183,14 @@ unsafe = db.execute(f"SELECT name FROM users WHERE name = '{user_input}'").fetch
 safe = db.execute("SELECT name FROM users WHERE name = ?", (user_input,)).fetchall()
 print(unsafe, safe)   # -> [('ana',), ('ben',)] []`,
       followUps: ["Can you parameterize a table or column name? What would you do instead?"],
+      source: { title: "OWASP — SQL Injection Prevention Cheat Sheet", url: "https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html" },
     },
     {
       question: "When would you choose a relational database over a non-relational one?",
       answer:
         "Choose a relational database when data has clear structure and relationships, you need joins and ad hoc queries, and you need transactions and constraints to keep data correct, which covers most business applications. Non-relational databases suit specific needs: document stores for flexible, nested records read as a whole; key-value stores for very fast lookups by key, such as caches and sessions; others for graphs or time series. Many systems use a relational database by default and add a specialized store where needed.",
-      code: `relational = {"orders": [(1, "ana", 25.0)], "customers": [("ana", "Ana")]}   # normalized rows
-document = {"order_1": {"customer": {"id": "ana", "name": "Ana"}, "total": 25.0}}   # nested record
-print(len(relational), document["order_1"]["customer"]["name"])   # -> 2 Ana`,
       followUps: ["What does normalization mean, and when might you denormalize?"],
+      source: { title: "AWS — What is a NoSQL database?", url: "https://aws.amazon.com/nosql/" },
     },
   ],
   mistakes: [
@@ -228,6 +208,7 @@ print(len(relational), document["order_1"]["customer"]["name"])   # -> 2 Ana`,
     "You can explain indexes, transactions, ACID and SQL injection prevention, with an example of each.",
     "You can run parameterized queries from Python.",
     "Backend targets go further in Backend Engineering; general targets can stop here unless the posting stresses SQL.",
+    "Skip this topic if you can already do all of the above.",
   ],
   deprioritize: [
     "Detailed PostgreSQL features, query planning and advanced optimization.",

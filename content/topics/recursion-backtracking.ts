@@ -14,12 +14,13 @@ const topic: Topic = {
     "Write recursive functions with a correct base case and progress toward it.",
     "Trace the call stack for a small input and explain stack space usage.",
     "Analyze recursive time with a recursion tree (number of calls × work per call).",
-    "Know Python's default recursion limit (about 1,000 frames) and when to prefer iteration.",
+    "Know that CPython limits recursion depth (1,000 frames by default) and does not optimize tail calls; convert deep recursion to iteration.",
     "Implement the backtracking template: choose, recurse, undo.",
     "Generate subsets, combinations and permutations, and state their output sizes (2ⁿ, C(n, k), n!).",
     "Prune branches early using constraints (remaining sum, validity checks).",
     "Copy the current path when recording a result, and avoid shared-state bugs.",
     "Recognize when overlapping subproblems mean memoization (Dynamic Programming) is needed.",
+    "Skip for now: tail-call elimination, trampolines, the master theorem and bitmask backtracking.",
   ],
   depth: "Apply: Use the concept to solve unfamiliar problems and explain relevant trade-offs.",
   resources: [
@@ -28,34 +29,39 @@ const topic: Topic = {
       url: "https://runestone.academy/ns/books/published/pythonds3/Recursion/WhatIsRecursion.html",
       provider: "Brad Miller and David Ranum (Runestone Academy)",
       type: "Book",
-      instructions: "Free interactive textbook. Read 4.2–4.6: what recursion is, the three laws, and stack frames. Skip the visualization (turtle) sections.",
+      instructions:
+        "Start here for recursion. Read 4.2–4.6: what recursion is, the three laws of recursion, and how stack frames implement recursion. Skip the turtle-graphics visualization sections. Free; reading needs no account.",
     },
     {
-      title: "Recursion cheatsheet for coding interviews",
-      url: "https://www.techinterviewhandbook.org/algorithms/recursion/",
-      provider: "Tech Interview Handbook",
-      type: "Article",
-      instructions: "Free. Read the techniques on base cases, memoization and backtracking, and the corner cases.",
+      title: "NeetCode — Subsets (LeetCode 78) video",
+      url: "https://www.youtube.com/watch?v=REOH22Xwdkk",
+      provider: "NeetCode (YouTube)",
+      type: "Video",
+      instructions:
+        "Then, for backtracking: watch the whole video for the include/exclude decision tree and the choose–explore–undo code in Python. Watch it after attempting Subsets yourself. Free; no account.",
+    },
+    {
+      title: "CS50x — Recursion (short)",
+      url: "https://cs50.harvard.edu/x/shorts/recursion/",
+      provider: "Harvard University",
+      type: "Video",
+      instructions:
+        "Video alternative to the Runestone sections: base cases, recursive cases and the call stack. Examples are in C; the ideas transfer directly. Free; no account.",
     },
     {
       title: "VisuAlgo — Recursion Tree and DAG",
       url: "https://visualgo.net/en/recursion",
       provider: "VisuAlgo (National University of Singapore)",
       type: "Visual explanation",
-      instructions: "Optional. Draw the recursion tree for Fibonacci to see repeated subproblems before studying dynamic programming.",
-    },
-    {
-      title: "Python Standard Library — sys.setrecursionlimit",
-      url: "https://docs.python.org/3/library/sys.html#sys.setrecursionlimit",
-      provider: "Python Software Foundation",
-      type: "Documentation",
-      instructions: "Reference. Read the short warning about raising the limit; prefer an iterative solution for deep recursion.",
+      instructions:
+        "Optional visualisation. Draw the recursion tree for Fibonacci to see the number of calls and repeated subproblems before studying dynamic programming. Free; no account.",
     },
   ],
   exercises: [
     {
-      title: "Write recursive versions of sum of a list, reversing a string, and power(x, n), then state each one's time and stack space.",
-      note: "Foundation. Write power(x, n) once in O(n) and once in O(log n) by halving n.",
+      title: "Pow(x, n) (LeetCode)",
+      url: "https://leetcode.com/problems/powx-n/",
+      note: "Foundation, Medium. Write it once in O(n) and once in O(log n) by halving n, handle negative n, and state each version's time and stack depth. LeetCode needs a free account to submit.",
     },
     {
       title: "Subsets (LeetCode)",
@@ -97,7 +103,7 @@ const topic: Topic = {
     {
       question: "What makes a recursive function correct?",
       answer:
-        "Three things: a base case that returns without recursing, each recursive call working on a strictly smaller problem so that the base case is eventually reached, and correct combination of the sub-results. A useful way to reason is to assume the recursive call works for the smaller input (the \"leap of faith\") and check that your combination step is right.",
+        "Three things: a base case that returns without recursing, each recursive call working on a strictly smaller problem so the base case is eventually reached, and a correct combination of the sub-results. Reason with the \"leap of faith\": assume the recursive call is correct for the smaller input and check that your combination step is right.",
       code: `def total(nums, i=0):
     if i == len(nums):          # base case
         return 0
@@ -105,11 +111,12 @@ const topic: Topic = {
 
 print(total([3, 1, 4]), total([]))   # -> 8 0`,
       followUps: ["Why does this version pass an index instead of slicing nums[1:]?"],
+      source: { title: "Tech Interview Handbook — Recursion cheatsheet", url: "https://www.techinterviewhandbook.org/algorithms/recursion/" },
     },
     {
       question: "How do you analyze the time and space complexity of a recursive function?",
       answer:
-        "Time: count the calls (draw the recursion tree) and multiply by the work done per call. Space: the maximum depth of the call stack times the space per frame, plus any data you build. A function that makes one call on n - 1 is O(n) time and O(n) stack; one that makes two calls on n - 1 is O(2ⁿ) time but still O(n) depth; halving n gives O(log n) depth.",
+        "Time: count the calls (draw the recursion tree) and multiply by the work per call. Space: the maximum call-stack depth times the space per frame, plus any data you build. One call on n - 1 is O(n) time and O(n) stack; two calls on n - 1 is O(2ⁿ) time but still O(n) depth; halving n gives O(log n) depth, as in fast exponentiation.",
       code: `def power(x, n):                 # O(log n) time and stack depth
     if n == 0:
         return 1
@@ -118,11 +125,12 @@ print(total([3, 1, 4]), total([]))   # -> 8 0`,
 
 print(power(2, 10), power(3, 0), power(5, 3))   # -> 1024 1 125`,
       followUps: ["What would the complexity be if power called itself twice instead of storing half?"],
+      source: { title: "VisuAlgo — Recursion Tree and DAG", url: "https://visualgo.net/en/recursion" },
     },
     {
       question: "What happens when recursion goes too deep in Python, and what can you do?",
       answer:
-        "Each call adds a frame to the call stack. CPython limits the depth (about 1,000 by default) and raises RecursionError beyond it. Python does not optimize tail calls. For inputs that can be deep — long linked lists, skewed trees, large n — convert to iteration with an explicit stack or loop. Raising the limit with sys.setrecursionlimit is possible but risks crashing the interpreter.",
+        "Each call adds a frame to the call stack. CPython limits the depth (1,000 by default) and raises RecursionError beyond it, and it does not optimize tail calls. For inputs that can be deep — long linked lists, skewed trees, large n — convert to iteration with a loop or an explicit stack. sys.setrecursionlimit can raise the limit, but too high a value can crash the interpreter.",
       code: `import sys
 
 def depth(n):
@@ -134,11 +142,12 @@ try:
 except RecursionError:
     print("RecursionError")             # -> RecursionError`,
       followUps: ["How would you rewrite depth() iteratively?"],
+      source: { title: "Python Docs — sys.setrecursionlimit", url: "https://docs.python.org/3/library/sys.html#sys.setrecursionlimit" },
     },
     {
       question: "Explain the backtracking template.",
       answer:
-        "Backtracking builds a partial solution step by step. At each step: if the partial solution is complete, record a copy; otherwise, for each valid choice, make the choice (append to the path, mark as used), recurse, then undo the choice (pop, unmark) so the next choice starts from the same state. Pruning skips choices that cannot lead to a valid answer.",
+        "Backtracking builds a partial solution step by step. If the partial solution is complete, record a copy; otherwise, for each valid choice, make it (append to the path, mark as used), recurse, then undo it (pop, unmark) so the next choice starts from the same state. Pruning skips choices that cannot lead to a valid answer.",
       code: `def subsets(nums):
     result, path = [], []
 
@@ -153,57 +162,23 @@ except RecursionError:
     return result
 
 print(subsets([1, 2, 3]))
-# -> [[], [1], [1, 2], [1, 2, 3], [1, 3], [2], [2, 3], [3]]
-print(subsets([]))   # -> [[]]`,
+# -> [[], [1], [1, 2], [1, 2, 3], [1, 3], [2], [2, 3], [3]]`,
       followUps: ["What goes wrong if you append path instead of path[:]?"],
+      source: { title: "NeetCode — Subsets (LeetCode 78) video", url: "https://www.youtube.com/watch?v=REOH22Xwdkk" },
     },
     {
       question: "How many subsets, combinations and permutations are there, and what does that mean for complexity?",
       answer:
-        "A set of n items has 2ⁿ subsets, C(n, k) combinations of size k, and n! permutations. Any algorithm that outputs all of them takes at least that many steps times the cost of copying each result: O(n × 2ⁿ) for subsets and O(n × n!) for permutations. These are only feasible for small n (roughly n ≤ 20 for subsets and n ≤ 10 for permutations), which is a useful signal from constraints.",
-      code: `from itertools import permutations
-from math import comb, factorial
-
-def perms(nums):
-    result, path, used = [], [], [False] * len(nums)
-    def backtrack():
-        if len(path) == len(nums):
-            result.append(path[:]); return
-        for i, x in enumerate(nums):
-            if not used[i]:
-                used[i] = True; path.append(x)
-                backtrack()
-                path.pop(); used[i] = False
-    backtrack()
-    return result
-
-print(len(perms([1, 2, 3, 4])), factorial(4), comb(5, 2), 2 ** 5)   # -> 24 24 10 32
-print(perms([1, 2]) == [list(p) for p in permutations([1, 2])])   # -> True`,
+        "A set of n items has 2ⁿ subsets, C(n, k) combinations of size k and n! permutations. Any algorithm that outputs all of them takes at least that many steps times the cost of copying each result: O(n × 2ⁿ) for subsets and O(n × n!) for permutations. That is only feasible for small n, so small input limits in a problem statement are a signal that exhaustive backtracking is expected. For permutations, track which elements are already used instead of searching the path.",
       followUps: ["How would you avoid duplicate permutations when the input contains duplicates?"],
+      source: { title: "NeetCode — Permutations (LeetCode 46) video", url: "https://www.youtube.com/watch?v=s7AvT7cGdSo" },
     },
     {
       question: "What is pruning, and how does it help?",
       answer:
-        "Pruning stops exploring a branch as soon as it cannot lead to a valid solution: the remaining target is negative, too many open brackets have been used, or a partial board is already invalid. It does not usually change the worst-case bound, but it can cut the explored tree dramatically in practice. Sorting candidates first often enables earlier pruning.",
-      code: `def combination_sum(candidates, target):
-    candidates = sorted(candidates)
-    result, path = [], []
-
-    def backtrack(start, remaining):
-        if remaining == 0:
-            result.append(path[:]); return
-        for i in range(start, len(candidates)):
-            if candidates[i] > remaining:     # sorted: every later candidate is too big
-                break
-            path.append(candidates[i])
-            backtrack(i, remaining - candidates[i])   # i, not i + 1: reuse allowed
-            path.pop()
-
-    backtrack(0, target)
-    return result
-
-print(combination_sum([2, 3, 6, 7], 7), combination_sum([2], 1))   # -> [[2, 2, 3], [7]] []`,
-      followUps: ["What changes if each candidate may be used only once?"],
+        "Pruning stops exploring a branch as soon as it cannot lead to a valid solution: the remaining target is negative, too many open brackets have been used, or a partial board is already invalid. It usually does not change the worst-case bound, but it can cut the explored tree dramatically in practice. Sorting candidates first often allows breaking out of the loop early (in Combination Sum, once a candidate exceeds the remaining target, every later one does too).",
+      followUps: ["What changes in Combination Sum if each candidate may be used only once?"],
+      source: { title: "NeetCode — Combination Sum (LeetCode 39) video", url: "https://www.youtube.com/watch?v=GBKI9VSKdGg" },
     },
   ],
   mistakes: [
@@ -219,6 +194,8 @@ print(combination_sum([2, 3, 6, 7], 7), combination_sum([2], 1))   # -> [[2, 2, 
     "You trace a small call stack and state time and stack space.",
     "You implement subsets, permutations and combination-sum style backtracking from the template without reference.",
     "You add pruning and explain what it saves, and you record copies of results.",
+    "You solve an unseen backtracking problem such as Word Search or Generate Parentheses without hints (editorial benchmark).",
+    "Skip this topic if you can already do all of the above.",
   ],
   deprioritize: [
     "Advanced backtracking with bitmask state compression, and Sudoku or N-Queens optimizations beyond the basic version.",

@@ -19,30 +19,33 @@ const topic: Topic = {
     "Solve one-dimensional problems (stairs, house robber, coin change, maximum subarray) and simple two-dimensional grid or two-string problems.",
     "State time as (number of states) × (work per state), and space for the table or recursion.",
     "Know when a greedy approach is enough and when it fails (coin change with arbitrary coins).",
+    "Skip for now: bitmask, interval, tree and digit DP, knapsack variants beyond subset sum, and the O(n log n) longest increasing subsequence method.",
   ],
   depth: "Implement: Independently perform appropriately scoped tasks.",
   resources: [
-    {
-      title: "Dynamic programming cheatsheet for coding interviews",
-      url: "https://www.techinterviewhandbook.org/algorithms/dynamic-programming/",
-      provider: "Tech Interview Handbook",
-      type: "Article",
-      instructions: "Free. Read the introduction and techniques; use its essential questions as the core of your practice.",
-    },
     {
       title: "Problem Solving with Algorithms and Data Structures using Python — 4.12 Dynamic Programming",
       url: "https://runestone.academy/ns/books/published/pythonds3/Recursion/DynamicProgramming.html",
       provider: "Brad Miller and David Ranum (Runestone Academy)",
       type: "Book",
-      instructions: "Free interactive textbook. Read the coin-change example, which moves from slow recursion to memoization to a table.",
+      instructions:
+        "Start here, in Python. Read the whole section: the coin-change example moves from slow recursion to memoization to a bottom-up table, which is the recipe this topic uses. Then apply it to the exercises below; the NeetCode videos (Python) linked in Interview Q&A walk through the same problems, so watch one only after a real attempt. Free; reading needs no account.",
     },
     {
-      title: "MIT 6.006 (Spring 2020) — Lectures 15 and 16: Dynamic Programming",
-      url: "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/pages/lecture-notes/",
-      provider: "MIT OpenCourseWare",
-      type: "Course",
+      title: "Dynamic Programming — Learn to Solve Algorithmic Problems & Coding Challenges",
+      url: "https://www.youtube.com/watch?v=oBt53YbR9Kk",
+      provider: "freeCodeCamp.org (Alvin Zablan)",
+      type: "Video",
       instructions:
-        "Optional university depth. Lecture 15 introduces a framework for defining subproblems; Lecture 16 covers longest common subsequence, longest increasing subsequence and coins. Lectures 17–18 can be deferred.",
+        "Video alternative (JavaScript; the concepts transfer) if you want a slower, longer walk through both techniques. The full course is about 5 hours; you need only two parts. Watch 0:00:00–1:52:06 (fib and gridTraveler memoization, the memoization recipe, canSum and howSum) and 3:10:53–3:53:01 (fib and gridTraveler tabulation, the tabulation recipe, canSum tabulation). The remaining problems are optional repetition. Write the code in Python as you go. Free; no account.",
+    },
+    {
+      title: "VisuAlgo — Recursion Tree and DAG",
+      url: "https://visualgo.net/en/recursion",
+      provider: "VisuAlgo (National University of Singapore)",
+      type: "Visual explanation",
+      instructions:
+        "Optional visualisation. Compare the Fibonacci recursion tree with its DAG to see how memoization collapses repeated subproblems; try Coin Change and LCS the same way. Free; no account.",
     },
     {
       title: "Python Standard Library — functools.cache",
@@ -56,7 +59,7 @@ const topic: Topic = {
     {
       title: "Climbing Stairs (LeetCode)",
       url: "https://leetcode.com/problems/climbing-stairs/",
-      note: "Foundation, Easy. Write the plain recursion, add memoization, then a bottom-up loop with two variables.",
+      note: "Foundation, Easy. Write the plain recursion, add memoization, then a bottom-up loop with two variables. LeetCode needs a free account to submit.",
     },
     {
       title: "Min Cost Climbing Stairs (LeetCode)",
@@ -108,16 +111,9 @@ const topic: Topic = {
     {
       question: "What is dynamic programming, and how do you recognize a DP problem?",
       answer:
-        "DP applies when a problem's answer can be built from answers to smaller subproblems (optimal substructure) and those subproblems repeat (overlapping subproblems), so caching them avoids exponential recomputation. Signals: counting the ways to do something, a minimum or maximum over sequences of choices, or a plain recursive solution whose recursion tree repeats the same calls. If subproblems do not overlap, plain recursion or divide and conquer is enough.",
-      code: `calls = 0
-def fib(n):
-    global calls
-    calls += 1
-    return n if n < 2 else fib(n - 1) + fib(n - 2)
-
-fib(20)
-print(calls)   # repeated subproblems  # -> 21891`,
+        "DP applies when a problem's answer can be built from answers to smaller subproblems (optimal substructure) and those subproblems repeat (overlapping subproblems), so caching them avoids exponential recomputation. Signals: counting the ways to do something, a minimum or maximum over sequences of choices, or a plain recursive solution whose recursion tree repeats the same calls — naive fib(n) makes exponentially many calls but has only n + 1 distinct subproblems. If subproblems do not overlap, plain recursion or divide and conquer is enough.",
       followUps: ["How many distinct subproblems does fib(20) actually have?"],
+      source: { title: "VisuAlgo — Recursion Tree and DAG: Fibonacci Numbers", url: "https://visualgo.net/en/recursion" },
     },
     {
       question: "What is the difference between memoization and tabulation?",
@@ -141,64 +137,35 @@ def climb_table(n):
 
 print(climb_memo(10), climb_table(10), climb_table(1))   # -> 89 89 1`,
       followUps: ["Why does the table version need only two variables?"],
+      source: { title: "NeetCode — Climbing Stairs (LeetCode 70) video", url: "https://www.youtube.com/watch?v=Y0lT9Fck7qI" },
     },
     {
       question: "Walk through how you would design a DP solution, using House Robber.",
       answer:
-        "Define the state: best(i) is the most money from houses 0..i. Recurrence: at house i you either skip it (best(i - 1)) or rob it (nums[i] + best(i - 2)), so best(i) = max of the two. Base cases: best of no houses is 0, best of one house is that house. Compute left to right; only the previous two values are needed. O(n) time and O(1) space. Check the recurrence on a small example before coding.",
-      code: `def rob(nums):
-    prev2, prev1 = 0, 0               # best up to i-2 and i-1
-    for x in nums:
-        prev2, prev1 = prev1, max(prev1, prev2 + x)
-    return prev1
-
-print(rob([2, 7, 9, 3, 1]), rob([1, 2, 3, 1]), rob([]), rob([5]))   # -> 12 4 0 5`,
+        "Define the state: best(i) is the most money from houses 0..i. Recurrence: at house i you either skip it (best(i - 1)) or rob it (nums[i] + best(i - 2)), so best(i) is the larger of the two. Base cases: no houses gives 0, one house gives that house. Compute left to right; only the previous two values are needed, so O(n) time and O(1) space. Check the recurrence on a small example such as [2, 7, 9, 3, 1] (answer 12) before coding.",
       followUps: ["How would you change the solution if the houses were arranged in a circle?"],
+      source: { title: "NeetCode — House Robber (LeetCode 198) video", url: "https://www.youtube.com/watch?v=73r3KWiEvyk" },
     },
     {
       question: "Why does a greedy approach fail for Coin Change, and what is the DP solution?",
       answer:
-        "Always taking the largest coin works for some coin systems but not all: with coins [1, 3, 4] and amount 6, greedy picks 4 + 1 + 1 (three coins) but 3 + 3 uses two. DP computes the minimum coins for every amount from 0 up: dp[a] = 1 + min(dp[a - coin]) over coins that fit, with dp[0] = 0 and infinity meaning unreachable. O(amount × number of coins) time and O(amount) space.",
-      code: `def coin_change(coins, amount):
-    INF = float("inf")
-    dp = [0] + [INF] * amount
-    for a in range(1, amount + 1):
-        for coin in coins:
-            if coin <= a and dp[a - coin] + 1 < dp[a]:
-                dp[a] = dp[a - coin] + 1
-    return dp[amount] if dp[amount] != INF else -1
-
-print(coin_change([1, 3, 4], 6), coin_change([2], 3), coin_change([1], 0))   # -> 2 -1 0`,
+        "Always taking the largest coin works for some coin systems but not all: with coins [1, 3, 4] and amount 6, greedy picks 4 + 1 + 1 (three coins) but 3 + 3 uses two. DP computes the minimum coins for every amount from 0 up: dp[a] = 1 + min(dp[a - coin]) over coins that fit, with dp[0] = 0 and infinity meaning unreachable (return -1). O(amount × number of coins) time and O(amount) space.",
       followUps: ["How would you count the number of ways to make the amount instead?"],
+      source: { title: "NeetCode — Coin Change (LeetCode 322) video", url: "https://www.youtube.com/watch?v=H9bfqozjoqs" },
     },
     {
       question: "How do you approach a two-dimensional DP problem such as Unique Paths?",
       answer:
-        "Define dp[r][c] as the number of ways to reach cell (r, c). You can only arrive from above or from the left, so dp[r][c] = dp[r - 1][c] + dp[r][c - 1], with every cell in the first row and column equal to 1. Fill row by row: O(rows × cols) time. Because each row depends only on the previous one, one row of size cols is enough, giving O(cols) space.",
-      code: `def unique_paths(rows, cols):
-    row = [1] * cols
-    for _ in range(1, rows):
-        for c in range(1, cols):
-            row[c] += row[c - 1]       # above (old row[c]) + left (new row[c-1])
-    return row[-1]
-
-print(unique_paths(3, 7), unique_paths(3, 2), unique_paths(1, 1))   # -> 28 3 1`,
+        "Define dp[r][c] as the number of ways to reach cell (r, c). You can only arrive from above or from the left, so dp[r][c] = dp[r - 1][c] + dp[r][c - 1], with every cell in the first row and column equal to 1. Fill row by row: O(rows × cols) time. Because each row depends only on the previous one, a single row of size cols is enough, giving O(cols) space.",
       followUps: ["How would obstacles in the grid change the recurrence?"],
+      source: { title: "NeetCode — Unique Paths (LeetCode 62) video", url: "https://www.youtube.com/watch?v=IlEsdxuD4lY" },
     },
     {
       question: "How do you find the maximum sum of a contiguous subarray in O(n)?",
       answer:
-        "Track the best sum of a subarray ending at the current index: either extend the previous subarray or start fresh at the current element, whichever is larger. The answer is the best of these values over all indexes. This is a one-dimensional DP that needs only O(1) space, often called Kadane's algorithm. It works with negative numbers; clarify what to return for an empty array.",
-      code: `def max_subarray(nums):
-    best = current = nums[0]
-    for x in nums[1:]:
-        current = max(x, current + x)
-        best = max(best, current)
-    return best
-
-print(max_subarray([-2, 1, -3, 4, -1, 2, 1, -5, 4]), max_subarray([-3, -1, -2]), max_subarray([5]))
-# -> 6 -1 5`,
+        "Track the best sum of a subarray ending at the current index: either extend the previous subarray or start fresh at the current element, whichever is larger. The answer is the best of these values over all indexes. This one-dimensional DP needs only O(1) space and is usually called Kadane's algorithm. Initialise with the first element, not 0, so all-negative input works; clarify what to return for an empty array.",
       followUps: ["How would you also return the start and end indexes?"],
+      source: { title: "NeetCode — Maximum Subarray (LeetCode 53) video", url: "https://www.youtube.com/watch?v=5WZl3MMT0Eg" },
     },
   ],
   mistakes: [
@@ -214,6 +181,7 @@ print(max_subarray([-2, 1, -3, 4, -1, 2, 1, -5, 4]), max_subarray([-3, -1, -2]),
     "You define state, recurrence and base cases in words before coding.",
     "You implement both memoized and bottom-up versions of the Foundation and Reinforcement problems above.",
     "You state time and space as states × work and reduce space where only recent states are needed.",
+    "Skip this topic if you can already solve House Robber and Coin Change without hints, both top-down and bottom-up.",
   ],
   deprioritize: [
     "Advanced DP: bitmask DP, interval DP, DP on trees, digit DP and optimization techniques.",

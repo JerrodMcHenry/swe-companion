@@ -6,100 +6,74 @@ const topic: Topic = {
   category: "Python",
   phase: "programming-fluency",
   overview:
-    "Python variables are names bound to objects. Objects have types that determine their supported operations and behavior. Python uses dynamic typing, so a name can be rebound to objects of different types.",
+    "A variable is a name bound to an object, and every object has a type (int, float, str, bool, None) that decides what you can do with it. Wrong assumptions about types and missing values cause many beginner bugs, in interviews and at work.",
   whyItMatters:
     "Every program stores and transforms data, and most beginner bugs come from a wrong assumption about a value's type: a number read as text, a missing value treated as zero, or a float compared exactly. In interviews you are rarely asked type trivia on its own, but you are expected to explain the values your code handles, including None, empty inputs and conversions. At work the same skills appear whenever you parse user input, configuration or API data.",
   prerequisites: ["None. This is the first Programming Fluency topic; you only need a way to run Python code."],
   objectives: [
-    "Create and reassign variables, and explain that a variable is a name for an object.",
-    "Use int, float, str, bool and None, and explain when each is appropriate.",
-    "Inspect types with type() and isinstance(), and explain the difference.",
-    "Convert values with int(), float(), str() and bool(), and predict which conversions fail.",
-    "Explain truthiness and distinguish None, 0, False and the empty string.",
-    "Explain why floating-point results such as 0.1 + 0.2 are not exact, and compare floats safely.",
-    "Recognize which basic types are mutable and which are immutable.",
-    "Follow readable naming conventions and avoid shadowing built-in names such as list or str.",
+    "Assignment binds a name to an object; reassigning rebinds the name. Types belong to objects, not names (dynamic typing), and incompatible types are not silently combined (strong typing).",
+    "The basic types int, float, str, bool and None, and when each is appropriate. Python ints have arbitrary precision; bool is a subclass of int.",
+    "type() returns the exact class; isinstance() also accepts subclasses and a tuple of classes.",
+    "Conversions with int(), float(), str() and bool(): int() truncates floats toward zero and raises ValueError for text such as \"4.2\"; input() always returns a string.",
+    "Truthiness: None, False, numeric zero and empty containers are falsy; None is not equal to 0, False or \"\". Check for None with `is None`.",
+    "Floats are binary approximations: 0.1 + 0.2 != 0.3. Compare with math.isclose; use integers or decimal for exact money values.",
+    "Which basic types are immutable (int, float, bool, str, tuple, None) and which are mutable (list, dict, set).",
+    "Naming: readable snake_case names; never shadow built-ins such as list, str or input.",
+    "Skip for now: floating-point bit layout, small-integer caching, string interning and object internals.",
   ],
   depth: "Apply: Use the concept to solve unfamiliar problems and explain relevant trade-offs.",
   resources: [
     {
-      title: "Python Programming MOOC — More about variables",
+      title: "Python Programming MOOC — Part 1: More about variables",
       url: "https://programming-26.mooc.fi/part-1/3-more-about-variables",
       provider: "University of Helsinki",
       type: "Course",
       instructions:
-        "Written lesson. Focus on reassignment, integers and floating-point numbers. Converting input with int() is covered in the next lesson, Arithmetic operations.",
+        "Start here. Read the whole section (reassignment, naming, integers, f-strings, floating-point numbers) and do its exercises. Then read \"Numbers as input\" in the next section, Arithmetic operations, for converting input with int() and float(). Free; reading needs no account, submitting exercises needs a free MOOC.fi account.",
     },
     {
-      title: "Think Python — 2.1 Variables",
-      url: "https://allendowney.github.io/ThinkPython/chap02.html#variables",
-      provider: "Allen B. Downey",
-      type: "Book",
-      instructions:
-        "Written alternative, part 1: variable assignment. Read sections 2.1–2.3 on variables, state diagrams and variable names.",
-    },
-    {
-      title: "Think Python — 1.5 Values and types",
-      url: "https://allendowney.github.io/ThinkPython/chap01.html#values-and-types",
-      provider: "Allen B. Downey",
-      type: "Book",
-      instructions:
-        "Written alternative, part 2: types. Read section 1.5 on int, float and str, type(), and converting with int() and float().",
-    },
-    {
-      title: "CS50's Introduction to Programming with Python — Week 0: Functions",
+      title: "CS50's Introduction to Programming with Python — Week 0: Functions, Variables",
       url: "https://cs50.harvard.edu/python/weeks/0/",
       provider: "Harvard University",
       type: "Video",
-      instructions: "Video alternative. Focus on variables, the str, int and float types, and converting between them.",
+      instructions:
+        "Video alternative to the MOOC section, not an addition. In the lecture, watch the parts the notes title \"Integers or int\", \"Readability Wins\", \"Float Basics\" and \"More on Floats\". Free, no account needed.",
     },
     {
       title: "Python Standard Library — Truth Value Testing",
       url: "https://docs.python.org/3/library/stdtypes.html#truth-value-testing",
       provider: "Python Software Foundation",
       type: "Documentation",
-      instructions: "Short reference listing exactly which values are false. Read this section only (a few minutes).",
+      instructions: "Reference: the exact list of falsy values, which the MOOC does not cover. Read this short section only.",
     },
     {
-      title: "Python Design FAQ — Why are floating-point calculations so inaccurate?",
-      url: "https://docs.python.org/3/faq/design.html#why-are-floating-point-calculations-so-inaccurate",
-      provider: "Python Software Foundation",
-      type: "Documentation",
-      instructions: "Short official explanation of why 0.1 + 0.2 is not exactly 0.3. Read this answer only.",
-    },
-    {
-      title: "Python Standard Library — Built-in Functions",
-      url: "https://docs.python.org/3/library/functions.html",
+      title: "The Python Tutorial — 15. Floating-Point Arithmetic: Issues and Limitations",
+      url: "https://docs.python.org/3/tutorial/floatingpoint.html",
       provider: "Python Software Foundation",
       type: "Documentation",
       instructions:
-        "Reference for type conversion and type checking. Look up int(), float(), str(), bool(), type() and isinstance().",
+        "Reference for why 0.1 + 0.2 is not 0.3 and how to compare floats (math.isclose) or use the decimal module. Read the main part; skip 15.1 Representation Error.",
     },
   ],
   exercises: [
     {
       title: "University of Helsinki, More about variables: Arithmetics; Fix the code: Print a single line",
       url: "https://programming-26.mooc.fi/part-1/3-more-about-variables",
-      note: "Instructions are readable without an account; submitting requires logging in.",
+      note: "Assigning and combining int and str values in output. Instructions are readable without an account; submitting requires a free MOOC.fi account.",
     },
     {
       title: "University of Helsinki, Arithmetic operations: Name and age",
       url: "https://programming-26.mooc.fi/part-1/4-arithmetic-operations",
-      note: "Instructions are readable without an account; submitting requires logging in.",
+      note: "Converting text input to a number before calculating. Submitting requires a free MOOC.fi account.",
     },
     {
-      title: "Predict the type and value of ten expressions involving int, float, str, bool and None.",
-      note: "Code reading. Write your prediction first, then check each one in the interpreter and explain any surprise.",
+      title: "Guido's Gorgeous Lasagna (Exercism, Python track)",
+      url: "https://exercism.org/tracks/python/exercises/guidos-gorgeous-lasagna",
+      note: "Constants, variables and simple arithmetic with automated tests. Instructions are readable without an account; solving in the online editor or CLI needs a free Exercism account.",
     },
     {
-      title: "Write a function that converts a numeric string into an integer and adds ten.",
-      note: "Decide and document what happens for an empty string, surrounding spaces and a value such as \"4.5\".",
-    },
-    { title: "Write a temperature converter between Celsius and Fahrenheit, and test it with 0, 100, -40 and 37.5." },
-    { title: "Repair a program containing mismatched string and integer operations." },
-    {
-      title: "Practical task: read an optional setting that may be missing (None), empty, or a number stored as text, and return a sensible integer default.",
-      note: "Combines None checks, truthiness and conversion. State which inputs count as missing.",
+      title: "Apply it to your own code: review every int() or float() conversion of input in a script you have written.",
+      note: "Decide and handle what happens for \"\", \" 42 \", \"4.5\" and None. No external exercise covers missing-value handling at this level.",
     },
   ],
   interviewQuestions: [
@@ -117,6 +91,7 @@ except TypeError as error:
         "What is the difference between dynamic typing and weak typing?",
         "Do type hints change how Python behaves at runtime?",
       ],
+      source: { title: "Python Language Reference — Objects, values and types", url: "https://docs.python.org/3/reference/datamodel.html#objects-values-and-types" },
     },
     {
       question: "What is the difference between type() and isinstance()?",
@@ -127,6 +102,7 @@ print(isinstance(True, int))     # -> True
 print(type(True) == int)         # -> False
 print(isinstance(3.0, (int, float)))  # -> True`,
       followUps: ["When would checking the exact type be appropriate?"],
+      source: { title: "Python Docs — Built-in functions: isinstance()", url: "https://docs.python.org/3/library/functions.html#isinstance" },
     },
     {
       question: "What is None, and how should you check for it?",
@@ -141,6 +117,7 @@ result = find([1, 2, 3], 5)
 print(result is None)   # -> True
 print(None == 0)        # -> False`,
       followUps: ["Why might `if result:` be the wrong check when 0 is a valid result?"],
+      source: { title: "PEP 8 — Programming Recommendations (comparisons to None)", url: "https://peps.python.org/pep-0008/#programming-recommendations" },
     },
     {
       question: "What is truthiness? Why does bool(\"False\") evaluate to True?",
@@ -151,6 +128,7 @@ print(bool(""))        # -> False
 print(bool([0]))       # -> True
 print(bool(0.0))       # -> False`,
       followUps: ["When is `if items:` clearer than `if len(items) > 0:`, and when is it ambiguous?"],
+      source: { title: "Python Docs — Truth Value Testing", url: "https://docs.python.org/3/library/stdtypes.html#truth-value-testing" },
     },
     {
       question: "Why is 0.1 + 0.2 not equal to 0.3, and how should you compare floats?",
@@ -161,6 +139,7 @@ print(0.1 + 0.2 == 0.3)              # -> False
 print(math.isclose(0.1 + 0.2, 0.3))  # -> True
 print(2 ** 100 > 10 ** 30)           # -> True`,
       followUps: ["How would you store prices in an application?"],
+      source: { title: "The Python Tutorial — Floating-Point Arithmetic: Issues and Limitations", url: "https://docs.python.org/3/tutorial/floatingpoint.html" },
     },
     {
       question: "How do int(), float() and str() conversions behave, and what can go wrong?",
@@ -174,6 +153,7 @@ try:
 except ValueError as error:
     print(type(error).__name__)   # -> ValueError`,
       followUps: ["How would you convert \"4.2\" to an integer?", "What does round(2.5) return, and why might that surprise you?"],
+      source: { title: "Python Docs — Built-in functions: int()", url: "https://docs.python.org/3/library/functions.html#int" },
     },
     {
       question: "Which built-in types are mutable and which are immutable?",
@@ -189,6 +169,7 @@ b = a
 a.append(2)       # changes the one shared list
 print(b)          # -> [1, 2]`,
       followUps: ["Is a tuple that contains a list immutable?"],
+      source: { title: "Python Language Reference — Objects, values and types", url: "https://docs.python.org/3/reference/datamodel.html#objects-values-and-types" },
     },
   ],
   mistakes: [
@@ -200,11 +181,11 @@ print(b)          # -> [1, 2]`,
     "Naming variables list, str, sum or input, which hides the built-in function for the rest of the scope.",
   ],
   mastery: [
-    "Predict the type and value of short expressions without running them, and explain any you got wrong.",
-    "Explain dynamic typing, None and truthiness aloud without notes.",
-    "Convert user-style input safely, including empty, padded and invalid values.",
-    "Diagnose and correct basic TypeError and ValueError problems.",
-    "Answer the interview questions above in your own words, with an example for each.",
+    "You complete the MOOC and Exercism exercises above without help.",
+    "Without running them, you predict the type and value of the snippets in the interview questions (truthiness, float addition, int() conversions, isinstance(True, int)) and explain any you got wrong.",
+    "You can explain dynamic versus strong typing, None and truthiness aloud without notes.",
+    "You can convert user-style input safely, handling empty, padded and invalid values, and fix basic TypeError and ValueError problems.",
+    "Skip this topic if you can already do all of the above.",
   ],
   deprioritize: [
     "Metaclasses, advanced object internals and detailed floating-point representation.",

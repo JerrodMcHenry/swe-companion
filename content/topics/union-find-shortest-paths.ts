@@ -18,42 +18,54 @@ const topic: Topic = {
     "Explain why BFS fails on weighted graphs and implement Dijkstra's algorithm with heapq.",
     "State Dijkstra's complexity, O((V + E) log V) with a binary heap, and its requirement of non-negative weights.",
     "Recognize when Bellman–Ford (negative weights, or a limit on the number of edges) is needed, at a recognition level.",
+    "Skip for now: Floyd–Warshall, A*, minimum spanning trees, network flow and the inverse Ackermann proof.",
   ],
   depth: "Implement: Independently perform appropriately scoped tasks.",
   resources: [
+    {
+      title: "cp-algorithms — Disjoint Set Union",
+      url: "https://cp-algorithms.com/data_structures/disjoint_set_union.html",
+      provider: "cp-algorithms",
+      type: "Article",
+      instructions:
+        "Start here for union-find. Read Build an efficient data structure through Time complexity (naive implementation, path compression, union by size or rank), then Connected components in a graph. Code is in C++ but short. Skip the remaining applications and improvements. Free; no account.",
+    },
+    {
+      title: "NeetCode — Redundant Connection (LeetCode 684) video",
+      url: "https://www.youtube.com/watch?v=FXWRE67PLL0",
+      provider: "NeetCode (YouTube)",
+      type: "Video",
+      instructions:
+        "Video alternative in Python: explains union-find with union by rank and path compression while solving Redundant Connection. Attempt the problem first. Free; no account.",
+    },
     {
       title: "VisuAlgo — Union-Find Disjoint Sets",
       url: "https://visualgo.net/en/ufds",
       provider: "VisuAlgo (National University of Singapore)",
       type: "Visual explanation",
-      instructions: "Watch union and find operations with path compression to see why trees stay shallow.",
+      instructions: "Optional visualisation. Run FindSet and UnionSet to see path compression flatten the trees. Free; no account.",
     },
     {
-      title: "Problem Solving with Algorithms and Data Structures using Python — 7.20 Dijkstra's Algorithm",
-      url: "https://runestone.academy/ns/books/published/pythonds3/Graphs/DijkstrasAlgorithm.html",
-      provider: "Brad Miller and David Ranum (Runestone Academy)",
-      type: "Book",
-      instructions: "Free interactive textbook. Read 7.20 and 7.21 (analysis). The book uses its own priority queue class; use heapq in practice.",
+      title: "cp-algorithms — Dijkstra Algorithm, and Dijkstra on sparse graphs",
+      url: "https://cp-algorithms.com/graph/dijkstra.html",
+      provider: "cp-algorithms",
+      type: "Article",
+      instructions:
+        "Start here for shortest paths. Read Algorithm and Proof, then on the linked \"Dijkstra on sparse graphs\" page read the priority_queue section (the lazy-deletion version that heapq solutions use). Code is in C++. Free; no account.",
     },
     {
-      title: "VisuAlgo — Single-Source Shortest Paths",
-      url: "https://visualgo.net/en/sssp",
-      provider: "VisuAlgo (National University of Singapore)",
-      type: "Visual explanation",
-      instructions: "Optional. Compare BFS, Dijkstra and Bellman–Ford on the same weighted graph.",
-    },
-    {
-      title: "MIT 6.006 (Spring 2020) — Lecture 13: Dijkstra's Algorithm",
-      url: "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/pages/lecture-notes/",
-      provider: "MIT OpenCourseWare",
-      type: "Course",
-      instructions: "Optional university depth for the correctness argument. Lecture 12 covers Bellman–Ford if you need it.",
+      title: "NeetCode — Network Delay Time (LeetCode 743) video",
+      url: "https://www.youtube.com/watch?v=EaphyqKU4PQ",
+      provider: "NeetCode (YouTube)",
+      type: "Video",
+      instructions: "Video alternative in Python: Dijkstra with heapq applied to Network Delay Time. Attempt the problem first. Free; no account.",
     },
   ],
   exercises: [
     {
-      title: "Solve Number of Provinces (from Graphs) again with union-find and compare the code with your DFS version.",
-      note: "Foundation. Same problem, new technique.",
+      title: "Number of Provinces (LeetCode)",
+      url: "https://leetcode.com/problems/number-of-provinces/",
+      note: "Foundation, Medium. Already solved with DFS in Graphs; solve it again with union-find and compare the two. LeetCode needs a free account to submit.",
     },
     {
       title: "Redundant Connection (LeetCode)",
@@ -85,7 +97,7 @@ const topic: Topic = {
     {
       question: "What is union-find, and how do path compression and union by size help?",
       answer:
-        "Union-find keeps a parent pointer for each item; items with the same root are in the same set. find follows parents to the root; union links one root under the other. Without care the trees can become long chains, making find O(n). Path compression points every node on a find path directly at the root, and union by size attaches the smaller tree under the larger. Together they make operations effectively constant time amortized.",
+        "Union-find keeps a parent pointer for each item; items with the same root are in the same set. find follows parents to the root; union links one root under the other. Without care the trees can become long chains, making find O(n). Path compression points nodes on a find path closer to (or directly at) the root, and union by size attaches the smaller tree under the larger. Together they make operations effectively constant time amortized (inverse Ackermann).",
       code: `class UnionFind:
     def __init__(self, n):
         self.parent = list(range(n))
@@ -111,30 +123,14 @@ uf = UnionFind(5)
 uf.union(0, 1); uf.union(3, 4)
 print(uf.find(1) == uf.find(0), uf.find(2) == uf.find(3), uf.union(1, 0))   # -> True False False`,
       followUps: ["How would you count the number of sets at any time?"],
+      source: { title: "cp-algorithms — Disjoint Set Union", url: "https://cp-algorithms.com/data_structures/disjoint_set_union.html" },
     },
     {
       question: "When would you choose union-find over BFS or DFS?",
       answer:
-        "For a fixed graph, BFS or DFS finds connected components in O(V + E) and is often simpler. Union-find shines when edges arrive one at a time and you must answer \"are these connected now?\" after each one, when you need to detect the first edge that creates a cycle in an undirected graph, or when grouping items that share attributes (such as accounts sharing an email) without building an explicit graph.",
-      code: `def redundant_connection(edges):
-    parent = list(range(len(edges) + 1))
-
-    def find(x):
-        while parent[x] != x:
-            parent[x] = parent[parent[x]]
-            x = parent[x]
-        return x
-
-    for a, b in edges:
-        ra, rb = find(a), find(b)
-        if ra == rb:
-            return [a, b]          # a and b were already connected: this edge closes a cycle
-        parent[ra] = rb
-    return []
-
-print(redundant_connection([[1, 2], [1, 3], [2, 3]]), redundant_connection([[1, 2], [2, 3], [3, 4], [1, 4], [1, 5]]))
-# -> [2, 3] [1, 4]`,
+        "For a fixed graph, BFS or DFS finds connected components in O(V + E) and is often simpler. Union-find shines when edges arrive one at a time and you must answer \"are these connected now?\" after each one, when you need the first edge that creates a cycle in an undirected graph (union returns False because both endpoints already share a root, as in Redundant Connection), or when grouping items that share attributes (such as accounts sharing an email) without building an explicit graph.",
       followUps: ["Why does union-find not detect cycles in directed graphs?"],
+      source: { title: "NeetCode — Redundant Connection (LeetCode 684) video", url: "https://www.youtube.com/watch?v=FXWRE67PLL0" },
     },
     {
       question: "Why does BFS not find shortest paths in weighted graphs, and how does Dijkstra fix it?",
@@ -159,26 +155,14 @@ def dijkstra(graph, source):
 graph = {"A": [("B", 4), ("C", 1)], "C": [("B", 2), ("D", 7)], "B": [("D", 1)]}
 print(dijkstra(graph, "A"))   # -> {'A': 0, 'B': 3, 'C': 1, 'D': 4}`,
       followUps: ["What is a stale heap entry, and why is skipping it correct?"],
+      source: { title: "cp-algorithms — Dijkstra on sparse graphs (priority_queue)", url: "https://cp-algorithms.com/graph/dijkstra_sparse.html" },
     },
     {
       question: "When would you need Bellman–Ford instead of Dijkstra?",
       answer:
-        "When edge weights can be negative (Dijkstra's \"popped means final\" argument fails), when you must detect negative cycles, or when the path may use at most k edges, as in \"cheapest flight within k stops\". Bellman–Ford relaxes every edge V - 1 times, costing O(V × E). At entry level, knowing when it is needed is usually enough.",
-      code: `def cheapest_within_k_stops(n, flights, src, dst, k):
-    INF = float("inf")
-    cost = [INF] * n
-    cost[src] = 0
-    for _ in range(k + 1):                 # at most k stops = k + 1 edges
-        updated = cost[:]                  # use last round's costs only
-        for u, v, price in flights:
-            if cost[u] + price < updated[v]:
-                updated[v] = cost[u] + price
-        cost = updated
-    return -1 if cost[dst] == INF else cost[dst]
-
-flights = [[0, 1, 100], [1, 2, 100], [2, 3, 100], [0, 3, 500]]
-print(cheapest_within_k_stops(4, flights, 0, 3, 1), cheapest_within_k_stops(4, flights, 0, 3, 2))   # -> 500 300`,
-      followUps: ["Why does the code copy the cost array in each round?"],
+        "When edge weights can be negative (Dijkstra's \"popped means final\" argument fails), when you must detect negative cycles, or when the path may use at most k edges, as in Cheapest Flights Within K Stops. Bellman–Ford relaxes every edge V - 1 times, costing O(V × E); limiting it to k + 1 rounds, using only the previous round's distances in each round, enforces the edge limit. At entry level, knowing when it is needed is usually enough.",
+      followUps: ["Why must each round use the previous round's distances when there is a stop limit?"],
+      source: { title: "cp-algorithms — Bellman-Ford", url: "https://cp-algorithms.com/graph/bellman_ford.html" },
     },
   ],
   mistakes: [
@@ -193,6 +177,7 @@ print(cheapest_within_k_stops(4, flights, 0, 3, 1), cheapest_within_k_stops(4, f
     "You implement Dijkstra with heapq and explain why non-negative weights are required.",
     "You explain when union-find beats BFS/DFS and when Bellman–Ford is needed.",
     "Only required if your target employers' interviews reach this level; general entry-level preparation can stop at Graphs.",
+    "Skip this topic if your targets do not call for it, or if you can already solve Redundant Connection and Network Delay Time without hints.",
   ],
   deprioritize: [
     "Proofs of the inverse Ackermann bound, Floyd–Warshall, A*, Johnson's algorithm and minimum spanning trees (Kruskal, Prim) beyond recognition.",

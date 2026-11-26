@@ -6,7 +6,7 @@ const topic: Topic = {
   category: "Practical Engineering",
   phase: "build-and-deploy-a-project",
   overview:
-    "A realistic, self-contained take-home assignment to complete on your own under an editorial timebox: clear requirements, acceptance criteria, explicit scope, testing and documentation expectations, evaluation criteria and the follow-up questions you should be ready for. No solution is provided — the value is in doing it and then defending it. The Take-Home Assignments interview guide covers strategy for real take-homes; this topic is the practice assignment and its debrief.",
+    "A self-contained practice take-home under an editorial timebox, with requirements, evaluation criteria and the follow-up questions to prepare for; no solution is provided. Use it, or a real company assignment from a public collection, to practise delivering and then defending working, tested, documented code. Strategy for real take-homes is in the Take-Home Assignments interview guide.",
   whyItMatters:
     "Take-homes appear in some hiring processes but not all: in this curriculum's research they were described in official startup processes (a 4-hour take-home followed by an interview about it at one YC company; a take-home presented on a whiteboard in a recruiter-posted startup process), in candidate reports from AI-focused companies (a 90-minute take-home with a design document; a four-hour build with AI), and Pinterest names a take-home as one place where it may invite AI use. Big Tech early-career processes reviewed here rarely use them. Practising one under time pressure — and defending it — prepares you for take-homes, practical rounds and project discussions alike.",
   prerequisites: ["Automated Testing", "Exceptions and Error Handling", "Modules, Packages and Project Structure", "Git and Pull Requests"],
@@ -17,6 +17,7 @@ const topic: Topic = {
     "Write a README covering how to run it, design decisions, trade-offs, assumptions and what you would do with more time.",
     "Follow the assignment's AI rules exactly, and disclose AI use when it is allowed.",
     "Defend the submission in a follow-up interview: explain decisions, extend it live and answer \"what would you change\".",
+    "Skip for now: polishing beyond the brief (user interfaces, persistence, deployment) and optimal settlement algorithms.",
   ],
   depth: "Apply: Use the concept to solve unfamiliar problems and explain relevant trade-offs.",
   resources: [
@@ -25,7 +26,7 @@ const topic: Topic = {
       url: "https://docs.python.org/3/howto/argparse.html",
       provider: "Python Software Foundation",
       type: "Documentation",
-      instructions: "Reference for building the command-line entry point: positional arguments, options and help. Read the first half (up to combining positional and optional arguments).",
+      instructions: "Start here (reference, only if you build a command-line tool). Building the command-line entry point: positional arguments, options and help. Read the first half (up to combining positional and optional arguments).",
     },
     {
       title: "Python Standard Library — json",
@@ -42,6 +43,16 @@ const topic: Topic = {
         "Brief: friends share expenses on a trip. Build a small Python program (command-line tool or library with an entry point) that reads a JSON file of members and expenses (example in this topic's first question) and reports each member's balance and a list of payments that settles all debts. Functional requirements: (1) each expense is split equally among the members listed in split_between; (2) balances are shown to the cent and sum to zero; (3) settlement suggests who pays whom how much, using no more payments than members minus one; (4) invalid input — unknown member, negative or zero amount, empty split, malformed JSON — produces a clear error message and a non-zero exit code, never a traceback. Out of scope: currencies, persistence, a user interface, authentication. Testing: automated tests for the splitting rules, rounding, settlement and each invalid-input case. Documentation: README with how to run and test, design decisions, assumptions (for example how leftover cents are assigned) and what you would do next. Editorial timebox: 3 hours, including tests and README. Work independently in a new Git repository; commit as you go.",
     },
     {
+      title: "Backend Challenges — public take-home assignments from companies",
+      url: "https://github.com/CollabCodeTech/backend-challenges",
+      note: "Alternative practice source: a community-maintained list (about 80 entries) linking to take-home briefs that companies published openly. Pick one that accepts any language or uses your stack, and apply this topic's timebox, rubric and README expectations. Many entries are from Brazilian companies and some briefs are in Portuguese; links can go stale, and a listing does not mean the company still uses that assignment. Free; no account to read.",
+    },
+    {
+      title: "Frontend Challenges — public front-end take-home assignments",
+      url: "https://github.com/felipefialho/frontend-challenges",
+      note: "For full-stack targets only: the same kind of community list for front-end briefs (many in Portuguese; each row is marked with its language). Same cautions as above.",
+    },
+    {
       title: "Extension for the follow-up: add expenses that are split by percentages or exact amounts, without breaking existing behavior.",
       note: "Do this 30 minutes live, as an interviewer might ask, after submitting the main assignment. Do not prepare it in advance.",
     },
@@ -50,7 +61,7 @@ const topic: Topic = {
       note: "Write down what you would change if you resubmitted.",
     },
     {
-      title: "Repeat the simulation in AI-assisted mode with a different brief (for example a library loan tracker), keeping a verification log, and compare the result with your independent attempt.",
+      title: "Repeat the simulation in AI-assisted mode with a different brief (for example a library loan tracker, or one from the Backend Challenges list), keeping a verification log, and compare the result with your independent attempt.",
       note: "Only for targets that allow AI. Follow AI-Assisted Engineering and Verification.",
     },
   ],
@@ -69,6 +80,7 @@ const topic: Topic = {
   ]
 }`,
       followUps: ["Why might representing money as floats cause problems, and what would you use instead?"],
+      source: { title: "The Python Tutorial — 15. Floating-Point Arithmetic: Issues and Limitations", url: "https://docs.python.org/3/tutorial/floatingpoint.html" },
     },
     {
       question: "Evaluation criteria: how will a reviewer judge the submission?",
@@ -109,6 +121,7 @@ const topic: Topic = {
     "A reviewer could run it and the tests from the README without asking you anything.",
     "You can defend the design for 15–30 minutes and add the uneven-split extension live in about 30 minutes.",
     "You can state what you would improve and which weaknesses you accepted, and why.",
+    "Skip the simulation if you have recently completed and defended a real take-home; use one public assignment instead if you want more practice.",
   ],
   deprioritize: [
     "Polishing beyond the brief (user interfaces, persistence, deployment) unless the assignment asks for it.",

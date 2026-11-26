@@ -168,6 +168,15 @@ export default async function TopicPage({ params }: Props) {
                       <b>Follow-ups:</b> {item.followUps.join(" · ")}
                     </div>
                   )}
+                  {item.source ? (
+                    <div className="small" style={{ marginTop: 6 }}>
+                      <b>Source:</b> <ExternalLink href={item.source.url}>{item.source.title}</ExternalLink>
+                    </div>
+                  ) : (
+                    <div className="xs muted" style={{ marginTop: 6 }}>
+                      Preparation advice (editorial)
+                    </div>
+                  )}
                 </div>
               </details>
             ),

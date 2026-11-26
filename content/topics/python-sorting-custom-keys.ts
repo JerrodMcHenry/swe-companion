@@ -11,13 +11,15 @@ const topic: Topic = {
     "Sorting is a step in many interview solutions: intervals, greedy problems, two-pointer techniques, ranking records and grouping equal items all start with a sort. You are expected to use the built-in sort with an appropriate key rather than writing your own, to state its O(n log n) cost, and to recognize when sorting is unnecessary. At work you sort records for reports, APIs and user interfaces.",
   prerequisites: ["Lists", "Functions and Arguments", "Dictionaries"],
   objectives: [
-    "Choose between sorted() and list.sort(), and explain their return values and mutation.",
-    "Sort with key functions, including built-ins such as len and str.lower, and short lambda expressions.",
-    "Sort in descending order with reverse=True.",
-    "Sort records (tuples and dictionaries) by one or several fields, including mixed ascending and descending order.",
-    "Explain sort stability and use it for multi-step sorts.",
-    "State the time and space complexity of sorting, including that already-sorted input is fast.",
-    "Decide when sorting is useful and when a linear-time alternative such as max() or a set is better.",
+    "sorted() returns a new list from any iterable; list.sort() sorts a list in place and returns None.",
+    "Key functions: called once per item, using built-ins such as len and str.lower or a short lambda.",
+    "Descending order with reverse=True.",
+    "Sorting records (tuples, dictionaries) by several fields with a tuple key, negating numeric fields for mixed ascending and descending order.",
+    "Stability: items with equal keys keep their original order, which makes multi-pass sorts work.",
+    "Cost: O(n log n) time and O(n) extra space; already-sorted input is fast (O(n)).",
+    "When not to sort: min()/max() in O(n), a set for duplicates, heapq.nlargest for a small top k.",
+    "Mixed types such as int and str cannot be compared in Python 3; convert them or use a key.",
+    "Skip for now: implementing sorting algorithms (Unit 2), functools.cmp_to_key and Timsort internals.",
   ],
   depth: "Apply: Use the concept to solve unfamiliar problems and explain relevant trade-offs.",
   resources: [
@@ -27,59 +29,27 @@ const topic: Topic = {
       provider: "Python Software Foundation",
       type: "Documentation",
       instructions:
-        "Written, primary. Read Sorting Basics, Key Functions, Ascending and Descending, and Sort Stability and Complex Sorts. The Operator Module Functions section is optional; skip Decorate-Sort-Undecorate, Comparison Functions and the later sections.",
+        "Start here. Read Sorting Basics, Key Functions, Ascending and Descending, and Sort Stability and Complex Sorts; Strategies For Unorderable Types and Values is useful for messy data. Operator Module Functions is optional. Skip Decorate-Sort-Undecorate, Comparison Functions, Odds and Ends and Partial Sorts. Free; no account needed.",
     },
     {
-      title: "Think Python — 11.7 Comparing and Sorting",
-      url: "https://allendowney.github.io/ThinkPython/chap11.html#comparing-and-sorting",
-      provider: "Allen B. Downey",
-      type: "Book",
-      instructions: "Written alternative. Read section 11.7 on comparing tuples and sorting with key=. Section 9.8 Sorting lists covers the basics.",
-    },
-    {
-      title: "CS50's Introduction to Programming with Python — Week 6: File I/O",
+      title: "CS50's Introduction to Programming with Python — Lecture 6: File I/O",
       url: "https://cs50.harvard.edu/python/weeks/6/",
       provider: "Harvard University",
       type: "Video",
       instructions:
-        "Video alternative. Watch the segment where the lecture sorts student records with sorted(), key= and lambda; the file-handling parts are optional here.",
-    },
-    {
-      title: "Python Design FAQ — Why doesn't list.sort() return the sorted list?",
-      url: "https://docs.python.org/3/faq/design.html#why-doesn-t-list-sort-return-the-sorted-list",
-      provider: "Python Software Foundation",
-      type: "Documentation",
-      instructions: "Short official answer explaining in-place sorting and returning None.",
-    },
-    {
-      title: "Python Standard Library — sorted() and list.sort()",
-      url: "https://docs.python.org/3/library/functions.html#sorted",
-      provider: "Python Software Foundation",
-      type: "Documentation",
-      instructions: "Reference for the key and reverse parameters and the stability guarantee.",
+        "Video alternative. Watch only the segment where the lecture sorts student records with sorted(), key= and a lambda (the notes on the same site show the same code); the file-handling parts belong to a later topic.",
     },
   ],
   exercises: [
     {
-      title: "Sort a list of employee dictionaries by department ascending, then salary descending, then name.",
-      note: "Practical task. Do it once with a tuple key and once with two stable sorts, and confirm both give the same result.",
-    },
-    {
-      title: "Sort words by length, breaking ties alphabetically and ignoring case.",
-    },
-    {
-      title: "Given a list of numbers, decide whether you need to sort to find the three largest, and explain the trade-off.",
-      note: "Technical explanation. Compare sorting, three passes with max(), and heapq.nlargest.",
-    },
-    {
       title: "Sort the People (LeetCode)",
       url: "https://leetcode.com/problems/sort-the-people/",
-      note: "Easy. Pair names with heights using zip, then sort with a key.",
+      note: "Easy. Pair names with heights using zip, then sort with a key. LeetCode needs a free account to submit.",
     },
     {
       title: "Height Checker (LeetCode)",
       url: "https://leetcode.com/problems/height-checker/",
-      note: "Easy. Compare the list with a sorted copy.",
+      note: "Easy. Compare the list with a sorted copy; explain why sorted() rather than sort() here.",
     },
     {
       title: "Sort Array by Increasing Frequency (LeetCode)",
@@ -94,7 +64,7 @@ const topic: Topic = {
     {
       title: "Merge Intervals (LeetCode)",
       url: "https://leetcode.com/problems/merge-intervals/",
-      note: "Medium. Optional stretch and a preview of Unit 2: sorting by start time makes the problem linear.",
+      note: "Medium. Optional stretch and a preview of Unit 2: after sorting by start time, one linear pass merges the intervals (O(n log n) overall).",
     },
   ],
   interviewQuestions: [
@@ -109,6 +79,7 @@ result = scores.sort()
 print(result, scores)   # -> None [70, 82, 95]
 print(sorted("cab"))    # -> ['a', 'b', 'c']`,
       followUps: ["What bug does `items = items.sort()` cause?"],
+      source: { title: "Python Design FAQ — Why doesn't list.sort() return the sorted list?", url: "https://docs.python.org/3/faq/design.html#why-doesn-t-list-sort-return-the-sorted-list" },
     },
     {
       question: "How do key functions work?",
@@ -121,6 +92,7 @@ print(sorted(words, key=len))         # -> ['Kiwi', 'apple', 'banana']
 people = [{"name": "Lin", "age": 31}, {"name": "Ade", "age": 25}]
 print([p["name"] for p in sorted(people, key=lambda p: p["age"])])   # -> ['Ade', 'Lin']`,
       followUps: ["What happens if two items produce the same key?"],
+      source: { title: "Python Sorting HOWTO — Key Functions", url: "https://docs.python.org/3/howto/sorting.html#key-functions" },
     },
     {
       question: "How do you sort by several criteria, some ascending and some descending?",
@@ -131,6 +103,7 @@ print([p["name"] for p in sorted(people, key=lambda p: p["age"])])   # -> ['Ade'
 print(sorted(players, key=lambda p: (-p[1], p[0])))
 # -> [('ana', 90), ('cy', 90), ('ben', 85)]`,
       followUps: ["How would you sort names descending and scores ascending?"],
+      source: { title: "Python Sorting HOWTO — Sort Stability and Complex Sorts", url: "https://docs.python.org/3/howto/sorting.html#sort-stability-and-complex-sorts" },
     },
     {
       question: "What does it mean that Python's sort is stable, and why is it useful?",
@@ -141,6 +114,7 @@ by_priority = sorted(orders, key=lambda o: o[1])
 print(by_priority)
 # -> [('apple', 1), ('kiwi', 1), ('pear', 2), ('fig', 2)]`,
       followUps: ["Name a sorting algorithm that is not stable. (Covered in Unit 2.)"],
+      source: { title: "Python Sorting HOWTO — Sort Stability and Complex Sorts", url: "https://docs.python.org/3/howto/sorting.html#sort-stability-and-complex-sorts" },
     },
     {
       question: "What is the time and space complexity of sorting in Python?",
@@ -150,6 +124,7 @@ print(by_priority)
 print(sorted(data)[:3])   # -> [1, 2, 3]
 print(data[:3])           # -> [10, 9, 8]`,
       followUps: ["Does sorting change the overall complexity of an otherwise O(n) solution?"],
+      source: { title: "Python Docs — Time complexity of built-in types: list", url: "https://docs.python.org/3/builtins/time-complexity.html#list" },
     },
     {
       question: "When is sorting the wrong tool?",
@@ -161,6 +136,7 @@ print(max(nums))                   # -> 9
 print(heapq.nlargest(2, nums))     # -> [9, 7]
 print(len(set(nums)) != len(nums)) # -> False`,
       followUps: ["How would you find the median of a list?"],
+      source: { title: "Python Docs — heapq.nlargest", url: "https://docs.python.org/3/library/heapq.html#heapq.nlargest" },
     },
     {
       question: "Why does sorting a list of mixed types fail?",
@@ -174,6 +150,7 @@ print(sorted([3, "2", 1], key=int))        # -> [1, '2', 3]
 values = [3, None, 1]
 print(sorted(values, key=lambda v: (v is None, v or 0)))   # -> [1, 3, None]`,
       followUps: ["Why does the last key put None at the end?"],
+      source: { title: "Python Sorting HOWTO — Strategies For Unorderable Types and Values", url: "https://docs.python.org/3/howto/sorting.html#strategies-for-unorderable-types-and-values" },
     },
   ],
   mistakes: [
@@ -185,11 +162,11 @@ print(sorted(values, key=lambda v: (v is None, v or 0)))   # -> [1, 3, None]`,
     "Writing your own sorting algorithm in an interview when the built-in sort is allowed.",
   ],
   mastery: [
-    "Sort lists of values and records by one or several fields, ascending and descending, without looking up syntax.",
-    "Explain sorted() versus list.sort(), stability, and why sort returns None.",
-    "State O(n log n) time and O(n) extra space, and when sorted input is faster.",
-    "Recognize when sorting simplifies a problem and when a linear-time alternative is better.",
-    "Solve the linked Easy practice problems independently.",
+    "You solve the four linked LeetCode Easy problems without help, each with an appropriate key.",
+    "You sort records by several fields, some ascending and some descending, without looking up syntax.",
+    "You can explain sorted() versus list.sort(), stability, and why sort returns None.",
+    "You can state O(n log n) time and O(n) extra space, and recognize when a linear-time alternative beats sorting.",
+    "Skip this topic if you can already do all of the above.",
   ],
   deprioritize: [
     "Implementing sorting algorithms such as merge sort and quicksort; they are covered in Data Structures & Algorithms.",

@@ -6,7 +6,7 @@ const topic: Topic = {
   category: "Practical Engineering",
   phase: "practical-software-engineering",
   overview:
-    "Short, repeatable exercises in code you did not write: trace a flow, add missing tests, fix a reported bug, implement a small feature, refactor safely and review a change. Each drill names its starting code, requirements, constraints, acceptance criteria, how to verify and what you should be able to explain afterwards. A worked example shows the whole process once; the independent drills use small public repositories and do not give solutions. Do them in both modes: independently without AI, and AI-assisted with full verification. You do not need to complete every drill.",
+    "Short, repeatable exercises in code you did not write — trace a flow, add tests, fix a bug, add a small feature, refactor safely, review a change — using small public repositories, done once without AI and once with AI plus verification. They turn the practical-engineering topics into routine and mirror the work of a new engineer; you do not need to complete every drill.",
   whyItMatters:
     "Drills turn the skills from Reading and Debugging Unfamiliar Code, Code Review and AI-Assisted Engineering into routine. They mirror the work of a new engineer and the practical rounds candidates report outside Big Tech — debugging an existing codebase (Stripe, Notion, Scale AI) and Capital One's agentic round, reported as fixing a bug and then adding a feature in a large application. They are also the fastest way to build the confidence to change unfamiliar code without breaking it.",
   prerequisites: ["Reading and Debugging Unfamiliar Code", "Code Review", "Automated Testing", "Git and Pull Requests"],
@@ -18,6 +18,7 @@ const topic: Topic = {
     "Refactor without changing behavior, keeping tests green after each step.",
     "Review a proposed change and give prioritized feedback.",
     "Manage limited time: scope first, keep the code working, and say what you would do next.",
+    "Skip for now: large open-source contributions and multi-service codebases.",
   ],
   depth: "Apply: Use the concept to solve unfamiliar problems and explain relevant trade-offs.",
   resources: [
@@ -26,7 +27,7 @@ const topic: Topic = {
       url: "https://github.com/emilybache/GildedRose-Refactoring-Kata",
       provider: "Emily Bache (open-source repository)",
       type: "Repository",
-      instructions: "Starting code for drills 2–4: a small, deliberately messy legacy function with a written requirements file (GildedRoseRequirements.md). Use the python folder. Free; no account needed to clone.",
+      instructions: "Start here: starting code for drills 2–4, a small, deliberately messy legacy function with a written requirements file (GildedRoseRequirements.md at the repository root). Use the python folder only. Free; no account needed to clone.",
     },
     {
       title: "humanize",
@@ -52,7 +53,7 @@ const topic: Topic = {
     {
       title: "Drill 2 — Add missing tests (Gilded Rose)",
       url: "https://github.com/emilybache/GildedRose-Refactoring-Kata",
-      note: "Starting code: python/gilded_rose.py. The tests folder has one deliberately failing placeholder test (test_foo) and an approval test that compares a 30-day text output; install requirements.txt in a virtual environment and run python -m pytest. Requirement: replace the placeholder with characterization tests that pin down the current behavior of update_quality for normal items, Aged Brie, Sulfuras and backstage passes, including the quality limits and sell-by date changes in GildedRoseRequirements.md. Constraints: do not change gilded_rose.py. Acceptance: each rule in the requirements is covered by at least one named test; all tests pass. Verify: temporarily break one rule in the code and confirm a test fails, then undo it. Explain afterwards: which cases were hardest to find and why.",
+      note: "Starting code: python/gilded_rose.py. The tests folder has one deliberately failing placeholder test (test_foo) and an approval test that compares a 30-day text output; install requirements.txt in a virtual environment and run python -m pytest. Requirement: replace the placeholder with characterization tests that pin down the current behavior of update_quality for normal items, Aged Brie, Sulfuras and backstage passes, including the quality limits and sell-by date changes in GildedRoseRequirements.md (repository root). Constraints: do not change gilded_rose.py. Acceptance: each rule in the requirements is covered by at least one named test; all tests pass. Verify: temporarily break one rule in the code and confirm a test fails, then undo it. Explain afterwards: which cases were hardest to find and why.",
     },
     {
       title: "Drill 3 — Implement a small feature (Gilded Rose: Conjured items)",
@@ -81,54 +82,22 @@ const topic: Topic = {
     {
       question: "Worked example: \"Orders of exactly $100 don't get free shipping, but the pricing page says $100 or more ships free.\" How do you diagnose and fix it?",
       answer:
-        "1. Understand: the requirement is total >= 100 ships free. 2. Locate: search for \"free\" or the threshold constant and find free_shipping in shipping.py and its callers. 3. Reproduce: write a test for exactly 100.00 — it fails because the code uses > instead of >=. 4. Root cause: the comparison, not the callers, so the fix belongs here. 5. Minimal fix: change > to >=. 6. Regression tests at the boundary (99.99, 100, 100.01) and the full suite. 7. Explain in the pull request: cause, fix, tests, and that no callers relied on the old behavior. The code shows the module after the fix with its tests.",
+        "The requirement is total >= 100 ships free. Search for the threshold constant to find free_shipping in shipping.py and its callers, then reproduce the report with a test for exactly 100 — it fails because the code uses > instead of >=. The comparison is the root cause, so the minimal fix belongs there. Add boundary tests (99.99, 100, 100.01), run the full suite, and explain in the pull request the cause, the fix, the tests and that no caller relied on the old behavior.",
       code: `FREE_SHIPPING_THRESHOLD = 100
-STANDARD_SHIPPING = 4.99
 
 def free_shipping(total):
-    return total >= FREE_SHIPPING_THRESHOLD     # was: total > FREE_SHIPPING_THRESHOLD
+    return total >= FREE_SHIPPING_THRESHOLD      # was: total > FREE_SHIPPING_THRESHOLD
 
-def shipping_cost(total):
-    return 0.0 if free_shipping(total) else STANDARD_SHIPPING
+def test_boundary():                              # reproduced the report; failed before the fix
+    assert free_shipping(100) and free_shipping(100.01) and not free_shipping(99.99)
 
-def test_exactly_threshold_ships_free():          # reproduced the report; failed before the fix
-    assert shipping_cost(100) == 0.0
-
-def test_just_below_threshold_pays():
-    assert shipping_cost(99.99) == STANDARD_SHIPPING
-
-def test_above_threshold_ships_free():
-    assert shipping_cost(100.01) == 0.0
-
-# pytest result  # -> 3 passed`,
+# pytest result  # -> 1 passed`,
       followUps: ["What if the totals were floats computed from many prices — what boundary problems could appear?"],
     },
     {
       question: "Worked example: add express shipping (a flat $15, never free) to the same module. How do you implement a small feature in existing code?",
       answer:
-        "Read the existing code and tests first and follow their style. Clarify the requirement (does express ever ship free? no). Write tests for the new behavior, including that standard shipping is unchanged. Make the smallest change that fits the existing design — here an optional parameter with the old behavior as its default, so existing callers keep working. Run the whole suite and describe the change, its tests and any open questions in the pull request.",
-      code: `FREE_SHIPPING_THRESHOLD = 100
-STANDARD_SHIPPING = 4.99
-EXPRESS_SHIPPING = 15.00
-
-def free_shipping(total):
-    return total >= FREE_SHIPPING_THRESHOLD
-
-def shipping_cost(total, express=False):          # default keeps existing callers unchanged
-    if express:
-        return EXPRESS_SHIPPING
-    return 0.0 if free_shipping(total) else STANDARD_SHIPPING
-
-def test_express_is_flat_even_above_threshold():
-    assert shipping_cost(250, express=True) == EXPRESS_SHIPPING
-
-def test_express_below_threshold():
-    assert shipping_cost(20, express=True) == EXPRESS_SHIPPING
-
-def test_standard_shipping_unchanged():
-    assert shipping_cost(100) == 0.0 and shipping_cost(20) == STANDARD_SHIPPING
-
-# pytest result  # -> 3 passed`,
+        "Read the existing code and tests first and follow their style. Clarify the requirement (does express ever ship free? no). Write tests for the new behavior, including that standard shipping is unchanged. Make the smallest change that fits the existing design — here an optional parameter with the old behavior as its default (shipping_cost(total, express=False)), so existing callers keep working. Run the whole suite and describe the change, its tests and any open questions in the pull request.",
       followUps: ["A third shipping type is requested next month. When would you change the design?"],
     },
     {
@@ -136,55 +105,33 @@ def test_standard_shipping_unchanged():
       answer:
         "Write characterization tests: tests that record what the code currently does, not what you think it should do. Call it with representative and edge inputs, and assert the actual results. If a result looks wrong, still record it, mark it with a comment and raise it as a question — changing behavior is a separate decision. Once the behavior is pinned down, you can refactor or add features and know immediately if something changed.",
       code: `def legacy_discount(total, code):
-    if code == "SAVE10":
-        return total * 0.9
-    if code == "save10":
-        return total
-    return total
-
-def test_known_code():
-    assert legacy_discount(50, "SAVE10") == 45.0
+    return total * 0.9 if code == "SAVE10" else total
 
 def test_lowercase_code_is_ignored_today():       # surprising: record it and ask whether it is intended
     assert legacy_discount(50, "save10") == 50
 
-def test_unknown_code():
-    assert legacy_discount(50, "NOPE") == 50
-
-# pytest result  # -> 3 passed`,
+# pytest result  # -> 1 passed`,
       followUps: ["You find the code returns a negative total for some inputs. What do you do?"],
+      source: { title: "Wikipedia — Characterization test", url: "https://en.wikipedia.org/wiki/Characterization_test" },
     },
     {
       question: "How do you refactor safely?",
       answer:
         "Make sure tests cover the behavior first (add characterization tests if not). Then change the structure in small steps — rename, extract a function, remove duplication — running the tests after each step, and commit at green points so you can go back. Do not mix behavior changes into a refactor. Stop when the code is clear enough for the task; refactoring is a means to make the next change easy, not a goal in itself.",
-      code: `def price_before(kind, base):
-    if kind == "student":
-        return round(base - base * 0.2, 2)
-    elif kind == "senior":
-        return round(base - base * 0.3, 2)
-    else:
-        return round(base, 2)
-
-DISCOUNTS = {"student": 0.2, "senior": 0.3}
-
-def price_after(kind, base):
-    return round(base * (1 - DISCOUNTS.get(kind, 0)), 2)
-
-cases = [(k, b) for k in ("student", "senior", "adult") for b in (0, 9.99, 100)]
-print(all(price_before(k, b) == price_after(k, b) for k, b in cases))   # same behavior on every case  # -> True`,
       followUps: ["Why compare old and new versions on many inputs rather than one?"],
+      source: { title: "Refactoring.Guru — How to refactor", url: "https://refactoring.guru/refactoring/how-to" },
     },
     {
       question: "How do you balance a quick fix against maintainability?",
       answer:
         "It depends on urgency and risk. For a production incident, ship the smallest safe fix (or roll back) to stop the harm, with a test if at all possible, and record the follow-up work explicitly. Without that urgency, fix the root cause properly. Either way, avoid fixes that hide the problem, keep the change reviewable, and tell the team about trade-offs instead of quietly accumulating debt. A good answer names the trade-off and the follow-up, not just the choice.",
       followUps: ["Your quick fix is merged and the follow-up ticket has been ignored for a month. What do you do?"],
+      source: { title: "Martin Fowler — TechnicalDebt", url: "https://martinfowler.com/bliki/TechnicalDebt.html" },
     },
     {
       question: "In a timed practical round, how do you manage limited time in unfamiliar code?",
       answer:
-        "Spend the first minutes understanding the task, running the code and tests, and finding the relevant files, while talking through what you see. Get to a reproduction or a failing test early. Make small changes and keep the code working, so you always have something to show. If you are stuck on one bug or part, say so, state your current hypothesis and move to the next part rather than going silent. Leave a few minutes to run the tests and summarize what you did, what you verified and what you would do next. Candidates in one reported agentic round ran out of time yet still received offers; clear reasoning matters as well as completion.",
+        "Spend the first minutes on the task, running the code and tests and finding the relevant files, while talking through what you see. Get to a reproduction or a failing test early, then make small changes that keep the code working so you always have something to show. If you are stuck, say so, state your current hypothesis and move to the next part rather than going silent. Leave a few minutes to run the tests and summarize what you did, what you verified and what you would do next: interviewers can credit only the reasoning they see.",
       followUps: ["You have 10 minutes left and the fix is half done. What do you say?"],
     },
   ],
@@ -203,6 +150,7 @@ print(all(price_before(k, b) == price_after(k, b) for k, b in cases))   # same b
     "You can write characterization tests and refactor without changing behavior.",
     "You can review a small change and prioritize your comments.",
     "Keep doing an occasional drill as maintenance; you do not need to finish them all before applying.",
+    "Skip this topic if you already make tested fixes and features in codebases you did not write, with and without AI.",
   ],
   deprioritize: [
     "Large open-source contributions; they are valuable but not required for readiness.",

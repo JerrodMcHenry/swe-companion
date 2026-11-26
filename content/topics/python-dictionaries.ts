@@ -6,78 +6,61 @@ const topic: Topic = {
   category: "Python",
   phase: "programming-fluency",
   overview:
-    "A Python dictionary is a mutable mapping that stores key-value pairs and supports efficient lookup by key. It is implemented as a hash table and preserves insertion order.",
+    "A dictionary maps keys to values with fast average-case lookup. It is Python's hash map: the structure behind counting, grouping and most \"remember what you have seen\" interview solutions.",
   whyItMatters:
     "The hash map is the most frequently useful data structure in coding interviews: counting, grouping, remembering positions (as in Two Sum) and caching all rely on it. At work, dictionaries hold JSON data, configuration, records and lookup tables. You are expected to use them fluently and explain their average-case and worst-case costs.",
   prerequisites: ["Lists", "Loops", "Functions and Arguments", "Strings"],
   objectives: [
-    "Create dictionaries, and add, update, read and delete entries.",
-    "Choose between d[key], d.get(key, default) and `key in d`, and explain KeyError.",
-    "Iterate over keys, values and items, and avoid changing a dictionary's size while iterating.",
-    "Explain which objects can be keys (hashable) and why.",
-    "State average-case O(1) lookup, insertion and deletion, the worst-case O(n), and that insertion is amortized.",
-    "Implement frequency counting and grouping, with plain dictionaries and with collections.Counter and defaultdict.",
-    "Use a dictionary to remember earlier values or positions to avoid nested loops.",
-    "Choose between a dictionary, a set and a list.",
+    "Create, read, update and delete entries; choose between d[key] (raises KeyError), d.get(key, default) and key in d (checks keys, not values).",
+    "Iterate with .items(), .keys() and .values(); know that adding or removing keys while iterating raises RuntimeError.",
+    "Explain hashability: a key needs a hash that never changes and equality consistent with it. Most immutable built-ins are hashable, but immutability alone is not enough — a tuple containing a list is unhashable.",
+    "State the costs: lookup, insertion and deletion are O(1) on average (insertion amortized) and O(n) in the worst case; iteration is O(n).",
+    "Count and group with plain dictionaries, and with collections.Counter and defaultdict.",
+    "Use a dictionary to remember earlier values or positions instead of nested loops, and choose between a dictionary, a set and a list.",
+    "Skip for now: CPython's hash table internals and collision-resolution details.",
   ],
   depth: "Apply: Use the concept to solve unfamiliar problems and explain relevant trade-offs.",
   resources: [
     {
-      title: "The Python Tutorial — Dictionaries",
-      url: "https://docs.python.org/3/tutorial/datastructures.html#dictionaries",
-      provider: "Python Software Foundation",
-      type: "Documentation",
-      instructions:
-        "Written. Read section 5.5 on creating, accessing and deleting entries, then 5.6 Looping Techniques for items(), enumerate() and zip().",
-    },
-    {
-      title: "Python Programming MOOC — Dictionary",
+      title: "Python Programming MOOC — Part 5: Dictionary",
       url: "https://programming-26.mooc.fi/part-5/3-dictionary",
       provider: "University of Helsinki",
       type: "Course",
-      instructions: "Written alternative with exercises on adding, searching, iterating over and removing dictionary entries.",
+      instructions:
+        "Start here. Read the whole section and do its exercises — it covers creating, searching, iterating over and removing entries with immediate practice. Free; reading needs no account, submitting exercises needs a free MOOC.fi account.",
     },
     {
       title: "CS50's Introduction to Programming with Python — Week 2: Loops",
       url: "https://cs50.harvard.edu/python/weeks/2/",
       provider: "Harvard University",
       type: "Video",
-      instructions: "Video alternative. Watch the dictionaries segment near the end of the lecture, which iterates over dictionary keys and values.",
+      instructions: "Video alternative to the MOOC section. Watch only the dictionaries segment near the end of the lecture.",
     },
     {
-      title: "Python Design FAQ — Why must dictionary keys be immutable?",
-      url: "https://docs.python.org/3/faq/design.html#why-must-dictionary-keys-be-immutable",
+      title: "The Python Tutorial — 5.5 Dictionaries and 5.6 Looping Techniques",
+      url: "https://docs.python.org/3/tutorial/datastructures.html#dictionaries",
       provider: "Python Software Foundation",
       type: "Documentation",
-      instructions: "Official explanation of the hashability requirement. Read this answer only.",
+      instructions: "Short reference for the syntax, including items() and dictionary comprehensions. Use it to look things up, not as a second course.",
     },
     {
       title: "Time complexity of operations on built-in types — dict",
       url: "https://docs.python.org/3/builtins/time-complexity.html#dict-frozendict",
       provider: "Python Software Foundation",
       type: "Documentation",
-      instructions:
-        "Reference. Read the introduction, which explains average-case versus worst-case costs, then the table. The costs are for CPython.",
+      instructions: "Reference for the average- versus worst-case costs you will be asked to state. Read the introduction and the dict table.",
     },
   ],
   exercises: [
     {
       title: "University of Helsinki, Dictionary: Histogram; Phone book, version 2; Invert a dictionary",
       url: "https://programming-26.mooc.fi/part-5/3-dictionary",
-      note: "Instructions are readable without an account; submitting requires logging in.",
-    },
-    {
-      title: "Implement a word-frequency counter that ignores case and punctuation, then print the three most common words.",
-      note: "Write it once with a plain dictionary and once with collections.Counter.",
-    },
-    {
-      title: "Group a list of (name, department) records into a dictionary of department to sorted names.",
-      note: "Practical task. Use a loop with conditionals or setdefault, then defaultdict.",
+      note: "Counting, lookup and building a new dictionary from an existing one. Instructions are readable without an account; submitting requires a free account.",
     },
     {
       title: "Two Sum (LeetCode)",
       url: "https://leetcode.com/problems/two-sum/",
-      note: "Easy. Remember each value's index in a dictionary; explain why this beats nested loops.",
+      note: "Easy. Remember each value's index in a dictionary; explain why this beats nested loops. LeetCode needs a free account to submit.",
     },
     {
       title: "Valid Anagram (LeetCode)",
@@ -97,119 +80,82 @@ const topic: Topic = {
     {
       title: "Group Anagrams (LeetCode)",
       url: "https://leetcode.com/problems/group-anagrams/",
-      note: "Medium. Optional stretch: choose a hashable key that represents each group.",
+      note: "Medium, optional stretch: choose a hashable key that represents each group.",
     },
   ],
   interviewQuestions: [
     {
       question: "How does a Python dictionary work?",
       answer:
-        "It is a hash table. When you store a key, Python computes hash(key) and uses it to choose where to keep the key and its value. A lookup hashes the key again, goes to that location and confirms the match with ==. This is why lookups are fast on average and why keys must be hashable. Since Python 3.7, dictionaries also preserve insertion order.",
-      code: `prices = {"apple": 1.2, "pear": 0.8}
-prices["kiwi"] = 0.5          # insert
-prices["apple"] = 1.0         # update
-del prices["pear"]            # delete
-print(prices)                 # -> {'apple': 1.0, 'kiwi': 0.5}`,
+        "It is a hash table. Storing a key computes hash(key) to choose a slot; a lookup hashes the key again, goes to that slot and confirms the match with ==. That is why lookups are fast on average and why keys must be hashable. Since Python 3.7, dictionaries preserve insertion order.",
       followUps: ["What happens when two different keys produce the same hash?"],
+      source: { title: "Python Glossary — hashable", url: "https://docs.python.org/3/glossary.html#term-hashable" },
     },
     {
       question: "What are the average-case and worst-case costs of dictionary operations?",
       answer:
-        "Lookup, insertion, deletion and `key in d` are O(1) on average, assuming a reasonable hash function and that hashing a key is itself O(1). Insertion is amortized because the table occasionally resizes. In the worst case, if many keys collide, these operations degrade to O(n). Iterating over all entries is O(n). In an interview, say \"O(1) on average\" rather than just \"O(1)\".",
-      code: `squares = {n: n * n for n in range(5)}
-print(3 in squares, squares[3])   # -> True 9
-print(len(squares))               # -> 5`,
+        "Lookup, insertion, deletion and key in d are O(1) on average, assuming a reasonable hash function and O(1) hashing of the key; insertion is amortized because the table occasionally resizes. If many keys collide, they degrade to O(n). Say \"O(1) on average\", not just \"O(1)\".",
       followUps: ["Does hashing a long string cost O(1)?"],
+      source: { title: "Python Docs — Time complexity of built-in types: dict", url: "https://docs.python.org/3/builtins/time-complexity.html#dict-frozendict" },
     },
     {
       question: "What types can be dictionary keys?",
       answer:
-        "Any hashable object: one whose hash never changes and which compares equal to objects with the same hash. Immutable built-ins such as int, str, bool, frozenset and tuples of hashable items work. Lists, dictionaries and sets do not, because changing them would change their hash and the dictionary could no longer find them. Values can be anything.",
-      code: `distances = {("A", "B"): 5}      # tuple key
-print(distances[("A", "B")])      # -> 5
+        "Any hashable object. Most immutable built-ins (int, str, frozenset) are hashable; lists, dictionaries and sets are not. Immutability is not the same thing: a tuple is hashable only if everything inside it is, so a tuple containing a list cannot be a key. Values can be anything.",
+      code: `print({("A", "B"): 5}[("A", "B")])   # -> 5
 try:
-    {["A", "B"]: 5}
+    {(1, [2]): "x"}                     # tuple is immutable, but holds a list
 except TypeError as error:
-    print(type(error).__name__)   # -> TypeError`,
-      followUps: ["Can a tuple containing a list be a key?"],
+    print(type(error).__name__)         # -> TypeError`,
+      followUps: ["Why would a mutable key break lookups?"],
+      source: { title: "Python Glossary — hashable", url: "https://docs.python.org/3/glossary.html#term-hashable" },
     },
     {
-      question: "What is the difference between d[key], d.get(key) and `key in d`?",
+      question: "What is the difference between d[key], d.get(key) and key in d?",
       answer:
-        "d[key] returns the value or raises KeyError if the key is missing; use it when the key must exist. d.get(key, default) returns the default (None if omitted) instead of raising, which suits optional keys and counting. `key in d` checks keys, not values, in O(1) on average; `value in d.values()` is an O(n) scan.",
+        "d[key] returns the value or raises KeyError if it is missing — use it when the key must exist. d.get(key, default) returns the default (None if omitted) instead. key in d checks keys, not values, in O(1) on average; value in d.values() is an O(n) scan.",
       code: `user = {"name": "Ana"}
-print(user.get("email"))          # -> None
-print(user.get("email", "n/a"))   # -> n/a
-print("name" in user, "Ana" in user)   # -> True False
-try:
-    user["email"]
-except KeyError as error:
-    print(type(error).__name__)   # -> KeyError`,
+print(user.get("email"), "name" in user, "Ana" in user)   # -> None True False`,
       followUps: ["When is raising KeyError better than returning a default?"],
+      source: { title: "Python Docs — Mapping types: dict.get", url: "https://docs.python.org/3/library/stdtypes.html#dict.get" },
     },
     {
       question: "How do you count frequencies and group items with dictionaries?",
       answer:
-        "For counting, use counts[key] = counts.get(key, 0) + 1, or collections.Counter, which also provides most_common. For grouping, append to a list per key, using setdefault or collections.defaultdict(list). Each approach is O(n) on average for n items. Be able to write the plain version, since some interviewers ask you to avoid library helpers.",
-      code: `from collections import Counter, defaultdict
-words = ["to", "be", "or", "not", "to", "be"]
-counts = {}
-for w in words:
-    counts[w] = counts.get(w, 0) + 1
-print(counts["to"], Counter(words).most_common(1))   # -> 2 [('to', 2)]
-
-by_length = defaultdict(list)
-for w in words:
-    by_length[len(w)].append(w)
-print(dict(by_length))   # -> {2: ['to', 'be', 'or', 'to', 'be'], 3: ['not']}`,
+        "Count with counts[k] = counts.get(k, 0) + 1 or collections.Counter (which adds most_common). Group by appending to a list per key with setdefault or collections.defaultdict(list). Both are O(n) on average. Be able to write the plain version: some interviewers ask you to avoid library helpers.",
       followUps: ["How would you find the k most frequent items?"],
+      source: { title: "Python Docs — collections.Counter", url: "https://docs.python.org/3/library/collections.html#collections.Counter" },
     },
     {
       question: "How do you iterate over a dictionary, and why can deleting during iteration fail?",
       answer:
-        "Iterating over a dictionary yields its keys; use .values() for values and .items() for (key, value) pairs. Adding or removing keys while iterating raises RuntimeError because the dictionary's size changed. Iterate over a copy such as list(d) or build a new dictionary with a comprehension instead.",
-      code: `stock = {"apple": 0, "pear": 3, "kiwi": 0}
-for name, qty in stock.items():
-    print(name, qty)
-# -> apple 0
-# -> pear 3
-# -> kiwi 0
-in_stock = {k: v for k, v in stock.items() if v > 0}
-print(in_stock)   # -> {'pear': 3}`,
+        "Iterating yields keys; use .items() for (key, value) pairs. Adding or removing keys while iterating raises RuntimeError because the size changed. Iterate over a copy such as list(d), or build a new dictionary with a comprehension.",
       followUps: ["Is changing the value of an existing key during iteration allowed?"],
+      source: { title: "The Python Tutorial — 5.6 Looping Techniques", url: "https://docs.python.org/3/tutorial/datastructures.html#looping-techniques" },
     },
     {
       question: "How can a dictionary turn an O(n²) solution into O(n)? Explain Two Sum.",
       answer:
-        "Instead of checking every pair with nested loops, walk the list once and store each value's index in a dictionary. For each number, the partner you need is target - number; checking whether it is already in the dictionary is O(1) on average. The result is O(n) time and O(n) extra space, a classic time-for-space trade.",
-      code: `def two_sum(nums, target):
-    index_of = {}
-    for i, n in enumerate(nums):
-        if target - n in index_of:
-            return [index_of[target - n], i]
-        index_of[n] = i
-    return None
-
-print(two_sum([2, 7, 11, 15], 9))   # -> [0, 1]`,
+        "Instead of checking every pair, walk the list once and store each value's index. For each number, check whether target - number is already stored — O(1) on average — before storing the current number. The result is O(n) time and O(n) extra space: a classic time-for-space trade.",
       followUps: ["Why is the value stored after the check, not before?", "What if the input were sorted?"],
+      source: { title: "NeetCode — Two Integer Sum (explanation video and solution)", url: "https://neetcode.io/problems/two-integer-sum" },
     },
   ],
   mistakes: [
     "Using d[key] for keys that may be missing and getting a KeyError.",
-    "Checking `value in d` when you meant to search values; it checks keys.",
+    "Checking value in d when you meant to search values; it checks keys.",
     "Adding or removing keys while iterating over the dictionary.",
-    "Using a list as a key instead of a tuple.",
+    "Assuming every immutable object is hashable (a tuple containing a list is not).",
     "Saying lookups are always O(1) without the average-case qualification.",
     "Writing {} expecting an empty set.",
   ],
   mastery: [
-    "Create and manipulate dictionaries independently, including safe access with get.",
-    "Solve counting, grouping and lookup problems with plain dictionaries and with Counter and defaultdict.",
-    "Explain average-case O(1) and worst-case O(n) lookup, and why keys must be hashable.",
-    "Explain how a dictionary removes the need for nested loops in problems such as Two Sum.",
-    "Justify choosing a dictionary over a list or set for a specific problem.",
+    "You complete the MOOC dictionary exercises and Two Sum, Valid Anagram and Ransom Note without help.",
+    "You can explain average-case O(1) and worst-case O(n) lookup, and the hashability requirement, without notes.",
+    "You can explain how a dictionary removes nested loops in Two Sum, and justify a dictionary over a list or set for a given problem.",
+    "Skip this topic if you can already do all of the above.",
   ],
-  deprioritize: ["Detailed CPython hash table internals and advanced collision-resolution algorithms."],
+  deprioritize: ["CPython hash table internals and collision-resolution algorithms."],
   keywords: [
     "dictionary",
     "dict",

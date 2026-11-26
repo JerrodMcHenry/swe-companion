@@ -106,24 +106,33 @@ Units organize the Library; the learner's order comes from their target's stages
 
 Programming Fluency replaces Programming Mastery. Preserve the eight published Python topics. The 24 Python topics are classified (R5) as 14 Essential, 6 Working, 2 Conditional, 2 Defer; do not require all 24 before algorithms. Learners fluent in another suitable language may skip redundant Python instruction. Create no additional units without approval.
 
-## Content standard for technical topics
+## Content strategy: curator, not course creator (permanent)
 
-Each applicable topic answers: why do I need this, what exactly to learn, how deeply, best free resources, which interview questions, how to practice, when to move on. Editorial structure (use where valuable; no schema field per heading): overview with interview vs professional relevance · readiness-first checkpoint · essential knowledge · depth · genuine prerequisites only · curated resources · interview questions with model answers · coding problems · practical exercises · common mistakes · readiness criteria and stopping point · what to defer.
+SWE Apprenticeship is a curated, employment-driven roadmap, not a course. The best existing free resources do the teaching. Our value is research, curation, prioritization, sequencing and employment readiness: what to learn, why, how deeply, in what order, where to learn it (exact sections), which exercises to practise, which interview questions to prepare for, when to move on and what to skip.
+
+- **Do not create:** tutorials, lessons, long instructional explanations, worked solutions that an existing explanation covers, original exercise collections, sample applications or services, practice databases, code fixtures, courses, interactive environments or assessment engines. Do not copy substantial third-party material; link and attribute.
+- **Short original material is an exception:** a code snippet only when it is the interview answer (aliasing, mutability, floating point, output prediction, a concise pattern template); a practice prompt only when no suitable external exercise exists (prefer "apply it to your project or an existing repository") — record the gap in the batch notes.
+- **No arbitrary limits:** do not enforce fixed numbers of questions, resources, exercises, words or lines. Keep every genuinely relevant interview question and every resource with distinct value; remove material for irrelevance, duplication or inefficiency, never just to shorten. Do not replace excess with insufficient preparation.
+- **Quality is measured by** resource-selection quality, relevance to the employer and role, sequence efficiency, appropriate depth, study eliminated, interview-preparation quality, practice quality and clear readiness criteria — never by counts of examples, exercises, words, resources or pages.
+
+### Topic tabs
+
+- **Learn** (`overview`, `whyItMatters`, `objectives`, `depth`, `prerequisites`): a concise, technically precise learning checklist with the reason and depth, ending with what to skip for now. Not a lesson.
+- **Resources:** a clear "Start here", then alternatives only when they add distinct value (different format or hands-on practice; alternatives are not cumulative), then references. Each says exactly which sections, chapters or videos to complete and discloses account requirements.
+- **Interview Q&A:** relevant questions with concise, accurate answers (as long as needed, no longer), useful follow-ups and an optional `source` (title and link) supporting the technical answer. A source never establishes that employers ask the question; never claim frequency without evidence.
+- **Practice:** specific external exercises by default (practice platforms, course exercises, repositories), each saying what it demonstrates and any access requirement. Preserve employer-selected exercise titles; when one is replaced, update every roadmap reference.
+- **Ready?** (`mastery`, `mistakes`, `deprioritize`): observable criteria matched to the topic's depth — what to explain, implement, solve and demonstrate, when to skip the topic and what to defer. Editorial benchmarks are labelled and never presented as employer passing standards; keep interview and professional readiness distinct.
 
 ### Interview-driven content
 
-- Every applicable topic prepares learners for its commonly encountered interview questions and patterns, researched during its batch.
-- Prefer questions that are foundational, commonly recommended, employer-supported, repeatedly candidate-reported, realistic and entry-level appropriate. A focused set beats a large bank; no obscure trivia or senior questions without justification.
-- For each topic where useful: conceptual questions, concise accurate model answers, follow-ups, misconceptions, code examples, complexity, coding patterns, practical engineering questions, supported role/company notes. Teach reasoning, not scripts.
-- Coding preparation: the pattern, why it works, how to recognize it, representative problems with direct practice links, expected complexity, edge cases, common mistakes, alternatives. No arbitrary problem counts; aim for solving unfamiliar problems.
+- Prefer questions that are foundational, commonly recommended, employer-supported, repeatedly candidate-reported, realistic and entry-level appropriate; no obscure trivia or senior questions without justification. Teach reasoning, not scripts.
+- Coding preparation: name the pattern, how to recognize it and its complexity, and link the representative problems and an existing explanation; do not reproduce full solutions.
 
 ## Resources and verification
 
-- Recommend the best freely accessible resources (official docs, tutorials, articles, repositories, free books, video, university material, visual explanations, external interactive exercises, practice platforms). Never imply something is free unless the recommended material is.
-- Offer written and video alternatives plus practice where high-quality options exist. Alternatives, not cumulative assignments. Never add inferior resources to fill categories.
-- Be precise: direct links, chapters, sections, video segments, repository files, named exercises, why recommended, what to get from it, approximate effort when estimable, a stopping point. Never assign a whole course when sections suffice.
-- Before publishing: confirm link access, free availability, that the section exists, technical accuracy and relevance; note registration requirements. Distinguish accessibility checks from educational-quality review. Set `verifiedOn` only when verification actually occurred and the specification approves it. Omit or flag unverifiable resources.
-- Keep instructional resources, reference material, exercises and interview preparation distinct (`resources`, `exercises`, `interviewQuestions`, `Resource.type`).
+- Select the strongest freely accessible resource for each competency individually (official docs, university courses, well-known educators, repositories, interactive platforms, interview-prep resources); no provider is assumed best for every topic. Never imply something is free unless the recommended material is.
+- Be precise: direct links to sections, chapters, video segments, repository files or named exercises; never a whole course when sections suffice.
+- Before publishing: confirm link access, free availability, that the section exists and supports the claim, and technical accuracy; note registration requirements. Distinguish link availability from educational-quality review. Set `verifiedOn` only when a person verified it. Omit or flag unverifiable resources.
 - All interactive learning, coding practice and mock interviews are external links.
 
 ## Learning method
@@ -133,7 +142,7 @@ Cycle: learn → recall without notes → explain aloud → implement independen
 ## Practical engineering and AI
 
 - One substantial project, scoped to the target role, is the initial practical assignment; an existing project may satisfy it. Real users optional. Extra projects only for a demonstrated gap.
-- Repeatable existing-codebase drills (read, trace, debug, implement small features, test, review, explain) and timed take-home practice (requirements, deliverables, evaluation criteria, follow-up discussion; time limits are editorial unless an employer documents them).
+- Repeatable existing-codebase drills on existing external repositories (read, trace, debug, implement small features, test, review, explain) and timed take-home practice (requirements, deliverables, evaluation criteria, follow-up discussion; time limits are editorial unless an employer documents them). Prefer existing external assignments and repositories over writing our own.
 - Projects, drills and take-homes are canonical Library content in a Practical Engineering category.
 - **Independent mode:** write, solve, explain, analyze, debug, test and defend without AI. **AI-assisted mode:** give clear requirements, understand and review generated code, catch wrong assumptions and security/reliability issues, validate, test, correct, explain and own the result.
 - AI-assisted engineering is recommended professional preparation; its interview relevance depends on employer and format. Never encourage prohibited AI use in interviews. No AI functionality in the app.
@@ -180,8 +189,8 @@ The product owner exclusively controls staging, commits and pushes. Only read-on
 
 Complete only the currently approved milestone or batch; never start the next without approval. M0–M6, M7.1A and research R1–R6 are complete. Publication batches (each independently useful; behavioral and application guidance may be published earlier when needed):
 
-S0 curriculum restructuring and readiness support · S1 Programming Fluency · S2 Data Structures, Algorithms & Complexity · S3 core interview guides, Google guide, foundational behavioral · S4 OOP & Software Design · S5 Engineering Fundamentals · S6 Practical Engineering · S7 Backend Engineering · S8 remaining company and role guides · S9 Full-Stack · S10 conditional formats, job description gap analysis, interview recovery, remaining hiring content, final validation.
+S0 curriculum restructuring and readiness support · S1 Programming Fluency · S2 Data Structures, Algorithms & Complexity · S3 core interview guides, Google guide, foundational behavioral · S4 OOP & Software Design · S5 Engineering Fundamentals · S6 Practical Engineering · S7 Backend Engineering · S8 remaining company and role guides · S9 Full-Stack · S10 conditional formats, job description gap analysis, interview recovery, remaining hiring content, final validation. Completed out of the original order: T1–T4 target paths, the redesign, S7 Projects and practical assessments, and C1 content correction (curation strategy). S8 is now Backend Engineering, S9 Full-Stack.
 
-Every batch verifies: technical accuracy, employment relevance, entry-level depth, interview question relevance, model-answer and complexity accuracy, resource access/relevance/free availability, prerequisites, useful exercises, observable readiness criteria, stopping points, deferred material, valid internal references, no duplicated content. Company guides carry verification dates for time-sensitive information. No automated monitoring.
+Every batch verifies: technical accuracy, employment relevance, entry-level depth, interview question relevance, model-answer and complexity accuracy, interview source links, resource access/relevance/free availability and section specificity, prerequisites, external practice, observable readiness criteria, stopping points, deferred material, valid internal references, no duplicated content, and no original instructional material where an existing resource suffices. Do not build instructional testing infrastructure (sample apps, databases, package environments) to validate external content; validate the application and any retained snippets only. Company guides carry verification dates for time-sensitive information. No automated monitoring.
 
 After every batch report: (1) what changed, (2) why, (3) files created/modified, (4) file tree where relevant, (5) code and content flow, (6) dependencies, (7) validation results, (8) build results, (9) type-check results, (10) route and reference validation, (11) browser/manual verification, (12) known limitations, (13) unresolved decisions, (14) suggested commit message. Never claim checks that were not performed. Stop and wait for review.

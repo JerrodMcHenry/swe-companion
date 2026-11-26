@@ -106,6 +106,15 @@ for (const topic of topics) {
   seen.add(topic.slug);
 }
 
+// Interview answer sources must be absolute links.
+for (const topic of topics) {
+  for (const item of topic.interviewQuestions) {
+    if (typeof item !== "string" && item.source && !/^https:\/\//.test(item.source.url)) {
+      throw new Error(`Topic "${topic.slug}" has an interview source that is not an https link: ${item.source.url}`);
+    }
+  }
+}
+
 export function getTopic(slug: string) {
   return topics.find((topic) => topic.slug === slug);
 }

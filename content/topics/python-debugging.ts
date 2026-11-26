@@ -11,40 +11,40 @@ const topic: Topic = {
     "Every engineer spends a large share of their time debugging, and some employers run dedicated debugging rounds. In coding interviews, especially those without a compiler, you are expected to dry-run your code and find your own bugs before the interviewer does. This topic covers debugging your own code; Unit 5 applies the same skills to unfamiliar codebases.",
   prerequisites: ["Functions and Arguments", "Loops", "Lists"],
   objectives: [
-    "Read a traceback from the bottom up: exception type, message, then the call chain to the line in your code.",
-    "Distinguish syntax errors, runtime exceptions and logic errors, and know how each is found.",
-    "Recognize common exceptions (NameError, TypeError, ValueError, IndexError, KeyError, AttributeError, ZeroDivisionError, UnboundLocalError) and their usual causes.",
-    "Reproduce a defect with the smallest input that triggers it.",
-    "Inspect variables with print statements and with a debugger (breakpoint(), pdb or an editor's visual debugger), stepping line by line.",
-    "Trace execution by hand on a small example, and find off-by-one and boundary errors.",
-    "Form and test one hypothesis at a time, and use assertions to check assumptions.",
-    "Confirm a fix with a test that failed before the fix.",
+    "Read a traceback from the bottom up: exception type and message, then the call chain to the lowest frame in your own code.",
+    "Syntax errors (reported before running), runtime exceptions (raised while running) and logic errors (no error, wrong result), and how each is found.",
+    "Common exceptions and their usual causes: NameError, TypeError, ValueError, IndexError, KeyError, AttributeError, ZeroDivisionError, UnboundLocalError.",
+    "The debugging process: reproduce with the smallest failing input, state the expected output, form one hypothesis, inspect state, change one thing at a time, then confirm the fix with a test that failed before it.",
+    "Inspecting state with print statements and with a debugger: breakpoint() and the pdb commands n, s, c, p, l and q, or an editor's visual debugger.",
+    "Dry-running code by hand on small and edge-case inputs to find off-by-one, boundary and missing-branch bugs.",
+    "Assertions to check assumptions while debugging.",
+    "Skip for now: try/except and raising exceptions (Exception Handling, Unit 6), logging (Unit 7), profilers and remote debugging.",
   ],
   depth: "Apply: Use the concept to solve unfamiliar problems and explain relevant trade-offs.",
   resources: [
     {
-      title: "The Python Tutorial — Errors and Exceptions (8.1–8.2)",
+      title: "Python Programming MOOC — debugging sections in Parts 2, 3 and 4",
+      url: "https://programming-26.mooc.fi/part-2/1-programming-terminology",
+      provider: "University of Helsinki",
+      type: "Course",
+      instructions:
+        "Start here. Read three short sections: the Debugging section of Part 2 \"Programming terminology\" (this link; print-statement debugging), the Debugging tips section of Part 3 \"Loops with conditions\" (stepping through code in Python Tutor), and The built-in debugger section of Part 4 \"The Visual Studio Code editor, Python interpreter and built-in debugging tool\" (breakpoints and stepping). Skip the rest of those pages if you already know the material. Free; no account needed to read.",
+    },
+    {
+      title: "The Python Tutorial — 8.1 Syntax Errors and 8.2 Exceptions",
       url: "https://docs.python.org/3/tutorial/errors.html",
       provider: "Python Software Foundation",
       type: "Documentation",
       instructions:
-        "Written. Read 8.1 Syntax Errors and 8.2 Exceptions to understand what error messages report. Handling exceptions (8.3 onward) belongs to Exception Handling in Unit 6.",
+        "Read 8.1 and 8.2 to understand what syntax errors and tracebacks report. Stop at 8.3 Handling Exceptions; that belongs to Exception Handling in Unit 6.",
     },
     {
-      title: "Python Programming MOOC — The Visual Studio Code editor, Python interpreter and built-in debugging tool",
-      url: "https://programming-26.mooc.fi/part-4/1-vscode",
-      provider: "University of Helsinki",
-      type: "Course",
-      instructions:
-        "Written. Read the section on the built-in debugger: setting breakpoints, stepping through code and evaluating expressions in the debug console.",
-    },
-    {
-      title: "CS50's Introduction to Programming with Python — Week 3: Exceptions",
+      title: "CS50's Introduction to Programming with Python — Lecture 3: Exceptions",
       url: "https://cs50.harvard.edu/python/weeks/3/",
       provider: "Harvard University",
       type: "Video",
       instructions:
-        "Video alternative. Watch the opening segments on syntax errors, runtime errors and ValueError. The try/except parts preview Exception Handling and are optional now.",
+        "Video alternative for reading errors. Watch the opening segments on syntax errors, runtime errors and ValueError. The try/except parts preview Exception Handling and are optional now.",
     },
     {
       title: "Python Standard Library — pdb: The Python Debugger",
@@ -52,61 +52,29 @@ const topic: Topic = {
       provider: "Python Software Foundation",
       type: "Documentation",
       instructions:
-        "Reference. Read the introduction on starting the debugger with breakpoint(), then the Debugger Commands for n, s, c, p, l, w and q. Skip the rest.",
-    },
-    {
-      title: "Python debugging in VS Code",
-      url: "https://code.visualstudio.com/docs/python/debugging",
-      provider: "Microsoft",
-      type: "Documentation",
-      instructions:
-        "Reference for a visual debugger if you use VS Code: breakpoints, stepping and watching variables. Skip remote and advanced configuration.",
-    },
-    {
-      title: "Python Standard Library — Built-in Exceptions: Concrete exceptions",
-      url: "https://docs.python.org/3/library/exceptions.html#concrete-exceptions",
-      provider: "Python Software Foundation",
-      type: "Documentation",
-      instructions: "Reference. Look up an unfamiliar exception when you meet it; do not read it end to end.",
-    },
-    {
-      title: "Python Tutor",
-      url: "https://pythontutor.com/python-compiler.html",
-      provider: "Philip Guo",
-      type: "Visual explanation",
-      instructions: "Free tool that shows variables after every step. Useful for checking a hand trace of a short buggy function.",
+        "Reference while doing the pdb tutorial exercise. Read the introduction on starting the debugger with breakpoint(), then look up the Debugger Commands n, s, c, p, l, w and q. Skip the rest.",
     },
   ],
   exercises: [
     {
-      title: "A function that averages each student's scores crashes for one student. Reproduce the crash with the smallest input, read the traceback, and fix it with a clear decision about empty input.",
-      note: "Write the failing test first, then the fix.",
-    },
-    {
-      title: "A function meant to count words reports one fewer word than expected for some sentences. Find the inputs that trigger it, trace the loop by hand, and fix the off-by-one error.",
-      note: "Test empty text, one word, repeated spaces and trailing spaces.",
-    },
-    {
-      title: "A function that removes duplicates from a list sometimes skips items. Identify why, using print statements or a debugger, without changing more than necessary.",
-      note: "Reinforces modifying a list while iterating.",
-    },
-    {
-      title: "A function returns None for some inputs instead of a number. Find the missing branch using the debugger to step through a failing call.",
-    },
-    {
-      title: "Set a breakpoint with breakpoint() in a loop, and use n, s, p and c in pdb (or your editor's debugger) to watch a running total change.",
-      note: "Tool practice. Ten minutes is enough; the goal is to be comfortable using a debugger.",
+      title: "pdb Tutorial: fix the dice game (spiside/pdb-tutorial)",
+      url: "https://github.com/spiside/pdb-tutorial",
+      note: "A small, deliberately broken dice-game project with a walkthrough of the core pdb commands (l, s, n, b, r); the README fixes one bug with you and leaves a couple more for you to find. Clone or download the repository; no account needed. It was written for older Python versions: breakpoint() (Python 3.7+) replaces import pdb; pdb.set_trace(), and ll is available.",
     },
     {
       title: "Without running it, dry-run one of your earlier solutions on an edge-case input, writing each variable's value in a table.",
-      note: "Interview practice for rounds without a compiler.",
+      note: "Interview practice for rounds without a compiler. Then step through the same input in Python Tutor (pythontutor.com) or your debugger and compare it with your table.",
+    },
+    {
+      title: "Next time one of your exercise solutions fails a test, debug it with the full process before changing any code.",
+      note: "Reproduce the failure with the smallest input, write down the expected output, read the traceback or inspect state with print or breakpoint(), fix one thing, and keep the failing case as a test.",
     },
   ],
   interviewQuestions: [
     {
       question: "How do you read a Python traceback?",
       answer:
-        "Start at the bottom. The last line gives the exception type and message, which usually names the problem. The lines above show the chain of calls, with the most recent call last, so the frame just above the message is where the error was raised. Find the lowest frame that is in your own code, read that line, and ask which value there could cause the error. Recent Python versions also underline the failing expression.",
+        "From the bottom up. The last line gives the exception type and message. Above it is the call chain, most recent call last, so the frame just above the message is where the error was raised. I find the lowest frame in my own code and ask which value on that line could cause the error; that is often not where the bad value was created. Python 3.11 and later also mark the failing expression.",
       code: `Traceback (most recent call last):
   File "report.py", line 8, in <module>
     report({"ana": [90, 80], "ben": []})
@@ -116,6 +84,7 @@ const topic: Topic = {
     return sum(scores) / len(scores)
 ZeroDivisionError: division by zero`,
       followUps: ["The error is in average(), but where should the fix go?"],
+      source: { title: "The Python Tutorial — 8.2 Exceptions", url: "https://docs.python.org/3/tutorial/errors.html#exceptions" },
     },
     {
       question: "What is the difference between syntax errors, runtime errors and logic errors?",
@@ -130,6 +99,7 @@ try:
 except IndexError as error:
     print(type(error).__name__)   # -> IndexError`,
       followUps: ["Why are logic errors more dangerous in production than crashes?"],
+      source: { title: "Python Programming MOOC — Programming terminology: Debugging", url: "https://programming-26.mooc.fi/part-2/1-programming-terminology" },
     },
     {
       question: "What do common exceptions such as TypeError, ValueError, KeyError and AttributeError usually mean?",
@@ -142,11 +112,12 @@ try:
 except AttributeError as error:
     print(error)   # -> 'NoneType' object has no attribute 'append'`,
       followUps: ["How would you work out where a None came from?"],
+      source: { title: "Python Docs — Built-in Exceptions: Concrete exceptions", url: "https://docs.python.org/3/library/exceptions.html#concrete-exceptions" },
     },
     {
       question: "Walk me through how you would debug a function that returns the wrong result.",
       answer:
-        "First, reproduce it reliably with the smallest input that fails, and state what the correct output should be. Then form a hypothesis about where the values go wrong, and check it by inspecting state: print the relevant variables or set a breakpoint and step through. Change one thing at a time. Once you find the cause, fix it, rerun the failing case, and add a test so the bug cannot return. In an interview, say each step aloud.",
+        "Reproduce it with the smallest failing input and state the correct output. Form one hypothesis about where the values go wrong and check it by inspecting state, with a print or a breakpoint. Change one thing at a time. After fixing the cause, rerun the failing case and keep it as a test so the bug cannot return. In an interview, say each step aloud.",
       code: `def count_words(text):
     count = 0
     for i in range(len(text) - 1):
@@ -162,7 +133,7 @@ print(count_words("one  two"))   # -> 3`,
     {
       question: "When would you use print statements and when a debugger?",
       answer:
-        "Print statements are quick and work anywhere, and are good for checking a hypothesis about one or two values. A debugger lets you pause at a breakpoint, inspect every variable, step into function calls and evaluate expressions without editing the code, which is faster when you do not yet know where to look. Calling breakpoint() starts pdb at that line; editors such as VS Code offer the same features visually. Remove temporary prints, or use logging, before committing.",
+        "Prints are quick and work anywhere, so they suit checking a hypothesis about one or two values. A debugger is better when I do not yet know where to look: I can pause at a breakpoint, inspect every variable, step into calls and evaluate expressions without editing the code. breakpoint() starts pdb; editors such as VS Code do the same visually. Temporary prints come out, or become logging, before committing.",
       code: `def running_total(values):
     total = 0
     for v in values:
@@ -170,6 +141,7 @@ print(count_words("one  two"))   # -> 3`,
         total += v
     return total`,
       followUps: ["What do the pdb commands n, s and c do?"],
+      source: { title: "Python Docs — pdb: Debugger Commands", url: "https://docs.python.org/3/library/pdb.html#debugger-commands" },
     },
     {
       question: "This function should return the largest number in a list. Find the bugs and the tests that reveal them.",
@@ -212,11 +184,12 @@ for case in ["hello world", "", "one", "  padded  input  "]:
     "Assuming a variable holds a certain value instead of checking it.",
   ],
   mastery: [
-    "Explain any traceback from your own code and locate the cause, not just the line that failed.",
-    "Find and fix off-by-one, boundary, wrong-type and missing-branch bugs in short functions.",
-    "Use both print statements and a debugger (breakpoint and stepping) comfortably.",
-    "Dry-run a function by hand on normal and edge-case inputs before running it.",
-    "Add a test that fails before a fix and passes after it.",
+    "You can explain any traceback from your own code and locate the cause, not just the line that failed.",
+    "You find the bugs in the count_words and find_max examples above, and the remaining bugs in the pdb tutorial's dice game, without looking at the solutions.",
+    "You use both print statements and a debugger (breakpoint() and stepping) comfortably.",
+    "You dry-run a function by hand on normal and edge-case inputs before running it.",
+    "You add a test that fails before a fix and passes after it.",
+    "Skip this topic if you can already do all of the above.",
   ],
   deprioritize: [
     "Handling exceptions with try/except/finally and raising your own exceptions; covered in Exception Handling in Unit 6.",

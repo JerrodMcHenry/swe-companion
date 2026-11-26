@@ -20,44 +20,48 @@ const topic: Topic = {
     "Detect cycles: visited sets in undirected graphs (with the parent), and three-state colouring or Kahn's algorithm in directed graphs.",
     "Produce a topological order with Kahn's algorithm (in-degrees and a queue), and detect when none exists.",
     "State O(V + E) time and O(V) space for traversals.",
+    "Skip for now: weighted shortest paths and union-find (see the conditional Union-Find and Shortest Paths topic), minimum spanning trees, strongly connected components and network flow.",
   ],
   depth: "Apply: Use the concept to solve unfamiliar problems and explain relevant trade-offs.",
   resources: [
-    {
-      title: "Graph cheatsheet for coding interviews",
-      url: "https://www.techinterviewhandbook.org/algorithms/graph/",
-      provider: "Tech Interview Handbook",
-      type: "Article",
-      instructions: "Free. Read representations, BFS, DFS, topological sorting and the corner cases. The matrix cheatsheet on the same site covers grid traversal.",
-    },
     {
       title: "Problem Solving with Algorithms and Data Structures using Python — 7.2 Vocabulary, 7.5 Adjacency List, 7.9 BFS, 7.15 DFS, 7.17 Topological Sorting",
       url: "https://runestone.academy/ns/books/published/pythonds3/Graphs/VocabularyandDefinitions.html",
       provider: "Brad Miller and David Ranum (Runestone Academy)",
       type: "Book",
       instructions:
-        "Free interactive textbook. Read 7.2, 7.5, 7.9–7.10, 7.15–7.17. Skip the word-ladder and knight's tour case studies unless you want extra examples.",
+        "Start here, in Python. Read 7.2 (vocabulary), 7.5 (adjacency list), 7.9–7.10 (breadth-first search and its analysis) and 7.15–7.17 (depth-first search, its analysis and topological sorting). Skip the word-ladder and knight's tour case studies. Free; reading needs no account.",
+    },
+    {
+      title: "Graph Algorithms for Technical Interviews — Full Course",
+      url: "https://www.youtube.com/watch?v=tWVWeAqZ0WU",
+      provider: "freeCodeCamp.org (Alvin Zablan)",
+      type: "Video",
+      instructions:
+        "Video alternative (JavaScript; the concepts transfer), about 2 h 10 min. Watch 0:02:23–2:12:05: graph basics, depth-first and breadth-first traversal, has path, undirected path, connected components, largest component, shortest path, island count and minimum island. Write each one in Python as you go. It does not cover topological sort. Free; no account.",
+    },
+    {
+      title: "Graph cheatsheet for coding interviews",
+      url: "https://www.techinterviewhandbook.org/algorithms/graph/",
+      provider: "Tech Interview Handbook",
+      type: "Article",
+      instructions:
+        "Interview checklist and Kahn's algorithm for topological sort, which the interview questions below use. Read Graph representations, Things to look out for, Corner cases and Topological sorting (Kahn's algorithm in Python). Ignore the paid course recommendations at the end. Free; no account.",
     },
     {
       title: "VisuAlgo — Graph Traversal (DFS/BFS)",
       url: "https://visualgo.net/en/dfsbfs",
       provider: "VisuAlgo (National University of Singapore)",
       type: "Visual explanation",
-      instructions: "Optional. Run BFS and DFS on the same graph to compare visit order; the topological sort mode is also useful.",
-    },
-    {
-      title: "MIT 6.006 (Spring 2020) — Lectures 9 and 10: Breadth-First and Depth-First Search",
-      url: "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/pages/lecture-notes/",
-      provider: "MIT OpenCourseWare",
-      type: "Course",
-      instructions: "Optional university depth. Read the Lecture 9 and 10 notes for proofs of correctness and O(V + E).",
+      instructions:
+        "Optional visualisation. Run BFS and DFS on the same graph to compare visit order, then read the Detecting Cycle and Topological Sort e-lecture slides. Skip bipartite checking, cut vertices, SCCs and 2-SAT. Free; no account.",
     },
   ],
   exercises: [
     {
       title: "Flood Fill (LeetCode)",
       url: "https://leetcode.com/problems/flood-fill/",
-      note: "Foundation, Easy. Grid DFS or BFS; handle the case where the new colour equals the old one.",
+      note: "Foundation, Easy. Grid DFS or BFS; handle the case where the new colour equals the old one. LeetCode needs a free account to submit.",
     },
     {
       title: "Number of Islands (LeetCode)",
@@ -104,7 +108,7 @@ const topic: Topic = {
     {
       question: "How do you represent a graph, and which representation would you choose?",
       answer:
-        "An adjacency list maps each node to its neighbours (in Python, a dictionary of lists or sets). It uses O(V + E) space and makes iterating over neighbours efficient, so it is the default for interview problems, which are usually sparse. An adjacency matrix uses O(V²) space but answers \"is there an edge between u and v?\" in O(1). An edge list is how input often arrives; convert it to an adjacency list first.",
+        "An adjacency list maps each node to its neighbours (in Python, a dictionary of lists or sets). It uses O(V + E) space and makes iterating over neighbours efficient, so it is the default for interview problems, which are usually sparse. An adjacency matrix uses O(V²) space but answers \"is there an edge between u and v?\" in O(1). Input often arrives as an edge list; convert it to an adjacency list first. A grid is an implicit graph: neighbours are the in-bounds cells up, down, left and right.",
       code: `from collections import defaultdict
 
 edges = [(0, 1), (0, 2), (1, 2), (2, 3)]
@@ -115,11 +119,12 @@ for u, v in edges:                  # undirected: add both directions
 
 print(dict(graph))   # -> {0: [1, 2], 1: [0, 2], 2: [0, 1, 3], 3: [2]}`,
       followUps: ["How would you store weights on the edges?"],
+      source: { title: "Tech Interview Handbook — Graph cheatsheet: Graph representations", url: "https://www.techinterviewhandbook.org/algorithms/graph/" },
     },
     {
       question: "When do you use BFS versus DFS?",
       answer:
-        "BFS explores in layers from the start, so in an unweighted graph the first time it reaches a node is along a shortest path: use it for minimum steps, levels and spreading processes. DFS goes deep before backtracking: use it for exploring all reachable nodes, connected components, cycle detection, topological ordering and path enumeration. Both run in O(V + E) time with O(V) space for the visited set; recursive DFS can hit Python's recursion limit on large graphs.",
+        "BFS explores in layers from the start, so in an unweighted graph the first time it reaches a node is along a shortest path: use it for minimum steps, levels and spreading processes. DFS goes deep before backtracking: use it to explore everything reachable, count components, detect cycles, produce topological orders and enumerate paths. Both run in O(V + E) time with O(V) space for the visited set. Recursive DFS can hit Python's recursion limit on large graphs or grids; an explicit stack avoids that.",
       code: `from collections import deque
 
 def shortest_steps(graph, start, goal):
@@ -135,110 +140,37 @@ def shortest_steps(graph, start, goal):
     return -1
 
 graph = {0: [1, 2], 1: [3], 2: [3], 3: [4], 4: []}
-print(shortest_steps(graph, 0, 4), shortest_steps(graph, 4, 0), shortest_steps(graph, 0, 0))   # -> 3 -1 0`,
+print(shortest_steps(graph, 0, 4), shortest_steps(graph, 4, 0))   # -> 3 -1`,
       followUps: ["Why does BFS not give shortest paths when edges have different weights?"],
+      source: { title: "cp-algorithms — Breadth First Search", url: "https://cp-algorithms.com/graph/breadth-first-search.html" },
     },
     {
       question: "How do you count islands in a grid?",
       answer:
-        "Treat each land cell as a node connected to its up, down, left and right land neighbours. Scan every cell; when you find unvisited land, increment the count and flood the whole island with DFS or BFS, marking cells visited (or overwriting them if mutation is allowed). Every cell is visited a constant number of times: O(rows × cols) time and up to O(rows × cols) space for the visited set or recursion.",
-      code: `def num_islands(grid):
-    if not grid:
-        return 0
-    rows, cols = len(grid), len(grid[0])
-    seen = set()
-
-    def sink(r, c):
-        stack = [(r, c)]
-        while stack:
-            r, c = stack.pop()
-            if 0 <= r < rows and 0 <= c < cols and grid[r][c] == "1" and (r, c) not in seen:
-                seen.add((r, c))
-                stack.extend([(r + 1, c), (r - 1, c), (r, c + 1), (r, c - 1)])
-
-    count = 0
-    for r in range(rows):
-        for c in range(cols):
-            if grid[r][c] == "1" and (r, c) not in seen:
-                count += 1
-                sink(r, c)
-    return count
-
-grid = ["11000", "11000", "00100", "00011"]
-print(num_islands(grid), num_islands([]), num_islands(["0"]))   # -> 3 0 0`,
+        "Treat each land cell as a node connected to its up, down, left and right land neighbours. Scan every cell; when you find unvisited land, increment the count and flood the whole island with DFS or BFS, marking cells visited (or overwriting them if mutating the input is allowed — say so). Every cell is processed a constant number of times: O(rows × cols) time and up to O(rows × cols) space for the visited set, queue or recursion.",
       followUps: ["Why might an iterative DFS be safer than a recursive one here?"],
+      source: { title: "NeetCode — Number of Islands (LeetCode 200) video", url: "https://www.youtube.com/watch?v=pV2kpPD66nE" },
     },
     {
       question: "What is topological sorting, and how does Kahn's algorithm work?",
       answer:
-        "A topological order lists the nodes of a directed graph so that every edge goes from earlier to later — for example, courses before the courses that require them. It exists only if the graph has no cycle. Kahn's algorithm counts each node's incoming edges, starts a queue with every node of in-degree 0, and repeatedly removes a node, appends it to the order and decrements its neighbours' in-degrees, enqueuing any that reach 0. If the order contains fewer than V nodes, there is a cycle. O(V + E).",
-      code: `from collections import deque
-
-def course_order(n, prerequisites):
-    graph = [[] for _ in range(n)]
-    indegree = [0] * n
-    for course, before in prerequisites:
-        graph[before].append(course)
-        indegree[course] += 1
-    queue = deque(i for i in range(n) if indegree[i] == 0)
-    order = []
-    while queue:
-        node = queue.popleft()
-        order.append(node)
-        for nxt in graph[node]:
-            indegree[nxt] -= 1
-            if indegree[nxt] == 0:
-                queue.append(nxt)
-    return order if len(order) == n else []      # [] means a cycle
-
-print(course_order(4, [[1, 0], [2, 0], [3, 1], [3, 2]]), course_order(2, [[0, 1], [1, 0]]))
-# -> [0, 1, 2, 3] []`,
+        "A topological order lists the nodes of a directed graph so that every edge goes from earlier to later — for example, courses before the courses that require them. It exists only if the graph has no cycle. Kahn's algorithm counts each node's incoming edges, starts a queue with every node of in-degree 0, and repeatedly removes a node, appends it to the order and decrements its neighbours' in-degrees, enqueuing any that reach 0. If the order contains fewer than V nodes, the graph has a cycle. O(V + E).",
       followUps: ["How would you detect a cycle in a directed graph with DFS instead?"],
+      source: { title: "Tech Interview Handbook — Graph cheatsheet: Topological sorting", url: "https://www.techinterviewhandbook.org/algorithms/graph/" },
     },
     {
       question: "Why do graph traversals need a visited set, and when should you mark nodes?",
       answer:
-        "Graphs can contain cycles and multiple paths to the same node; without a visited set, traversal can loop forever or process nodes many times. In BFS, mark a node when you add it to the queue, not when you remove it; otherwise the same node can be queued many times. In trees you do not need a visited set because there are no cycles.",
-      code: `from collections import deque
-
-def reachable(graph, start):
-    visited, queue = {start}, deque([start])
-    while queue:
-        for nxt in graph[queue.popleft()]:
-            if nxt not in visited:
-                visited.add(nxt)
-                queue.append(nxt)
-    return sorted(visited)
-
-cyclic = {"a": ["b"], "b": ["c"], "c": ["a"], "d": []}
-print(reachable(cyclic, "a"), reachable(cyclic, "d"))   # -> ['a', 'b', 'c'] ['d']`,
+        "Graphs can contain cycles and several paths to the same node; without a visited set a traversal can loop forever or process nodes many times. In BFS, mark a node when you add it to the queue, not when you remove it; otherwise the same node can be queued many times. To find every component of a disconnected graph, start a traversal from each unvisited node. A rooted tree traversed through child pointers needs no visited set because it has no cycles; an undirected tree stored as an adjacency list still needs a visited set or a parent check.",
       followUps: ["What changes for an undirected graph when detecting a cycle?"],
+      source: { title: "VisuAlgo — Graph Traversal (DFS/BFS): Avoiding Cycle", url: "https://visualgo.net/en/dfsbfs" },
     },
     {
       question: "What is multi-source BFS?",
       answer:
-        "Start BFS with every source in the queue at distance 0 instead of a single start node. The search then expands from all sources simultaneously, so each cell's distance is to its nearest source. It solves spreading problems such as rotting oranges or distance to the nearest exit in O(V + E), instead of running a separate BFS from each source.",
-      code: `from collections import deque
-
-def minutes_to_rot(grid):
-    rows, cols = len(grid), len(grid[0])
-    queue = deque((r, c) for r in range(rows) for c in range(cols) if grid[r][c] == 2)
-    fresh = sum(row.count(1) for row in grid)
-    minutes = 0
-    while queue and fresh:
-        for _ in range(len(queue)):
-            r, c = queue.popleft()
-            for nr, nc in ((r + 1, c), (r - 1, c), (r, c + 1), (r, c - 1)):
-                if 0 <= nr < rows and 0 <= nc < cols and grid[nr][nc] == 1:
-                    grid[nr][nc] = 2
-                    fresh -= 1
-                    queue.append((nr, nc))
-        minutes += 1
-    return minutes if fresh == 0 else -1
-
-print(minutes_to_rot([[2, 1, 1], [1, 1, 0], [0, 1, 1]]), minutes_to_rot([[2, 1, 1], [0, 1, 1], [1, 0, 1]]))
-# -> 4 -1`,
-      followUps: ["This version mutates the grid. How would you avoid that?"],
+        "Start BFS with every source in the queue at distance 0 instead of a single start node. The search then expands from all sources at once, so each node's distance is to its nearest source. Processing the queue one level at a time counts the steps (minutes, in Rotting Oranges). It solves spreading problems in O(V + E) instead of running a separate BFS from each source.",
+      followUps: ["The usual Rotting Oranges solution mutates the grid. How would you avoid that?"],
+      source: { title: "NeetCode — Rotting Oranges (LeetCode 994) video", url: "https://www.youtube.com/watch?v=y704fEOx0s0" },
     },
   ],
   mistakes: [
@@ -255,6 +187,7 @@ print(minutes_to_rot([[2, 1, 1], [1, 1, 0], [0, 1, 1]]), minutes_to_rot([[2, 1, 
     "You implement grid traversal, component counting and multi-source BFS without reference.",
     "You implement Kahn's algorithm and explain how it detects cycles.",
     "You state O(V + E) time and O(V) space, and handle disconnected graphs and empty input.",
+    "Skip this topic if you can already solve Number of Islands, Rotting Oranges and Course Schedule without hints and explain their complexity.",
   ],
   deprioritize: [
     "Weighted shortest paths (Dijkstra, Bellman–Ford) and union-find; see the conditional Union-Find and Shortest Paths topic.",

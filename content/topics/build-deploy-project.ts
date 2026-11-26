@@ -6,7 +6,7 @@ const topic: Topic = {
   category: "Practical Engineering",
   phase: "build-and-deploy-a-project",
   overview:
-    "One working, tested, deployed and documented project is the strongest practical evidence an entry-level candidate can show. This topic is the assignment: choose a meaningful, appropriately scoped problem, define requirements and acceptance criteria, choose a reasonable stack, design and build the core, test and debug it, keep it in Git, handle configuration, errors and basic security, deploy it and document it — then explain every decision. It demonstrates competence, not complexity. An existing project counts if you can explain, modify, debug and test it on your own.",
+    "The practical assignment: one working, tested, deployed and documented project, scoped to your target role, that you can explain and change on your own. It is the strongest practical evidence an entry-level candidate can show; it demonstrates competence, not complexity, and an existing project counts if you can explain, modify, debug and test it yourself.",
   whyItMatters:
     "Screeners and interviewers use projects as evidence of what you can build, especially when you have little professional experience. Some early-stage companies in this curriculum's research ask to see a deployed project or discuss a take-home, and candidates report project deep dives at several employers. A personal project is not professional experience: describe it honestly, and do not expect it to satisfy a posting's experience requirement. Its value is the competence you can demonstrate and explain.",
   prerequisites: [
@@ -27,6 +27,7 @@ const topic: Topic = {
     "Deploy it so others can use it, or document exactly how to run it if deployment is not appropriate.",
     "Write a README that explains what it does, how to run and test it, the architecture, key decisions and limitations.",
     "Explain how you used AI and how you verified its output, and be able to change any part without AI.",
+    "Skip for now: real users, payments, microservices and a second project unless it closes a specific gap.",
   ],
   depth: "Apply: Use the concept to solve unfamiliar problems and explain relevant trade-offs.",
   resources: [
@@ -35,14 +36,14 @@ const topic: Topic = {
       url: "https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-readmes",
       provider: "GitHub Docs",
       type: "Documentation",
-      instructions: "Short reference for what a README is for and where GitHub shows it. Use this topic's README outline for the content.",
+      instructions: "Start here (short reference): what a README is for and where GitHub shows it. Use this topic's README outline for the content. Free; no account.",
     },
     {
       title: "The Missing Semester — Beyond the Code (2026)",
       url: "https://missing.csail.mit.edu/2026/beyond-code/",
       provider: "MIT",
       type: "Video",
-      instructions: "Optional. The parts on writing for people without your context — comments, READMEs, commit messages — explain why documentation should capture the why, not just the what.",
+      instructions: "Optional video alternative. The parts on writing for people without your context — comments, READMEs, commit messages — explain why documentation should capture the why, not just the what.",
     },
   ],
   exercises: [
@@ -83,24 +84,7 @@ const topic: Topic = {
     {
       question: "How did you define requirements and decide when the project was done?",
       answer:
-        "I wrote a few requirements as user-visible behavior, each with acceptance criteria I could test, and a list of what was out of scope. The project was done when the acceptance criteria passed as automated tests, it was deployed and documented, and I could demo the main workflow. Writing acceptance criteria as tests kept the scope honest.",
-      code: `# Requirement: "A user can log a study session; sessions with zero or negative minutes are rejected."
-import pytest
-
-def log_session(sessions, topic, minutes):
-    if minutes <= 0:
-        raise ValueError("minutes must be positive")
-    sessions.append({"topic": topic, "minutes": minutes})
-    return sessions
-
-def test_logs_a_valid_session():
-    assert log_session([], "graphs", 30) == [{"topic": "graphs", "minutes": 30}]
-
-def test_rejects_zero_minutes():
-    with pytest.raises(ValueError, match="positive"):
-        log_session([], "graphs", 0)
-
-# pytest result  # -> 2 passed`,
+        "I wrote a few requirements as user-visible behavior, each with acceptance criteria I could test, and a list of what was out of scope. The project was done when the acceptance criteria passed as automated tests, it was deployed and documented, and I could demo the main workflow. Writing acceptance criteria as tests kept the scope honest — for example, \"sessions with zero or negative minutes are rejected\" became a pytest.raises test.",
       followUps: ["Which requirement changed while you were building, and how did you handle it?"],
     },
     {
@@ -130,6 +114,7 @@ One-line description and who it is for.
 ## Limitations       — known gaps and what you would do next
 ## AI use            — what was AI-assisted and how it was verified`,
       followUps: ["What would a new teammate still not understand after reading it?"],
+      source: { title: "GitHub Docs — About READMEs", url: "https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-readmes" },
     },
   ],
   mistakes: [
@@ -153,6 +138,7 @@ One-line description and who it is for.
     "7. You can draw the architecture and trace one request through the code from memory.",
     "8. You can add a small feature or fix a bug in it without AI in under an hour.",
     "9. You can name two limitations and what you would improve next.",
+    "Skip this topic if an existing project of yours already meets every item above.",
   ],
   deprioritize: [
     "Real users, payments, custom domains and paid infrastructure — welcome but not required.",

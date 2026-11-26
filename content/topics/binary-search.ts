@@ -18,22 +18,33 @@ const topic: Topic = {
     "Handle rotated sorted arrays by deciding which half is sorted.",
     "State O(log n) time and O(1) space, and include the cost of sorting first if the input is unsorted.",
     "Test empty input, one element, target absent, target at either end, and duplicates.",
+    "Skip for now: ternary search, binary search on real numbers and Median of Two Sorted Arrays.",
   ],
   depth: "Apply: Use the concept to solve unfamiliar problems and explain relevant trade-offs.",
   resources: [
     {
-      title: "Sorting and searching cheatsheet for coding interviews",
-      url: "https://www.techinterviewhandbook.org/algorithms/sorting-searching/",
-      provider: "Tech Interview Handbook",
-      type: "Article",
-      instructions: "Free. Read the binary search section and its techniques; the sorting part is used in Sorting and Intervals.",
+      title: "Hello Interview — Binary Search Overview and Apple Harvest (Koko Eating Bananas)",
+      url: "https://www.hellointerview.com/learn/code/binary-search/overview",
+      provider: "Hello Interview",
+      type: "Interactive",
+      instructions:
+        "Start here. Read Binary Search Overview (intuition, variables, code, edge cases), then Apple Harvest (Koko Eating Bananas) from the left-hand menu for binary search on the answer — attempt Koko Eating Bananas first if you want to practise unaided. About 45 minutes, in Python with step-through visualizations. Free to read without an account; Premium features are not needed.",
     },
     {
-      title: "Problem Solving with Algorithms and Data Structures using Python — 5.4 The Binary Search",
-      url: "https://runestone.academy/ns/books/published/pythonds3/SortSearch/TheBinarySearch.html",
-      provider: "Brad Miller and David Ranum (Runestone Academy)",
-      type: "Book",
-      instructions: "Free interactive textbook. Read the iterative version and its analysis; note why the slicing-based recursive version is not O(log n).",
+      title: "NeetCode — Binary Search (Leetcode 704)",
+      url: "https://www.youtube.com/watch?v=s4DPM8ct1pI",
+      provider: "NeetCode",
+      type: "Video",
+      instructions:
+        "Video alternative to the overview. For the other exercises, the NeetCode roadmap's Binary Search node links a free video per problem; watch one only after attempting the problem.",
+    },
+    {
+      title: "Binary Search — Search in sorted arrays and Search on arbitrary predicate",
+      url: "https://cp-algorithms.com/num_methods/binary_search.html",
+      provider: "Algorithms for Competitive Programming (cp-algorithms)",
+      type: "Article",
+      instructions:
+        "Optional depth for boundary precision. Read Search in sorted arrays (including Lower bound and upper bound) and Search on arbitrary predicate (including Binary search on the answer): they explain the loop invariant that prevents off-by-one errors. Code is C++; the reasoning transfers. Skip Continuous search, Search with powers of 2 and Parallel binary search.",
     },
     {
       title: "Python Standard Library — bisect",
@@ -47,7 +58,7 @@ const topic: Topic = {
     {
       title: "Binary Search (LeetCode)",
       url: "https://leetcode.com/problems/binary-search/",
-      note: "Foundation, Easy. Write it from scratch three times on different days until the boundaries are automatic.",
+      note: "Foundation, Easy. Write it from scratch three times on different days until the boundaries are automatic. LeetCode problems need a free account to submit.",
     },
     {
       title: "Search Insert Position (LeetCode)",
@@ -89,23 +100,9 @@ const topic: Topic = {
     {
       question: "How does binary search work, and why is it O(log n)?",
       answer:
-        "Keep a range [low, high] that must contain the target if it exists. Compare the middle element with the target and discard the half that cannot contain it. Each step halves the range, so after about log₂ n steps it is empty or the target is found: O(log n) time, O(1) extra space for the iterative version. It requires sorted data (or a monotonic condition); sorting first costs O(n log n).",
-      code: `def binary_search(nums, target):
-    low, high = 0, len(nums) - 1          # inclusive range
-    while low <= high:
-        mid = (low + high) // 2
-        if nums[mid] == target:
-            return mid
-        if nums[mid] < target:
-            low = mid + 1
-        else:
-            high = mid - 1
-    return -1
-
-data = [-1, 0, 3, 5, 9, 12]
-print(binary_search(data, 9), binary_search(data, 2), binary_search([], 1), binary_search([4], 4))
-# -> 4 -1 -1 0`,
+        "Keep a range [low, high] that must contain the target if it exists. Compare the middle element with the target and discard the half that cannot contain it. Each step halves the range, so after about log₂ n steps the target is found or the range is empty: O(log n) time and O(1) extra space for the iterative version. It requires sorted data (or a monotonic condition); sorting first costs O(n log n).",
       followUps: ["Why do some languages write mid = low + (high - low) // 2? Does Python need it?"],
+      source: { title: "Hello Interview — Binary Search Overview", url: "https://www.hellointerview.com/learn/code/binary-search/overview" },
     },
     {
       question: "How do you avoid off-by-one errors in binary search?",
@@ -125,81 +122,40 @@ data = [1, 3, 3, 3, 8]
 print(lower_bound(data, 3), lower_bound(data, 4), lower_bound(data, 0), lower_bound(data, 9))
 # -> 1 4 0 5`,
       followUps: ["What does the function return if the target is larger than every element?"],
+      source: { title: "cp-algorithms — Binary Search: Lower bound and upper bound", url: "https://cp-algorithms.com/num_methods/binary_search.html#lower-bound-and-upper-bound" },
     },
     {
       question: "How do you find the first and last occurrence of a value?",
       answer:
-        "Run two boundary searches: the first index with value >= target (lower bound) and the first index with value > target (upper bound). If the lower bound is out of range or not equal to the target, the value is absent; otherwise the occurrences span [lower, upper - 1]. Python's bisect_left and bisect_right compute exactly these bounds. Both searches are O(log n).",
+        "Run two boundary searches: the first index with value >= target (lower bound) and the first index with value > target (upper bound). If the lower bound is out of range or its element is not the target, the value is absent; otherwise the occurrences span [lower, upper - 1]. Python's bisect_left and bisect_right compute exactly these bounds, each in O(log n).",
       code: `from bisect import bisect_left, bisect_right
 
-def search_range(nums, target):
-    left = bisect_left(nums, target)
-    if left == len(nums) or nums[left] != target:
-        return [-1, -1]
-    return [left, bisect_right(nums, target) - 1]
-
-print(search_range([5, 7, 7, 8, 8, 10], 8), search_range([5, 7, 7, 8, 8, 10], 6), search_range([], 0))
-# -> [3, 4] [-1, -1] [-1, -1]`,
+data = [5, 7, 7, 8, 8, 10]
+print(bisect_left(data, 8), bisect_right(data, 8))   # -> 3 5
+print(bisect_left(data, 6), bisect_right(data, 6))   # absent  # -> 1 1`,
       followUps: ["How would you count occurrences of a value in a sorted list in O(log n)?"],
+      source: { title: "Python Docs — bisect.bisect_left", url: "https://docs.python.org/3/library/bisect.html#bisect.bisect_left" },
     },
     {
       question: "What does \"binary search on the answer\" mean?",
       answer:
-        "When you are asked for the minimum (or maximum) value that satisfies a condition, and the condition is monotonic — if speed s works, every faster speed also works — you can binary search over the range of possible answers, using a feasibility check at each midpoint. The cost is O(log(range) × cost of the check). Signals: \"minimum capacity\", \"smallest speed\", \"maximize the minimum\".",
-      code: `import math
-
-def min_eating_speed(piles, hours):
-    def can_finish(speed):
-        return sum(math.ceil(p / speed) for p in piles) <= hours
-
-    low, high = 1, max(piles)
-    while low < high:
-        mid = (low + high) // 2
-        if can_finish(mid):
-            high = mid          # mid works; look for something smaller
-        else:
-            low = mid + 1
-    return low
-
-print(min_eating_speed([3, 6, 7, 11], 8), min_eating_speed([30, 11, 23, 4, 20], 5))
-# -> 4 30`,
-      followUps: ["What is the time complexity in terms of the number of piles and the largest pile?"],
+        "When you are asked for the minimum (or maximum) value that satisfies a condition, and the condition is monotonic — if speed s works, every faster speed also works — you can binary search over the range of possible answers, running a feasibility check at each midpoint. The cost is O(log(range) × cost of the check); for Koko Eating Bananas that is O(n log m) for n piles and largest pile m. Signals: \"minimum capacity\", \"smallest speed\", \"maximize the minimum\".",
+      followUps: ["What are the lowest and highest possible answers, and why?"],
+      source: { title: "Hello Interview — Apple Harvest (Koko Eating Bananas)", url: "https://www.hellointerview.com/learn/code/binary-search/apple-harvest" },
     },
     {
       question: "How do you search in a rotated sorted array?",
       answer:
         "At each step at least one half, [low, mid] or [mid, high], is sorted. Determine which by comparing nums[low] with nums[mid]. If the target lies within the sorted half's range, search there; otherwise search the other half. This keeps O(log n) time, assuming distinct values; duplicates can force a linear scan in the worst case.",
-      code: `def search_rotated(nums, target):
-    low, high = 0, len(nums) - 1
-    while low <= high:
-        mid = (low + high) // 2
-        if nums[mid] == target:
-            return mid
-        if nums[low] <= nums[mid]:                  # left half sorted
-            if nums[low] <= target < nums[mid]:
-                high = mid - 1
-            else:
-                low = mid + 1
-        else:                                       # right half sorted
-            if nums[mid] < target <= nums[high]:
-                low = mid + 1
-            else:
-                high = mid - 1
-    return -1
-
-print(search_rotated([4, 5, 6, 7, 0, 1, 2], 0), search_rotated([4, 5, 6, 7, 0, 1, 2], 3), search_rotated([1], 1))
-# -> 4 -1 0`,
-      followUps: ["How would you find the rotation point itself?"],
+      followUps: ["How would you find the rotation point (the minimum) itself?"],
+      source: { title: "Hello Interview — Search in Rotated Sorted Array", url: "https://www.hellointerview.com/learn/code/binary-search/search-in-rotated-sorted-array" },
     },
     {
       question: "When is binary search not appropriate?",
       answer:
-        "When the data is unsorted and you search only once (a linear scan is O(n), cheaper than sorting at O(n log n)); when the condition is not monotonic; or when the data structure does not support O(1) access by index, such as a linked list. For many lookups by exact key, a set or dictionary gives O(1) average time without sorting.",
-      code: `values = [9, 2, 7, 4]
-print(7 in values)                 # one search on unsorted data: O(n) is fine  # -> True
-lookup = set(values)
-print(all(v in lookup for v in (2, 4, 9)))   # many exact lookups: use a set  # -> True`,
+        "When the data is unsorted and you search only once (a linear scan is O(n), cheaper than sorting at O(n log n)); when the condition is not monotonic; or when the data structure does not support O(1) access by index, such as a linked list. For many lookups by exact key, a set or dictionary gives O(1) average time without sorting; binary search is still preferable when you need nearest values, ranges or insertion positions.",
       followUps: ["When would you still sort and use binary search instead of a set?"],
+      source: { title: "Python Docs — Time complexity of built-in types: list", url: "https://docs.python.org/3/builtins/time-complexity.html#list" },
     },
   ],
   mistakes: [
@@ -214,6 +170,7 @@ print(all(v in lookup for v in (2, 4, 9)))   # many exact lookups: use a set  # 
     "You use bisect correctly and know what each function returns.",
     "You recognize answer-space problems and write the feasibility check.",
     "You test empty, single-element, absent, boundary and duplicate cases.",
+    "Skip this topic if you can already write lower and upper bound searches from scratch and solve Koko Eating Bananas without hints.",
   ],
   deprioritize: [
     "Ternary search, fractional cascading and binary search on floating-point answers with precision analysis.",

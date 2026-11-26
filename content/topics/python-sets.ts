@@ -11,23 +11,25 @@ const topic: Topic = {
     "\"Have I seen this before?\" is one of the most common steps in coding interview problems: detecting duplicates, tracking visited items, or comparing two collections. A set turns that step from an O(n) scan into an O(1) average lookup. At work, sets are used to remove duplicates, compare permissions or IDs, and validate input against allowed values.",
   prerequisites: ["Lists", "Loops", "Strings"],
   objectives: [
-    "Create sets with set() and literals, and remember that {} creates an empty dictionary, not a set.",
-    "Add and remove items with add, remove, discard and pop, and know which raise errors.",
-    "Use membership tests and explain why they are O(1) on average and O(n) in the worst case.",
-    "Explain hashability: which objects can be set members, and why lists cannot.",
-    "Remove duplicates from a sequence, with and without preserving order.",
-    "Use union, intersection, difference and symmetric difference, and state their costs.",
-    "Choose between a set, a list and a dictionary.",
-    "Recognize frozenset as an immutable, hashable set.",
+    "Create sets with set() and literals; {} is an empty dictionary, not a set.",
+    "add, remove, discard and pop: remove raises KeyError for a missing item, discard does not.",
+    "Membership is O(1) on average and O(n) in the worst case; building a set from n items is O(n).",
+    "Hashability: members need a hash that never changes and equality consistent with it, so lists, dictionaries and sets cannot be members; tuples can only if everything inside them is hashable.",
+    "Remove duplicates with set() (order lost) or dict.fromkeys() / a seen set (order kept).",
+    "Union, intersection, difference and symmetric difference, and their costs.",
+    "Sets are unordered: sort the result when output order matters.",
+    "Choosing between a set, a list and a dictionary; frozenset as an immutable, hashable set.",
+    "Skip for now: hash table internals, and rarely used methods beyond recognizing them.",
   ],
   depth: "Apply: Use the concept to solve unfamiliar problems and explain relevant trade-offs.",
   resources: [
     {
-      title: "The Python Tutorial — Sets",
+      title: "The Python Tutorial — 5.4 Sets",
       url: "https://docs.python.org/3/tutorial/datastructures.html#sets",
       provider: "Python Software Foundation",
       type: "Documentation",
-      instructions: "Written. Read section 5.4 (short) on creating sets, membership and set operations; set comprehensions are optional.",
+      instructions:
+        "Start here. A short section on creating sets, membership and the set operators; set comprehensions are optional. Then do Cater Waiter (Exercises) for hands-on practice. Free; no account needed.",
     },
     {
       title: "CS50's Introduction to Programming with Python — Lecture 9: Et Cetera (set)",
@@ -38,45 +40,31 @@ const topic: Topic = {
         "Video and notes alternative. Watch or read only the opening \"set\" section, which uses a set to remove duplicate values; the rest of the lecture covers other topics.",
     },
     {
-      title: "Python Standard Library — Set Types: set, frozenset",
-      url: "https://docs.python.org/3/library/stdtypes.html#set-types-set-frozenset",
-      provider: "Python Software Foundation",
-      type: "Documentation",
-      instructions: "Reference for every set method and operator. Look up methods as you need them; do not read it end to end.",
-    },
-    {
       title: "Time complexity of operations on built-in types — set, frozenset",
       url: "https://docs.python.org/3/builtins/time-complexity.html#set-frozenset",
       provider: "Python Software Foundation",
       type: "Documentation",
       instructions:
-        "Reference table of set operation costs in CPython. Read the introduction on average versus worst case, then the table.",
+        "Reference for the costs you will be asked to state. Read the paragraph on average versus worst case at the top of the page, then the set table.",
     },
     {
-      title: "Python Programming FAQ — How do you remove duplicates from a list?",
-      url: "https://docs.python.org/3/faq/programming.html#how-do-you-remove-duplicates-from-a-list",
+      title: "Python Standard Library — Set Types: set, frozenset",
+      url: "https://docs.python.org/3/library/stdtypes.html#set-types-set-frozenset",
       provider: "Python Software Foundation",
       type: "Documentation",
-      instructions: "Short official answer showing order-losing and order-preserving approaches.",
+      instructions: "Reference for every set method and operator. Look methods up as you need them; do not read it end to end.",
     },
   ],
   exercises: [
     {
-      title: "Write a function that returns the first repeated word in a sentence, ignoring case and punctuation.",
-      note: "Combines strings and sets. Return None if nothing repeats; state the time complexity.",
-    },
-    {
-      title: "Given two lists of user IDs, return the IDs present in both, only in the first, and in exactly one of them.",
-      note: "Practical task. Use set operations and return sorted lists so the output is predictable.",
-    },
-    {
-      title: "Explain, for an input of size n checked against a list of size m, how the cost changes when you convert the list to a set first.",
-      note: "Technical explanation. Include the cost of building the set.",
+      title: "Cater Waiter (Exercism Python track)",
+      url: "https://exercism.org/tracks/python/exercises/cater-waiter",
+      note: "Concept exercise: deduplicating ingredient lists, membership checks and union, intersection and difference, with automated tests. Free; needs a free Exercism account to use the online editor.",
     },
     {
       title: "Contains Duplicate (LeetCode)",
       url: "https://leetcode.com/problems/contains-duplicate/",
-      note: "Easy. Compare the set solution with sorting and with a nested-loop solution.",
+      note: "Easy. Compare the set solution with sorting and with a nested-loop solution. LeetCode needs a free account to submit.",
     },
     {
       title: "Jewels and Stones (LeetCode)",
@@ -91,7 +79,7 @@ const topic: Topic = {
     {
       title: "Intersection of Two Arrays (LeetCode)",
       url: "https://leetcode.com/problems/intersection-of-two-arrays/",
-      note: "Easy. Solve it with set operations, then state the complexity.",
+      note: "Easy. Solve it with set operations, then state the complexity, including the cost of building the sets.",
     },
   ],
   interviewQuestions: [
@@ -107,6 +95,7 @@ for n in [3, 1, 3, 2, 1]:
 # -> duplicate: 3
 # -> duplicate: 1`,
       followUps: ["How would you return the duplicates in the order they first repeated?"],
+      source: { title: "The Python Tutorial — 5.4 Sets", url: "https://docs.python.org/3/tutorial/datastructures.html#sets" },
     },
     {
       question: "Why is membership testing faster in a set than in a list?",
@@ -117,11 +106,12 @@ lookup = set(names)
 print(len(names), len(lookup))   # -> 3000 3
 print("cy" in lookup)            # -> True`,
       followUps: ["For a single lookup, is converting a list to a set worth it?"],
+      source: { title: "Python Docs — Time complexity of built-in types: set", url: "https://docs.python.org/3/builtins/time-complexity.html#set-frozenset" },
     },
     {
       question: "What can be stored in a set? Why can't a list be a set member?",
       answer:
-        "Set members must be hashable: their hash value must never change while they are stored, and equal objects must have equal hashes. Immutable built-ins such as int, float, str, tuples of hashable items and frozenset are hashable. Lists, dictionaries and sets are mutable and unhashable, so adding one raises TypeError; convert a list to a tuple if you need to store it.",
+        "Set members must be hashable: their hash value must never change while they are stored, and equal objects must have equal hashes. Most immutable built-ins (int, float, str, frozenset) are hashable, and a tuple is hashable only if everything inside it is. Lists, dictionaries and sets are unhashable, so adding one raises TypeError; convert a list to a tuple if you need to store it.",
       code: `points = {(0, 0), (1, 2)}
 print((1, 2) in points)   # -> True
 try:
@@ -129,6 +119,7 @@ try:
 except TypeError as error:
     print(type(error).__name__)   # -> TypeError`,
       followUps: ["Why would a changing hash break a set?"],
+      source: { title: "Python Glossary — hashable", url: "https://docs.python.org/3/glossary.html#term-hashable" },
     },
     {
       question: "How do you remove duplicates from a list? Does the order matter?",
@@ -138,6 +129,7 @@ except TypeError as error:
 print(sorted(set(items)))           # -> ['a', 'b', 'c']
 print(list(dict.fromkeys(items)))   # -> ['b', 'a', 'c']`,
       followUps: ["How would you remove duplicates from a list of lists?"],
+      source: { title: "Python FAQ — How do you remove duplicates from a list?", url: "https://docs.python.org/3/faq/programming.html#how-do-you-remove-duplicates-from-a-list" },
     },
     {
       question: "How do set operations work, and what do they cost?",
@@ -150,6 +142,7 @@ print(a & b)           # -> {3}
 print(sorted(a - b))   # -> [1, 2]
 print(sorted(a ^ b))   # -> [1, 2, 4]`,
       followUps: ["How would you check whether one set is contained in another?"],
+      source: { title: "Python Docs — Time complexity of built-in types: set", url: "https://docs.python.org/3/builtins/time-complexity.html#set-frozenset" },
     },
     {
       question: "What is the difference between a set and a dictionary?",
@@ -161,6 +154,7 @@ for ch in "aab":
     counts[ch] = counts.get(ch, 0) + 1
 print(counts)   # -> {'a': 2, 'b': 1}`,
       followUps: ["Which would you use to find the first non-repeating character, and why?"],
+      source: { title: "The Python Tutorial — 5.4 Sets", url: "https://docs.python.org/3/tutorial/datastructures.html#sets" },
     },
     {
       question: "Are sets ordered?",
@@ -169,6 +163,7 @@ print(counts)   # -> {'a': 2, 'b': 1}`,
       code: `tags = {"python", "api", "sql"}
 print(sorted(tags))   # -> ['api', 'python', 'sql']`,
       followUps: ["Why might a test that prints a set pass on one machine and fail on another?"],
+      source: { title: "Python Standard Library — Set Types: set, frozenset", url: "https://docs.python.org/3/library/stdtypes.html#set-types-set-frozenset" },
     },
   ],
   mistakes: [
@@ -180,11 +175,12 @@ print(sorted(tags))   # -> ['api', 'python', 'sql']`,
     "Calling remove() for an item that may be absent; discard() does not raise.",
   ],
   mastery: [
-    "Use sets for membership, uniqueness and comparisons without looking up syntax.",
-    "Explain average-case O(1) and worst-case O(n) membership, and when building a set pays off.",
-    "Explain hashability and convert unhashable data into a form a set can store.",
-    "Remove duplicates both with and without preserving order.",
-    "Choose between a list, a set and a dictionary for a problem and justify the choice.",
+    "You complete Cater Waiter and the four LeetCode Easy problems without help, and state each solution's complexity.",
+    "You can explain average-case O(1) and worst-case O(n) membership, and when building a set pays off.",
+    "You can explain hashability and convert unhashable data (such as a list) into a form a set can store.",
+    "You remove duplicates both with and without preserving order.",
+    "You can choose between a list, a set and a dictionary for a problem and justify the choice.",
+    "Skip this topic if you can already do all of the above.",
   ],
   deprioritize: [
     "Hash table internals such as probing strategies and resizing thresholds.",

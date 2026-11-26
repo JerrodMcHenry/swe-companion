@@ -16,10 +16,12 @@ export type Exercise = {
   note?: string; // Pattern, expected complexity or practice instructions.
 };
 
-// A plain question, or a question with a model answer, optional follow-ups and an optional code example.
+// A plain question, or a question with a model answer, optional follow-ups, an optional code example and an
+// optional source: the resource that supports the answer technically (not evidence that employers ask it).
+// Answers without a source are shown as editorial preparation advice.
 export type InterviewQuestion =
   | string
-  | { question: string; answer: string; followUps?: string[]; code?: string };
+  | { question: string; answer: string; followUps?: string[]; code?: string; source?: { title: string; url: string } };
 
 export type Topic = {
   slug: string; // URL segment: /library/<slug>

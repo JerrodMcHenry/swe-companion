@@ -19,43 +19,47 @@ const topic: Topic = {
     "Recognize and implement a monotonic stack for next-greater or next-smaller element problems.",
     "Implement a queue with two stacks and explain its amortized cost.",
     "Use a queue for level-by-level processing (introduced here, used in Trees and Graphs).",
+    "Skip for now: monotonic deques, circular buffers and thread-safe queues.",
   ],
   depth: "Apply: Use the concept to solve unfamiliar problems and explain relevant trade-offs.",
   resources: [
     {
-      title: "Stack cheatsheet for coding interviews",
-      url: "https://www.techinterviewhandbook.org/algorithms/stack/",
-      provider: "Tech Interview Handbook",
-      type: "Article",
-      instructions: "Free. Read the introduction, operation costs and corner cases. The queue cheatsheet on the same site is a short companion.",
+      title: "Hello Interview — Stack Overview and Monotonic Stack",
+      url: "https://www.hellointerview.com/learn/code/stack/overview",
+      provider: "Hello Interview",
+      type: "Interactive",
+      instructions:
+        "Start here. Read Stack Overview (using a list as a stack, nested sequences, Valid Parentheses), then Monotonic Stack from the left-hand menu (next greater and next smaller element); about 40 minutes, in Python with step-through visualizations. Skip the other problem pages until you have attempted the matching exercises. Free to read without an account; Premium features are not needed.",
     },
     {
-      title: "Problem Solving with Algorithms and Data Structures using Python — 3.3 Stacks to 3.6 Simple Balanced Parentheses",
-      url: "https://runestone.academy/ns/books/published/pythonds3/BasicDS/WhatisaStack.html",
-      provider: "Brad Miller and David Ranum (Runestone Academy)",
-      type: "Book",
-      instructions: "Free interactive textbook. Read 3.3–3.7 on stacks and balanced symbols, then 3.10–3.12 on queues. Skip the simulation sections.",
-    },
-    {
-      title: "Python Standard Library — collections.deque",
-      url: "https://docs.python.org/3/library/collections.html#collections.deque",
+      title: "The Python Tutorial — 5.1.1 Using Lists as Stacks and 5.1.2 Using Lists as Queues",
+      url: "https://docs.python.org/3/tutorial/datastructures.html#using-lists-as-stacks",
       provider: "Python Software Foundation",
       type: "Documentation",
-      instructions: "Reference. Read the opening paragraphs on O(1) appends and pops at both ends and the note that indexing in the middle is O(n).",
+      instructions:
+        "Read both short subsections (5 minutes): why a list is a good stack but a poor queue, and why collections.deque is the queue to use. This is the queue half of the topic; queues are used heavily later in Trees and Graphs (breadth-first search).",
+    },
+    {
+      title: "NeetCode roadmap — Stack",
+      url: "https://neetcode.io/roadmap",
+      provider: "NeetCode",
+      type: "Video",
+      instructions:
+        "Video alternative for problem explanations. Open the Stack node (Valid Parentheses, Min Stack, Evaluate Reverse Polish Notation, Daily Temperatures) and watch a video only after attempting the problem. The videos are free on YouTube; paid NeetCode features are not needed.",
     },
     {
       title: "VisuAlgo — Linked List, Stack, Queue, Deque",
       url: "https://visualgo.net/en/list",
       provider: "VisuAlgo (National University of Singapore)",
       type: "Visual explanation",
-      instructions: "Optional. Use the Stack and Queue modes to watch push, pop, enqueue and dequeue.",
+      instructions: "Optional. Use the Stack and Queue modes to watch push, pop, enqueue and dequeue. No account needed.",
     },
   ],
   exercises: [
     {
       title: "Valid Parentheses (LeetCode)",
       url: "https://leetcode.com/problems/valid-parentheses/",
-      note: "Foundation, Easy. Stack of expected closing brackets; test \"\", \"(\", \")(\" and \"([)]\".",
+      note: "Foundation, Easy. Stack of expected closing brackets; test \"\", \"(\", \")(\" and \"([)]\". LeetCode problems need a free account to submit.",
     },
     {
       title: "Implement Queue using Stacks (LeetCode)",
@@ -101,119 +105,57 @@ print(stack.pop())          # -> 2
 
 queue = deque()
 queue.append(1); queue.append(2)
-print(queue.popleft())      # -> 1
-print(len(queue), bool(stack))   # -> 1 True`,
+print(queue.popleft())      # -> 1`,
       followUps: ["What happens if you pop from an empty list or deque?"],
+      source: { title: "The Python Tutorial — Using Lists as Queues", url: "https://docs.python.org/3/tutorial/datastructures.html#using-lists-as-queues" },
     },
     {
       question: "How do you check whether brackets are balanced?",
       answer:
-        "Scan left to right. Push each opening bracket; for each closing bracket, the stack must be non-empty and its top must be the matching opener, which you pop. At the end the stack must be empty. The stack works because the most recently opened bracket must be closed first. O(n) time and O(n) space in the worst case.",
-      code: `def is_valid(s):
-    pairs = {")": "(", "]": "[", "}": "{"}
-    stack = []
-    for ch in s:
-        if ch in pairs:
-            if not stack or stack.pop() != pairs[ch]:
-                return False
-        else:
-            stack.append(ch)
-    return not stack
-
-for s in ["()[]{}", "([)]", "", "((", ")"]:
-    print(repr(s), is_valid(s))
-# -> '()[]{}' True
-# -> '([)]' False
-# -> '' True
-# -> '((' False
-# -> ')' False`,
+        "Scan left to right. Push each opening bracket; for each closing bracket, the stack must be non-empty and its top must be the matching opener, which you pop. At the end the stack must be empty. A stack fits because the most recently opened bracket must be closed first. O(n) time and O(n) space in the worst case. Test \"\", \"(\", \")\" and \"([)]\".",
       followUps: ["How would you return the index of the first unmatched bracket?"],
+      source: { title: "Hello Interview — Valid Parentheses", url: "https://www.hellointerview.com/learn/code/stack/valid-parentheses" },
     },
     {
       question: "What is a monotonic stack, and when would you use one?",
       answer:
-        "A stack whose values (or the values at its stored indexes) stay in increasing or decreasing order. When a new element breaks the order, you pop smaller (or larger) elements, and the new element is the answer for each popped one: their \"next greater element\". Each index is pushed and popped at most once, so the whole pass is O(n). Signals: \"next greater/smaller\", \"how many days until\", spans and histogram areas.",
-      code: `def daily_temperatures(temps):
-    answer = [0] * len(temps)
-    stack = []                                  # indexes, temperatures decreasing
-    for i, t in enumerate(temps):
-        while stack and temps[stack[-1]] < t:
-            j = stack.pop()
-            answer[j] = i - j
+        "A stack whose values (or the values at its stored indexes) stay in increasing or decreasing order. When a new element breaks the order, you pop elements, and the new element is the answer for each popped one — their \"next greater element\". Each index is pushed and popped at most once, so the whole pass is O(n) despite the nested loop. Store indexes when you need distances. Signals: \"next greater/smaller\", \"how many days until\", spans and histogram areas.",
+      code: `def next_greater(nums):
+    result = [-1] * len(nums)
+    stack = []                                 # indexes still waiting for an answer
+    for i, x in enumerate(nums):
+        while stack and nums[stack[-1]] < x:
+            result[stack.pop()] = x
         stack.append(i)
-    return answer
+    return result
 
-print(daily_temperatures([73, 74, 75, 71, 69, 72, 76, 73]))
-# -> [1, 1, 4, 2, 1, 1, 0, 0]`,
+print(next_greater([2, 1, 3, 2, 4]))   # -> [3, 3, 4, 4, -1]`,
       followUps: ["Why is the nested while loop still O(n) in total?"],
+      source: { title: "Hello Interview — Monotonic Stack", url: "https://www.hellointerview.com/learn/code/stack/monotonic-stack" },
     },
     {
       question: "How can you implement a queue using two stacks, and what does each operation cost?",
       answer:
-        "Push new items onto an input stack. To dequeue, pop from an output stack; if it is empty, first move every item from the input stack to the output stack, which reverses their order so the oldest is on top. A single dequeue can cost O(n), but each item moves at most once, so the amortized cost per operation is O(1).",
-      code: `class TwoStackQueue:
-    def __init__(self):
-        self.inbox, self.outbox = [], []
-
-    def push(self, x):
-        self.inbox.append(x)
-
-    def pop(self):
-        if not self.outbox:
-            while self.inbox:
-                self.outbox.append(self.inbox.pop())
-        return self.outbox.pop()
-
-q = TwoStackQueue()
-for x in (1, 2, 3):
-    q.push(x)
-print(q.pop(), q.pop())   # -> 1 2
-q.push(4)
-print(q.pop(), q.pop())   # -> 3 4`,
+        "Push new items onto an input stack. To dequeue, pop from an output stack; if it is empty, first move every item from the input stack to the output stack, which reverses their order so the oldest is on top. A single dequeue can cost O(n), but each item is moved at most once, so the amortized cost per operation is O(1).",
       followUps: ["Why would you ever do this instead of using a deque?"],
+      source: {
+        title: "NeetCode — Implement Queue using Stacks (written solution, amortized approach)",
+        url: "https://github.com/neetcode-gh/leetcode/blob/main/articles/implement-queue-using-stacks.md",
+      },
     },
     {
       question: "How would you design a stack that returns its minimum in O(1)?",
       answer:
-        "Store, with each pushed value, the minimum of the stack at that point: push (value, min(value, current_min)). The minimum is always the second field of the top entry, and popping automatically restores the previous minimum. Every operation is O(1); the extra space is O(n).",
-      code: `class MinStack:
-    def __init__(self):
-        self.items = []
-
-    def push(self, x):
-        current = self.items[-1][1] if self.items else x
-        self.items.append((x, min(x, current)))
-
-    def pop(self):
-        return self.items.pop()[0]
-
-    def get_min(self):
-        return self.items[-1][1]
-
-s = MinStack()
-for x in (5, 2, 7, 2):
-    s.push(x)
-print(s.get_min()); s.pop(); s.pop(); print(s.get_min()); s.pop(); print(s.get_min())
-# -> 2
-# -> 2
-# -> 5`,
+        "Store, with each pushed value, the minimum of the stack at that point: push (value, min(value, current_min)), or keep a second stack of minimums. The minimum is always at the top, and popping automatically restores the previous minimum. Every operation is O(1); the extra space is O(n).",
       followUps: ["How could you reduce the extra memory when the minimum rarely changes?"],
+      source: { title: "NeetCode — Min Stack (video explanation)", url: "https://www.youtube.com/watch?v=qkLl7nAwDPo" },
     },
     {
       question: "Where are stacks and queues used in real software?",
       answer:
-        "Stacks: the function call stack (and recursion), undo history, parsing and expression evaluation, and depth-first traversal. Queues: breadth-first traversal, task and job queues, buffering requests between producers and consumers, and rate limiting over a time window. Knowing these helps you recognize the pattern in disguise during interviews.",
-      code: `from collections import deque
-
-calls = deque()
-def ping(t, window=3000):          # count requests in the last 3000 ms
-    calls.append(t)
-    while calls[0] < t - window:
-        calls.popleft()
-    return len(calls)
-
-print([ping(t) for t in (1, 100, 3001, 3002)])   # -> [1, 2, 3, 3]`,
+        "Stacks: the function call stack (and recursion), undo history, parsing and expression evaluation, and depth-first traversal. Queues: breadth-first traversal, task and job queues, buffering requests between producers and consumers, and counting events in a sliding time window (as in Number of Recent Calls).",
       followUps: ["What would you use if items needed to come out by priority rather than arrival order?"],
+      source: { title: "Tech Interview Handbook — Stack: Introduction", url: "https://www.techinterviewhandbook.org/algorithms/stack/#introduction" },
     },
   ],
   mistakes: [
@@ -228,6 +170,7 @@ print([ping(t) for t in (1, 100, 3001, 3002)])   # -> [1, 2, 3, 3]`,
     "You implement balanced brackets, a min stack and a two-stack queue without reference.",
     "You recognize next-greater-element problems and solve them with a monotonic stack in O(n).",
     "You explain amortized O(1) for the two-stack queue and list.append.",
+    "Skip this topic if you can already solve Daily Temperatures and Min Stack unaided and explain why a deque beats list.pop(0).",
   ],
   deprioritize: [
     "Monotonic deques (sliding window maximum) and circular buffer implementations, unless you target roles that emphasize them.",

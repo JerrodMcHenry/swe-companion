@@ -6,7 +6,7 @@ const topic: Topic = {
   category: "Practical Engineering",
   phase: "build-and-deploy-a-project",
   overview:
-    "Project deep dives ask you to explain something you built: the problem, the architecture, how a request flows through it, why you chose each part, how you tested and deployed it, what went wrong, what you would change, and what exactly you did. This topic teaches how to explain your own project clearly at two and ten minutes, draw it, trace it and defend it under follow-up questions — including code an AI assistant helped write. It is entry-level architecture: components and data flow of one application, not large-scale system design.",
+    "Project deep dives ask you to explain something you built — the problem, its components, how a request flows through it, why you chose each part, how you tested and deployed it and what exactly you did — and to defend it under follow-up questions. This is entry-level architecture: the components and data flow of one application, not large-scale system design.",
   whyItMatters:
     "Candidates report project deep dives and resume discussions at several employers in this curriculum's research (for example Decagon's onsite and a CTO deep dive in one startup's official process), Microsoft internship reports describe them as common, and many behavioral and hiring-manager conversations draw on your projects. Interviewers use follow-up questions to check that you understand and personally did the work; a project you cannot explain counts against you.",
   prerequisites: ["Build and Deploy a Project (or an existing project of your own)", "How the Internet and HTTP Work", "Automated Testing"],
@@ -20,6 +20,7 @@ const topic: Topic = {
     "Name limitations and what you would improve, including what changes with more users (at a basic level).",
     "State your personal contribution precisely, especially in team projects.",
     "Explain AI-assisted parts as well as any other code, and say how you verified them.",
+    "Skip for now: large-scale distributed design and formal architecture documentation.",
   ],
   depth: "Apply: Use the concept to solve unfamiliar problems and explain relevant trade-offs.",
   resources: [
@@ -28,7 +29,7 @@ const topic: Topic = {
       url: "https://c4model.com/diagrams/system-context",
       provider: "Simon Brown (c4model.com)",
       type: "Visual explanation",
-      instructions: "Primary for diagrams. Read the system context and container diagram pages: they are the two levels you need to explain one application. Skip component and code diagrams.",
+      instructions: "Start here for diagrams. Read the system context page and the container diagram page (linked from it): the two levels you need to explain one application. Skip component and code diagrams. Free; no account.",
     },
     {
       title: "Excalidraw",
@@ -80,6 +81,7 @@ Request flow for "log a session":
 Decision: kept scheduling rules in a plain module, so they are unit-tested without the database.
 Limitation: one user per deployment; next step would be accounts and authentication.`,
       followUps: ["Why did you build it this way rather than another way?", "What was the hardest bug?"],
+      source: { title: "The C4 model — Container diagram", url: "https://c4model.com/diagrams/container" },
     },
     {
       question: "Trace what happens when a user does X in your application.",
@@ -133,6 +135,7 @@ Limitation: one user per deployment; next step would be accounts and authenticat
     "You can justify each major choice with a trade-off and name an alternative.",
     "You can make a small change or diagnose an injected failure in it, live, without AI.",
     "You can state your personal contribution and the project's limitations precisely.",
+    "Skip this topic if you have already defended your project under follow-up questions and could make a live change to it without AI.",
   ],
   deprioritize: [
     "Large-scale distributed system design (load balancers, sharding, queues) beyond recognizing where they would appear.",

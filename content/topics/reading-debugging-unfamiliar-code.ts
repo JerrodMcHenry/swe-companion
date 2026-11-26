@@ -6,7 +6,7 @@ const topic: Topic = {
   category: "Practical Engineering",
   phase: "practical-software-engineering",
   overview:
-    "Most engineering work happens in code someone else wrote. This topic teaches a repeatable way to find your way around an unfamiliar repository — README, structure, entry points, dependencies, execution and data flow — and a repeatable debugging process for it: reproduce, gather evidence from stack traces, logs and breakpoints, form and test one hypothesis at a time, isolate the root cause, make a minimal fix, prove it with a regression test and check that nothing else broke. It builds on Python Debugging (tracebacks, print and the debugger on your own code) and Automated Testing (writing tests); it does not repeat them.",
+    "Finding your way around a repository you did not write, and debugging it with evidence: reproduce, form and test one hypothesis at a time, fix the root cause and prove it with a regression test. Most entry-level work happens in existing code; this builds on Python Debugging and Automated Testing rather than repeating them.",
   whyItMatters:
     "New engineers spend their first months reading, tracing and fixing existing code, and postings ask for it directly (for example, investigating bugs and finding the root cause). Debugging rounds in existing codebases were reported by candidates at several growth-stage companies (Stripe, Notion, Scale AI) and in Capital One's technical case, and Meta's official guidance advises being comfortable reading, debugging and building on existing code. Not every employer runs such a round; Big Tech interviews still centre on algorithmic coding. As a professional skill it matters everywhere.",
   prerequisites: ["Python Debugging", "Automated Testing", "Command Line and Development Environment", "Git and Pull Requests"],
@@ -21,6 +21,7 @@ const topic: Topic = {
     "Form one hypothesis at a time, predict what you will observe, test it, and narrow the search (including by halving the input or the code path, or with git bisect).",
     "Distinguish symptom from root cause, and make the smallest fix that addresses the cause.",
     "Write a regression test, run the full test suite and check other callers so existing behavior still works.",
+    "Skip for now: profiling, production observability tooling and concurrency debugging.",
   ],
   depth: "Apply: Use the concept to solve unfamiliar problems and explain relevant trade-offs.",
   resources: [
@@ -30,14 +31,22 @@ const topic: Topic = {
       provider: "MIT",
       type: "Video",
       instructions:
-        "Video and notes, primary. Watch the debugging half: print debugging and logging, debuggers and specialized tools. Skip profiling unless you are working on performance. Do the merge-sort debugging exercise at the end.",
+        "Start here. Watch the lecture (or read the notes) for the debugging half: print debugging and logging, debuggers and specialized tools. Skip profiling unless you are working on performance. Do the merge-sort debugging exercise at the end. Free; no account.",
+    },
+    {
+      title: "Site Reliability Engineering — Chapter 12: Effective Troubleshooting",
+      url: "https://sre.google/sre-book/effective-troubleshooting/",
+      provider: "Google (free online book)",
+      type: "Book",
+      instructions:
+        "Written alternative focused on method rather than tools. Read Theory, Common Pitfalls and In Practice (Triage, Examine, Diagnose — including \"Simplify and reduce\" and \"What touched it last\" — and Test and Treat). Skip the case study and the distributed-systems detail. About 30 minutes.",
     },
     {
       title: "Python Logging HOWTO — Basic Logging Tutorial",
       url: "https://docs.python.org/3/howto/logging.html",
       provider: "Python Software Foundation",
       type: "Documentation",
-      instructions: "Written. Read the Basic Logging Tutorial (when to use logging, levels, logging to a file, formatting messages). Skip the advanced tutorial until you need handlers and configuration files.",
+      instructions: "Reference. Read the Basic Logging Tutorial (when to use logging, levels, logging to a file, formatting messages). Skip the advanced tutorial until you need handlers and configuration files.",
     },
     {
       title: "pytest — How to handle test failures",
@@ -51,23 +60,23 @@ const topic: Topic = {
       url: "https://git-scm.com/book/en/v2/Git-Tools-Debugging-with-Git",
       provider: "Scott Chacon and Ben Straub (free book)",
       type: "Book",
-      instructions: "Optional. Read when you need to find which commit introduced a regression. Awareness is enough at entry level.",
+      instructions: "Optional reference. Read when you need to find which commit introduced a regression. Awareness is enough at entry level.",
     },
   ],
   exercises: [
     {
       title: "Trace naturalsize in the humanize library",
       url: "https://github.com/python-humanize/humanize",
-      note: "Small, pure-Python repository. Clone it, set it up and run its tests. Then trace naturalsize in src/humanize/filesize.py for 3000, 3000 with binary=True and 3000 with gnu=True: which branches run, and why do the outputs differ? Write a three-sentence explanation and one new test.",
+      note: "Small, pure-Python repository; free, no account needed to clone. Set it up and run its tests. Then trace naturalsize in src/humanize/filesize.py for 3000, 3000 with binary=True and 3000 with gnu=True: which branches run, and why do the outputs differ? Write a three-sentence explanation and one new test. Demonstrates orientation and tracing.",
     },
     {
       title: "Missing Semester merge-sort debugging exercise",
       url: "https://missing.csail.mit.edu/2026/debugging-profiling/",
-      note: "Implement the lecture's buggy merge sort and find the bug with a debugger rather than by rereading. Write the failing test first.",
+      note: "From the lecture's exercises. Find the bug with a debugger rather than by rereading, and write the failing test first. Demonstrates evidence-based debugging.",
     },
     {
       title: "Reproduce a closed bug report in a small open-source project",
-      note: "Pick a small Python project, find a closed issue labelled bug with a linked fix, check out the commit before the fix (git checkout <commit>^ in your own clone), reproduce the bug as a failing test, and fix it yourself before reading the real fix. Then compare.",
+      note: "Pick a small Python project (humanize works), find a closed issue labelled bug with a linked fix, check out the commit before the fix (git checkout <commit>^ in your own clone), reproduce the bug as a failing test, and fix it yourself before reading the real fix. Then compare. Demonstrates the full reproduce–isolate–fix–verify loop on real code.",
     },
     {
       title: "Debugging log: for your next three bugs (in any code), write down the symptom, each hypothesis, the evidence for or against it, the root cause and how you verified the fix.",
@@ -78,7 +87,7 @@ const topic: Topic = {
     {
       question: "How would you approach an unfamiliar codebase?",
       answer:
-        "Start with the goal: what do I need to change or understand? Read the README and setup docs, get the project running and run the tests to have a working baseline. Skim the folder structure and configuration to see the main parts and dependencies. Find the entry point for the behavior I care about — a route, command or main function — and trace from there, reading tests to learn the intended behavior. Search for names from error messages or the UI. I note what I learn and only go as deep as the task needs, rather than trying to read everything.",
+        "Start from the task, not the whole codebase. Read the README, get the project running and run the tests for a baseline, then skim the folder structure and configuration to see the main parts and dependencies. Find the entry point for the behavior you care about — a route, command or main function — by searching for names from error messages or the UI, trace from there, and read its tests to learn the intended behavior. Note what you learn and go only as deep as the task needs.",
       code: `$ cat README.md                      # purpose, setup, how to run and test
 $ ls; ls src tests                    # main packages, where tests live
 $ cat pyproject.toml                  # dependencies, entry points ([project.scripts])
@@ -91,32 +100,13 @@ $ grep -rn "naturalsize(" src tests   # ...and who calls it`,
       question: "How do you trace execution and data flow through code you didn't write?",
       answer:
         "Pick one concrete input and follow it to the output. Read from the entry point, noting each function call and how the data changes shape. Where reading gets hard, step through with a debugger or add temporary log lines at boundaries to see the actual values. Tests are useful maps: a test that calls the function shows the inputs and expected outputs. Writing a short summary of the flow (or a sketch) makes it easier to explain and to spot where a bug could enter.",
-      code: `import logging, sys
-
-logging.basicConfig(stream=sys.stdout, level=logging.DEBUG, format="%(funcName)s: %(message)s", force=True)
-log = logging.getLogger(__name__)
-
-def parse(line):
-    log.debug("raw=%r", line)
-    name, amount = line.split(",")
-    return name.strip(), float(amount)
-
-def total(lines):
-    records = [parse(line) for line in lines]
-    log.debug("records=%r", records)
-    return sum(amount for _, amount in records)
-
-print(total(["ana, 10", "ben, 2.5"]))
-# -> parse: raw='ana, 10'
-# -> parse: raw='ben, 2.5'
-# -> total: records=[('ana', 10.0), ('ben', 2.5)]
-# -> 12.5`,
       followUps: ["When is a debugger better than logging, and the other way round?"],
+      source: { title: "Python Logging HOWTO — When to use logging", url: "https://docs.python.org/3/howto/logging.html" },
     },
     {
       question: "How would you investigate a production bug?",
       answer:
-        "First understand the impact and whether to mitigate immediately (roll back a recent deploy, disable a feature) before finding the cause. Then gather evidence: the exact error and stack trace, logs around the time, which users or inputs are affected, and what changed recently (deploys, configuration, data, a dependency or an external API). Reproduce it locally or in a test with the same input. Form a hypothesis, check it against the evidence, fix the root cause with a regression test, and confirm in production that the errors stop. Afterwards, consider what would have caught it earlier. A common cause is an integration change — here an external service started sending amounts as strings.",
+        "Impact first: if users are affected, mitigate (roll back a recent deploy, disable a feature) before hunting for the cause. Then gather evidence: the exact error and stack trace, logs around the time, which users or inputs are affected, and what changed recently (deploys, configuration, data, a dependency or an external API). Reproduce it with the same input, test one hypothesis at a time, fix the root cause with a regression test, and confirm in production that the errors stop. Here the cause is an integration change: an external service started sending amounts as strings.",
       code: `def order_total(items):
     return sum(item["amount"] for item in items)
 
@@ -129,11 +119,12 @@ try:
 except TypeError as error:
     print(type(error).__name__, "-", error)                 # -> TypeError - unsupported operand type(s) for +: 'int' and 'str'`,
       followUps: ["Would you convert the strings in order_total or where the API response is parsed? Why?", "How do you debug a problem you cannot reproduce locally?"],
+      source: { title: "Site Reliability Engineering — Effective Troubleshooting (Triage; What touched it last)", url: "https://sre.google/sre-book/effective-troubleshooting/" },
     },
     {
       question: "How do you determine the root cause of a failing test?",
       answer:
-        "Read the failure message and the assertion first: what was expected, what happened. Run the failing test alone; if it passes alone but fails in the full suite, suspect shared state between tests or test order. Check whether the test or the code is wrong by comparing against the requirement. Then narrow down with logs or a debugger until you find where the actual value first diverges from the expected one — that is the root cause, not the line where the assertion fails. In this example the second test fails only because the first one ran: the default list is created once and shared between calls (incorrect state). The fix is tags=None with a new list inside the function.",
+        "Read the assertion first: expected versus actual. Run the test alone; if it passes alone but fails in the full suite, suspect shared state or test order. Check the requirement to decide whether the test or the code is wrong. Then use logs or a debugger to find where the value first diverges from what was expected — that is the root cause, not the line where the assertion fails. Here the second test fails only because the first one ran: the default list is created once and shared between calls; the fix is tags=None with a new list inside the function.",
       code: `def add_tag(tag, tags=[]):        # bug: one default list shared by every call
     tags.append(tag)
     return tags
@@ -147,6 +138,7 @@ def test_tags_start_empty():
 # fails: test_tags_start_empty -- assert ['urgent', 'later'] == ['later']
 # pytest result  # -> 1 failed, 1 passed`,
       followUps: ["A test fails only on the CI server. What could differ from your machine?", "How would you find which commit made the test start failing?"],
+      source: { title: "Python FAQ — Why are default values shared between objects?", url: "https://docs.python.org/3/faq/programming.html#why-are-default-values-shared-between-objects" },
     },
     {
       question: "A bug only happens for some inputs or users. How do you isolate it?",
@@ -166,11 +158,12 @@ for value in ["12.50", " 12.50 ", "1200", "1,200", ""]:
 # -> '1,200' ValueError
 # -> '' ValueError`,
       followUps: ["Should the fix accept '1,200', reject it with a clear error, or handle it earlier? Who decides?"],
+      source: { title: "Site Reliability Engineering — Effective Troubleshooting (Simplify and reduce)", url: "https://sre.google/sre-book/effective-troubleshooting/" },
     },
     {
       question: "How do you verify that a bug fix does not introduce regressions?",
       answer:
-        "Write a test that reproduces the bug and fails before the fix, then passes after it. Keep the fix minimal and focused on the root cause so the change is easy to review. Run the whole test suite, not just the new test. Search for other callers of the changed code and check whether they relied on the old behavior. Test the edge cases next to the bug (here: just below, at and above the boundary). In review, explain the cause and the fix; after release, watch the logs or metrics that showed the bug.",
+        "Reproduce the bug as a test that fails before the fix and passes after it, and test the neighbouring edge cases (here just below, at and above the boundary). Keep the fix small and focused on the root cause so it is easy to review. Run the whole suite, not only the new test, and check other callers of the changed code in case they relied on the old behavior. After release, watch the logs or metrics that showed the bug.",
       code: `$ python -m pytest tests/test_shipping.py -k boundary   # new regression test: fails before, passes after
 $ python -m pytest -q                                     # the full suite still passes
 $ grep -rn "free_shipping(" src                           # other callers that may depend on the old behavior
@@ -181,13 +174,8 @@ $ git diff --stat                                         # the change is small 
       question: "What is a minimal, targeted fix, and when is it not enough?",
       answer:
         "A minimal fix changes only what is needed to correct the root cause, with a test, so it is easy to review, low-risk and easy to revert. It is not enough when the same mistake exists in several places, when the design makes the bug likely to recur, or when the fix only hides the symptom (for example catching and ignoring an exception). Then fix the cause now and propose the larger cleanup as a separate, planned change rather than mixing it into the bug fix.",
-      code: `def average(values):
-    if not values:                       # targeted fix: the reported crash on an empty list
-        return 0.0
-    return sum(values) / len(values)
-
-print(average([]), average([2, 4]))      # -> 0.0 3.0`,
-      followUps: ["Is returning 0.0 the right behavior for an empty list, or should it raise? How would you decide?"],
+      followUps: ["The reported crash is average([]) raising ZeroDivisionError. Should the fix return 0.0 or raise a clearer error? How would you decide?"],
+      source: { title: "Google Engineering Practices — Small CLs (Separate out refactorings)", url: "https://google.github.io/eng-practices/review/developer/small-cls.html" },
     },
   ],
   mistakes: [
@@ -205,6 +193,7 @@ print(average([]), average([2, 4]))      # -> 0.0 3.0`,
     "You can reproduce a reported bug as a failing test, isolate the root cause with evidence and explain each hypothesis you tested.",
     "Your fixes are minimal, come with a regression test and leave the full suite passing.",
     "You can debug a failure that crosses module or service boundaries using stack traces and logs.",
+    "Skip this topic if you have already fixed bugs in a codebase you did not write, with regression tests, and can explain how you found each root cause.",
   ],
   deprioritize: [
     "Profiling and performance debugging, beyond recognizing when a problem is about speed or memory.",

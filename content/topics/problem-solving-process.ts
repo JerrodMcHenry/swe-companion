@@ -20,16 +20,25 @@ const topic: Topic = {
     "Test by dry-running examples and edge cases, find and fix bugs, and state final time and space complexity.",
     "Discuss trade-offs and answer follow-ups such as \"What if the input did not fit in memory?\"",
     "Manage time, and recover when stuck by revisiting examples or simplifying the problem.",
+    "Skip for now: memorized scripts and formal correctness proofs.",
   ],
   depth: "Apply: Use the concept to solve unfamiliar problems and explain relevant trade-offs.",
   resources: [
+    {
+      title: "Coding interview cheatsheet",
+      url: "https://www.techinterviewhandbook.org/coding-interview-cheatsheet/",
+      provider: "Tech Interview Handbook",
+      type: "Article",
+      instructions:
+        "Start here. Read \"What to do during your coding interview\" steps 2–5: clarifying the question, working out the approach with the interviewer, coding while talking, and checking your code with test cases (about 15 minutes). Skim the before and after sections; skip the course advertisements. Free, no account.",
+    },
     {
       title: "Coding interview techniques",
       url: "https://www.techinterviewhandbook.org/coding-interview-techniques/",
       provider: "Tech Interview Handbook",
       type: "Article",
       instructions:
-        "Free. Read the sections on what to do before, during and after coding. It is a commonly recommended summary of the same process taught here (about 20 minutes).",
+        "Companion to Start here for the step most candidates get stuck on. Read \"How to find solutions to coding interview problems\" (techniques 1–5) and \"How to optimize time complexity\" (about 15 minutes). Skip the space-optimization section for now.",
     },
     {
       title: "How to solve a Google coding interview question",
@@ -37,21 +46,15 @@ const topic: Topic = {
       provider: "Life at Google (official)",
       type: "Video",
       instructions:
-        "Official mock interview. Watch for the clarifying questions, the move from brute force to an optimized approach, and how the candidate explains while coding.",
+        "Official mock interview: watch the whole video to see the process performed. Note the clarifying questions, the move from a straightforward approach to an optimized one, and how the candidate explains while coding.",
     },
     {
-      title: "Software development interview topics",
+      title: "Software development interview topics — Coding",
       url: "https://amazon.jobs/content/en/how-we-hire/interview-prep/software-development-topics",
       provider: "Amazon (official)",
       type: "Article",
-      instructions: "Official employer guidance. Read the coding section on writing syntactically correct, tested code and checking edge cases.",
-    },
-    {
-      title: "Algorithms study cheatsheet",
-      url: "https://www.techinterviewhandbook.org/algorithms/study-cheatsheet/",
-      provider: "Tech Interview Handbook",
-      type: "Article",
-      instructions: "Free reference for the general approach and common corner cases to test. Skim it now; return to it before interviews.",
+      instructions:
+        "Official employer guidance. Open only the Coding topic: syntactically correct code (no pseudocode), well-tested code and checking edge cases. Two minutes.",
     },
   ],
   exercises: [
@@ -62,7 +65,7 @@ const topic: Topic = {
     {
       title: "Majority Element (LeetCode)",
       url: "https://leetcode.com/problems/majority-element/",
-      note: "Foundation, Easy. Solve it three ways — counting with a dictionary, sorting, and (optional) Boyer–Moore voting — and compare time and space aloud.",
+      note: "Foundation, Easy. Solve it three ways — counting with a dictionary, sorting, and (optional) Boyer–Moore voting — and compare time and space aloud. Free LeetCode account needed to submit.",
     },
     {
       title: "Missing Number (LeetCode)",
@@ -82,81 +85,57 @@ const topic: Topic = {
     {
       question: "What clarifying questions would you ask before solving a coding problem?",
       answer:
-        "Questions that change the solution: the input type and size, whether it can be empty, whether values can be negative or duplicated, whether the input is sorted, what to return when there is no answer, whether there can be several valid answers, and whether I may modify the input. Constraints such as n up to 10^5 tell me an O(n²) approach is probably too slow. I ask a few targeted questions rather than a long list.",
-      code: `# Problem: "Return the indices of two numbers that add up to target."
-# Clarify: Exactly one answer? Can I use the same element twice?
-# Sorted input? Negative numbers? What if there is no pair?
-# Example: nums=[3, 2, 4], target=6 -> [1, 2]   (not [0, 0])
-print("ask before you code")   # -> ask before you code`,
+        "Questions that change the solution: the input type and size, whether it can be empty, whether values can be negative or duplicated, whether the input is sorted, what to return when there is no answer, whether several answers are valid, and whether I may modify the input. Constraints such as n up to 10^5 tell me an O(n²) approach is probably too slow. I restate the problem, then ask a few targeted questions rather than a long list.",
       followUps: ["How do the constraints help you choose an algorithm?"],
+      source: {
+        title: "Tech Interview Handbook — Upon receiving the question, make clarifications",
+        url: "https://www.techinterviewhandbook.org/coding-interview-cheatsheet/#2-upon-receiving-the-question-make-clarifications",
+      },
     },
     {
       question: "Should you always code the brute-force solution first?",
       answer:
-        "No. You should always be able to describe a correct straightforward approach and its complexity, because it proves you understand the problem and gives a baseline. If you already see a better approach and can justify it, explain both briefly and implement the better one. If you are stuck on the optimal solution, implementing the straightforward one first is better than having no working code.",
-      code: `def has_duplicate_brute(nums):           # O(n^2) time, O(1) space
-    return any(nums[i] == nums[j]
-               for i in range(len(nums)) for j in range(i + 1, len(nums)))
-
-def has_duplicate(nums):                 # O(n) average time, O(n) space
-    return len(set(nums)) != len(nums)
-
-print(has_duplicate_brute([1, 2, 1]), has_duplicate([1, 2, 3]))   # -> True False`,
+        "No. Always be able to describe a correct straightforward approach and its complexity: it proves you understand the problem and gives a baseline. If you already see a better approach and can justify it, explain both briefly and implement the better one. If you are stuck on the optimal solution, implementing the straightforward one is better than having no working code.",
       followUps: ["When might the brute-force solution be the right final answer?"],
+      source: {
+        title: "Tech Interview Handbook — Work out and optimize your approach with the interviewer",
+        url: "https://www.techinterviewhandbook.org/coding-interview-cheatsheet/#3-work-out-and-optimize-your-approach-with-the-interviewer",
+      },
     },
     {
       question: "How do you find a better approach once you have a working one?",
       answer:
-        "Look for repeated work. Common moves: replace a repeated search with a hash map or set lookup; sort first so that two pointers or binary search apply; keep a running value (sum, maximum, window) instead of recomputing; precompute prefix sums; or use a heap when you only need the top k. The input constraints and the required output often point to the target complexity.",
-      code: `# Repeated work: for each price, scan all later prices -> O(n^2).
-# Better: keep the lowest price seen so far -> one pass, O(n).
-def max_profit(prices):
-    lowest, best = float("inf"), 0
-    for price in prices:
-        lowest = min(lowest, price)
-        best = max(best, price - lowest)
-    return best
-
-print(max_profit([7, 1, 5, 3, 6, 4]), max_profit([7, 6, 4]))   # -> 5 0`,
+        "Look for repeated work. Common moves: replace a repeated search with a hash map or set lookup; sort first so that two pointers or binary search apply; keep a running value (sum, minimum, window) instead of recomputing; precompute prefix sums; or use a heap when you only need the top k. Also estimate the best possible complexity — if you must read every element, you cannot beat O(n) — so you know when to stop optimizing.",
       followUps: ["What signals suggest sorting first? What signals suggest a hash map?"],
+      source: {
+        title: "Tech Interview Handbook — How to optimize time complexity",
+        url: "https://www.techinterviewhandbook.org/coding-interview-techniques/#how-to-optimize-time-complexity",
+      },
     },
     {
       question: "How do you test a solution without running it?",
       answer:
-        "Dry-run it on the example from the problem and track variables in a small table, then on edge cases: empty input, one element, two elements, duplicates, negative numbers, all equal values, and the boundaries of each loop. Check that every branch returns the right type and that indexes stay in range. Say aloud what each test checks.",
-      code: `def first_unique(s):
-    counts = {}
-    for ch in s:
-        counts[ch] = counts.get(ch, 0) + 1
-    for i, ch in enumerate(s):
-        if counts[ch] == 1:
-            return i
-    return -1
-
-for case in ["leetcode", "aabb", "", "z"]:
-    print(repr(case), first_unique(case))
-# -> 'leetcode' 0
-# -> 'aabb' -1
-# -> '' -1
-# -> 'z' 0`,
+        "Read the code as if someone else wrote it, looking for off-by-one errors. Dry-run it on the given example, tracking variables in a small table, then on edge cases: empty input, one element, two elements, duplicates, negative numbers, all-equal values and the boundaries of each loop. Check that every branch returns the right type and that indexes stay in range. Say aloud what each test checks, then restate the time and space complexity.",
       followUps: ["Which edge cases would you test for a function that merges two sorted lists?"],
+      source: {
+        title: "Tech Interview Handbook — After coding, check your code and add test cases",
+        url: "https://www.techinterviewhandbook.org/coding-interview-cheatsheet/#5-after-coding-check-your-code-and-add-test-cases",
+      },
     },
     {
       question: "What should you do when you are stuck in an interview?",
       answer:
-        "Say so and keep reasoning aloud. Go back to concrete examples and solve them by hand, noting what you do; simplify the problem (smaller input, sorted input, no duplicates); ask which data structure would make the slow step fast; and consider implementing the straightforward solution. Interviewers often give hints when they can see your reasoning, and taking a hint well is part of the assessment.",
-      code: `# Stuck on: "longest substring without repeating characters"
-# By hand on "abcabcbb": a, ab, abc, then 'a' repeats -> move the start
-# past the earlier 'a'. That "move the start" step suggests a sliding window.
-print("solve examples by hand, then generalize")   # -> solve examples by hand, then generalize`,
+        "Say so and keep reasoning aloud. Draw the data and solve a concrete example by hand, noting what you do; try more examples; simplify the problem (smaller input, sorted input, no duplicates) or break it into parts; ask which data structure would make the slow step fast; and consider implementing the straightforward solution. Interviewers often give hints when they can see your reasoning, and taking a hint well is part of the assessment.",
       followUps: ["How do you use an interviewer's hint without losing your own reasoning?"],
+      source: {
+        title: "Tech Interview Handbook — How to find solutions to coding interview problems",
+        url: "https://www.techinterviewhandbook.org/coding-interview-techniques/#how-to-find-solutions-to-coding-interview-problems",
+      },
     },
     {
       question: "How should you manage time in a 45-minute coding interview?",
       answer:
-        "A rough editorial guide: about 5 minutes understanding and clarifying, 5–10 minutes on examples and the approach, 15–20 minutes implementing, and 5–10 minutes testing and discussing complexity and follow-ups. Interviews also include introductions and your questions, and many include more than one problem. Do not polish details before the core solution works; mention improvements you would make if you run short.",
-      code: `plan = {"clarify": 5, "approach": 8, "implement": 18, "test and discuss": 9}
-print(sum(plan.values()))   # -> 40`,
+        "A rough editorial guide: about 5 minutes understanding and clarifying, 5–10 minutes on examples and the approach, 15–20 minutes implementing, and 5–10 minutes testing and discussing complexity and follow-ups. Leave room for introductions and your own questions, and compress the plan if there is more than one problem. Do not polish details before the core solution works; if you run short, say what you would finish or improve.",
       followUps: ["What would you say if you realize with five minutes left that your approach is wrong?"],
     },
   ],
@@ -174,6 +153,7 @@ print(sum(plan.values()))   # -> 40`,
     "You explain your plan before coding and narrate key decisions while implementing.",
     "You dry-run and test your code and find your own bugs before the interviewer does.",
     "You finish by stating time and space complexity and at least one trade-off or follow-up.",
+    "Skip this topic if mock interviewers already describe your process as clear and well-tested; keep applying it to every problem.",
   ],
   deprioritize: [
     "Memorized scripts or catchphrases; interviewers notice and they do not help on unfamiliar problems.",

@@ -19,47 +19,53 @@ const topic: Topic = {
     "Use the built-in sort in interviews unless asked to implement one, and state its O(n log n) cost.",
     "Merge overlapping intervals after sorting by start, and insert an interval into a sorted list.",
     "Solve greedy interval problems (minimum removals, arrows) by sorting by end, and explain why the greedy choice is safe.",
+    "Skip for now: heapsort, shell sort and radix sort implementations, Timsort/Powersort internals, and proofs of the comparison-sort lower bound.",
   ],
   depth: "Apply: Use the concept to solve unfamiliar problems and explain relevant trade-offs.",
   resources: [
-    {
-      title: "Problem Solving with Algorithms and Data Structures using Python — 5.11 The Merge Sort and 5.12 The Quicksort",
-      url: "https://runestone.academy/ns/books/published/pythonds3/SortSearch/TheMergeSort.html",
-      provider: "Brad Miller and David Ranum (Runestone Academy)",
-      type: "Book",
-      instructions: "Free interactive textbook. Read 5.11 and 5.12 with their analysis. The bubble, selection and shell sort sections are optional.",
-    },
     {
       title: "VisuAlgo — Sorting",
       url: "https://visualgo.net/en/sorting",
       provider: "VisuAlgo (National University of Singapore)",
       type: "Visual explanation",
-      instructions: "Optional. Watch merge sort and quicksort on the same input, then counting sort on small integers.",
+      instructions:
+        "Start here. In e-lecture mode, read the Insertion Sort, Merge Sort, Quick Sort (including the analysis slides and Random Quick Sort), Counting Sort and Stable Sort slides, running each algorithm on the same input. Skim bubble and selection sort; skip radix sort details. Free; no account.",
+    },
+    {
+      title: "Problem Solving with Algorithms and Data Structures using Python — 5.11 The Merge Sort and 5.12 The Quicksort",
+      url: "https://runestone.academy/ns/books/published/pythonds3/SortSearch/TheMergeSort.html",
+      provider: "Brad Miller and David Ranum (Runestone Academy)",
+      type: "Book",
+      instructions:
+        "Written alternative with Python implementations. Read 5.11 and 5.12 with their analysis. The bubble, selection and shell sort sections are optional. Free; reading needs no account.",
+    },
+    {
+      title: "CS50x — Merge Sort (short)",
+      url: "https://cs50.harvard.edu/x/shorts/merge_sort/",
+      provider: "Harvard University",
+      type: "Video",
+      instructions:
+        "Short video alternative for merge sort only (examples in C). It does not cover quicksort; use VisuAlgo for that. Free; no account.",
     },
     {
       title: "Interval cheatsheet for coding interviews",
       url: "https://www.techinterviewhandbook.org/algorithms/interval/",
       provider: "Tech Interview Handbook",
       type: "Article",
-      instructions: "Free. Read the techniques for sorting by start, overlap checks and merging, plus the corner cases.",
-    },
-    {
-      title: "MIT 6.006 (Spring 2020) — Lecture 3: Sorting and Lecture 5: Linear Sorting",
-      url: "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/pages/lecture-notes/",
-      provider: "MIT OpenCourseWare",
-      type: "Course",
-      instructions: "Optional university depth. Lecture 3 covers merge sort and the analysis; Lecture 5 explains why counting and radix sort can beat O(n log n).",
+      instructions:
+        "Start here for the interval half. Read Things to look out for, Corner cases and Techniques (sort by start, overlap check, merging two intervals). Ignore the paid course recommendations at the end. Free; no account.",
     },
   ],
   exercises: [
     {
       title: "Sort an Array (LeetCode)",
       url: "https://leetcode.com/problems/sort-an-array/",
-      note: "Foundation, Medium. Implement merge sort yourself (the problem forbids built-ins); then explain how you would choose a quicksort pivot.",
+      note: "Foundation, Medium. Implement merge sort yourself (the problem forbids built-ins); then explain how you would choose a quicksort pivot. LeetCode needs a free account to submit.",
     },
     {
-      title: "Revisit Merge Intervals from Sorting and Custom Sort Keys and explain why sorting by start makes one pass sufficient.",
-      note: "Foundation. Already practised in Programming Fluency; now focus on the correctness argument.",
+      title: "Merge Intervals (LeetCode)",
+      url: "https://leetcode.com/problems/merge-intervals/",
+      note: "Foundation, Medium. Already practised in Sorting and Custom Sort Keys; solve it again and explain why sorting by start makes one pass sufficient.",
     },
     {
       title: "Insert Interval (LeetCode)",
@@ -87,65 +93,31 @@ const topic: Topic = {
       question: "How does merge sort work, and what are its time and space costs?",
       answer:
         "Merge sort splits the list in half, recursively sorts each half, and merges the two sorted halves by repeatedly taking the smaller front element. The recursion has O(log n) levels and each level does O(n) merging work, so it is O(n log n) in every case. Merging needs O(n) extra space. Taking from the left half on ties makes it stable.",
-      code: `def merge_sort(nums):
-    if len(nums) <= 1:
-        return nums
-    mid = len(nums) // 2
-    left, right = merge_sort(nums[:mid]), merge_sort(nums[mid:])
-    merged, i, j = [], 0, 0
-    while i < len(left) and j < len(right):
-        if left[i] <= right[j]:            # <= keeps equal items in order (stable)
-            merged.append(left[i]); i += 1
-        else:
-            merged.append(right[j]); j += 1
-    merged.extend(left[i:])
-    merged.extend(right[j:])
-    return merged
-
-print(merge_sort([5, 2, 9, 1, 5, 6]), merge_sort([]), merge_sort([3]))   # -> [1, 2, 5, 5, 6, 9] [] [3]`,
-      followUps: ["The slices here copy data. Does that change the overall complexity?"],
+      followUps: ["If your implementation slices the list at each level, does that change the overall complexity?"],
+      source: { title: "VisuAlgo — Sorting: Merge Sort (e-lecture)", url: "https://visualgo.net/en/sorting" },
     },
     {
       question: "How does quicksort work, and why can it be O(n²)?",
       answer:
-        "Quicksort picks a pivot, partitions the list into elements smaller than the pivot and elements larger than it, and recursively sorts each part. With balanced partitions it is O(n log n); if the pivot is always the smallest or largest element (for example, the first element of already sorted input), each partition removes only one element and it degrades to O(n²). Choosing a random pivot makes that worst case very unlikely. In-place versions use O(log n) stack space on average and are typically not stable.",
-      code: `import random
-
-def quicksort(nums):
-    if len(nums) <= 1:
-        return nums
-    pivot = random.choice(nums)
-    smaller = [x for x in nums if x < pivot]
-    equal = [x for x in nums if x == pivot]
-    larger = [x for x in nums if x > pivot]
-    return quicksort(smaller) + equal + quicksort(larger)
-
-print(quicksort([3, 6, 1, 8, 1, 2]), quicksort([]))   # -> [1, 1, 2, 3, 6, 8] []`,
-      followUps: ["This version is easy to read but uses O(n) extra space. How does in-place partitioning work?"],
+        "Quicksort picks a pivot, partitions the list into elements smaller than the pivot and elements larger than it, and recursively sorts each part. With balanced partitions it is O(n log n); if the pivot is always the smallest or largest element (for example, the first element of already sorted input), each partition removes only one element and it degrades to O(n²). A random pivot makes that worst case very unlikely, giving expected O(n log n). In-place versions use O(log n) stack space on average and are typically not stable.",
+      followUps: ["How does in-place partitioning work?"],
+      source: { title: "VisuAlgo — Sorting: Quick Sort and Random Quick Sort (e-lecture)", url: "https://visualgo.net/en/sorting" },
     },
     {
       question: "Should you implement your own sort in an interview?",
       answer:
-        "Usually not. Use the built-in sort, state that it is O(n log n) and stable, and spend your time on the actual problem. Implement a sort only when the interviewer asks, or when a modified merge or partition step is the point of the problem (counting inversions, quickselect, three-way partitioning). Be able to explain at least one O(n log n) algorithm either way.",
+        "Usually not. Use the built-in sort, state that it is O(n log n) and stable, and spend your time on the actual problem. Implement a sort only when the interviewer asks, or when a modified merge or partition step is the point of the problem (counting inversions, quickselect, three-way partitioning). Be able to explain at least one O(n log n) algorithm either way. Stability matters when you sort by one key and expect ties to keep their earlier order:",
       code: `records = [("ana", 3), ("ben", 1), ("cy", 3)]
 print(sorted(records, key=lambda r: -r[1]))   # -> [('ana', 3), ('cy', 3), ('ben', 1)]`,
       followUps: ["Which property of the built-in sort did this example rely on?"],
+      source: { title: "Python Docs — Sorting Techniques: Sort Stability and Complex Sorts", url: "https://docs.python.org/3/howto/sorting.html#sort-stability-and-complex-sorts" },
     },
     {
       question: "Can sorting ever be faster than O(n log n)?",
       answer:
-        "Comparison-based sorting cannot beat O(n log n) in the worst case. If the values are integers in a small known range k, counting sort runs in O(n + k) by counting occurrences instead of comparing; radix and bucket sorts extend the idea. In interviews this appears as \"the values are only 0, 1 and 2\" or \"ages between 0 and 120\".",
-      code: `def counting_sort(nums, max_value):
-    counts = [0] * (max_value + 1)
-    for x in nums:
-        counts[x] += 1
-    out = []
-    for value, c in enumerate(counts):
-        out.extend([value] * c)
-    return out
-
-print(counting_sort([2, 0, 2, 1, 1, 0], 2))   # -> [0, 0, 1, 1, 2, 2]`,
+        "Comparison-based sorting cannot beat O(n log n) in the worst case. If the values are integers in a small known range k, counting sort runs in O(n + k) by counting occurrences instead of comparing; radix and bucket sorts extend the idea. In interviews this appears as \"the values are only 0, 1 and 2\" or \"ages between 0 and 120\". If the range is huge, the O(k) counting array makes it impractical.",
       followUps: ["What happens to counting sort if the range of values is huge?"],
+      source: { title: "VisuAlgo — Sorting: Counting Sort (e-lecture)", url: "https://visualgo.net/en/sorting" },
     },
     {
       question: "How do you merge overlapping intervals, and why does sorting make it work?",
@@ -160,26 +132,16 @@ print(counting_sort([2, 0, 2, 1, 1, 0], 2))   # -> [0, 0, 1, 1, 2, 2]`,
             merged.append([start, end])
     return merged
 
-print(merge_intervals([[1, 3], [8, 10], [2, 6], [15, 18]]))   # -> [[1, 6], [8, 10], [15, 18]]
-print(merge_intervals([[1, 4], [4, 5]]), merge_intervals([]))   # -> [[1, 5]] []`,
+print(merge_intervals([[1, 3], [8, 10], [2, 6], [15, 18]]))   # -> [[1, 6], [8, 10], [15, 18]]`,
       followUps: ["Should [1, 4] and [4, 5] be merged? How would you confirm the requirement?"],
+      source: { title: "NeetCode — Merge Intervals (LeetCode 56) video", url: "https://www.youtube.com/watch?v=44H3cEC2fFM" },
     },
     {
       question: "How do you find the minimum number of intervals to remove so that none overlap?",
       answer:
-        "Sort by end time (breaking ties by start) and greedily keep each interval that starts at or after the end of the last kept one; count the rest as removed. Keeping the interval that ends earliest always leaves the most room for the remaining intervals, so no other choice can keep more. O(n log n) time. The same idea solves activity selection and \"minimum arrows\" problems.",
-      code: `def min_removals(intervals):
-    removed, last_end = 0, float("-inf")
-    for start, end in sorted(intervals, key=lambda iv: (iv[1], iv[0])):
-        if start >= last_end:
-            last_end = end          # keep it
-        else:
-            removed += 1            # overlaps the last kept interval
-    return removed
-
-print(min_removals([[1, 2], [2, 3], [3, 4], [1, 3]]), min_removals([[1, 2], [1, 2], [1, 2]]), min_removals([]))
-# -> 1 2 0`,
-      followUps: ["Why does sorting by start time instead give wrong answers?"],
+        "Sort by end time and greedily keep each interval that starts at or after the end of the last kept one; count the rest as removed. Keeping the interval that ends earliest always leaves the most room for the remaining intervals, so no other choice can keep more. O(n log n) time. The same idea solves activity selection and the minimum-arrows problem. (Sorting by start also works if, on overlap, you keep the interval with the smaller end.)",
+      followUps: ["Why does keeping the interval that starts first, without comparing ends, give wrong answers?"],
+      source: { title: "NeetCode — Non-Overlapping Intervals (LeetCode 435) video", url: "https://www.youtube.com/watch?v=nONCGxWoUfM" },
     },
   ],
   mistakes: [
@@ -194,6 +156,7 @@ print(min_removals([[1, 2], [2, 3], [3, 4], [1, 3]]), min_removals([[1, 2], [1, 
     "You state the time, space and stability of merge sort, quicksort, counting sort and Python's sort.",
     "You merge and insert intervals and solve a greedy interval problem, explaining why sorting makes it correct.",
     "You decide quickly whether sorting first is worth its O(n log n) cost.",
+    "Skip this topic if you can already implement merge sort, explain quicksort's worst case and solve Insert Interval and Non-overlapping Intervals without hints.",
   ],
   deprioritize: [
     "Heapsort, shell sort, radix sort implementation details and Timsort internals.",

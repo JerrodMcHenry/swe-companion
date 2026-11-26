@@ -19,44 +19,48 @@ const topic: Topic = {
     "Search a BST in O(h), and explain why h is O(log n) when balanced but O(n) when skewed.",
     "Validate a BST with value bounds, not just parent-child comparisons.",
     "State time O(n) for full traversals and space O(h) for recursion or O(w) for BFS (w = maximum width).",
+    "Skip for now: implementing AVL or red-black rebalancing, segment and Fenwick trees, and Morris traversal.",
   ],
   depth: "Apply: Use the concept to solve unfamiliar problems and explain relevant trade-offs.",
   resources: [
     {
-      title: "Tree cheatsheet for coding interviews",
-      url: "https://www.techinterviewhandbook.org/algorithms/tree/",
-      provider: "Tech Interview Handbook",
-      type: "Article",
-      instructions: "Free. Read the terminology, traversals, BST section and corner cases.",
-    },
-    {
-      title: "Problem Solving with Algorithms and Data Structures using Python — 6.3 Vocabulary, 6.8 Tree Traversals, 6.12 Binary Search Trees",
+      title: "Problem Solving with Algorithms and Data Structures using Python — 6.3 Vocabulary, 6.8 Tree Traversals, 6.12–6.14 Binary Search Trees",
       url: "https://runestone.academy/ns/books/published/pythonds3/Trees/TreeTraversals.html",
       provider: "Brad Miller and David Ranum (Runestone Academy)",
       type: "Book",
       instructions:
-        "Free interactive textbook. Read 6.3 (vocabulary), 6.8 (traversals) and 6.12–6.14 (BSTs). Skip parse trees and the AVL implementation details.",
+        "Start here. Read 6.3 (vocabulary), 6.8 (traversals) and 6.12–6.14 (binary search trees and their analysis). Skip parse trees, priority queues (covered in Heaps) and the AVL implementation. Free; reading needs no account.",
+    },
+    {
+      title: "Binary Tree Algorithms for Technical Interviews — Full Course",
+      url: "https://www.youtube.com/watch?v=fAAZixBzIAI",
+      provider: "freeCodeCamp.org (Alvin Zablan)",
+      type: "Video",
+      instructions:
+        "Video alternative for traversals (JavaScript; the concepts transfer), about 1 h 50 min. Watch 0:01:09–1:48:28: what a binary tree is, depth-first and breadth-first values, tree includes, sum, min value and max root-to-leaf path sum. Write the code in Python as you go. It does not cover binary search trees — use VisuAlgo below for those. Free; no account.",
     },
     {
       title: "VisuAlgo — Binary Search Tree",
       url: "https://visualgo.net/en/bst",
       provider: "VisuAlgo (National University of Singapore)",
       type: "Visual explanation",
-      instructions: "Optional. Insert values in sorted order to see a skewed tree, then in mixed order to see a bushier one.",
+      instructions:
+        "Visualisation with e-lecture notes. Read the BST Property, O(h) Time Complexity, Inorder Traversal and Preorder and Postorder Traversal slides, then insert values in sorted order to see a skewed tree. Skip the AVL Tree slides. Free; no account.",
     },
     {
-      title: "MIT 6.006 (Spring 2020) — Lecture 6: Binary Trees, Part 1",
-      url: "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/pages/lecture-notes/",
-      provider: "MIT OpenCourseWare",
-      type: "Course",
-      instructions: "Optional university depth. Read the Lecture 6 notes; Lecture 7 (AVL balancing) can be deferred.",
+      title: "Tree cheatsheet for coding interviews",
+      url: "https://www.techinterviewhandbook.org/algorithms/tree/",
+      provider: "Tech Interview Handbook",
+      type: "Article",
+      instructions:
+        "Interview checklist, not a lesson: read the BST section, Things to look out for, Corner cases, Common routines and Techniques. Ignore the paid course recommendations at the end. Free; no account.",
     },
   ],
   exercises: [
     {
       title: "Maximum Depth of Binary Tree (LeetCode)",
       url: "https://leetcode.com/problems/maximum-depth-of-binary-tree/",
-      note: "Foundation, Easy. Solve it recursively (DFS) and with a queue (BFS).",
+      note: "Foundation, Easy. Solve it recursively (DFS) and with a queue (BFS). LeetCode needs a free account to submit.",
     },
     {
       title: "Invert Binary Tree (LeetCode)",
@@ -123,7 +127,7 @@ const topic: Topic = {
     {
       question: "What are preorder, inorder and postorder traversal, and when would you use each?",
       answer:
-        "They are depth-first orders that differ in when the node is visited relative to its subtrees: preorder visits the node before its children (useful for copying or serializing a tree), inorder visits left subtree, node, right subtree (yields sorted order in a BST), and postorder visits children before the node (useful when a node's answer depends on its children's answers, such as height). All are O(n) time and O(h) stack space.",
+        "They are depth-first orders that differ in when the node is visited relative to its subtrees. Preorder visits the node before its children (useful for copying or serializing a tree); inorder visits left subtree, node, right subtree (yields sorted order in a BST); postorder visits children before the node (useful when a node's answer depends on its children's, such as height). All are O(n) time and O(h) stack space.",
       code: `class TreeNode:
     def __init__(self, val, left=None, right=None):
         self.val, self.left, self.right = val, left, right
@@ -131,33 +135,22 @@ const topic: Topic = {
 def inorder(node, out):
     if node:
         inorder(node.left, out)
-        out.append(node.val)
+        out.append(node.val)        # move this line first for preorder, last for postorder
         inorder(node.right, out)
     return out
 
-def preorder(node, out):
-    if node:
-        out.append(node.val)
-        preorder(node.left, out)
-        preorder(node.right, out)
-    return out
-
 root = TreeNode(4, TreeNode(2, TreeNode(1), TreeNode(3)), TreeNode(6))
-print(inorder(root, []), preorder(root, []), inorder(None, []))
-# -> [1, 2, 3, 4, 6] [4, 2, 1, 3, 6] []`,
-      followUps: ["How would you do an inorder traversal iteratively?"],
+print(inorder(root, []), inorder(None, []))   # -> [1, 2, 3, 4, 6] []`,
+      followUps: ["How would you do an inorder traversal iteratively with an explicit stack?"],
+      source: { title: "Tech Interview Handbook — Tree cheatsheet", url: "https://www.techinterviewhandbook.org/algorithms/tree/" },
     },
     {
       question: "When would you use BFS instead of DFS on a tree?",
       answer:
-        "Use BFS (level order with a queue) when the question is about levels or the nearest something: level averages, the right side view, or the minimum depth, where BFS can stop at the first leaf. Use DFS when the answer combines results from subtrees (height, diameter, path sums) or follows root-to-leaf paths. BFS uses O(w) memory for the widest level; DFS uses O(h) for the deepest path.",
+        "Use BFS (level order with a queue) when the question is about levels or the nearest something: level averages, the right side view, or the minimum depth, where BFS can stop at the first leaf. Use DFS when the answer combines results from subtrees (height, diameter, path sums) or follows root-to-leaf paths. BFS uses O(w) memory for the widest level; DFS uses O(h) for the deepest path. Use collections.deque, not list.pop(0), for the queue.",
       code: `from collections import deque
 
-class TreeNode:
-    def __init__(self, val, left=None, right=None):
-        self.val, self.left, self.right = val, left, right
-
-def level_order(root):
+def level_order(root):              # root is a TreeNode as above, or None
     if not root:
         return []
     levels, queue = [], deque([root])
@@ -173,106 +166,37 @@ def level_order(root):
         levels.append(level)
     return levels
 
-root = TreeNode(3, TreeNode(9), TreeNode(20, TreeNode(15), TreeNode(7)))
-print(level_order(root), level_order(None))   # -> [[3], [9, 20], [15, 7]] []`,
+print(level_order(None))   # -> []`,
       followUps: ["How would you return the levels in zigzag order?"],
+      source: { title: "NeetCode — Binary Tree Level Order Traversal (LeetCode 102) video", url: "https://www.youtube.com/watch?v=6ZnyEApgFYg" },
     },
     {
       question: "How do you approach a tree problem recursively?",
       answer:
-        "Decide what each call should return about its subtree, assume the recursive calls return it correctly for the children, and combine. For maximum depth, return the height: 1 + max(left, right), with 0 for an empty tree. When you need two things — such as height and whether the subtree is balanced — return both, or keep a separate best answer updated during the traversal (as in diameter).",
-      code: `class TreeNode:
-    def __init__(self, val, left=None, right=None):
-        self.val, self.left, self.right = val, left, right
-
-def diameter(root):
-    best = 0
-    def height(node):
-        nonlocal best
-        if not node:
-            return 0
-        left, right = height(node.left), height(node.right)
-        best = max(best, left + right)        # longest path through this node (edges)
-        return 1 + max(left, right)
-    height(root)
-    return best
-
-root = TreeNode(1, TreeNode(2, TreeNode(4), TreeNode(5)), TreeNode(3))
-print(diameter(root), diameter(TreeNode(1)), diameter(None))   # -> 3 0 0`,
+        "Decide what each call returns about its subtree, assume the recursive calls return it correctly for the children, and combine. For maximum depth, return the height: 1 + max(left, right), with 0 for an empty tree. When you need two things — such as height and whether the subtree is balanced — return both, or update a separate best answer during the traversal: for diameter, return height but record left height + right height at every node. Calling a separate height() at every node instead costs O(n²) on a skewed tree.",
       followUps: ["Why does checking balance by calling height() at every node cost O(n²) in the worst case?"],
+      source: { title: "NeetCode — Diameter of a Binary Tree (LeetCode 543) video", url: "https://www.youtube.com/watch?v=bkxqA8Rfv04" },
     },
     {
       question: "What is a binary search tree, and what are its operation costs?",
       answer:
-        "In a BST, every value in a node's left subtree is smaller than the node and every value in its right subtree is larger (with a stated rule for duplicates). Search, insert and delete follow one root-to-leaf path, so they cost O(h). A balanced tree has h = O(log n); inserting sorted data into a plain BST creates a chain with h = O(n). Self-balancing trees (AVL, red-black) guarantee O(log n); you should know they exist, not implement them.",
-      code: `class TreeNode:
-    def __init__(self, val, left=None, right=None):
-        self.val, self.left, self.right = val, left, right
-
-def insert(root, val):
-    if not root:
-        return TreeNode(val)
-    if val < root.val:
-        root.left = insert(root.left, val)
-    else:
-        root.right = insert(root.right, val)
-    return root
-
-def contains(root, val):
-    while root:
-        if val == root.val:
-            return True
-        root = root.left if val < root.val else root.right
-    return False
-
-root = None
-for v in (5, 3, 8, 1, 4):
-    root = insert(root, v)
-print(contains(root, 4), contains(root, 7))   # -> True False`,
+        "In a BST, every value in a node's left subtree is smaller than the node and every value in its right subtree is larger (with a stated rule for duplicates). Search, insert and delete follow one root-to-leaf path, so they cost O(h). A balanced tree has h = O(log n); inserting sorted data into a plain BST creates a chain with h = O(n). Self-balancing trees (AVL, red-black) guarantee O(log n). Python has no built-in BST; depending on the operations, I would use a sorted list with bisect, a heap or a dictionary.",
       followUps: ["Python has no built-in BST. What would you use for sorted data with frequent inserts?"],
+      source: { title: "VisuAlgo — Binary Search Tree (e-lecture)", url: "https://visualgo.net/en/bst" },
     },
     {
       question: "How do you check whether a binary tree is a valid BST?",
       answer:
-        "Pass down the allowed range for each node: the root may be anything; a left child must be below its parent's value and above the parent's lower bound; a right child must be above the parent and below the parent's upper bound. Checking only each node against its direct children misses violations deeper in the tree. Alternatively, an inorder traversal must produce strictly increasing values. Both are O(n) time and O(h) space.",
-      code: `class TreeNode:
-    def __init__(self, val, left=None, right=None):
-        self.val, self.left, self.right = val, left, right
-
-def is_bst(node, low=float("-inf"), high=float("inf")):
-    if not node:
-        return True
-    if not (low < node.val < high):
-        return False
-    return is_bst(node.left, low, node.val) and is_bst(node.right, node.val, high)
-
-good = TreeNode(5, TreeNode(3), TreeNode(8, TreeNode(6), TreeNode(9)))
-bad = TreeNode(5, TreeNode(3), TreeNode(8, TreeNode(4), TreeNode(9)))   # 4 is in 5's right subtree
-print(is_bst(good), is_bst(bad), is_bst(None))   # -> True False True`,
+        "Pass down the allowed range for each node: the root may be anything; going left, the upper bound becomes the parent's value; going right, the lower bound becomes the parent's value. Every node must lie strictly inside its range. Checking each node only against its direct children misses violations deeper in the tree (a small value in the right subtree of the root). Alternatively, an inorder traversal must produce strictly increasing values. Both are O(n) time and O(h) space.",
       followUps: ["How would you handle duplicate values?"],
+      source: { title: "NeetCode — Validate Binary Search Tree (LeetCode 98) video", url: "https://www.youtube.com/watch?v=s6ATEkipzow" },
     },
     {
       question: "How do you find the lowest common ancestor of two nodes in a BST?",
       answer:
-        "Start at the root. If both values are smaller than the current node, the ancestor is in the left subtree; if both are larger, it is in the right subtree; otherwise the current node splits them (or equals one of them) and is the answer. This takes O(h) time and O(1) space iteratively. In a general binary tree without ordering, you instead search both subtrees recursively in O(n).",
-      code: `class TreeNode:
-    def __init__(self, val, left=None, right=None):
-        self.val, self.left, self.right = val, left, right
-
-def lca_bst(root, p, q):
-    node = root
-    while node:
-        if p < node.val and q < node.val:
-            node = node.left
-        elif p > node.val and q > node.val:
-            node = node.right
-        else:
-            return node.val
-    return None
-
-root = TreeNode(6, TreeNode(2, TreeNode(0), TreeNode(4)), TreeNode(8, TreeNode(7), TreeNode(9)))
-print(lca_bst(root, 2, 8), lca_bst(root, 2, 4), lca_bst(root, 7, 9))   # -> 6 2 8`,
+        "Start at the root. If both values are smaller than the current node, the ancestor is in the left subtree; if both are larger, it is in the right subtree; otherwise the current node splits them (or equals one of them) and is the answer. That is O(h) time and O(1) space iteratively. In a general binary tree without ordering, you instead search both subtrees recursively in O(n).",
       followUps: ["How would you find the lowest common ancestor in a binary tree that is not a BST?"],
+      source: { title: "NeetCode — Lowest Common Ancestor of a Binary Search Tree (LeetCode 235) video", url: "https://www.youtube.com/watch?v=gs2LMfuOR9k" },
     },
   ],
   mistakes: [
@@ -289,6 +213,7 @@ print(lca_bst(root, 2, 8), lca_bst(root, 2, 4), lca_bst(root, 7, 9))   # -> 6 2 
     "You explain BST operations, their O(h) cost and the balanced versus skewed cases.",
     "You validate a BST correctly and find a BST lowest common ancestor.",
     "You state time and space complexity in terms of n, h and w.",
+    "Skip this topic if you can already solve Diameter of Binary Tree and Validate Binary Search Tree without hints and explain their complexity.",
   ],
   deprioritize: [
     "Implementing AVL, red-black or B-trees; know what balancing guarantees and that databases use B-tree-like indexes.",

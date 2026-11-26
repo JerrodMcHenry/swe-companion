@@ -20,37 +20,47 @@ const topic: Topic = {
     "Modify arrays in place when required, and explain the space trade-off.",
     "Recognize when sorting first enables two pointers, and include the O(n log n) cost.",
     "Recognize when these patterns do not apply (non-contiguous choices, negative numbers breaking window monotonicity).",
+    "Skip for now: specialized string algorithms (KMP, Rabin–Karp) and monotonic deques.",
   ],
   depth: "Apply: Use the concept to solve unfamiliar problems and explain relevant trade-offs.",
   resources: [
+    {
+      title: "Hello Interview — Two Pointers, Sliding Window and Prefix Sum overviews",
+      url: "https://www.hellointerview.com/learn/code/two-pointers/overview",
+      provider: "Hello Interview",
+      type: "Interactive",
+      instructions:
+        "Start here. Read the Two-Pointer Overview, then, from the left-hand menu, Fixed Length Sliding Window, Variable Length Sliding Window and Prefix Sum Overview (about 1 hour in total). Each explains the pattern in Python with step-through visualizations and a \"When Do I Use This?\" section. Skip the practice-problem pages for now — the exercises below cover them. These pages are free to read without an account; Premium features are not needed.",
+    },
+    {
+      title: "NeetCode roadmap — Two Pointers and Sliding Window",
+      url: "https://neetcode.io/roadmap",
+      provider: "NeetCode",
+      type: "Video",
+      instructions:
+        "Video alternative to Start here. Open the Two Pointers and Sliding Window nodes and watch the free explanation video for a problem only after attempting it yourself. The videos are free on YouTube; paid NeetCode features are not needed.",
+    },
     {
       title: "Array cheatsheet for coding interviews",
       url: "https://www.techinterviewhandbook.org/algorithms/array/",
       provider: "Tech Interview Handbook",
       type: "Article",
-      instructions: "Free. Read the techniques (sliding window, two pointers, traversing from the right, prefix sums) and the corner cases; skip the course advertisements.",
+      instructions:
+        "Revision checklist after Start here. Read Corner cases and Techniques (sliding window, two pointers, traversing from the right, sorting, precomputation); about 15 minutes. Skip the course advertisements.",
     },
     {
       title: "String cheatsheet for coding interviews",
       url: "https://www.techinterviewhandbook.org/algorithms/string/",
       provider: "Tech Interview Handbook",
       type: "Article",
-      instructions: "Free. Read the techniques section on counting characters and anagram and palindrome checks.",
-    },
-    {
-      title: "NeetCode roadmap — Two Pointers and Sliding Window",
-      url: "https://neetcode.io/roadmap",
-      provider: "NeetCode",
-      type: "Interactive",
-      instructions:
-        "Optional free problem map with linked video explanations on YouTube. Use the Two Pointers and Sliding Window nodes as an alternative explanation; paid features are not needed.",
+      instructions: "Short companion to the array checklist. Read Corner cases and Techniques (counting characters, anagram, palindrome); about 10 minutes.",
     },
   ],
   exercises: [
     {
       title: "Best Time to Buy and Sell Stock (LeetCode)",
       url: "https://leetcode.com/problems/best-time-to-buy-and-sell-stock/",
-      note: "Foundation, Easy. One pass with a running minimum. O(n) time, O(1) space.",
+      note: "Foundation, Easy. One pass with a running minimum. O(n) time, O(1) space. LeetCode problems need a free account to submit.",
     },
     {
       title: "Squares of a Sorted Array (LeetCode)",
@@ -102,7 +112,7 @@ const topic: Topic = {
     {
       question: "When do two pointers work, and why is the technique correct?",
       answer:
-        "Opposite-direction pointers work when the input is sorted (or symmetric, as in palindromes) and moving one pointer predictably changes the quantity you compare. For a pair sum in a sorted array: if the sum is too small, moving the left pointer right is the only way to increase it, and no pair using the current left element with any remaining right element can work, so discarding it is safe. Each step discards one candidate, giving O(n) time and O(1) space.",
+        "Opposite-direction pointers work when the input is sorted (or symmetric, as in palindromes) and moving one pointer predictably changes the quantity you compare. For a pair sum in a sorted array: if the sum is too small, the current left element cannot pair with any remaining element to reach the target, so discarding it (left += 1) is safe; if too large, discard the right element. Each step eliminates one candidate, giving O(n) time and O(1) space.",
       code: `def pair_with_sum(sorted_nums, target):
     left, right = 0, len(sorted_nums) - 1
     while left < right:
@@ -117,29 +127,15 @@ const topic: Topic = {
 
 print(pair_with_sum([1, 3, 4, 6, 9], 10), pair_with_sum([1, 2], 7), pair_with_sum([], 1))
 # -> (0, 4) None None`,
-      followUps: ["What changes if the array is not sorted? What does sorting cost?"],
+      followUps: ["What changes if the array is not sorted? What does sorting cost?", "Why is moving the shorter side safe in Container With Most Water?"],
+      source: { title: "Hello Interview — Two-Pointer Overview", url: "https://www.hellointerview.com/learn/code/two-pointers/overview" },
     },
     {
       question: "What is a sliding window, and how do you recognize a sliding-window problem?",
       answer:
-        "A sliding window maintains a contiguous range [left, right] and updates a summary (counts, sum, set) as right expands and left shrinks, instead of recomputing every subarray. Signals: \"contiguous subarray or substring\", \"longest/shortest/at most k\", and a validity condition that becomes true or false monotonically as the window grows. Each index enters and leaves at most once, so it runs in O(n).",
-      code: `def longest_unique_substring(s):
-    last_seen = {}
-    left = best = 0
-    for right, ch in enumerate(s):
-        if ch in last_seen and last_seen[ch] >= left:
-            left = last_seen[ch] + 1        # shrink past the repeat
-        last_seen[ch] = right
-        best = max(best, right - left + 1)
-    return best
-
-for s in ["abcabcbb", "bbbb", "", "pwwkew"]:
-    print(repr(s), longest_unique_substring(s))
-# -> 'abcabcbb' 3
-# -> 'bbbb' 1
-# -> '' 0
-# -> 'pwwkew' 3`,
+        "A sliding window maintains a contiguous range [left, right] and updates a summary (counts, sum, set) as right expands and left shrinks, instead of recomputing every subarray. Signals: \"contiguous subarray or substring\", \"longest/shortest/at most k\", and a validity condition that changes monotonically as the window grows or shrinks. Fixed-size windows add one element and remove one per step; variable-size windows shrink from the left until the window is valid again. Each index enters and leaves at most once, so the pass is O(n).",
       followUps: ["Why does a sliding window fail for \"subarray sum equals k\" when numbers can be negative?"],
+      source: { title: "Hello Interview — Variable Length Sliding Window (includes a template)", url: "https://www.hellointerview.com/learn/code/sliding-window/variable-length" },
     },
     {
       question: "What are prefix sums, and when are they useful?",
@@ -152,6 +148,7 @@ prefix = [0] + list(accumulate(nums))
 print(prefix)                      # -> [0, 3, 2, 6, 7, 12]
 print(prefix[4] - prefix[1])       # sum of nums[1:4]  # -> 4`,
       followUps: ["How would you extend prefix sums to a two-dimensional grid?"],
+      source: { title: "Hello Interview — Prefix Sum Overview", url: "https://www.hellointerview.com/learn/code/prefix-sum/overview" },
     },
     {
       question: "How do you remove or rearrange elements in place, and what does that save?",
@@ -167,44 +164,26 @@ print(prefix[4] - prefix[1])       # sum of nums[1:4]  # -> 4`,
 
 data = [3, 2, 2, 3, 4]
 k = remove_value(data, 3)
-print(k, data[:k])                    # -> 3 [2, 2, 4]
-print(remove_value([], 1))            # -> 0`,
+print(k, data[:k])                    # -> 3 [2, 2, 4]`,
       followUps: ["Why is calling list.remove() in a loop slower?"],
+      source: { title: "Hello Interview — Move Zeroes (same read/write-pointer idea)", url: "https://www.hellointerview.com/learn/code/two-pointers/move-zeroes" },
     },
     {
       question: "How do you choose between a hash map and two pointers for a pair problem?",
       answer:
         "On unsorted input, a hash map finds a pair in O(n) average time and O(n) space. If the input is already sorted, two pointers find it in O(n) time and O(1) space. Sorting first costs O(n log n) and loses original indexes, so it is worthwhile mainly when the problem needs sorted order anyway (as in 3Sum) or memory is tight.",
-      code: `def two_sum_indexes(nums, target):        # unsorted: hash map
-    seen = {}
-    for i, x in enumerate(nums):
-        if target - x in seen:
-            return [seen[target - x], i]
-        seen[x] = i
-    return None
-
-print(two_sum_indexes([3, 2, 4], 6))   # -> [1, 2]`,
       followUps: ["How would you find all unique triplets that sum to zero?"],
+      source: {
+        title: "Tech Interview Handbook — Work out and optimize your approach (Two Sum trade-off)",
+        url: "https://www.techinterviewhandbook.org/coding-interview-cheatsheet/#3-work-out-and-optimize-your-approach-with-the-interviewer",
+      },
     },
     {
       question: "Walk through an O(n) solution for Product of Array Except Self without division.",
       answer:
-        "The answer at i is the product of everything to the left of i times everything to the right. One pass left to right stores running prefix products in the output array; a second pass right to left multiplies in a running suffix product. That is O(n) time and O(1) extra space beyond the output. Avoiding division also handles zeros correctly.",
-      code: `def product_except_self(nums):
-    result = [1] * len(nums)
-    prefix = 1
-    for i in range(len(nums)):
-        result[i] = prefix
-        prefix *= nums[i]
-    suffix = 1
-    for i in range(len(nums) - 1, -1, -1):
-        result[i] *= suffix
-        suffix *= nums[i]
-    return result
-
-print(product_except_self([1, 2, 3, 4]))    # -> [24, 12, 8, 6]
-print(product_except_self([0, 4, 5]))       # -> [20, 0, 0]`,
+        "The answer at i is the product of everything to the left of i times everything to the right. One pass left to right writes running prefix products into the output array; a second pass right to left multiplies in a running suffix product. That is O(n) time and O(1) extra space beyond the output. Avoiding division also handles zeros correctly.",
       followUps: ["Why does the division-based approach fail with zeros?"],
+      source: { title: "NeetCode — Product of Array Except Self (video explanation)", url: "https://www.youtube.com/watch?v=bNvIQI2wAjk" },
     },
   ],
   mistakes: [
@@ -221,6 +200,7 @@ print(product_except_self([0, 4, 5]))       # -> [20, 0, 0]`,
     "You explain why two pointers or a sliding window does not miss the answer.",
     "You state O(n) time and the extra space used, including any sort.",
     "You solve the Reinforcement problems above independently and at least one Transfer problem without hints.",
+    "Skip this topic if you can already solve unseen Medium two-pointer and sliding-window problems and explain why they are correct.",
   ],
   deprioritize: [
     "Specialized string algorithms (KMP, Rabin–Karp, suffix arrays, Manacher's algorithm).",

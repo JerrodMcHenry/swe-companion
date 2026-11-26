@@ -11,80 +11,71 @@ const topic: Topic = {
     "Lists are the default container in Python and the input type of most array problems in coding interviews. You need to manipulate them fluently and know the cost of each operation, because choosing list.insert(0, x) or `x in some_list` inside a loop quietly turns an O(n) solution into O(n²). Basic tuple use (fixed records, multiple return values) is taught here too.",
   prerequisites: ["Variables and Data Types", "Loops", "Functions and Arguments", "Strings (for indexing and slicing)"],
   objectives: [
-    "Create lists, index and slice them, including negative indexes, and modify items by index.",
-    "Use append, extend, insert, pop, remove, del, index, count, reverse and clear, and know what each returns.",
-    "Distinguish append from extend and from +, and remove from pop from del.",
-    "Test membership and state that `x in list` is O(n).",
-    "State the cost of indexing, append, insert, pop, slicing, len and sorting.",
-    "Copy a list with slicing, list() or copy(), and recognize when a shallow copy is not enough.",
-    "Use built-ins with lists: len, sum, min, max, sorted, reversed, enumerate, zip, any and all.",
-    "Write simple list comprehensions with a condition, and know when a loop is clearer.",
-    "Use tuples for fixed records and multiple return values, including unpacking.",
-    "Choose between a list, a set and a dictionary for a task.",
+    "Create, index and slice lists, including negative indexes and slices that return a new list.",
+    "List methods and what they return: append, extend, insert, pop, remove, index, count, reverse, sort and clear (the mutating methods return None).",
+    "append versus extend versus +, and remove (by value) versus pop (by index, returns the item) versus del.",
+    "Costs in CPython's dynamic array: indexing and len O(1); append amortized O(1); insert or pop at index k O(n - k); x in list, index and remove O(n); sort O(n log n).",
+    "Copying: a[:], list(a) and a.copy() are shallow copies; b = a is not a copy.",
+    "Built-ins used with lists: len, sum, min, max, sorted, reversed, enumerate, zip, any and all.",
+    "Simple list comprehensions with one condition, and when a plain loop is clearer.",
+    "Tuples for fixed records and multiple return values, including unpacking.",
+    "Choosing between a list, a set and a dictionary for a task.",
+    "Skip for now: CPython over-allocation details, nested comprehensions with several for clauses, the array module and NumPy.",
   ],
   depth: "Apply: Use the concept to solve unfamiliar problems and explain relevant trade-offs.",
   resources: [
     {
-      title: "Python Programming MOOC — Lists",
+      title: "Python Programming MOOC — Part 4: Lists",
       url: "https://programming-26.mooc.fi/part-4/3-lists",
       provider: "University of Helsinki",
       type: "Course",
-      instructions: "Written lesson with exercises: creating, indexing, adding, removing and searching list items.",
-    },
-    {
-      title: "Think Python — Chapter 9: Lists",
-      url: "https://allendowney.github.io/ThinkPython/chap09.html",
-      provider: "Allen B. Downey",
-      type: "Book",
       instructions:
-        "Written alternative. Read sections 9.1–9.8 (list basics, methods, looping and sorting). Sections 9.9–9.11 on aliasing belong to Mutability, References and Copying; read them now or there.",
+        "Start here. Read the whole section and do its exercises: creating lists, indexing, adding, removing and searching items, sorting and list functions. Free; reading needs no account, submitting exercises needs a free MOOC.fi account (later parts use the VS Code TMC plugin).",
     },
     {
-      title: "CS50's Introduction to Programming with Python — Lists (short)",
+      title: "CS50's Introduction to Programming with Python — Lists and List Methods (shorts)",
       url: "https://cs50.harvard.edu/python/shorts/lists/",
       provider: "Harvard University",
       type: "Video",
       instructions:
-        "Short video alternative with transcript on creating lists, append, extend, insert and remove. Follow it with the List Methods short on the same site.",
+        "Short video alternative to the MOOC reading, with transcripts. Watch the Lists short, then the List Methods short (cs50.harvard.edu/python/shorts/list_methods/). Free; no account needed.",
     },
     {
-      title: "The Python Tutorial — More on Lists and List Comprehensions",
+      title: "The Python Tutorial — 5.1 More on Lists, 5.1.3 List Comprehensions and 5.3 Tuples and Sequences",
       url: "https://docs.python.org/3/tutorial/datastructures.html#more-on-lists",
       provider: "Python Software Foundation",
       type: "Documentation",
       instructions:
-        "Reference. Read 5.1 More on Lists and 5.1.3 List Comprehensions; nested comprehensions are optional. Section 5.3 Tuples and Sequences covers tuple basics and unpacking.",
+        "Reference for the full method list, comprehensions and tuple unpacking. Read 5.1, 5.1.3 and 5.3; skip 5.1.1–5.1.2 (stacks and queues are covered in Unit 2) and 5.1.4 nested comprehensions.",
     },
     {
       title: "Time complexity of operations on built-in types — list",
       url: "https://docs.python.org/3/builtins/time-complexity.html#list",
       provider: "Python Software Foundation",
       type: "Documentation",
-      instructions:
-        "Reference table of list operation costs in CPython, including the notes on amortized append. Use it to check your complexity claims.",
+      instructions: "Reference table of list operation costs in CPython, including the note on amortized append. Use it to check your complexity claims.",
     },
   ],
   exercises: [
     {
       title: "University of Helsinki, Lists: Addition and removal; Same word twice; Arithmetic mean; The range of a list",
       url: "https://programming-26.mooc.fi/part-4/3-lists",
-      note: "Instructions are readable without an account; submitting requires logging in.",
+      note: "Adding, removing and searching items, and list functions. Instructions are readable without an account; submitting requires a free account.",
     },
     {
-      title: "Write a function that returns a new list with duplicates removed while keeping the first occurrence of each value.",
-      note: "First write an O(n²) version, then an O(n) version that uses a set to remember what you have seen.",
+      title: "Card Games (Exercism Python track)",
+      url: "https://exercism.org/tracks/python/exercises/card-games",
+      note: "Concept exercise on list creation, concatenation, slicing and membership, with automated tests. Free; needs a free Exercism account to use the online editor.",
     },
     {
-      title: "Write a function that returns the second-largest distinct value in a list, without sorting.",
-      note: "Decide what to return for fewer than two distinct values and test it.",
-    },
-    {
-      title: "Rewrite three short loops as list comprehensions, and one comprehension back as a loop where the loop is clearer.",
+      title: "Chaitana's Colossal Coaster (Exercism Python track)",
+      url: "https://exercism.org/tracks/python/exercises/chaitanas-colossal-coaster",
+      note: "Concept exercise on list methods (append, insert, index, remove, pop, count, copy, sort) applied to two queues. Free Exercism account.",
     },
     {
       title: "Richest Customer Wealth (LeetCode)",
       url: "https://leetcode.com/problems/richest-customer-wealth/",
-      note: "Easy. Nested lists; try sum() with max().",
+      note: "Easy. Nested lists; try sum() with max(). LeetCode needs a free account to submit.",
     },
     {
       title: "Kids With the Greatest Number of Candies (LeetCode)",
@@ -117,6 +108,7 @@ print(8 in items)    # -> True`,
         "What does amortized O(1) mean?",
         "Which structure would you use if you needed to add and remove at both ends? (collections.deque, covered in Unit 2.)",
       ],
+      source: { title: "Python Design FAQ — How are lists implemented in CPython?", url: "https://docs.python.org/3/faq/design.html#how-are-lists-implemented-in-cpython" },
     },
     {
       question: "What is the difference between append and extend?",
@@ -130,6 +122,7 @@ b.extend([3, 4])
 print(b)          # -> [1, 2, 3, 4]
 print(b.append(5))   # -> None`,
       followUps: ["What happens if you call extend with a string?"],
+      source: { title: "The Python Tutorial — 5.1 More on Lists", url: "https://docs.python.org/3/tutorial/datastructures.html#more-on-lists" },
     },
     {
       question: "What is the difference between remove, pop and del?",
@@ -142,6 +135,7 @@ print(items.pop(0))     # -> a
 del items[-1]
 print(items)            # -> ['c']`,
       followUps: ["How would you remove every occurrence of a value efficiently?"],
+      source: { title: "The Python Tutorial — 5.2 The del statement", url: "https://docs.python.org/3/tutorial/datastructures.html#the-del-statement" },
     },
     {
       question: "Why doesn't `b = a` copy a list, and how do you copy one?",
@@ -154,6 +148,7 @@ a.append(4)
 print(b)   # -> [1, 2, 3, 4]
 print(c)   # -> [1, 2, 3]`,
       followUps: ["Why does `grid = [[0] * 3] * 3` produce surprising results?"],
+      source: { title: "Python FAQ — Why did changing list 'y' also change list 'x'?", url: "https://docs.python.org/3/faq/programming.html#why-did-changing-list-y-also-change-list-x" },
     },
     {
       question: "What is a list comprehension, and when should you use one?",
@@ -164,6 +159,7 @@ print([n * n for n in nums if n > 0])   # -> [9, 16, 81]
 words = ["Ada", "", "Lin"]
 print([w.upper() for w in words if w])  # -> ['ADA', 'LIN']`,
       followUps: ["What is the difference between a list comprehension and a generator expression?"],
+      source: { title: "The Python Tutorial — 5.1.3 List Comprehensions", url: "https://docs.python.org/3/tutorial/datastructures.html#list-comprehensions" },
     },
     {
       question: "When would you use a tuple instead of a list?",
@@ -177,6 +173,7 @@ print(low, high)                       # -> 1 9
 visited = {(0, 0), (0, 1)}             # tuples as set members
 print((0, 1) in visited)               # -> True`,
       followUps: ["Can a tuple ever change?"],
+      source: { title: "The Python Tutorial — 5.3 Tuples and Sequences", url: "https://docs.python.org/3/tutorial/datastructures.html#tuples-and-sequences" },
     },
     {
       question: "How do you choose between a list, a set and a dictionary?",
@@ -187,6 +184,7 @@ banned_set = set(banned)           # better for many lookups
 messages = ["hi", "spam", "hello"]
 print([m for m in messages if m not in banned_set])   # -> ['hi', 'hello']`,
       followUps: ["What does converting a list to a set cost, and when is it worth it?"],
+      source: { title: "Python Docs — Time complexity of built-in types", url: "https://docs.python.org/3/builtins/time-complexity.html#list" },
     },
   ],
   mistakes: [
@@ -198,11 +196,11 @@ print([m for m in messages if m not in banned_set])   # -> ['hi', 'hello']`,
     "Calling insert(0, x), pop(0) or `x in list` inside a loop without noticing the O(n) cost.",
   ],
   mastery: [
-    "Manipulate lists fluently with indexing, slicing, methods and comprehensions without looking up syntax.",
-    "State the time complexity of common list operations, including amortized append.",
-    "Copy lists correctly and explain when a shallow copy is not enough.",
-    "Explain when a set or dictionary would be a better choice than a list.",
-    "Solve the linked practice problems independently and explain their complexity.",
+    "You complete the MOOC list exercises, both Exercism exercises and the four LeetCode Easy problems without help, and state each solution's complexity.",
+    "You use indexing, slicing, list methods and simple comprehensions without looking up syntax.",
+    "You can state the cost of common list operations, including amortized append and O(n) insert(0, x) and x in list.",
+    "You can explain when a set or dictionary would be a better choice than a list.",
+    "Skip this topic if you can already do all of the above.",
   ],
   deprioritize: [
     "CPython's over-allocation details and memory layout.",
