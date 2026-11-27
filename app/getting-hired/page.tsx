@@ -1,46 +1,31 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { careerListings, getCareerGuide } from "@/content/career-guides";
-import { getSection } from "../sections";
+import { careerGuides } from "@/content/career-guides";
 
-const section = getSection("/getting-hired");
+export const metadata: Metadata = { title: "Getting Hired", description: "Resumes, applications, job descriptions, projects, behavioral interviews and recovering from rejection." };
 
-export const metadata: Metadata = { title: section.title };
-
-export default function GettingHiredPage() {
+export default function GettingHired() {
   return (
-    <>
-      <h1 className="title">{section.title}</h1>
-      <p className="lead">{section.description}</p>
-      <div className="grid g2" style={{ marginTop: 28 }}>
-        {careerListings.map((item) => {
-          if (!("slug" in item)) {
-            return (
-              <div key={item.title} className="card lib" style={{ padding: 20, boxShadow: "none" }}>
-                <div className="chips">
-                  <h2 className="h3 muted">{item.title}</h2>
-                  <span className="chip soon">Planned</span>
-                </div>
-                <div className="d">{item.description}</div>
-              </div>
-            );
-          }
-          const guide = getCareerGuide(item.slug)!; // Existence is checked at build time in career-guides.ts.
-          return (
-            <Link key={item.title} className="card lib" href={`/getting-hired/${guide.slug}`} style={{ padding: 20 }}>
-              <h2 className="h3">{item.title}</h2>
-              <div className="d">{guide.description}</div>
-            </Link>
-          );
-        })}
-      </div>
-      <p className="small body2" style={{ marginTop: 24 }}>
-        Preparing for behavioral interviews? See{" "}
-        <Link className="link" href="/interview-prep/behavioral-interviews">
-          Behavioral Interviews
+    <div className="narrow">
+      <h1 style={{ marginTop: 32 }}>Getting Hired</h1>
+      <div className="list" style={{ marginTop: 24 }}>
+        {careerGuides.map((g) => (
+          <Link key={g.slug} className="row" href={`/getting-hired/${g.slug}`}>
+            <div className="grow">
+              <div>{g.title}</div>
+              <div className="why">{g.description}</div>
+            </div>
+            <span className="go" aria-hidden="true">›</span>
+          </Link>
+        ))}
+        <Link className="row" href="/questions/behavioral">
+          <div className="grow">
+            <div>Behavioral interviews</div>
+            <div className="why">How to structure answers, build a story bank and prepare for the common questions.</div>
+          </div>
+          <span className="go" aria-hidden="true">›</span>
         </Link>
-        .
-      </p>
-    </>
+      </div>
+    </div>
   );
 }

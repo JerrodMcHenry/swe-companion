@@ -1,22 +1,68 @@
-import TargetPicker from "./target-picker";
-import { pickerCompanies, pickerEmployerTypes, pickerRoles } from "./picker-data";
+import Link from "next/link";
+import { companies } from "@/content/companies";
+import { questionSets } from "@/content/questions";
+import { problems } from "@/content/problems";
+import { Logo } from "./ui";
+import HeroSearch from "./hero-search";
 
-export default function HomePage() {
+export default function Home() {
+  const named = companies.filter((c) => c.kind === "Company");
+  const types = companies.filter((c) => c.kind === "Employer type");
   return (
     <>
-      <div className="narrow">
-        <div className="eyebrow">Your software engineering apprenticeship</div>
-        <h1 className="title" style={{ marginTop: 10 }}>
-          Stop searching. Start learning.
-          <br />
-          Get hired.
-        </h1>
-        <p className="lead">
-          Choose where you want to work and your role. You get one clear learning path for that target — what to study, in what order, how
-          deeply, and when you are ready.
-        </p>
+      <div className="hero">
+        <h1>Software engineering interview prep.</h1>
+        <HeroSearch />
       </div>
-      <TargetPicker companies={pickerCompanies} employerTypes={pickerEmployerTypes} roles={pickerRoles} />
+
+      <section>
+        <div className="sechead">
+          <h2 className="label">Companies</h2>
+        </div>
+        <div className="tiles">
+          {named.map((c) => (
+            <Link key={c.slug} className="tile" href={`/companies/${c.slug}`}>
+              <Logo company={c} />
+              <span className="n">{c.name}</span>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <section>
+        <div className="sechead">
+          <h2 className="label">Types of employer</h2>
+        </div>
+        <div className="cats">
+          {types.map((c) => (
+            <Link key={c.slug} className="cat" href={`/companies/${c.slug}`}>
+              <Logo company={c} />
+              <div>
+                <div className="n">{c.name}</div>
+                <div className="d">{c.card}</div>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <section>
+        <div className="sechead">
+          <h2 className="label">Topics</h2>
+        </div>
+        <div className="topics">
+          <Link href="/problems">
+            <span>Coding Problems</span>
+            <span className="c">{problems.length}</span>
+          </Link>
+          {questionSets.map((s) => (
+            <Link key={s.slug} href={`/questions/${s.slug}`}>
+              <span>{s.title}</span>
+              <span className="c">{s.questions.length}</span>
+            </Link>
+          ))}
+        </div>
+      </section>
     </>
   );
 }

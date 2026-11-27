@@ -4,16 +4,14 @@ const guide: CareerGuide = {
   slug: "application-strategy",
   title: "Job Application Strategy",
   description: "Find suitable entry-level roles, apply efficiently, use referrals and recruiter screens well, and keep preparing while you apply.",
-  overview:
-    "You do not need to finish the apprenticeship before applying. Hiring has two separate questions: are you eligible (degree or equivalent, graduation timing, work authorization, location), and are you ready for the interviews? Apply as soon as you are eligible and reasonably prepared, and keep preparing while applications are in progress, because hiring processes commonly take weeks to months. Nothing here guarantees interviews or offers; it helps you spend your time where it is most likely to pay off.",
   guidance: [
     {
       heading: "When to start applying",
       items: [
         "You meet a role's eligibility requirements (see Job Description Gap Analysis).",
         "You have a one-page resume with at least one project you can explain in depth (see Resume Preparation).",
-        "You can solve straightforward coding problems in one language and are practising data structures and algorithms (Apprenticeship Units 1–2).",
-        "You have a few behavioral stories prepared (see Behavioral Interview Preparation in Interview Preparation).",
+        "You can solve straightforward coding problems in one language and are practising data structures and algorithms.",
+        "You have a few behavioral stories prepared (see the Behavioral questions).",
         "Graduation-year programs often open many months before the start date; if you are a student, check timing early rather than waiting until you feel fully ready.",
       ],
     },
@@ -22,9 +20,9 @@ const guide: CareerGuide = {
       items: [
         "Look for titles that signal entry level: \"New Grad\", \"University Graduate\", \"Early Career\", \"Junior\", \"Associate\", \"Software Engineer I\" or level-one titles such as \"SDE I\".",
         "Treat \"Software Engineer\" postings that ask for several years of professional experience as out of range unless they say internships or equivalent experience count.",
-        "General software engineering roles are the broadest target. Add backend roles once you have done Unit 7 work, and full-stack roles once you have done Unit 8 work.",
+        "General software engineering roles are the broadest target. Add backend roles once you have built and can explain an API with a database, and full-stack roles once you have also built a React frontend.",
         "Big Tech, startups and enterprise programs differ in process: Big Tech usually emphasises coding interviews, startups often add practical or take-home work, and enterprise graduate programs often use online assessments and assessment days. Confirm the format with the recruiter.",
-        "Internships and apprenticeships are also routes in, if you are eligible for them.",
+        "Internships and structured early-career programs are also routes in, if you are eligible for them.",
       ],
     },
     {
@@ -75,7 +73,7 @@ const guide: CareerGuide = {
     },
   ],
   recommendations: [
-    "Apply while preparing. Keep one primary technical focus (for example Unit 2), a little regular behavioral practice, and a fixed, limited amount of application time each week.",
+    "Apply while preparing. Keep one primary technical focus (for example one problem pattern at a time), a little regular behavioral practice, and a fixed, limited amount of application time each week.",
     "If you get few responses, revisit targeting, eligibility and your resume before blaming your skills.",
     "If you get interviews but no offers, use the Interview Failure Recovery guide to find the weak stage.",
     "Prepare for an online assessment as soon as you apply to an employer that uses them; it can arrive within days.",
@@ -90,7 +88,7 @@ const guide: CareerGuide = {
     "Do you have any other interviews or offers in progress?",
   ],
   mistakes: [
-    "Waiting to finish every unit, or to feel completely ready, before applying.",
+    "Waiting to cover every topic, or to feel completely ready, before applying.",
     "Applying to roles where you clearly fail an eligibility requirement.",
     "Sending one generic resume to every role type.",
     "Spending all your time applying and none preparing, or the reverse.",
@@ -98,58 +96,39 @@ const guide: CareerGuide = {
     "Not asking the recruiter how the interviews work.",
     "Treating silence or rejection as proof you are not good enough; many factors are outside your control.",
   ],
-  readiness: [
-    "You can state your eligibility clearly: degree or equivalent, graduation date, work authorization and location.",
-    "You have a master resume and tailored versions for the role types you target.",
-    "You have a list of target employers and know where their entry-level roles are posted.",
-    "You have an introduction you can give in about a minute.",
-    "You keep a simple external record of applications and review it regularly.",
-  ],
   resources: [
     {
       title: "Google — Build your future (students and early career)",
       url: "https://www.google.com/about/careers/applications/buildyourfuture/",
-      provider: "Google Careers",
-      type: "Article",
-      instructions: "Official student and early-career page. Use it to find programs and Google's preparation resources. See also Google's hiring process page for application rules.",
+      note: "Official student and early-career page. Use it to find programs and Google's preparation resources. See also Google's hiring process page for application rules.",
     },
     {
       title: "Amazon — Students & graduates",
       url: "https://www.amazon.jobs/content/en/career-programs/university",
-      provider: "Amazon",
-      type: "Article",
-      instructions: "Official page for internships and graduate roles at Amazon.",
+      note: "Official page for internships and graduate roles at Amazon.",
     },
     {
       title: "Meta — Jobs for students and recent grads",
       url: "https://www.metacareers.com/careerprograms/students",
-      provider: "Meta",
-      type: "Article",
-      instructions: "Official page for Meta's student and recent-graduate roles.",
+      note: "Official page for Meta's student and recent-graduate roles.",
     },
     {
       title: "Apple — Student jobs and internships",
       url: "https://www.apple.com/careers/us/work-at-apple/students.html",
-      provider: "Apple",
-      type: "Article",
-      instructions: "Official US page for Apple's student and early-career opportunities.",
+      note: "Official US page for Apple's student and early-career opportunities.",
     },
     {
       title: "Our hiring process",
       url: "https://www.google.com/about/careers/applications/how-we-hire/",
-      provider: "Google Careers",
-      type: "Article",
-      instructions: "Official example of an employer explaining its process, recruiter conversations and application rules. Read it as an example of what to look for on any employer's site.",
+      note: "Official example of an employer explaining its process, recruiter conversations and application rules. Read it as an example of what to look for on any employer's site.",
     },
     {
       title: "New-Grad-Positions",
       url: "https://github.com/SimplifyJobs/New-Grad-Positions",
-      provider: "SimplifyJobs (community-maintained)",
-      type: "Repository",
-      instructions: "Free, frequently updated list of new-grad software roles. Use it for discovery only and confirm every detail on the employer's page; links to the maintainer's own product are optional.",
+      note: "Free, frequently updated list of new-grad software roles. Use it for discovery only and confirm every detail on the employer's page; links to the maintainer's own product are optional.",
     },
   ],
-  relatedGuides: ["/getting-hired/resume", "/getting-hired/job-description-gap-analysis", "/interview-prep/behavioral-interviews", "/getting-hired/interview-failure-recovery"],
+  relatedGuides: ["/getting-hired/resume", "/getting-hired/job-description-gap-analysis", "/getting-hired/interview-failure-recovery"],
 };
 
 export default guide;

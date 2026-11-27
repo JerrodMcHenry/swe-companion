@@ -4,8 +4,6 @@ const guide: CareerGuide = {
   slug: "resume",
   title: "Resume Preparation",
   description: "A clear, honest, one-page entry-level software engineering resume, tailored to each role.",
-  overview:
-    "Your resume has one job: show quickly and honestly that you meet a role's requirements and can do the work. For entry-level candidates that means education or equivalent experience, relevant technical skills, and evidence from internships, jobs and projects. Keep it to one page, write specific accomplishment bullets, label every project for what it is, and tailor it to each job description. Nothing here guarantees an interview; it removes avoidable reasons to be screened out.",
   guidance: [
     {
       heading: "Representative entry-level structure (one page)",
@@ -83,45 +81,27 @@ const guide: CareerGuide = {
     "Typos, inconsistent dates and broken links.",
     "Two pages for an entry-level candidate without a clear reason.",
   ],
-  readiness: [
-    "One page, single column, standard headings, text selectable in the PDF.",
-    "Every bullet is true, describes your own contribution and can be explained in an interview.",
-    "Every number can be explained, including how it was measured.",
-    "Every project is labelled as personal, academic, team, open-source or professional.",
-    "Every listed skill is one you could answer basic interview questions about.",
-    "The resume has been tailored to the role type, and the most relevant evidence appears first.",
-    "Links work and lead to a clear README or portfolio page.",
-    "Someone else has proofread it.",
-  ],
   resources: [
     {
       title: "Practical guide to writing software engineer resumes",
       url: "https://www.techinterviewhandbook.org/resume/",
-      provider: "Tech Interview Handbook",
-      type: "Article",
-      instructions:
+      note:
         "Free. Read the sections on structure, content and keywords. The page links paid resume services, which you do not need, and some of its claims about ATS screening are the author's view rather than documented behavior.",
     },
     {
       title: "Resumes — resources and templates",
       url: "https://capd.mit.edu/resources/resumes/",
-      provider: "MIT Career Advising & Professional Development",
-      type: "Article",
-      instructions: "Free university guidance on formatting, length and wording, with examples. Skim the resume guidance and use one example as a model.",
+      note: "Free university guidance on formatting, length and wording, with examples. Skim the resume guidance and use one example as a model.",
     },
     {
       title: "Create a strong resume",
       url: "https://careerservices.fas.harvard.edu/resources/create-a-strong-resume/",
-      provider: "Harvard Office of Career Services",
-      type: "Article",
-      instructions: "Free alternative with action verbs and sample resumes. Use the action-verb list when writing bullets.",
+      note: "Free alternative with action verbs and sample resumes. Use the action-verb list when writing bullets.",
     },
     {
       title: "Interviewing at Google: best practices, advice and tips",
       url: "https://www.google.com/about/careers/applications/interview-tips",
-      provider: "Google Careers",
-      type: "Article",
-      instructions: "Official employer guidance. Read the advice on describing achievements with the X-Y-Z structure.",
+      note: "Official employer guidance. Read the advice on describing achievements with the X-Y-Z structure.",
     },
   ],
   relatedGuides: ["/getting-hired/job-description-gap-analysis", "/getting-hired/engineering-projects"],

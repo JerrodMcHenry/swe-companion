@@ -1,66 +1,51 @@
-import Link from "next/link";
-import type { Tone } from "@/content/roadmap";
+import type { Company, Evidence } from "@/content/types";
 
-// Small presentation helpers shared by the pages.
+// Neutral icons for employer types without a logo (simple strokes, currentColor).
+const icons: Record<string, string> = {
+  spark: "M12 3v3M12 18v3M3 12h3M18 12h3M6 6l2 2M16 16l2 2M6 18l2-2M16 8l2-2M12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6z",
+  growth: "M4 18l6-6 4 4 6-8M15 8h5v5",
+  building: "M5 21V4h14v17M3 21h18M9 8h1M14 8h1M9 12h1M14 12h1M9 16h1M14 16h1",
+  bank: "M3 21h18M5 21V10l7-5 7 5v11M9 21v-6h6v6",
+  document: "M6 3h9l4 4v14H6zM9 12h6M9 16h4",
+};
 
-export function ExternalLink({ href, children, className = "link" }: { href: string; children: React.ReactNode; className?: string }) {
+export function Logo({ company, large }: { company: Company; large?: boolean }) {
   return (
-    <a href={href} target="_blank" rel="noopener noreferrer" className={className}>
-      {children}
-      <span aria-hidden="true"> ↗</span>
-      <span className="sr-only"> (opens in a new tab)</span>
-    </a>
-  );
-}
-
-export function Crumbs({ items }: { items: { label: string; href?: string }[] }) {
-  return (
-    <nav aria-label="Breadcrumb" className="crumb">
-      {items.map((item, index) => (
-        <span key={item.label}>
-          {index > 0 && <span aria-hidden="true"> › </span>}
-          {item.href ? <Link href={item.href}>{item.label}</Link> : <span aria-current="page">{item.label}</span>}
+    <span className={large ? "logo lg" : "logo"} aria-hidden="true">
+      {company.logo ? (
+        // Local SVG logo assets; next/image is unnecessary for small static SVGs in a static export.
+        // eslint-disable-next-line @next/next/no-img-element
+        <img src={company.logo} alt="" className={company.mono ? "mono" : undefined} />
+      ) : (
+        <span className="gicon">
+          <svg width={large ? 22 : 17} height={large ? 22 : 17} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+            <path d={icons[company.icon ?? "document"]} />
+          </svg>
         </span>
-      ))}
-    </nav>
+      )}
+    </span>
   );
 }
 
-export function DepthChip({ depth, suffix = "" }: { depth?: string; suffix?: string }) {
-  return depth ? <span className="chip depth">{depth + suffix}</span> : null;
+const tagClass: Record<Evidence, string> = { Official: "official", "Candidate-reported": "reported", "Third-party": "third", Editorial: "", Varies: "" };
+
+export function EvidenceTag({ evidence }: { evidence: Evidence }) {
+  return <span className={`tag ${tagClass[evidence]}`}>{evidence}</span>;
 }
 
-// Priority is shown only where it helps a decision: Essential stands out, Optional is marked; Important is the default.
-export function PriorityChip({ priority }: { priority?: string }) {
-  if (priority === "Essential") return <span className="chip key">Essential</span>;
-  if (priority === "Optional") return <span className="chip opt">Optional</span>;
-  return null;
-}
-
-export function StageNumber({ tone, children }: { tone: Tone; children: React.ReactNode }) {
-  return <div className={`num tone-${tone}`}>{children}</div>;
-}
-
-export function Bullets({ items }: { items: string[] }) {
+export function Chevron() {
   return (
-    <ul>
-      {items.map((item) => (
-        <li key={item}>{item}</li>
-      ))}
-    </ul>
+    <svg className="chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+      <path d="m9 6 6 6-6 6" />
+    </svg>
   );
 }
 
-// A collapsible card section, used for secondary detail.
-export function Collapsible({ title, open, children }: { title: string; open?: boolean; children: React.ReactNode }) {
+export function SearchIcon({ size = 15 }: { size?: number }) {
   return (
-    <details className="card" open={open}>
-      <summary className="sumrow">{title}</summary>
-      <div>{children}</div>
-    </details>
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+      <circle cx="11" cy="11" r="7" />
+      <path d="m20 20-3.5-3.5" />
+    </svg>
   );
 }
-
-export const isForthcoming = (title: string) => /forthcoming/i.test(title);
-export const cleanTitle = (title: string) => title.replace(/\s*\(forthcoming[^)]*\)/i, "");
-export const firstSentence = (text: string) => text.match(/^.*?[.!?](?=\s|$)/)?.[0] ?? text;

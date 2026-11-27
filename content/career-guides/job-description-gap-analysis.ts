@@ -3,9 +3,7 @@ import type { CareerGuide } from "../types";
 const guide: CareerGuide = {
   slug: "job-description-gap-analysis",
   title: "Job Description Gap Analysis",
-  description: "Read a job description, separate requirements from preferences, map your gaps to the curriculum, and decide whether to apply now.",
-  overview:
-    "A job description mixes hard eligibility rules, required skills, nice-to-have technologies and hints about the interview. Reading it carefully tells you whether you can apply, what to put first on your resume and what to prepare. You do not need to meet every preferred qualification. You do need to meet hard eligibility requirements, and to be honest with yourself about essential skills.",
+  description: "Read a job description, separate requirements from preferences, map your gaps to interview preparation, and decide whether to apply now.",
   guidance: [
     {
       heading: "Step 1: Split the posting into parts",
@@ -20,7 +18,7 @@ const guide: CareerGuide = {
       heading: "Step 2: Separate eligibility from competency",
       items: [
         "Eligibility requirements cannot be closed by studying: work authorization or sponsorship, citizenship or clearance, a required graduation window, location, and a required degree when no equivalent is offered. If you do not meet one, do not apply to that posting; look for similar roles where you do.",
-        "Degree wording matters. Many postings, including Google's early-career postings reviewed in this curriculum's research, accept a bachelor's degree \"or equivalent practical experience\". Others require a degree or a specific field.",
+        "Degree wording matters. Many postings, including Google's early-career postings reviewed in this site's research, accept a bachelor's degree \"or equivalent practical experience\". Others require a degree or a specific field.",
         "Experience wording matters too. \"New grad\" and \"early career\" roles usually expect little or no full-time experience. \"1 year of experience\" may or may not count internships and projects; some postings say \"in an industry setting\". Read the exact wording rather than guessing, and do not misrepresent projects as employment.",
         "Competency requirements can be developed: languages, data structures and algorithms, testing, databases, frameworks and tools.",
       ],
@@ -36,18 +34,18 @@ const guide: CareerGuide = {
       ],
     },
     {
-      heading: "Step 4: Map gaps to the curriculum",
+      heading: "Step 4: Map gaps to preparation",
       items: [
-        "Writing code fluently in one language → Apprenticeship Unit 1, Programming Fluency.",
-        "Data structures, algorithms, complexity, online assessments → Unit 2, Data Structures, Algorithms & Complexity, and the Coding & Algorithms guide in Interview Preparation.",
-        "Object-oriented design, design principles → Unit 3, Object-Oriented Programming & Design.",
-        "Git, testing, command line, HTTP, SQL concepts, operating-system and security basics → Unit 4, Engineering Fundamentals.",
-        "Working in existing codebases, code review, AI-assisted development tools → Unit 5, Practical Software Engineering.",
-        "No substantial project to discuss → Build and Deploy a Project (Unit 6).",
-        "REST APIs, databases, authentication, backend frameworks → Unit 7, Backend Engineering.",
-        "JavaScript, TypeScript, React, browser fundamentals → Unit 8, Full-Stack Engineering.",
-        "Behavioral questions and interview formats → Interview Preparation. Resume wording → Resume Preparation.",
-        "If an equivalent stack is listed (for example Java instead of Python), the concepts transfer; plan focused practice in that language rather than a new course.",
+        "Writing code fluently in one language → timed easy problems in that language and its language questions (Python shown here).",
+        "Data structures, algorithms, complexity, online assessments → Data Structures & Algorithms questions and the coding problems by pattern.",
+        "Object-oriented design, design principles → OOP & SOLID and Low-Level Design.",
+        "Git, testing, command line, HTTP, SQL concepts, operating-system and security basics → the Git, Testing & Debugging, Networking, SQL, Operating Systems and Backend question sets.",
+        "Working in existing codebases, code review, AI-assisted development tools → Testing & Debugging and the AI-assisted coding questions, plus practice in an open-source repository.",
+        "No substantial project to discuss → Engineering Projects.",
+        "REST APIs, databases, authentication, backend frameworks → APIs, SQL & Databases and Backend Engineering questions.",
+        "JavaScript, TypeScript, React, browser fundamentals → JavaScript, TypeScript, React and HTML/CSS questions.",
+        "Behavioral questions → the Behavioral questions. Interview formats → the employer's page. Resume wording → Resume Preparation.",
+        "If an equivalent stack is listed (for example Java instead of Python), the concepts transfer; plan focused practice in that language rather than starting a new course.",
       ],
     },
     {
@@ -63,21 +61,21 @@ const guide: CareerGuide = {
       heading: "Example A (illustrative, not a real posting): Software Engineer, New Grad",
       items: [
         "Required: bachelor's degree in computer science or equivalent practical experience; graduating between December and August; proficiency in one of Python, Java, C++ or Go; knowledge of data structures and algorithms. Preferred: internship experience; experience with testing; familiarity with distributed systems.",
-        "Analysis for a learner who has finished Units 1–2, has one deployed project and is graduating in the window: eligible; required skills met; internship missing but preferred; distributed systems deferred. Decision: apply now, practise timed coding (Unit 2) and behavioral stories, and put the project first under Projects.",
+        "Analysis for a candidate who is fluent in Python, practises coding problems regularly, has one deployed project and is graduating in the window: eligible; required skills met; internship missing but preferred; distributed systems deferred. Decision: apply now, practise timed coding problems and behavioral stories, and put the project first under Projects.",
       ],
     },
     {
       heading: "Example B (illustrative, not a real posting): Junior Backend Engineer",
       items: [
         "Required: 0–2 years of experience; experience building REST APIs in Python, Go or Java; SQL and a relational database; Git. Preferred: Docker; a cloud provider such as AWS; message queues.",
-        "Analysis for a career switcher with Units 1–4 done and a Python project but no API or database work: eligible; essential gap in APIs and SQL in practice. Decision: spend a few focused weeks on Unit 7 and add an API with PostgreSQL to the project, while applying to general entry-level roles; apply here once the API exists. Docker and AWS are optional; message queues can be deferred.",
+        "Analysis for a career switcher with solid Python and coding fundamentals and a Python project but no API or database work: eligible; essential gap in APIs and SQL in practice. Decision: spend a few focused weeks on APIs and SQL and add an API with PostgreSQL to the project, while applying to general entry-level roles; apply here once the API exists. Docker and AWS are optional; message queues can be deferred.",
       ],
     },
     {
       heading: "Example C (illustrative, not a real posting): Junior Full-Stack Engineer",
       items: [
         "Required: experience with JavaScript or TypeScript and React; building and consuming APIs; HTML and CSS; Git. Preferred: Node.js; testing frontend code; Next.js.",
-        "Analysis for a learner fluent in Python with a backend project but no frontend work: eligible; essential gap in JavaScript, TypeScript and React. Decision: Unit 8 before applying to full-stack roles specifically; apply to backend and general roles now. Next.js is optional once React is understood.",
+        "Analysis for a candidate fluent in Python with a backend project but no frontend work: eligible; essential gap in JavaScript, TypeScript and React. Decision: learn JavaScript, TypeScript and React before applying to full-stack roles specifically; apply to backend and general roles now. Next.js is optional once React is understood.",
       ],
     },
   ],
@@ -94,13 +92,7 @@ const guide: CareerGuide = {
     "Starting a new course for each posting instead of closing the shared gaps once.",
     "Misreading \"or equivalent practical experience\", or claiming projects as professional experience to meet a years-of-experience line.",
   ],
-  readiness: [
-    "For a real posting, you can mark each line as eligibility, required skill, preferred skill, responsibility or logistics.",
-    "You can state which gaps are essential, which are interview practice, which are optional and which to defer.",
-    "You can map each essential gap to an Apprenticeship unit or Library topic.",
-    "You can make and justify an apply-now or close-a-gap-first decision in a few minutes.",
-  ],
-  relatedGuides: ["/interview-prep/other-employer", "/getting-hired/resume", "/getting-hired/application-strategy"],
+  relatedGuides: ["/getting-hired/resume", "/getting-hired/application-strategy"],
 };
 
 export default guide;

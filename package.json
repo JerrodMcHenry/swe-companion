@@ -1,5 +1,5 @@
 {
-  "name": "swe-apprenticeship",
+  "name": "swe-companion",
   "private": true,
   "scripts": {
     "dev": "next dev",
