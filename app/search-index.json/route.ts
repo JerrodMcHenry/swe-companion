@@ -1,4 +1,4 @@
-import { companies } from "@/content/companies";
+import { companies, companyRoles, getCompany } from "@/content/companies";
 import { questionSets } from "@/content/questions";
 import { patterns, problems } from "@/content/problems";
 import { careerGuides } from "@/content/career-guides";
@@ -9,7 +9,8 @@ export const dynamic = "force-static";
 
 export function GET() {
   const items = [
-    ...companies.map((c) => ({ t: c.name, k: c.kind, h: `/companies/${c.slug}`, x: c.tagline })),
+    ...companyRoles(getCompany("other")!).map((r) => ({ t: `${r.title} interview prep`, k: "Role", h: r.slug === "software-engineer" ? "/companies/other" : `/companies/other/${r.slug}` })),
+    ...companies.map((c) => ({ t: c.name, k: c.group === "Types of Employer" ? "Employer type" : "Company", h: `/companies/${c.slug}`, x: c.tagline })),
     ...questionSets.map((s) => ({ t: `${s.title} interview questions`, k: "Questions", h: `/questions/${s.slug}`, x: s.description })),
     ...patterns.map((p) => ({ t: `${p.name} problems`, k: "Coding pattern", h: `/problems?pattern=${encodeURIComponent(p.name)}` })),
     ...careerGuides.map((g) => ({ t: g.title, k: "Getting Hired", h: `/getting-hired/${g.slug}`, x: g.description })),

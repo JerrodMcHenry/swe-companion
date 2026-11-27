@@ -3,7 +3,7 @@ import type { Company } from "../types";
 const company: Company = {
   slug: "established-tech",
   name: "Established tech companies",
-  kind: "Employer type",
+  group: "Types of Employer",
   icon: "building",
   tagline: "Mature technology companies outside the Big Tech pages",
   card: "Coding and behavioral interviews; design or knowledge questions at some.",

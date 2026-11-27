@@ -2,11 +2,12 @@ import type { Company } from "../types";
 
 const company: Company = {
   slug: "other",
-  name: "Other employer or posting",
-  kind: "Employer type",
+  name: "General preparation",
+  group: "Types of Employer",
   icon: "document",
-  tagline: "Prioritize from the actual posting and the format your recruiter confirms",
-  card: "Balanced coding, practical and behavioral preparation from the posting.",
+  roles: ["software-engineer", "backend-engineer", "full-stack-engineer", "ai-engineer", "forward-deployed-engineer", "quant-developer"],
+  tagline: "For any employer or a specific job posting: prioritize from the posting and the format your recruiter confirms",
+  card: "Any employer or a specific posting: balanced coding, practical and behavioral preparation.",
   facts: [
     { label: "How it works", value: "The posting and your recruiter's format set the priorities", evidence: "Editorial" },
     { label: "Default", value: "Balanced coding, practical and behavioral preparation", evidence: "Editorial" },

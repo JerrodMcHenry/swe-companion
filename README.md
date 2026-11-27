@@ -4,12 +4,16 @@ A modern, curated software engineering interview cheat sheet and resource direct
 
 It is not a course. It links the best existing free material (Tech Interview Handbook, NeetCode, Grind 75, Hello Interview, System Design Primer, Awesome Low-Level Design, Refactoring.Guru, DevInterview and official employer pages) and adds concise answers, prioritization and evidence labels. It cannot guarantee interviews or offers.
 
+## Mission
+
+SWE Companion exists to help engineers get hired and earn a living. It consolidates, verifies, prioritizes and simplifies the interview information that already exists, so candidates know what to focus on within minutes. Accuracy, relevance, accessibility and simplicity are permanent principles. It does not promise interviews, offers or exact questions, and it is not affiliated with any employer.
+
 ## What is included
 
-- **12 employers:** Google, Amazon, Meta, Apple, Microsoft, Netflix (eligibility-first), early-stage startups (including YC-backed), AI-focused startups, growth-stage companies, established tech companies, enterprise and graduate programs, and other employers or a specific posting.
-- **3 roles:** Software Engineer, Backend Engineer and Full-Stack Engineer, giving 36 company and role pages.
-- **18 question sets** (about 385 questions) covering Python, data structures and algorithms, OOP and SOLID, low-level design, system design, SQL, operating systems, networking, APIs, backend, JavaScript, TypeScript, React, HTML/CSS and accessibility, testing and debugging, Git and AI-assisted coding, behavioral, and projects and take-homes.
-- **71 coding problems** grouped by pattern, with employer selections, difficulty, priority, LeetCode links and NeetCode explanation videos where one exists.
+- **20 employers:** Big Tech (Google, Amazon, Meta, Apple, Microsoft, Netflix), AI companies (OpenAI, Anthropic, Perplexity), quantitative trading firms (Jane Street, Citadel Securities, Hudson River Trading, Jump Trading, Optiver) and six employer types, including General preparation for any employer.
+- **6 roles:** Software, Backend, Full-Stack, AI, Forward Deployed and Quantitative Developer. Each employer shows only the roles with hiring evidence there; every role also has general preparation.
+- **21 question sets** (about 464 questions) covering Python, C++, AI engineering, customer scenarios, data structures and algorithms, OOP and SOLID, low-level design, system design, SQL, operating systems, networking, APIs, backend, JavaScript, TypeScript, React, HTML/CSS and accessibility, testing and debugging, Git and AI-assisted coding, behavioral, and projects and take-homes.
+- **81 coding problems** grouped by pattern, with employer selections, difficulty, priority, LeetCode links and NeetCode explanation videos where one exists.
 - **Company pages** showing only the preparation categories relevant to that company and role; process, eligibility and sources are collapsed.
 - **Resource Library** (a directory by topic) and **Getting Hired** guides covering job descriptions, resumes, projects, applications and interview recovery.
 - Global search (⌘K), light and dark themes, and mobile layouts.

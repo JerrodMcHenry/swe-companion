@@ -3,7 +3,7 @@ import type { Company } from "../types";
 const company: Company = {
   slug: "meta",
   name: "Meta",
-  kind: "Company",
+  group: "Big Tech",
   logo: "/logos/meta.svg",
   tagline: "Software Engineer (University Grad)",
   card: "Fast, accurate coding and communication; some rounds include an AI assistant.",

@@ -3,7 +3,7 @@ import type { Company } from "../types";
 const company: Company = {
   slug: "early-stage-startups",
   name: "Early-stage startups",
-  kind: "Employer type",
+  group: "Types of Employer",
   logo: "/logos/ycombinator.svg",
   tagline: "Seed to Series A, including YC-backed companies · no standard process",
   card: "Take-homes, project discussions and work trials; algorithmic screens at some.",

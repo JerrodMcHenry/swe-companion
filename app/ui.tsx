@@ -16,12 +16,15 @@ export function Logo({ company, large }: { company: Company; large?: boolean }) 
         // Local SVG logo assets; next/image is unnecessary for small static SVGs in a static export.
         // eslint-disable-next-line @next/next/no-img-element
         <img src={company.logo} alt="" className={company.mono ? "mono" : undefined} />
-      ) : (
+      ) : company.icon ? (
         <span className="gicon">
           <svg width={large ? 22 : 17} height={large ? 22 : 17} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-            <path d={icons[company.icon ?? "document"]} />
+            <path d={icons[company.icon]} />
           </svg>
         </span>
+      ) : (
+        // Neutral monogram where a company's brand rules do not permit using its logo here.
+        <span className="gicon mono-tile">{company.name[0]}</span>
       )}
     </span>
   );

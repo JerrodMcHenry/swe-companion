@@ -17,6 +17,9 @@ import testing from "./questions/testing-debugging";
 import git from "./questions/git-tools-ai";
 import behavioral from "./questions/behavioral";
 import projects from "./questions/projects-take-homes";
+import aiEngineering from "./questions/ai-engineering";
+import customerScenarios from "./questions/customer-scenarios";
+import cpp from "./questions/cpp";
 
 const TIH = "https://www.techinterviewhandbook.org";
 const DI = "https://github.com/Devinterview-io";
@@ -76,6 +79,29 @@ export const questionSets: QuestionSet[] = [
     ],
   },
   {
+    slug: "ai-engineering",
+    title: "AI Engineering",
+    description: "Building products on LLMs: fundamentals, RAG, agents and tool calling, evaluation, production, security and AI system design.",
+    questions: aiEngineering,
+    resources: [
+      { title: "Anthropic — Building effective agents", url: "https://www.anthropic.com/engineering/building-effective-agents", note: "Workflows versus agents and the common patterns, with when not to build an agent. Free." },
+      { title: "Chip Huyen — Building a generative AI platform", url: "https://huyenchip.com/2024/07/25/genai-platform.html", note: "The best single overview of a production LLM system: context, guardrails, routing, caching and observability. Free." },
+      { title: "Hamel Husain and Shreya Shankar — AI Evals FAQ", url: "https://hamel.dev/blog/posts/evals-faq/", note: "Practical answers on error analysis, LLM judges and RAG evaluation. Free (the authors also sell a course)." },
+      { title: "AI Engineering Field Guide — interview questions", url: "https://github.com/alexeygrigorev/ai-engineering-field-guide", note: "Theory and AI system design questions collected from candidate reports, each cited. Questions only, no answers. Free." },
+    ],
+  },
+  {
+    slug: "cpp",
+    title: "C++",
+    description: "C++ for systems and trading-firm interviews: memory, object lifetime, move semantics, polymorphism, containers, undefined behaviour and concurrency.",
+    questions: cpp,
+    resources: [
+      { title: "C++ Super-FAQ (isocpp.org)", url: "https://isocpp.org/wiki/faq/virtual-functions", note: "Question-and-answer reference from the Standard C++ Foundation; see also its rvalue-reference and memory-management pages. Free." },
+      { title: "LearnCpp — Smart pointers and move semantics", url: "https://www.learncpp.com/cpp-tutorial/introduction-to-smart-pointers-move-semantics/", note: "Chapter 22 explains move semantics, unique_ptr and shared_ptr clearly; chapter 25 covers virtual functions and the vtable. Free." },
+      { title: "C++ Core Guidelines — Resource management", url: "https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#s-resource", note: "Authoritative rules on RAII, ownership and smart pointers to cite in answers. Free." },
+    ],
+  },
+  {
     slug: "sql-databases",
     title: "SQL & Databases",
     description: "Joins, grouping, NULLs, window functions, indexes, transactions and schema design.",
@@ -90,10 +116,13 @@ export const questionSets: QuestionSet[] = [
   {
     slug: "operating-systems",
     title: "Operating Systems & Concurrency",
-    description: "Processes and threads, memory, concurrency versus parallelism, race conditions and deadlocks.",
+    description: "Processes and threads, memory, concurrency, race conditions and deadlocks, plus performance and low latency for systems roles.",
     questions: os,
     resources: [
       { title: "DevInterview — Concurrency interview questions", url: `${DI}/concurrency-interview-questions`, note: "Threads, locks and synchronization. About 15 questions with answers are free in the GitHub README; the rest are on devinterview.io and mostly premium." },
+      { title: "Carl Cook — When a Microsecond Is an Eternity (CppCon 2017)", url: "https://www.youtube.com/watch?v=NH1Tta7purM", note: "A trading-firm engineer on low-latency C++: caches, allocation, branching and measurement. Free video." },
+      { title: "Algorithmica — CPU cache", url: "https://en.algorithmica.org/hpc/cpu-cache/", note: "Clear explanation of cache lines, locality and memory bandwidth with benchmarks. Free." },
+      { title: "Erik Rigtorp — Optimizing a ring buffer for throughput", url: "https://rigtorp.se/ringbuffer/", note: "A lock-free single-producer single-consumer queue in C++, including false-sharing fixes. Free." },
     ],
   },
   {
@@ -205,6 +234,16 @@ export const questionSets: QuestionSet[] = [
     questions: projects,
     resources: [
       { title: "Self introduction", url: `${TIH}/self-introduction/`, note: "Tech Interview Handbook: a short structure for introducing yourself and your project. Free." },
+    ],
+  },
+  {
+    slug: "customer-scenarios",
+    title: "Customer & Solutions Scenarios",
+    description: "Scenario questions for customer-facing engineers: discovery, building in customer environments and stakeholder communication.",
+    questions: customerScenarios,
+    resources: [
+      { title: "The Pragmatic Engineer — What are forward deployed engineers?", url: "https://newsletter.pragmaticengineer.com/p/forward-deployed-engineers", note: "What the role involves at Palantir, OpenAI and others, and how it differs from solutions engineering. Free." },
+      { title: "AI Engineering Field Guide — FDE role analysis", url: "https://github.com/alexeygrigorev/ai-engineering-field-guide/blob/main/role/06-fde.md", note: "Analysis of FDE job listings: growth, responsibilities and the skills employers ask for. Describes job expectations, not interview content. Free." },
     ],
   },
 ];

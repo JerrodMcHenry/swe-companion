@@ -95,6 +95,76 @@ print(asyncio.run(result))       # -> {'id': 1}`,
     followUps: ["How would you limit concurrency to five requests at a time? (asyncio.Semaphore.)"],
     source: { title: "Python Standard Library — Coroutines and Tasks: Running tasks concurrently", url: "https://docs.python.org/3/library/asyncio-task.html#running-tasks-concurrently" },
   },
+  {
+    group: "Performance & low latency",
+    question: "Why does cache locality matter so much for performance?",
+    answer:
+      "A main-memory access costs on the order of a hundred nanoseconds, while an L1 cache hit costs about a nanosecond. The CPU fetches whole cache lines (typically 64 bytes) and prefetches sequential accesses, so code that walks contiguous memory (arrays, vectors, struct-of-arrays layouts) runs far faster than code that chases pointers (linked lists, trees of separately allocated nodes). Algorithms with the same big-O can differ by an order of magnitude because of memory access patterns.",
+    followUps: ["How would you lay out data that is scanned field by field?"],
+    source: { title: "Algorithmica — Algorithms for Modern Hardware: CPU cache", url: "https://en.algorithmica.org/hpc/cpu-cache/" },
+  },
+  {
+    group: "Performance & low latency",
+    question: "What is false sharing, and how do you avoid it?",
+    answer:
+      "Two threads write to different variables that happen to share a cache line. The cores keep invalidating each other's copy of the line, so performance collapses even though no data is logically shared. Avoid it by giving frequently written per-thread data its own cache line (padding or alignas(64), or std::hardware_destructive_interference_size where available) and by batching updates locally before publishing them.",
+    code: `struct alignas(64) PaddedCounter {   // one counter per cache line
+    std::atomic<long> value{0};
+};
+PaddedCounter perThread[4];
+std::cout << sizeof(PaddedCounter) << '\\n';   // -> 64`,
+    source: { title: "Mechanical Sympathy — False sharing", url: "https://mechanical-sympathy.blogspot.com/2011/07/false-sharing.html" },
+  },
+  {
+    group: "Performance & low latency",
+    question: "What are memory alignment and struct padding?",
+    answer:
+      "Types are usually stored at addresses that are multiples of their alignment, so the compiler inserts padding between struct members and at the end. Ordering members from largest to smallest alignment often shrinks a struct, which means more objects per cache line. Misaligned access is slower on some hardware and invalid on others; alignas lets you request stronger alignment, for example for cache lines or SIMD.",
+    code: `struct Loose { char a; double b; char c; };   // padding after a and c
+struct Tight { double b; char a; char c; };
+std::cout << sizeof(Loose) << ' ' << sizeof(Tight) << '\\n';   // -> 24 16 (typical 64-bit platform)`,
+    source: { title: "cppreference — Object alignment", url: "https://en.cppreference.com/w/cpp/language/object#Alignment" },
+  },
+  {
+    group: "Performance & low latency",
+    question: "What does a context switch cost, and how do low-latency systems avoid it?",
+    answer:
+      "Switching threads saves and restores registers, may switch address spaces, and pollutes caches and the TLB, costing microseconds directly and more through lost cache warmth. Blocking on a mutex or I/O can trigger one. Latency-critical systems pin threads to dedicated cores, avoid blocking calls on the hot path, use busy-polling instead of sleeping, and keep the number of runnable threads at or below the number of cores.",
+    source: { title: "Operating Systems: Three Easy Pieces — Limited direct execution (context switches)", url: "https://pages.cs.wisc.edu/~remzi/OSTEP/cpu-mechanisms.pdf" },
+  },
+  {
+    group: "Performance & low latency",
+    question: "When would you use atomics or a lock-free structure instead of a mutex?",
+    answer:
+      "An uncontended mutex is cheap, but under contention threads block and may be descheduled, causing latency spikes. Atomics avoid blocking for simple operations such as counters, flags and single-producer single-consumer queues. General lock-free structures are hard to get right (memory ordering, the ABA problem, memory reclamation) and are not automatically faster, so use them only where measurement shows a mutex is the bottleneck, preferably via a well-tested library.",
+    source: { title: "cppreference — std::atomic", url: "https://en.cppreference.com/w/cpp/atomic/atomic" },
+  },
+  {
+    group: "Performance & low latency",
+    question: "What is tail latency, and why does it matter more than average latency?",
+    answer:
+      "Tail latency is the slow end of the distribution, such as the 99th or 99.9th percentile. Averages hide rare slow requests caused by garbage collection, page faults, cache misses, lock contention or context switches, and in a system where one request touches many components the tail dominates what users experience. Measure percentiles under realistic load and track outliers, not just the mean.",
+  },
+  {
+    group: "Performance & low latency",
+    question: "How do you find out why a program is slow?",
+    answer:
+      "Measure before changing anything. Reproduce with a realistic workload, then use a sampling profiler (for example perf on Linux) to find hot functions, view the results as a flame graph, and use hardware counters to check cache misses and branch mispredictions. Benchmark changes in isolation with repeated runs, compiler optimizations enabled and warm caches. Fix the biggest hotspot first and re-measure.",
+    source: { title: "Brendan Gregg — Flame graphs", url: "https://www.brendangregg.com/flamegraphs.html" },
+  },
+  {
+    group: "Performance & low latency",
+    question: "Why avoid memory allocation on the hot path?",
+    answer:
+      "General-purpose allocators can take locks, touch new memory (page faults) and have unpredictable run times, which shows up as latency spikes. Low-latency code preallocates buffers at startup, reuses objects through pools or free lists, reserves container capacity, and avoids hidden allocations such as growing strings or std::function captures in tight loops.",
+  },
+  {
+    group: "Performance & low latency",
+    question: "TCP or UDP for latency-sensitive data, and what is Nagle's algorithm?",
+    answer:
+      "TCP gives reliable, ordered delivery but retransmission and head-of-line blocking add latency; UDP sends independent datagrams with no delivery guarantee, so applications handle loss themselves. Market data is often distributed by UDP multicast with sequence numbers and gap recovery, while order entry commonly uses TCP. Nagle's algorithm batches small TCP writes to reduce packet count, which adds delay; latency-sensitive applications disable it with TCP_NODELAY.",
+    source: { title: "Beej's Guide to Network Programming", url: "https://beej.us/guide/bgnet/html/split/" },
+  },
 ];
 
 export default questions;

@@ -3,8 +3,9 @@ import type { Company } from "../types";
 const company: Company = {
   slug: "ai-startups",
   name: "AI-focused startups",
-  kind: "Employer type",
+  group: "Types of Employer",
   icon: "spark",
+  roles: ["software-engineer", "backend-engineer", "full-stack-engineer", "ai-engineer", "forward-deployed-engineer"],
   tagline: "General software roles at AI product companies, not ML research",
   card: "Coding, debugging and basic design; AI-assisted builds at some.",
   facts: [

@@ -119,7 +119,9 @@ export function SearchDialog() {
   const results = useMemo(() => {
     const words = query.toLowerCase().split(/\s+/).filter(Boolean);
     if (!index || words.length === 0) return [];
-    return index.filter((i) => words.every((w) => `${i.t} ${i.k} ${i.x ?? ""}`.toLowerCase().includes(w))).slice(0, 12);
+    // Each word must start a word in the entry, so "rag" finds RAG but not "average".
+    const patterns = words.map((w) => new RegExp(`(^|[^a-z0-9])${w.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}`));
+    return index.filter((i) => patterns.every((p) => p.test(`${i.t} ${i.k} ${i.x ?? ""}`.toLowerCase()))).slice(0, 12);
   }, [index, query]);
 
   const close = () => {

@@ -3,7 +3,7 @@ import type { Company } from "../types";
 const company: Company = {
   slug: "netflix",
   name: "Netflix",
-  kind: "Company",
+  group: "Big Tech",
   logo: "/logos/netflix.svg",
   tagline: "Eligibility first: few or no entry-level software roles",
   card: "No published new-grad process; check eligibility before preparing.",
@@ -25,7 +25,7 @@ const company: Company = {
     { title: "Netflix culture", url: "https://jobs.netflix.com/culture", note: "Official: the values behind behavioral conversations." },
   ],
   caveat:
-    "There is no reliable new-graduate interview process to prepare for here. If you meet a posting's real requirements, use the Other employer page with that posting.",
+    "There is no reliable new-graduate interview process to prepare for here. If you meet a posting's real requirements, use the General preparation page with that posting.",
   details: [
     {
       heading: "Eligibility",

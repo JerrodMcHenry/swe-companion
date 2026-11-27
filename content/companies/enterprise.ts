@@ -3,7 +3,7 @@ import type { Company } from "../types";
 const company: Company = {
   slug: "enterprise",
   name: "Enterprise & graduate programs",
-  kind: "Employer type",
+  group: "Types of Employer",
   icon: "bank",
   tagline: "Graduate programs and entry roles at large non-tech-first employers",
   card: "Online assessments, behavioral and video interviews; case exercises at some.",

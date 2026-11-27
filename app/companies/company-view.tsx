@@ -1,8 +1,7 @@
 import Link from "next/link";
-import { companyCategories } from "@/content/companies";
+import { companies, companyCategories, companyRoles } from "@/content/companies";
 import { getQuestionSet } from "@/content/questions";
 import type { Company, RoleSlug } from "@/content/types";
-import { roles } from "@/content/types";
 import { EvidenceTag, Logo } from "../ui";
 
 const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -25,6 +24,11 @@ function count(href: string, problems?: number) {
 
 export default function CompanyView({ company, role }: { company: Company; role: RoleSlug }) {
   const categories = companyCategories(company, role);
+  // On general role pages, point to the specific employers whose pages cover this role.
+  const employers =
+    company.slug === "other" && role !== "software-engineer"
+      ? companies.filter((c) => c.group !== "Types of Employer" && companyRoles(c).some((r) => r.slug === role))
+      : [];
   return (
     <>
       <div className="phead" style={{ paddingTop: 32 }}>
@@ -34,8 +38,16 @@ export default function CompanyView({ company, role }: { company: Company; role:
           <p className="muted">{company.tagline}</p>
         </div>
       </div>
+      {company.levels && (
+        <p className="small" style={{ marginTop: 14 }}>
+          <span className="tag third" style={{ marginRight: 8 }}>
+            Eligibility
+          </span>
+          {company.levels} <span className="faint">Postings change; this describes the postings reviewed, not a hiring policy.</span>
+        </p>
+      )}
       <nav className="seg" aria-label="Role">
-        {roles.map((r) => (
+        {companyRoles(company).map((r) => (
           <Link key={r.slug} href={roleHref(company, r.slug)} className={r.slug === role ? "on" : undefined} aria-current={r.slug === role ? "page" : undefined}>
             {r.title}
           </Link>
@@ -57,17 +69,31 @@ export default function CompanyView({ company, role }: { company: Company; role:
               <div className="why">{c.detail}</div>
             </Link>
             {c.practice && (
-              <Link className="xs link hide-m" href={c.practice.href}>
+              <Link className="xs link nw" href={c.practice.href}>
                 {c.practice.label}
               </Link>
             )}
-            <span className="xs faint nw">{count(c.href, c.problems)}</span>
+            <span className={c.practice ? "xs faint nw hide-m" : "xs faint nw"}>{count(c.href, c.problems)}</span>
             <span className="go" aria-hidden="true">
               ›
             </span>
           </div>
         ))}
       </div>
+
+      {employers.length > 0 && (
+        <p className="small" style={{ marginTop: 16 }}>
+          <span className="muted">Employers with this role: </span>
+          {employers.map((c, i) => (
+            <span key={c.slug}>
+              {i > 0 && <span className="faint"> · </span>}
+              <Link className="link" href={`/companies/${c.slug}/${role}`}>
+                {c.name}
+              </Link>
+            </span>
+          ))}
+        </p>
+      )}
 
       {company.officialResources.length > 0 && (
         <p className="small" style={{ marginTop: 16 }}>

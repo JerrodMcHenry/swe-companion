@@ -29,6 +29,9 @@ export const roles = [
   { slug: "software-engineer", title: "Software Engineer" },
   { slug: "backend-engineer", title: "Backend Engineer" },
   { slug: "full-stack-engineer", title: "Full-Stack Engineer" },
+  { slug: "ai-engineer", title: "AI Engineer" }, // also Applied AI Engineer
+  { slug: "forward-deployed-engineer", title: "Forward Deployed Engineer" }, // also Forward Deployed Software Engineer
+  { slug: "quant-developer", title: "Quantitative Developer" }, // also Algorithm Developer, C++ / Trading Systems / Low-Latency Engineer
 ] as const;
 
 export type RoleSlug = (typeof roles)[number]["slug"];
@@ -40,13 +43,19 @@ export type Evidence = "Official" | "Candidate-reported" | "Third-party" | "Edit
 export const categoryKeys = [
   "coding", "dsa", "python", "oop", "lld", "system-design", "sql", "behavioral", "practical", "projects",
   "apis", "backend", "javascript", "typescript", "react", "html-css", "os", "networking", "ai", "job-description",
+  // Targeted links into one group of a shared question set:
+  "api-design", "auth", "debugging", "llm-basics", "rag", "agents", "ai-evals", "ai-production", "ai-security", "ai-system-design",
+  "ai-practical", "customer-discovery", "customer-integration", "customer-communication",
+  "cpp", "cpp-memory", "cpp-concurrency", "cpp-practical", "concurrency", "performance", "os-memory",
 ] as const;
 export type CategoryKey = (typeof categoryKeys)[number];
 
 export type Company = {
   slug: string; // /companies/<slug>
   name: string;
-  kind: "Company" | "Employer type";
+  group: "Big Tech" | "AI Companies" | "Quantitative Trading" | "Types of Employer"; // homepage group
+  roles?: RoleSlug[]; // roles with hiring evidence at this employer; default Software, Backend and Full-Stack Engineer
+  levels?: string; // one line on who the reviewed postings target, shown when it affects eligibility
   logo?: string; // /logos/<file>.svg for companies with an authentic logo
   mono?: boolean; // single-colour logo that is inverted in dark mode
   icon?: string; // neutral icon name for employer types without a logo

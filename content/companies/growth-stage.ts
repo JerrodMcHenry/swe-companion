@@ -3,7 +3,7 @@ import type { Company } from "../types";
 const company: Company = {
   slug: "growth-stage",
   name: "Growth-stage companies",
-  kind: "Employer type",
+  group: "Types of Employer",
   icon: "growth",
   tagline: "Scaling product companies: algorithmic screens plus realistic rounds",
   card: "Coding screens plus integration, debugging and sometimes AI-assisted rounds.",
