@@ -78,10 +78,7 @@ section { margin-top: 44px; }
 
 /* logos */
 .logo { width: 34px; height: 34px; display: grid; place-items: center; flex: none; }
-.logo img { width: 30px; height: 30px; display: block; }
-[data-theme="dark"] .logo img.mono { filter: invert(1); }
 .logo.lg { width: 52px; height: 52px; border: 1px solid var(--line); border-radius: 12px; background: var(--bg2); }
-.logo.lg img { width: 30px; height: 30px; }
 .gicon { width: 34px; height: 34px; border-radius: 8px; background: var(--chip); display: grid; place-items: center; color: var(--fg2); }
 .mono-tile { font-weight: 650; font-size: 16px; color: var(--fg); }
 .logo.lg .mono-tile { font-size: 20px; }
@@ -167,7 +164,7 @@ td.nw, td a.x { white-space: nowrap; }
 .qa details[open] .chev { transform: rotate(90deg); }
 .qa .qn { font: 12px var(--mono); color: var(--fg3); margin-top: 3px; width: 22px; flex: none; }
 .ans { padding: 0 16px 16px 50px; min-width: 0; overflow-wrap: anywhere; }
-.ans p { margin: 0 0 10px; }
+.ans p { margin: 0 0 10px; white-space: pre-line; } /* line breaks in an answer render as a checklist */
 pre { background: var(--code); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; font: 12.5px/1.6 var(--mono); overflow: auto; margin: 10px 0; color: var(--fg); overflow-wrap: normal; }
 .fu { font-size: 13.5px; margin-top: 8px; color: var(--fg2); }
 .src { font-size: 13px; margin-top: 10px; color: var(--fg2); }
@@ -185,6 +182,7 @@ pre { background: var(--code); border: 1px solid var(--line); border-radius: 8px
 .palette .empty { padding: 14px 18px; color: var(--fg2); font-size: 14px; }
 
 .foot { margin: 72px auto 40px; padding-top: 20px; border-top: 1px solid var(--line); font-size: 13px; color: var(--fg3); display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.foot-note { margin: -28px 0 40px; font-size: 12px; line-height: 1.5; color: var(--fg3); max-width: 720px; }
 .tabs-mobile { display: none; }
 
 @media (max-width: 1000px) {
@@ -193,7 +191,13 @@ pre { background: var(--code); border: 1px solid var(--line); border-radius: 8px
 @media (max-width: 640px) {
   .wrap { padding: 0 16px; }
   nav.main { display: none; }
-  .kbtn { min-width: 0; width: 34px; padding: 0; justify-content: center; }
+  .kbtn { min-width: 0; width: 44px; height: 44px; padding: 0; justify-content: center; }
+  .icon-btn { width: 44px; height: 44px; }
+  /* Larger touch targets on phones (about 44px for primary controls, 36–40px for chips with spacing). */
+  .chip { height: 36px; padding: 0 13px; }
+  .seg a { padding: 10px 14px; }
+  select.sel { height: 44px; font-size: 16px; }
+  .qsearch { height: 44px; font-size: 16px; } /* 16px stops iOS Safari zooming on focus */
   .kbtn span, .kbtn kbd { display: none; }
   .hero { padding: 36px 0 0; }
   .hero h1 { font-size: 31px; }

@@ -11,7 +11,7 @@ const questions: Question[] = [
   {
     group: "Components & state",
     question: "What happens when you call a state setter? Why does logging the state right after calling it show the old value?",
-    answer: "The setter does not change the variable in the current render; it asks React to re-render the component with the new value. Each render sees a snapshot of state, so code after setCount(count + 1) in the same event handler still sees the old count. React also batches the updates made in one event and re-renders once. When the new value depends on the previous one, pass an updater function — setCount(c => c + 1) — so several updates in a row each see the latest value.",
+    answer: "The setter does not change the variable in the current render; it asks React to re-render the component with the new value. Each render sees a snapshot of state, so code after setCount(count + 1) in the same event handler still sees the old count. React also batches updates — since React 18 even those made in timeouts and promise callbacks — and re-renders once after the handler finishes. When the new value depends on the previous one, pass an updater function — setCount(c => c + 1) — so several updates in a row each see the latest value.",
     followUps: ["What does calling setCount(count + 1) three times in one click do?","What triggers a re-render besides state?"],
     source: { title: "React — State as a Snapshot", url: "https://react.dev/learn/state-as-a-snapshot" },
   },
@@ -37,9 +37,22 @@ const questions: Question[] = [
     source: { title: "React — Sharing State Between Components", url: "https://react.dev/learn/sharing-state-between-components" },
   },
   {
+    group: "Rendering & performance",
+    question: "What is reconciliation? What happens when a component's type or key changes?",
+    answer: "After a render, React compares the new element tree with the previous one and updates only the DOM that changed. It matches elements by position, type and key: if an element at the same position has the same type (and key), React keeps the component and its state and updates its props; if the type or key differs, React unmounts the old subtree, discarding its state, and mounts a new one. That is why defining a component inside another component resets its state on every render, and why changing a key is a deliberate way to reset a component, for example a form when the selected user changes.",
+    followUps: ["Why should you not declare a component function inside another component?"],
+    source: { title: "React — Preserving and Resetting State", url: "https://react.dev/learn/preserving-and-resetting-state" },
+  },
+  {
+    group: "Rendering & performance",
+    question: "When do memo, useMemo and useCallback help, and when are they unnecessary?",
+    answer: "memo skips re-rendering a component when its props are unchanged by shallow comparison; useMemo caches a computed value and useCallback caches a function between renders while their dependencies are unchanged. They help when a render is measurably slow, or when a memoized child or an Effect depends on an object or function that would otherwise be recreated on every render. They are unnecessary for cheap components, and they do nothing if a new object or inline function is passed as a prop anyway. Measure with the Profiler first; moving state down or passing children often removes the need. React Compiler (stable since v1.0 in October 2025, enabled as a build plugin) adds this memoization automatically, which makes most manual use unnecessary in projects that adopt it.",
+    source: { title: "React — memo", url: "https://react.dev/reference/react/memo" },
+  },
+  {
     group: "Effects",
     question: "What is useEffect for, and what do the dependency array and the cleanup function do?",
-    answer: "An Effect synchronizes a component with something outside React — fetching data, subscribing to a connection or browser event, starting a timer — after React has updated the screen. The dependency array lists the props and state the Effect uses: React re-runs the Effect when one of them changes, an empty array means only after mounting, and omitting it means after every render. The cleanup function you return undoes the Effect (unsubscribe, clear the timer, ignore or abort a stale request) before the next run and on unmount. In development, Strict Mode mounts components twice to expose missing cleanup; the fix is a correct cleanup, not suppressing the second run.",
+    answer: "An Effect synchronizes a component with something outside React — fetching data, subscribing to a connection or browser event, starting a timer — after React has updated the screen. The dependency array lists the props and state the Effect uses: React re-runs the Effect when one of them changes, an empty array means only after mounting, and omitting it means after every render. The cleanup function you return undoes the Effect (unsubscribe, clear the timer, ignore or abort a stale request) before the next run and on unmount. In development, Strict Mode runs an extra setup and cleanup cycle (setup, cleanup, setup) for every Effect to expose missing cleanup; the fix is a correct cleanup, not suppressing the second run.",
     followUps: ["What happens if you leave a used value out of the dependency array?","Why does my Effect run twice in development?"],
     source: { title: "React — Synchronizing with Effects", url: "https://react.dev/learn/synchronizing-with-effects" },
   },
@@ -53,7 +66,7 @@ const questions: Question[] = [
   {
     group: "Data & forms",
     question: "How do you handle a form submission in React?",
-    answer: "Put an onSubmit handler on the form element, so pressing Enter works as well as clicking, and call event.preventDefault() to stop the browser's full-page submission. Read the values from controlled inputs (or from FormData), validate them, set a submitting state that disables the button, send the request, and then either show success (clear or reset the form, update the list) or show the errors and re-enable the button. Mutations belong in the event handler, not in an Effect.",
+    answer: "Put an onSubmit handler on the form element, so pressing Enter works as well as clicking, and call event.preventDefault() to stop the browser's full-page submission. Read the values from controlled inputs (or from FormData), validate them, set a submitting state that disables the button, send the request, and then either show success (clear or reset the form, update the list) or show the errors and re-enable the button. Mutations belong in the event handler, not in an Effect. In React 19 you can instead pass a function to the form's action prop: React submits without a page reload, passes the FormData, resets uncontrolled fields after success, and useFormStatus or useActionState give the pending state.",
     followUps: ["Controlled versus uncontrolled inputs: which would you use here and why?","How would you reset the form after success?"],
     source: { title: "React — <form>: Handling form submission with an event handler", url: "https://react.dev/reference/react-dom/components/form" },
   },
@@ -95,14 +108,14 @@ const questions: Question[] = [
   {
     group: "Data & forms",
     question: "Your frontend calls your API and the console shows a CORS error. What is happening, and how do you fix it?",
-    answer: "The page's origin (for example http://localhost:5173) differs from the API's origin (http://localhost:8000), and the browser blocks the frontend from reading the response because the API did not send Access-Control-Allow-Origin for that origin. The request may well have reached the server. Confirm in the Network panel (look for a failed OPTIONS preflight or a missing header), then fix it on the server: in FastAPI, add CORSMiddleware with an explicit list of allowed origins — a wildcard origin does not work for credentialed requests (cookies), and an Authorization header must be listed explicitly in the allowed headers. In development you can instead proxy API calls through the Vite dev server so they are same-origin. Disabling browser security or switching to no-cors mode is not a fix.",
+    answer: "The page's origin (for example http://localhost:5173) differs from the API's origin (http://localhost:8000), and the browser blocks the frontend from reading the response because the API did not send Access-Control-Allow-Origin for that origin. The request may well have reached the server. Confirm in the Network panel (look for a failed OPTIONS preflight or a missing header), then fix it on the server: in FastAPI, add CORSMiddleware with an explicit list of allowed origins, and include Authorization in allow_headers if you send it. Browsers reject a literal * origin on credentialed requests (cookies); with allow_credentials=True, Starlette answers allow_origins=[\"*\"] by echoing whatever origin asks, which lets any site make credentialed requests, so avoid it. In development you can instead proxy API calls through the Vite dev server so they are same-origin. Disabling browser security or switching to no-cors mode is not a fix.",
     followUps: ["Why doesn't curl or Postman get a CORS error?","What is a preflight request?"],
     source: { title: "FastAPI — CORS (Cross-Origin Resource Sharing)", url: "https://fastapi.tiangolo.com/tutorial/cors/" },
   },
   {
     group: "Data & forms",
     question: "How does a React app send authenticated requests, and what should it do when the API returns 401?",
-    answer: "With cookie-based sessions the browser sends the cookie automatically — for a different-origin API you need credentials: \"include\" and matching CORS settings. With tokens, the app adds Authorization: Bearer <token> to each request, ideally in one API module rather than in every component. On 401 the session is missing or expired: clear the stored user and token and redirect to the login page (optionally returning to the original page afterwards). A 403 means the user is logged in but not allowed, so show a message instead of logging them out. Hiding a button is only convenience; the server must enforce permissions.",
+    answer: "With cookie-based sessions the browser sends the cookie automatically — for a different-origin API you need credentials: \"include\" and matching CORS settings, and if the API is on a different site the cookie needs SameSite=None; Secure and may still be blocked or partitioned as a third-party cookie (Safari blocks them; Firefox partitions them by default), so serve the API from the same site where you can. With tokens, the app adds Authorization: Bearer <token> to each request, ideally in one API module rather than in every component. On 401 the session is missing or expired: after one refresh attempt if you use refresh tokens, clear the stored user and token and redirect to the login page (optionally returning to the original page afterwards). A 403 means the user is logged in but not allowed, so show a message instead of logging them out. Hiding a button is only convenience; the server must enforce permissions.",
     followUps: ["Where would you store a token, and what are the risks?","Why can't the frontend keep an API secret?"],
     source: { title: "MDN — Using the Fetch API: Including credentials", url: "https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch" },
   },

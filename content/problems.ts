@@ -2,12 +2,13 @@ import type { Link, Pattern, Problem } from "./types";
 
 const lc = (slug: string) => `https://leetcode.com/problems/${slug}/`;
 const nc = (id: string): Link => ({ title: "NeetCode video", url: `https://www.youtube.com/watch?v=${id}` });
+const fm = (id: string): Link => ({ title: "Frederik Müller video", url: `https://www.youtube.com/watch?v=${id}` });
 const TIH = "https://www.techinterviewhandbook.org/algorithms";
 const HI = "https://www.hellointerview.com/learn/code";
 
 // The best explanation of each pattern, shown when a pattern is selected.
 export const patterns: Pattern[] = [
-  { name: "Arrays & hashing", resource: { title: "Hash table cheatsheet", url: `${TIH}/hash-table/`, note: "Tech Interview Handbook: techniques, corner cases and practice problems. Free." } },
+  { name: "Arrays & hashing", resource: { title: "Hash table cheatsheet", url: `${TIH}/hash-table/`, note: "Tech Interview Handbook: techniques and practice problems. Free." } },
   { name: "Two pointers", resource: { title: "Two pointers overview", url: `${HI}/two-pointers/overview`, note: "Hello Interview: when the technique works, with walkthroughs. Free page." } },
   { name: "Sliding window", resource: { title: "Variable-length sliding window", url: `${HI}/sliding-window/variable-length`, note: "Hello Interview: the template and how to recognize it. Free page." } },
   { name: "Prefix sum", resource: { title: "Prefix sum overview", url: `${HI}/prefix-sum/overview`, note: "Hello Interview. Free page." } },
@@ -15,16 +16,16 @@ export const patterns: Pattern[] = [
   { name: "Binary search", resource: { title: "Binary search overview", url: `${HI}/binary-search/overview`, note: "Hello Interview: classic binary search; the next pages cover binary search on the answer. Free pages." } },
   { name: "Linked list", resource: { title: "Linked list overview", url: `${HI}/linked-list/overview`, note: "Hello Interview: dummy nodes, fast and slow pointers. Free page." } },
   { name: "Trees", resource: { title: "Tree cheatsheet", url: `${TIH}/tree/`, note: "Tech Interview Handbook: traversals, BST properties and practice problems. Free." } },
-  { name: "Heap", resource: { title: "Heap cheatsheet", url: `${TIH}/heap/`, note: "Tech Interview Handbook: top-k and merge-k patterns. Free." } },
+  { name: "Heap", resource: { title: "Heap cheatsheet", url: `${TIH}/heap/`, note: "Tech Interview Handbook: when to use a heap (such as top-k) and practice problems. Free." } },
   { name: "Graphs", resource: { title: "Graph cheatsheet", url: `${TIH}/graph/`, note: "Tech Interview Handbook: BFS, DFS and topological sort. Free." } },
-  { name: "Backtracking", resource: { title: "Recursion cheatsheet", url: `${TIH}/recursion/`, note: "Tech Interview Handbook: recursion and backtracking. Free." } },
+  { name: "Backtracking", resource: { title: "Backtracking overview", url: `${HI}/backtracking/overview`, note: "Hello Interview: exploring and pruning the solution space, with walkthroughs. Free page." } },
   { name: "Dynamic programming", resource: { title: "Dynamic programming cheatsheet", url: `${TIH}/dynamic-programming/`, note: "Tech Interview Handbook. Free." } },
   { name: "Intervals", resource: { title: "Interval cheatsheet", url: `${TIH}/interval/`, note: "Tech Interview Handbook: sorting by start, merging and overlap checks. Free." } },
   { name: "Sorting", resource: { title: "Sorting and searching cheatsheet", url: `${TIH}/sorting-searching/`, note: "Tech Interview Handbook. Free." } },
   { name: "Math & bits", resource: { title: "Binary cheatsheet", url: `${TIH}/binary/`, note: "Tech Interview Handbook: bit manipulation tricks. Free." } },
   { name: "Union-find & shortest paths", resource: { title: "Disjoint Set Union", url: "https://cp-algorithms.com/data_structures/disjoint_set_union.html", note: "cp-algorithms: path compression and union by size. Read the first sections only." } },
   { name: "Design problems", resource: { title: "Awesome Low-Level Design — problems", url: "https://github.com/ashishps1/awesome-low-level-design#-low-level-design-interview-problems", note: "Common design problems with solutions. Free." } },
-  { name: "Concurrency", resource: { title: "OSTEP — Condition variables", url: "https://pages.cs.wisc.edu/~remzi/OSTEP/threads-cv.pdf", note: "Operating Systems: Three Easy Pieces chapter on waiting for conditions, with producer-consumer examples. Free PDF." } },
+  { name: "Concurrency", resource: { title: "OSTEP — Condition variables", url: "https://pages.cs.wisc.edu/~remzi/OSTEP/threads-cv.pdf", note: "One 19-page chapter of Operating Systems: Three Easy Pieces on making a thread wait for another, with producer-consumer examples. Free PDF." } },
   { name: "SQL", resource: { title: "LeetCode — SQL 50", url: "https://leetcode.com/studyplan/top-sql-50/", note: "SQL interview problems, mostly easy with some medium. Free; needs a LeetCode account." } },
   { name: "JavaScript", resource: { title: "LeetCode — 30 Days of JavaScript", url: "https://leetcode.com/studyplan/30-days-of-javascript/", note: "Closures, promises and timing problems such as debounce. Free; needs a LeetCode account." } },
 ];
@@ -105,16 +106,24 @@ export const problems: Problem[] = [
   { name: "Print in Order", url: lc("print-in-order"), difficulty: "Easy", pattern: "Concurrency", priority: "Important", employers: { "hudson-river-trading": "Important" } },
   { name: "Print FooBar Alternately", url: lc("print-foobar-alternately"), difficulty: "Medium", pattern: "Concurrency", priority: "Important", employers: { "jump-trading": "Important", "hudson-river-trading": "Important" } },
   { name: "Building H2O", url: lc("building-h2o"), difficulty: "Medium", pattern: "Concurrency", priority: "Optional" },
-  // Role practice: SQL for backend roles, JavaScript for full-stack roles.
+  // Role practice: SQL for backend and data roles, JavaScript for full-stack and frontend roles.
   { name: "Combine Two Tables", url: lc("combine-two-tables"), difficulty: "Easy", pattern: "SQL", priority: "Important", role: "backend-engineer", employers: { enterprise: "Important" } },
   { name: "Second Highest Salary", url: lc("second-highest-salary"), difficulty: "Medium", pattern: "SQL", priority: "Important", role: "backend-engineer" },
   { name: "Managers with at Least 5 Direct Reports", url: lc("managers-with-at-least-5-direct-reports"), difficulty: "Medium", pattern: "SQL", priority: "Important", role: "backend-engineer" },
   { name: "Confirmation Rate", url: lc("confirmation-rate"), difficulty: "Medium", pattern: "SQL", priority: "Important", role: "backend-engineer" },
   { name: "Game Play Analysis IV", url: lc("game-play-analysis-iv"), difficulty: "Medium", pattern: "SQL", priority: "Optional", role: "backend-engineer" },
+  { name: "Restaurant Growth", url: lc("restaurant-growth"), difficulty: "Medium", pattern: "SQL", priority: "Important", role: "data-engineer", explanation: fm("6p9lY_YftsE") },
+  { name: "Last Person to Fit in the Bus", url: lc("last-person-to-fit-in-the-bus"), difficulty: "Medium", pattern: "SQL", priority: "Important", role: "data-engineer", explanation: fm("Td452uOq-80") },
+  { name: "Consecutive Numbers", url: lc("consecutive-numbers"), difficulty: "Medium", pattern: "SQL", priority: "Important", role: "data-engineer", explanation: fm("smd03AqX5LA") },
+  { name: "Monthly Transactions I", url: lc("monthly-transactions-i"), difficulty: "Medium", pattern: "SQL", priority: "Important", role: "data-engineer", explanation: fm("awFtLa_iO0s") },
   { name: "Department Top Three Salaries", url: lc("department-top-three-salaries"), difficulty: "Hard", pattern: "SQL", priority: "Optional", role: "backend-engineer" },
   { name: "Counter", url: lc("counter"), difficulty: "Easy", pattern: "JavaScript", priority: "Important", role: "full-stack-engineer", explanation: nc("yEGQQAG5V68") },
   { name: "Memoize", url: lc("memoize"), difficulty: "Medium", pattern: "JavaScript", priority: "Important", role: "full-stack-engineer", explanation: nc("oFXyzJt9VeU") },
   { name: "Debounce", url: lc("debounce"), difficulty: "Medium", pattern: "JavaScript", priority: "Important", role: "full-stack-engineer", explanation: nc("1sxSpnxNx5w") },
+  { name: "Execute Asynchronous Functions in Parallel", url: lc("execute-asynchronous-functions-in-parallel"), difficulty: "Medium", pattern: "JavaScript", priority: "Important", role: "frontend-engineer" },
+  { name: "Promise Time Limit", url: lc("promise-time-limit"), difficulty: "Medium", pattern: "JavaScript", priority: "Important", role: "frontend-engineer", explanation: nc("hfH57rdZhOk") },
+  { name: "Event Emitter", url: lc("event-emitter"), difficulty: "Medium", pattern: "JavaScript", priority: "Important", role: "frontend-engineer", explanation: nc("M69bjWFarU0") },
+  { name: "Cache With Time Limit", url: lc("cache-with-time-limit"), difficulty: "Medium", pattern: "JavaScript", priority: "Optional", role: "frontend-engineer", explanation: nc("w772gtNK0Gw") },
 ];
 
 export const getPattern = (name: string) => patterns.find((p) => p.name === name);

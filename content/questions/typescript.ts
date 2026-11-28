@@ -57,7 +57,7 @@ console.log(describe({ status: "success", items: ["a", "b"] })); // -> 2 items`,
   {
     group: "TypeScript",
     question: "What is the difference between any and unknown?",
-    answer: "any switches type checking off for that value: you can call anything on it and it spreads silently into other code, so errors reappear at runtime. unknown also accepts any value, but you must narrow it (typeof, in, a validation function) before using it. Use unknown for data whose shape you have not checked, such as parsed JSON or a caught error, and treat any as a last resort — strict mode's noImplicitAny stops it from appearing by accident.",
+    answer: "any switches type checking off for that value: you can call anything on it and it spreads silently into other code, so errors reappear at runtime. unknown also accepts any value, but you must narrow it (typeof, in, a validation function) before using it. Use unknown for data whose shape you have not checked, such as parsed JSON or a caught error, and treat any as a last resort. Strict mode's noImplicitAny only catches implicit any (such as an unannotated parameter); JSON.parse and response.json() still return any, so annotate their results as unknown yourself.",
     followUps: ["What type does a caught error have in a catch block under strict mode?"],
     source: { title: "TypeScript Handbook — More on Functions: unknown", url: "https://www.typescriptlang.org/docs/handbook/2/functions.html" },
   },

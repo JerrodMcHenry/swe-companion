@@ -4,7 +4,7 @@ const questions: Question[] = [
   {
     group: "The internet",
     question: "What happens when you enter a URL into a browser?",
-    answer: "The browser parses the URL into scheme, domain and path. It resolves the domain to an IP address through DNS, checking caches first. It opens a TCP connection to that address on the port (443 for HTTPS) and performs a TLS handshake, which verifies the server's certificate and sets up encryption. It sends an HTTP request (for example GET /path with headers such as Host and cookies). The server, possibly behind load balancers, returns a response with a status code, headers and a body, often HTML. The browser parses the HTML, requests further resources (CSS, JavaScript, images) and renders the page. Caches and redirects can skip or add steps along the way; go deeper only where the interviewer asks.",
+    answer: "The browser parses the URL into scheme, domain and path. It resolves the domain to an IP address through DNS, checking caches first. It opens a TCP connection to that address on the port (443 for HTTPS) and performs a TLS handshake, which verifies the server's certificate and sets up encryption (with HTTP/3, QUIC over UDP combines these two steps). It sends an HTTP request (for example GET /path with headers such as Host and cookies). The server, possibly behind load balancers, returns a response with a status code, headers and a body, often HTML. The browser parses the HTML, requests further resources (CSS, JavaScript, images) and renders the page. Caches and redirects can skip or add steps along the way; go deeper only where the interviewer asks.",
     followUps: ["Where could caching speed this up?","What changes if the URL starts with http instead of https?"],
     source: { title: "MDN — How browsers work: Navigation", url: "https://developer.mozilla.org/en-US/docs/Web/Performance/Guides/How_browsers_work" },
   },
@@ -19,8 +19,8 @@ const questions: Question[] = [
   {
     group: "The internet",
     question: "What is the difference between TCP and UDP?",
-    answer: "TCP provides a reliable, ordered byte stream: it establishes a connection, retransmits lost packets and controls congestion, at the cost of extra latency. UDP sends independent datagrams with no delivery or ordering guarantees but low overhead, which suits real-time media, games and most DNS queries. HTTP/1.1 and HTTP/2 run over TCP; HTTP/3 runs over QUIC, which is built on UDP and implements reliability itself.",
-    followUps: ["What is the TCP three-way handshake, at a high level?"],
+    answer: "TCP provides a reliable, ordered byte stream: it establishes a connection, retransmits lost packets and controls congestion, at the cost of extra latency. UDP sends independent datagrams with no delivery or ordering guarantees but low overhead, which suits real-time media, games and most DNS queries. TCP setup is a three-way handshake (SYN, SYN-ACK, ACK), one round trip before data; TLS 1.3 then adds one more round trip (TLS 1.2 needed two). HTTP/1.1 and HTTP/2 run over TCP, so one lost packet stalls every HTTP/2 stream on that connection; HTTP/3 runs over QUIC, which is built on UDP, implements reliability per stream and combines the transport and TLS 1.3 handshakes into one round trip.",
+    followUps: ["Why does a lost packet hurt HTTP/2 more than HTTP/3?"],
     source: { title: "MDN Glossary — UDP", url: "https://developer.mozilla.org/en-US/docs/Glossary/UDP" },
   },
   {
@@ -33,7 +33,7 @@ const questions: Question[] = [
   {
     group: "HTTP",
     question: "Explain HTTP methods. What do safe and idempotent mean?",
-    answer: "GET retrieves a resource, POST creates a resource or triggers processing, PUT replaces a resource, PATCH partially updates it and DELETE removes it. Safe methods (GET, HEAD, OPTIONS) do not change server state. Idempotent methods leave the same end state whether called once or several times: GET, PUT and DELETE are idempotent; POST and PATCH are not guaranteed to be. This matters when clients retry after a timeout.",
+    answer: "GET retrieves a resource, POST creates a resource or triggers processing, PUT replaces a resource, PATCH partially updates it and DELETE removes it. Safe methods (GET, HEAD, OPTIONS) are defined as read-only: the client is not asking for any state change. Idempotent methods leave the same end state whether called once or several times: GET, PUT and DELETE are idempotent; POST and PATCH are not guaranteed to be. This matters when clients retry after a timeout.",
     followUps: ["Why would retrying a failed POST request be risky, and how can APIs make it safe?"],
     source: { title: "MDN Glossary — Idempotent", url: "https://developer.mozilla.org/en-US/docs/Glossary/Idempotent" },
   },

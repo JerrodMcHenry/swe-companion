@@ -4,7 +4,7 @@ const questions: Question[] = [
   {
     group: "Security",
     question: "What is the difference between encoding, hashing and encryption?",
-    answer: "Encoding transforms data into another format for transport or storage, such as Base64 or URL encoding; anyone can reverse it, so it provides no secrecy. Hashing maps data to a fixed-size fingerprint that cannot be reversed; it is used for integrity checks and, with slow salted algorithms, for passwords. Encryption transforms data so only someone with the key can read it, and it is reversible with that key; it protects data you need to read again, such as stored tokens or network traffic.",
+    answer: "Encoding transforms data into another format for transport or storage, such as Base64 or URL encoding; anyone can reverse it, so it provides no secrecy. Hashing maps data to a fixed-size fingerprint designed to be one-way (though guessable inputs can be found by trying candidates); it is used for integrity checks and, with slow salted algorithms, for passwords. Encryption transforms data so only someone with the key can read it, and it is reversible with that key; it protects data you need to read again, such as stored tokens or network traffic.",
     code: `import base64
 import hashlib
 
@@ -18,14 +18,14 @@ print(len(digest))                                # fixed size, not reversible  
   {
     group: "Security",
     question: "How should passwords be stored?",
-    answer: "Never store passwords in plain text or with reversible encryption. Store a hash produced by a slow, salted password-hashing algorithm designed for passwords — OWASP recommends Argon2id, then scrypt, with bcrypt for legacy systems — through a well-maintained library rather than your own code. The salt is a random value per password that makes identical passwords produce different hashes and defeats precomputed tables; the slowness makes guessing expensive. To log in, the library re-hashes the attempt with the stored salt and parameters and compares in constant time.",
+    answer: "Never store passwords in plain text or with reversible encryption. Store a hash produced by a slow, salted password-hashing algorithm designed for passwords — OWASP recommends Argon2id (minimum 19 MiB memory, 2 iterations, parallelism 1), then scrypt, with bcrypt (work factor 10 or more; it uses only the first 72 bytes) for legacy systems and PBKDF2-HMAC-SHA256 with 600,000 iterations where FIPS-140 compliance is required — through a well-maintained library rather than your own code. The salt is a random value per password that makes identical passwords produce different hashes and defeats precomputed tables; the slowness makes guessing expensive. To log in, the library re-hashes the attempt with the stored salt and parameters and compares in constant time.",
     followUps: ["What should happen if your password database is leaked?"],
     source: { title: "OWASP — Password Storage Cheat Sheet", url: "https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html" },
   },
   {
     group: "Security",
     question: "What is SQL injection, and how do you prevent it?",
-    answer: "SQL injection happens when user input is inserted into a SQL statement as text, letting an attacker change the query, for example to read or delete other users' data. Prevent it with parameterized queries, which send values separately from the SQL so they are always treated as data (see Databases and SQL Concepts for an example). Validate input and use least-privilege database accounts as additional layers. Escaping by hand is error-prone and not a substitute.",
+    answer: "SQL injection happens when user input is inserted into a SQL statement as text, letting an attacker change the query, for example to read or delete other users' data. Prevent it with parameterized queries, which send values separately from the SQL so they are always treated as data (see the SQL & Databases set for an example). Validate input and use least-privilege database accounts as additional layers. Escaping by hand is error-prone and not a substitute.",
     followUps: ["What other kinds of injection exist besides SQL? (Command injection, for example.)"],
     source: { title: "OWASP — SQL Injection Prevention Cheat Sheet", url: "https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html" },
   },
@@ -43,7 +43,7 @@ print(html.escape(comment))   # encode before inserting into HTML  # -> &lt;scri
   {
     group: "Security",
     question: "What is CSRF, and how is it prevented?",
-    answer: "Cross-site request forgery tricks a logged-in user's browser into sending an unwanted request to a site that trusts it, because the browser automatically includes that site's cookies. Defenses include anti-CSRF tokens that a forged request cannot know, SameSite cookie settings that stop cookies being sent on most cross-site requests, never changing state with GET requests, and frameworks' built-in CSRF protection. APIs that send tokens in headers rather than relying on cookies are less exposed.",
+    answer: "Cross-site request forgery tricks a logged-in user's browser into sending an unwanted request to a site that trusts it, because the browser automatically includes that site's cookies. Defenses include anti-CSRF tokens that a forged request cannot know, checking the Origin or Sec-Fetch-Site request header, never changing state with GET requests, and frameworks' built-in CSRF protection. Set SameSite=Lax or Strict on session cookies explicitly — only Chromium-based browsers default to Lax — and treat it as defense in depth: it does not stop requests from the same site, such as a sibling subdomain. APIs that send tokens in headers rather than relying on cookies are less exposed.",
     followUps: ["How does the SameSite cookie attribute help?"],
     source: { title: "OWASP — Cross-Site Request Forgery Prevention Cheat Sheet", url: "https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html" },
   },
@@ -118,7 +118,7 @@ log.debug("not shown below INFO")`,
   {
     group: "Async",
     question: "In FastAPI, when should a path operation be async def and when def?",
-    answer: "Use async def when the endpoint awaits async libraries — httpx.AsyncClient, an async database driver — so the event loop can serve other requests while it waits. Use def when it calls blocking libraries such as requests or a synchronous database driver: FastAPI runs def endpoints in a threadpool, so the blocking call does not stall the event loop. FastAPI's own advice is to use def if you are unsure. You can mix both in one application, and the same rule applies to dependencies.",
+    answer: "Use async def when the endpoint awaits async libraries — httpx.AsyncClient, an async database driver — so the event loop can serve other requests while it waits. Use def when it calls blocking libraries such as requests or a synchronous database driver: FastAPI runs def endpoints in a threadpool, so the blocking call does not stall the event loop (the pool is limited — AnyIO's default is 40 threads — so many long blocking calls still cap concurrency). FastAPI's own advice is to use def if you are unsure. You can mix both in one application, and the same rule applies to dependencies.",
     followUps: ["Will making a CPU-heavy endpoint async def make it faster? (No — async only helps while waiting; CPU work in async def blocks the loop. Use a process pool or a background worker.)"],
     source: { title: "FastAPI — Concurrency and async / await", url: "https://fastapi.tiangolo.com/async/" },
   },

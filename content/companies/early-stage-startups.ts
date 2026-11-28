@@ -4,7 +4,8 @@ const company: Company = {
   slug: "early-stage-startups",
   name: "Early-stage startups",
   group: "Types of Employer",
-  logo: "/logos/ycombinator.svg",
+  roles: ["software-engineer", "backend-engineer", "frontend-engineer", "full-stack-engineer", "data-engineer", "machine-learning-engineer", "ai-engineer"],
+  icon: "seed",
   tagline: "Seed to Series A, including YC-backed companies · no standard process",
   card: "Take-homes, project discussions and work trials; algorithmic screens at some.",
   facts: [

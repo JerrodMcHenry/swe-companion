@@ -54,7 +54,7 @@ print(bool(0.0))       # -> False`,
   {
     group: "Data model & types",
     question: "Why is 0.1 + 0.2 not equal to 0.3, and how should you compare floats?",
-    answer: "Floats are stored in binary, and most decimal fractions such as 0.1 cannot be represented exactly, so small rounding errors appear. Compare floats with a tolerance, for example math.isclose. Use integers (such as cents) or the decimal module when exact decimal arithmetic matters, as with money. Python integers, by contrast, have arbitrary precision and do not overflow.",
+    answer: "Floats are stored in binary, and most decimal fractions such as 0.1 cannot be represented exactly, so small rounding errors appear. Compare floats with a tolerance, for example math.isclose (it uses a relative tolerance by default, so pass abs_tol when comparing with values near zero). Use integers (such as cents) or the decimal module when exact decimal arithmetic matters, as with money. Python integers, by contrast, have arbitrary precision and do not overflow.",
     code: `import math
 print(0.1 + 0.2 == 0.3)              # -> False
 print(math.isclose(0.1 + 0.2, 0.3))  # -> True
@@ -65,7 +65,7 @@ print(2 ** 100 > 10 ** 30)           # -> True`,
   {
     group: "Data model & types",
     question: "Which built-in types are mutable and which are immutable?",
-    answer: "int, float, bool, str, tuple and None are immutable: operations that seem to change them create new objects. list, dict and set are mutable: they can be changed in place, and every name referring to them sees the change. This matters for dictionary keys, default arguments and shared data; it is covered in depth in Mutability, References and Copying.",
+    answer: "int, float, bool, str, tuple and None are immutable: operations that seem to change them create new objects. list, dict and set are mutable: they can be changed in place, and every name referring to them sees the change. This matters for dictionary keys, default arguments and shared data.",
     code: `s = "hi"
 t = s
 s += "!"          # creates a new string and rebinds s
@@ -81,7 +81,7 @@ print(b)          # -> [1, 2]`,
   {
     group: "Data model & types",
     question: "What is the difference between /, // and %, especially for negative numbers?",
-    answer: "/ is true division and always returns a float. // is floor division: it rounds down toward negative infinity, so -7 // 2 is -4, not -3. % returns the remainder with the sign of the divisor, chosen so that a == (a // b) * b + a % b always holds. This makes % useful for wrapping an index into a range even when the index is negative.",
+    answer: "/ is true division and returns a float for int and float operands. // is floor division: it rounds down toward negative infinity, so -7 // 2 is -4, not -3. % returns the remainder with the sign of the divisor, chosen so that a == (a // b) * b + a % b always holds. This makes % useful for wrapping an index into a range even when the index is negative.",
     code: `print(7 / 2)        # -> 3.5
 print(7 // 2)       # -> 3
 print(-7 // 2)      # -> -4
@@ -252,7 +252,7 @@ items.insert(0, 9)   # O(n): every item shifts right
 print(items)         # -> [9, 5, 3, 8, 1]
 print(items.pop())   # -> 1
 print(8 in items)    # -> True`,
-    followUps: ["What does amortized O(1) mean?","Which structure would you use if you needed to add and remove at both ends? (collections.deque, covered in Unit 2.)"],
+    followUps: ["What does amortized O(1) mean?","Which structure would you use if you needed to add and remove at both ends?"],
     source: { title: "Python Design FAQ — How are lists implemented in CPython?", url: "https://docs.python.org/3/faq/design.html#how-are-lists-implemented-in-cpython" },
   },
   {
@@ -294,7 +294,7 @@ print([m for m in messages if m not in banned_set])   # -> ['hi', 'hello']`,
   {
     group: "Built-in collections",
     question: "How does a Python dictionary work?",
-    answer: "It is a hash table. Storing a key computes hash(key) to choose a slot; a lookup hashes the key again, goes to that slot and confirms the match with ==. That is why lookups are fast on average and why keys must be hashable. Since Python 3.7, dictionaries preserve insertion order.",
+    answer: "It is a hash table. Storing a key computes hash(key) to choose a slot; a lookup hashes the key again, goes to that slot and confirms the match by identity or ==, probing other slots on a collision. That is why lookups are fast on average and why keys must be hashable. Since Python 3.7, preserving insertion order is a language guarantee (in CPython 3.6 it was an implementation detail).",
     followUps: ["What happens when two different keys produce the same hash?"],
     source: { title: "Python Glossary — hashable", url: "https://docs.python.org/3/glossary.html#term-hashable" },
   },
@@ -336,7 +336,7 @@ print(user.get("email"), "name" in user, "Ana" in user)   # -> None True False`,
   {
     group: "Built-in collections",
     question: "How do you iterate over a dictionary, and why can deleting during iteration fail?",
-    answer: "Iterating yields keys; use .items() for (key, value) pairs. Adding or removing keys while iterating raises RuntimeError because the size changed. Iterate over a copy such as list(d), or build a new dictionary with a comprehension.",
+    answer: "Iterating yields keys; use .items() for (key, value) pairs. Adding or removing keys while iterating is unsafe: the docs say it may raise RuntimeError or skip entries, and CPython raises \"dictionary changed size during iteration\". Iterate over a copy such as list(d), or build a new dictionary with a comprehension.",
     followUps: ["Is changing the value of an existing key during iteration allowed?"],
     source: { title: "The Python Tutorial — 5.6 Looping Techniques", url: "https://docs.python.org/3/tutorial/datastructures.html#looping-techniques" },
   },
@@ -692,15 +692,15 @@ from tracker.services import is_due          # models imports services...
 $ cat src/tracker/services.py
 from tracker.models import Session           # ...and services imports models
 $ python -m tracker
-ImportError: cannot import name 'Session' from partially initialized module 'tracker.models'
+ImportError: cannot import name 'Session' from partially initialized module 'tracker.models' (most likely due to a circular import)
 # Fix: models should not depend on services; keep is_due in services only.`,
-    followUps: ["How does a clear direction of dependencies (edges → logic → data) prevent this?"],
+    followUps: ["How does keeping dependencies one-directional (for example interface → services → models) prevent this?"],
     source: { title: "Python FAQ — What are the best practices for using import in a module? (circular imports)", url: "https://docs.python.org/3/faq/programming.html#what-are-the-best-practices-for-using-import-in-a-module" },
   },
   {
     group: "Errors, modules & type hints",
     question: "Does Python enforce type hints at runtime?",
-    answer: "No. Annotations are stored as metadata on the function (__annotations__) and the interpreter ignores them, so a call with the wrong type runs until something actually fails. Static checkers such as mypy and pyright read the hints and report mistakes before the code runs. Some libraries also read hints at runtime: Pydantic and FastAPI use them to convert and validate incoming data, which is real runtime checking — but only where those libraries are involved.",
+    answer: "No. Annotations are stored as metadata on the function (__annotations__) and the interpreter does not enforce them, so a call with the wrong type runs until something actually fails. Static checkers such as mypy and pyright read the hints and report mistakes before the code runs. Some libraries also read hints at runtime: Pydantic and FastAPI use them to convert and validate incoming data, which is real runtime checking — but only where those libraries are involved.",
     code: `def double(n: int) -> int:
     return n * 2
 

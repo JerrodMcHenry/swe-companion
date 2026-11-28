@@ -71,6 +71,27 @@ export const categoryCatalog: Record<CategoryKey, { title: string; href: string;
   concurrency: { title: "Concurrency Fundamentals", href: "/questions/operating-systems?group=Concurrency", detail: "Threads, race conditions, deadlocks and the GIL." },
   "os-memory": { title: "Processes & Memory", href: "/questions/operating-systems?group=Processes+%26+memory", detail: "Processes versus threads, stack and heap, virtual memory." },
   performance: { title: "Performance & Low Latency", href: "/questions/operating-systems?group=Performance+%26+low+latency", detail: "Caches, false sharing, context switches, allocation and profiling." },
+  "frontend-performance": { title: "Web Performance & Core Web Vitals", href: "/questions/frontend-system-design?group=Performance+%26+Core+Web+Vitals", detail: "LCP, INP, CLS, diagnosing slow pages, code splitting and lazy loading." },
+  "frontend-system-design": { title: "Frontend System Design", href: "/questions/frontend-system-design?group=Frontend+system+design", detail: "RADIO, a news feed, state placement and component APIs. Lighter at entry level." },
+  "frontend-practical": { title: "Frontend Coding Exercises", href: "/questions/frontend-system-design?group=Practical+exercises", detail: "Debounce, throttle, Promise.all, autocomplete and infinite scroll (representative)." },
+  "customer-practical": { title: "Customer Scenario Exercises", href: "/questions/customer-scenarios?group=Representative+exercises", detail: "Discovery role-play, live integration debugging and an AI solution presentation (representative)." },
+  "solutions-demos": { title: "Demos & Proofs of Concept", href: "/questions/customer-scenarios?group=Demos+%26+proofs+of+concept", detail: "Demo checklist, proof-of-concept design and technical presentations." },
+  "solutions-integration": { title: "Integration, Security & Architecture", href: "/questions/customer-scenarios?group=Integration%2C+security+%26+architecture", detail: "Troubleshooting integrations, explaining OAuth, security reviews and cloud fit." },
+  "solutions-objections": { title: "Objections & Business Value", href: "/questions/customer-scenarios?group=Objections+%26+business+value", detail: "Unsupported requirements, technical objections, value and stakeholders." },
+  "analytical-sql": { title: "Analytical SQL", href: "/questions/sql-databases?group=Analytical+SQL", detail: "Deduplication, running totals, rolling averages, streaks and pivots." },
+  "data-modeling": { title: "Data Modeling", href: "/questions/data-engineering?group=Data+modeling", detail: "Facts, dimensions, grain, star schemas and slowly changing dimensions." },
+  "data-pipelines": { title: "Data Pipelines", href: "/questions/data-engineering?group=Pipelines", detail: "ETL and ELT, batch and streaming, idempotency, backfills, late data and orchestration." },
+  "data-processing": { title: "Storage & Distributed Processing", href: "/questions/data-engineering?group=Storage+%26+processing", detail: "Warehouses and lakehouses, partitioning, Spark and Kafka concepts." },
+  "data-quality": { title: "Data Quality & Operations", href: "/questions/data-engineering?group=Data+quality+%26+operations", detail: "Data tests, monitoring, lineage and fixing a failed pipeline." },
+  "data-system-design": { title: "Data System Design", href: "/questions/data-engineering?group=Data+system+design", detail: "Design a reliable event ingestion pipeline." },
+  "data-practical": { title: "Data Coding Exercises", href: "/questions/data-engineering?group=Practical+exercises", detail: "Flatten JSON, aggregate a large file and design a dimensional model (representative)." },
+  "ml-fundamentals": { title: "ML Fundamentals", href: "/questions/ml-fundamentals", detail: "Splits, cross-validation, overfitting, regularization and common algorithms." },
+  "ml-features": { title: "Features, Leakage & Imbalance", href: "/questions/ml-fundamentals?group=Data+%26+features", detail: "Feature preparation and selection, data leakage and imbalanced classes." },
+  "ml-evaluation": { title: "Model Evaluation & Metrics", href: "/questions/ml-fundamentals?group=Evaluation+%26+metrics", detail: "Precision, recall, ROC-AUC, PR-AUC, regression metrics and tuning." },
+  "ml-practical": { title: "ML Coding Exercises", href: "/questions/ml-fundamentals?group=Practical+exercises", detail: "k-means from scratch and a timed modeling task (representative)." },
+  "ml-system-design": { title: "ML System Design", href: "/questions/ml-system-design", detail: "Training pipelines, serving, monitoring and design scenarios. Mainly for experienced candidates." },
+  "ml-serving": { title: "Model Serving & Deployment", href: "/questions/ml-system-design?group=Serving", detail: "Batch versus online inference, low latency and safe rollouts." },
+  "ml-monitoring": { title: "Production ML: Monitoring & Drift", href: "/questions/ml-system-design?group=Monitoring", detail: "What to monitor, data and concept drift, retraining and degradation." },
   "customer-communication": { title: "Stakeholder Communication", href: "/questions/customer-scenarios?group=Communication+%26+ownership", detail: "Explaining trade-offs, pushing back and owning outcomes." },
 };
 
@@ -84,7 +105,11 @@ const roleAdditions: Partial<Record<RoleSlug, CategoryKey[]>> = {
 const roleDefaults: Partial<Record<RoleSlug, CategoryKey[]>> = {
   "ai-engineer": ["rag", "agents", "ai-evals", "llm-basics", "ai-production", "ai-system-design", "coding", "ai-security", "ai-practical", "behavioral"],
   "quant-developer": ["coding", "cpp", "cpp-memory", "concurrency", "cpp-concurrency", "performance", "os-memory", "networking", "cpp-practical", "behavioral"],
-  "forward-deployed-engineer": ["customer-discovery", "customer-integration", "coding", "api-design", "auth", "debugging", "rag", "ai-system-design", "customer-communication", "behavioral"],
+  "forward-deployed-engineer": ["customer-discovery", "customer-integration", "customer-practical", "coding", "api-design", "auth", "debugging", "rag", "ai-system-design", "customer-communication", "behavioral"],
+  "frontend-engineer": ["javascript", "frontend-practical", "react", "typescript", "html-css", "frontend-performance", "frontend-system-design", "coding", "behavioral"],
+  "solutions-engineer": ["customer-discovery", "solutions-demos", "customer-practical", "solutions-integration", "auth", "api-design", "debugging", "solutions-objections", "system-design", "networking", "customer-communication", "behavioral"],
+  "data-engineer": ["sql", "analytical-sql", "python", "data-modeling", "data-pipelines", "data-practical", "data-processing", "data-quality", "data-system-design", "coding", "behavioral"],
+  "machine-learning-engineer": ["coding", "python", "ml-fundamentals", "ml-evaluation", "ml-features", "ml-practical", "ml-system-design", "ml-serving", "ml-monitoring", "behavioral"],
 };
 
 const defaultRoles: RoleSlug[] = ["software-engineer", "backend-engineer", "full-stack-engineer"];
@@ -106,8 +131,8 @@ export function companyCategories(company: Company, role: RoleSlug): CategoryIte
       item.problems = selected || problems.filter((p) => !p.role).length;
     }
     if (key === "coding" && role === "quant-developer") item.practice = { label: "Concurrency problems", href: "/problems?pattern=Concurrency" };
-    if (key === "sql" && role === "backend-engineer") item.practice = { label: "SQL problems", href: "/problems?pattern=SQL" };
-    if (key === "javascript" && role === "full-stack-engineer") item.practice = { label: "JavaScript problems", href: "/problems?pattern=JavaScript" };
+    if (key === "sql" && (role === "backend-engineer" || role === "data-engineer")) item.practice = { label: "SQL problems", href: "/problems?pattern=SQL" };
+    if (key === "javascript" && (role === "full-stack-engineer" || role === "frontend-engineer")) item.practice = { label: "JavaScript problems", href: "/problems?pattern=JavaScript" };
     return item;
   });
 }

@@ -4,16 +4,16 @@ const company: Company = {
   slug: "netflix",
   name: "Netflix",
   group: "Big Tech",
-  logo: "/logos/netflix.svg",
-  tagline: "Eligibility first: few or no entry-level software roles",
+  roles: ["software-engineer", "backend-engineer", "frontend-engineer", "full-stack-engineer", "data-engineer", "machine-learning-engineer"],
+  tagline: "Eligibility first: most software, data and ML roles are experienced hires",
   card: "No published new-grad process; check eligibility before preparing.",
   facts: [
     { label: "Postings", value: "No full-time new-grad SWE posting open on 25 Nov 2026", evidence: "Official" },
     { label: "Route", value: "Internships for current students", evidence: "Official" },
-    { label: "Process", value: "Not published for entry-level roles", evidence: "Official" },
+    { label: "Process", value: "None found for entry-level roles (Nov 2026 review)", evidence: "Varies" },
   ],
   formats: [
-    { name: "Unknown for new graduates", detail: "No reliable description of a new-graduate process exists; anonymous reports, mostly from experienced hires, mention coding, some system design and resume discussion.", evidence: "Candidate-reported" },
+    { name: "Unknown for new graduates", detail: "No reliable description of a new-graduate process was found in our review (November 2026); anonymous reports, mostly from experienced hires, mention coding, some system design and resume discussion.", evidence: "Candidate-reported" },
   ],
   categories: ["job-description", "coding", "dsa", "behavioral"],
   notes: {
@@ -25,7 +25,7 @@ const company: Company = {
     { title: "Netflix culture", url: "https://jobs.netflix.com/culture", note: "Official: the values behind behavioral conversations." },
   ],
   caveat:
-    "There is no reliable new-graduate interview process to prepare for here. If you meet a posting's real requirements, use the General preparation page with that posting.",
+    "We found no reliable new-graduate interview process to prepare for, and no Netflix statement on AI use in interviews (November 2026). If you meet a posting's real requirements, use the General preparation page with that posting and follow your recruiter's instructions.",
   details: [
     {
       heading: "Eligibility",
@@ -35,6 +35,7 @@ const company: Company = {
         "A third-party guide reports new-grad roles, when offered, usually post around September–October; Netflix has not confirmed this.",
       ],
     },
+    { heading: "Other roles (postings reviewed 27 November 2026)", items: ["One Front-End Developer posting (Netflix Animation Studios); machine learning and data engineering postings were at senior levels."] },
   ],
   sources: [
     { title: "Netflix — Careers job search (official)", url: "https://explore.jobs.netflix.net/careers" },

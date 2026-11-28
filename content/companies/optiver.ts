@@ -4,9 +4,9 @@ const company: Company = {
   slug: "optiver",
   name: "Optiver",
   group: "Quantitative Trading",
-  roles: ["software-engineer", "quant-developer"],
+  roles: ["software-engineer", "data-engineer", "machine-learning-engineer", "quant-developer"],
   levels: "Graduate, intern and experienced software roles are posted; one online-assessment attempt per 8 months (Europe FAQ).",
-  tagline: "Software engineering and quantitative development",
+  tagline: "Software engineering, quantitative development, data and ML engineering",
   card: "Technical discussions on data structures, memory and design rather than LeetCode puzzles.",
   categories: ["dsa", "cpp", "performance", "coding", "lld", "behavioral"],
   roleCategories: {
@@ -34,7 +34,7 @@ const company: Company = {
     { name: "Behavioral interview", detail: "Structured with the STAR method.", evidence: "Official" },
     { name: "Online assessment", detail: "Can be completed once every 8 months (Europe FAQ); postings describe an 8-month reapply rule for intern and graduate roles.", evidence: "Official" },
   ],
-  caveat: "Formats can differ by office and role. Candidate reports of the online assessment's contents could not be verified and are not used here.",
+  caveat: "Formats can differ by office and role; your recruiter's instructions take precedence. Candidate reports of the online assessment's contents could not be verified and are not used here.",
   details: [
     {
       heading: "Eligibility",
@@ -42,7 +42,8 @@ const company: Company = {
         "Postings reviewed on 27 November 2026 include Software Engineer and C++ Software Engineer roles at graduate, intern and experienced levels, and a Quantitative Developer – Pricing Data role.",
       ],
     },
-    { heading: "Evidence", items: ["Official: the interview tips page (21 March 2025), the Europe recruitment FAQ and postings (checked 27 November 2026)."] },
+    { heading: "Evidence", items: ["Official: the interview tips page (21 March 2025), the Europe recruitment FAQ (11 June 2026) and postings (checked 27 November 2026). None of them states a policy on AI use in interviews; ask your recruiter."] },
+    { heading: "Other roles (postings reviewed 27 November 2026)", items: ["Machine learning engineering postings include an intern role in Shanghai, senior roles and an ML performance role; data engineering postings are senior (8+ years) and above."] },
   ],
   sources: [
     { title: "Optiver — Interview tips for software engineers (official)", url: "https://www.optiver.com/join-us/stories/optiver-interview-tips-for-software-engineers/" },

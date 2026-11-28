@@ -3,7 +3,7 @@ import type { CareerGuide } from "../types";
 const guide: CareerGuide = {
   slug: "engineering-projects",
   title: "Engineering Projects",
-  description: "What a project should show, and how to prepare to discuss it in interviews.",
+  description: "What a project should show, project ideas by role, and how to explain your work in two minutes or in a deep dive.",
   guidance: [
     {
       heading: "What a project should demonstrate",
@@ -16,6 +16,25 @@ const guide: CareerGuide = {
         "Deployment, where relevant.",
         "Technical documentation.",
         "Ability to communicate engineering decisions.",
+      ],
+    },
+    {
+      heading: "Projects that fit the role",
+      items: [
+        "Backend: an API with a database, authentication, validation, tests and a deployment.",
+        "Frontend: an accessible, responsive interface that loads data from an API with loading, error and empty states, and measured performance.",
+        "Data: a pipeline that ingests a real public dataset, models it and answers questions with SQL, with data quality checks and a rerunnable load.",
+        "ML: a model on a real dataset with a leak-free split, a baseline, the right metric and an honest error analysis.",
+        "AI: a small RAG or tool-using application with an evaluation set and a note on failure cases.",
+        "Experienced engineers can usually discuss work projects instead; share what you built and decided, not confidential details.",
+      ],
+    },
+    {
+      heading: "Explaining a project in an interview",
+      items: [
+        "Two-minute version: the problem and who it was for, what you built, your role, one hard decision and the result.",
+        "Deep dive: draw the architecture, trace one request or data flow end to end, explain a trade-off you made (and the alternative), how you tested it, a bug you fixed and what you would change with more time or more users.",
+        "Be precise about your contribution in team projects, and about which parts were generated or suggested by AI tools and how you verified them.",
       ],
     },
   ],
@@ -50,7 +69,7 @@ const guide: CareerGuide = {
     "Being unable to explain code or architecture during an interview.",
   ],
   relatedQuestions: ["projects-take-homes", "backend-engineering"],
-  relatedGuides: ["/getting-hired/resume"],
+  relatedGuides: ["/getting-hired/resume", "/getting-hired/performing-in-interviews"],
 };
 
 export default guide;

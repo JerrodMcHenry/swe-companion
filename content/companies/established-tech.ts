@@ -4,6 +4,7 @@ const company: Company = {
   slug: "established-tech",
   name: "Established tech companies",
   group: "Types of Employer",
+  roles: ["software-engineer", "backend-engineer", "frontend-engineer", "full-stack-engineer", "data-engineer", "machine-learning-engineer", "ai-engineer", "solutions-engineer"],
   icon: "building",
   tagline: "Mature technology companies outside the Big Tech pages",
   card: "Coding and behavioral interviews; design or knowledge questions at some.",
@@ -43,6 +44,7 @@ const company: Company = {
         "Review date: 2027-05-25 (AI policies: 2027-02-25).",
       ],
     },
+    { heading: "Other roles (postings reviewed 27 November 2026)", items: ["Machine learning: some companies post university-grad ML engineer roles, often for Master's or PhD graduates (for example Pinterest)."] },
   ],
   sources: [
     { title: "Pinterest — Our philosophy on AI in hiring (official)", url: "https://www.pinterestcareers.com/candidate-hub/our-philosophy-on-ai-in-hiring/" },

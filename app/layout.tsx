@@ -38,6 +38,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <span>SWE Companion · links to the best free interview preparation</span>
             <span>Interview processes change. Confirm formats with your recruiter.</span>
           </div>
+          <p className="foot-note">
+            SWE Companion is an independent resource and is not affiliated with, endorsed by or sponsored by any company named on this site. Company names are trademarks of their respective owners and are used only to identify employers.
+          </p>
         </footer>
         <MobileTabs />
         <SearchDialog />

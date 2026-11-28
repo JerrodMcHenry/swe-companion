@@ -4,7 +4,7 @@ const questions: Question[] = [
   {
     group: "Project deep dive",
     question: "Walk me through a project you built.",
-    answer: "Start with the problem and who it is for, then the main components and how they connect, then one interesting decision or challenge, and finish with the result and what you would improve — about two minutes, then let the interviewer choose where to go deeper. The example below is a shape to adapt, not a script: use your own project's real components and decisions.",
+    answer: "Start with the problem and who it is for, then the main components and how they connect, then one interesting decision or challenge, and finish with the result and what you would improve — about two minutes, then let the interviewer choose where to go deeper. The example below is a shape to adapt, not a script: use your own project's real components and decisions, and describe only what you actually built.",
     code: `# architecture.txt — example explanation of a study-tracker project (adapt to your own)
 Problem: students forget topics they studied; the app schedules reviews based on past sessions.
 
@@ -67,13 +67,13 @@ Limitation: one user per deployment; next step would be accounts and authenticat
   {
     group: "Take-home assignments",
     question: "Follow-up: walk me through your design. Why did you structure it this way?",
-    answer: "Start from the requirements, then the parts: input parsing and validation at the edge, splitting and settlement as pure functions that are easy to test, output formatting separate. Explain one real decision (for example storing money in integer cents to avoid floating-point errors, or how you assign leftover cents) and the alternative you rejected. Keep it to a couple of minutes and let the interviewer dig in.",
+    answer: "Start from the requirements, then the parts. For an expense-splitting take-home, for example: input parsing and validation at the edge, splitting and settlement as pure functions that are easy to test, output formatting separate. Explain one real decision (for example storing money in integer cents to avoid floating-point errors, or how you assign leftover cents) and the alternative you rejected. Keep it to a couple of minutes and let the interviewer dig in.",
     followUps: ["Where would you add currencies?","How would this change if the data lived in a database?"],
   },
   {
     group: "Take-home assignments",
     question: "Follow-up: what would you do with more time, and what are the weaknesses of your solution?",
-    answer: "Name concrete, prioritized items rather than a generic list: for example property-based tests for settlement, better messages for malformed JSON, support for uneven splits. Point out real weaknesses honestly — such as a greedy settlement that is not always optimal — and why you accepted them within the timebox. Interviewers value accurate self-assessment.",
+    answer: "Name concrete, prioritized items rather than a generic list: for an expense-splitting take-home, for example, property-based tests for settlement, better messages for malformed JSON, support for uneven splits. Point out real weaknesses honestly — such as a greedy settlement that is not always optimal — and why you accepted them within the timebox. Interviewers value accurate self-assessment.",
     followUps: ["Is your settlement minimal? How would you check?"],
   },
   {

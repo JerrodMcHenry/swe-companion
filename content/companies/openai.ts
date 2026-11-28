@@ -4,22 +4,23 @@ const company: Company = {
   slug: "openai",
   name: "OpenAI",
   group: "AI Companies",
-  roles: ["software-engineer", "ai-engineer", "forward-deployed-engineer"],
+  roles: ["software-engineer", "frontend-engineer", "data-engineer", "machine-learning-engineer", "ai-engineer", "forward-deployed-engineer", "solutions-engineer"],
   levels: "Of 158 Software Engineer postings reviewed (27 Nov 2026), one asked 0–1 years; every forward deployed posting reviewed asked 5+ years.",
-  tagline: "Software, applied AI and forward deployed engineering",
+  tagline: "Software, applied AI, forward deployed, ML, data and solutions roles",
   card: "Practical coding with tests; AI-tool rules vary by interview.",
   categories: ["practical", "coding", "dsa", "system-design", "ai", "behavioral"],
   roleCategories: {
+    "solutions-engineer": ["customer-discovery", "solutions-demos", "customer-practical", "practical", "ai-system-design", "rag", "solutions-integration", "api-design", "auth", "solutions-objections", "customer-communication", "behavioral"],
     "ai-engineer": ["rag", "agents", "ai-evals", "ai-production", "ai-system-design", "ai-practical", "practical", "coding", "ai-security", "behavioral"],
-    "forward-deployed-engineer": ["customer-discovery", "customer-integration", "practical", "api-design", "auth", "ai-system-design", "rag", "customer-communication", "behavioral"],
+    "forward-deployed-engineer": ["customer-discovery", "customer-integration", "customer-practical", "practical", "api-design", "auth", "ai-system-design", "rag", "customer-communication", "behavioral"],
   },
   notes: {
-    coding: "OpenAI publishes no topic list: practise representative problems by pattern, then focus on clean, tested code.",
+    coding: "No official OpenAI topic list was found (Nov 2026): practise representative problems by pattern, then focus on clean, tested code.",
     practical: "OpenAI looks for well-designed solutions, high-quality code, performance and test coverage.",
     "system-design": "Reported by third-party guides, mainly for experienced candidates; not stated in the official guide.",
     ai: "AI-tool rules vary by interview: some allow tools, others test you without them. Ask your recruiter.",
     behavioral: "Communication, collaboration and why OpenAI's mission matters to you.",
-    "customer-discovery": "Forward deployed postings center on scoping problems with customers.",
+    "customer-discovery": "Customer-facing postings describe scoping problems with customers; that is a job duty, not a confirmed interview round.",
     "ai-system-design": "Design RAG systems and agents for customer or product use cases.",
   },
   officialResources: [
@@ -30,7 +31,7 @@ const company: Company = {
     { label: "Process", value: "Intro call, skills assessment (pair coding, take-home or technical test), then 4–6 hours of final interviews", evidence: "Official" },
     { label: "Assessed", value: "Solution design, code quality, performance, test coverage, communication", evidence: "Official" },
     { label: "AI tools", value: "Vary by interview; check your prep materials or ask", evidence: "Official" },
-    { label: "Experience", value: "Almost every reviewed posting that states a minimum asks 3+ years", evidence: "Official" },
+    { label: "Experience", value: "Of software engineering postings reviewed (27 Nov 2026) that state a minimum, all but one ask 3+ years", evidence: "Official" },
   ],
   formats: [
     { name: "Skills assessment", detail: "May include pair coding, a take-home project or a technical test, depending on the team.", evidence: "Official" },
@@ -39,7 +40,7 @@ const company: Company = {
     { name: "Forward deployed take-home", detail: "Third-party guides disagree on length (about five hours versus about a week to submit). Treat it as variable.", evidence: "Third-party" },
   ],
   caveat:
-    "OpenAI's guide does not specify languages or a system design round. Postings change often; the posting you apply to and your recruiter's description override this page.",
+    "OpenAI's guide (undated; re-read 27 November 2026) does not specify languages or a system design round. Postings change often; the posting you apply to and your recruiter's description override this page.",
   details: [
     {
       heading: "Eligibility",
@@ -55,6 +56,7 @@ const company: Company = {
         "Third-party: interviewing.io and aced.io guides, based on small samples of candidate reports.",
       ],
     },
+    { heading: "Other roles (postings reviewed 27 November 2026)", items: ["Frontend Software Engineer postings state no minimum. Machine learning engineering postings ask 3+ years and prefer a Master's or PhD; data engineering postings ask 3+ years as a data engineer.", "Applied AI Architect postings (the solutions role) state no minimum; Ads Solutions Engineer postings ask 5+ years."] },
   ],
   sources: [
     { title: "OpenAI — Interview guide (official)", url: "https://openai.com/interview-guide/" },

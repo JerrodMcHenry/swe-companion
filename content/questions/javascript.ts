@@ -39,7 +39,7 @@ console.log(Boolean([]), Boolean(""));   // -> true false`,
   {
     group: "Language",
     question: "What is the difference between var, let and const? What does this code print?",
-    answer: "let and const are block-scoped and cannot be used before their declaration; const cannot be reassigned, but an object or array it refers to can still be changed. var is function-scoped and hoisted, so a var loop variable is one variable shared by every iteration: all three callbacks see its final value, 3. let creates a new binding for each iteration, so each callback keeps its own value. Use const by default, let when you reassign, and never var in new code.",
+    answer: "let and const are block-scoped and cannot be used before their declaration; const cannot be reassigned, but an object or array it refers to can still be changed. var is function-scoped and hoisted (it reads as undefined before its declaration line), so a var loop variable is one variable shared by every iteration: all three callbacks see its final value, 3. let creates a new binding for each iteration, so each callback keeps its own value. Use const by default, let when you reassign, and never var in new code.",
     code: `for (var i = 0; i < 3; i++) setTimeout(() => console.log("var", i)); // -> var 3, var 3, var 3
 for (let j = 0; j < 3; j++) setTimeout(() => console.log("let", j)); // -> let 0, let 1, let 2`,
     followUps: ["Can you push to an array declared with const?"],
@@ -110,14 +110,14 @@ console.log(user.name, user.tags); // -> Ana [ 'admin', 'editor' ]`,
   {
     group: "Language",
     question: "How do ES modules work? What is the difference between named and default exports?",
-    answer: "Each file is a module with its own scope; it exposes values with export and uses other modules' values with import. A module can have many named exports, imported by their exact names (import { formatPrice } from \"./format.js\"), and at most one default export, imported under any name (import Button from \"./Button.js\"). Imports are resolved before the code runs and a module's code runs once, however often it is imported. Older Node.js code uses CommonJS (require and module.exports) instead.",
+    answer: "Each file is a module with its own scope; it exposes values with export and uses other modules' values with import. A module can have many named exports, imported by their exact names (import { formatPrice } from \"./format.js\"), and at most one default export, imported under any name (import Button from \"./Button.js\"). Imports are resolved before the code runs and a module's code runs once, however often it is imported. Much existing Node.js code uses CommonJS (require and module.exports) instead.",
     followUps: ["Why do many teams prefer named exports?"],
     source: { title: "MDN — JavaScript modules", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules" },
   },
   {
     group: "Async",
     question: "What does this code print, and why? Explain the event loop.",
-    answer: "A, D, C, B. JavaScript runs one piece of code at a time: the current script runs to completion first (A, D). Then the event loop runs all queued microtasks — promise callbacks — (C) before the next macrotask such as a timer callback (B), even one with a 0 ms delay. The practical consequences: a long synchronous loop freezes the page because nothing else can run, and async code is concurrent but not parallel. The Python asyncio event loop in Asynchronous Programming Basics is the same idea.",
+    answer: "A, D, C, B. JavaScript runs one piece of code at a time: the current script runs to completion first (A, D). Then the event loop runs all queued microtasks — promise callbacks — (C) before the next macrotask such as a timer callback (B), even one with a 0 ms delay. The practical consequences: a long synchronous loop freezes the page because nothing else can run, and async code is concurrent but not parallel (Web Workers are the exception). Python's asyncio event loop works the same way.",
     code: `console.log("A");
 setTimeout(() => console.log("B"), 0);
 Promise.resolve().then(() => console.log("C"));
@@ -181,7 +181,7 @@ main();`,
   {
     group: "The browser",
     question: "Compare localStorage, sessionStorage and cookies.",
-    answer: "localStorage keeps string key-value data for the origin until it is cleared; sessionStorage is the same but per tab and cleared when the tab closes. Both are synchronous, hold only strings (store objects with JSON.stringify), are never sent to the server automatically and are readable by any JavaScript on the page — so an XSS bug exposes them, and secrets do not belong there. Cookies are small values the browser sends automatically with every matching request, which is why servers use them for sessions; HttpOnly hides a cookie from JavaScript, Secure restricts it to HTTPS and SameSite limits sending it on cross-site requests. Where to keep an authentication token is a trade-off covered in Authentication and Authorization.",
+    answer: "localStorage keeps string key-value data for the origin until it is cleared; sessionStorage is the same but per tab and cleared when the tab closes. Both are synchronous, hold only strings (store objects with JSON.stringify), are never sent to the server automatically and are readable by any JavaScript on the page — so an XSS bug exposes them, and secrets do not belong there. Cookies are small values the browser sends automatically with every matching request, which is why servers use them for sessions; HttpOnly hides a cookie from JavaScript, Secure restricts it to HTTPS and SameSite limits sending it on cross-site requests. Where to keep an authentication token is a trade-off covered in the APIs set (Authentication & authorization).",
     followUps: ["What would you store in localStorage in a real app?","Why can't JavaScript read an HttpOnly cookie, and why is that useful?"],
     source: { title: "MDN — Web Storage API", url: "https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API" },
   },
@@ -195,14 +195,14 @@ main();`,
   {
     group: "The browser",
     question: "What is a CORS preflight request, and when does the browser send one?",
-    answer: "Before a cross-origin request that is not \"simple\", the browser automatically sends an OPTIONS request with Origin, Access-Control-Request-Method and Access-Control-Request-Headers, asking whether the real request is allowed. Simple requests are GET, HEAD or POST with only safelisted headers and a form or plain-text content type; so a JSON POST (Content-Type: application/json), a PUT or DELETE, or any request with an Authorization header is preflighted. The server must answer with matching Access-Control-Allow-Origin, -Methods and -Headers (and may cache the answer with Access-Control-Max-Age), otherwise the browser never sends the real request. curl and server-to-server calls do not do this, because CORS is enforced by browsers. Fixing a CORS error in your own app is covered in Forms, API Integration and UI States.",
+    answer: "Before a cross-origin request that is not \"simple\", the browser automatically sends an OPTIONS request with Origin, Access-Control-Request-Method and Access-Control-Request-Headers, asking whether the real request is allowed. Simple requests are GET, HEAD or POST with only safelisted headers and a form or plain-text content type; so a JSON POST (Content-Type: application/json), a PUT or DELETE, or any request with an Authorization header is preflighted. The server must answer with a 2xx status, a matching Access-Control-Allow-Origin, Access-Control-Allow-Headers for the non-safelisted headers and, for methods other than GET, HEAD and POST, Access-Control-Allow-Methods (and may cache the answer with Access-Control-Max-Age); otherwise the browser never sends the real request. curl and server-to-server calls do not do this, because CORS is enforced by browsers. Fixing a CORS error in your own app is covered in the React set (Data & forms).",
     followUps: ["Why does a wildcard Access-Control-Allow-Origin not work with credentials?","Where would you see the preflight in developer tools?"],
     source: { title: "MDN — Cross-Origin Resource Sharing (CORS): Preflighted requests", url: "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS" },
   },
   {
     group: "The browser",
     question: "How does the browser render a page? Why can a script tag slow it down?",
-    answer: "The browser parses HTML into the DOM and CSS into the CSSOM, combines them to compute each visible element's styles, calculates layout (sizes and positions — reflow) and paints pixels. A classic <script> in the head stops HTML parsing until it has downloaded and run, so the page appears later; defer downloads in parallel and runs after parsing, in order, and async runs as soon as it downloads, in any order. Module scripts are deferred by default. Later, changing anything that affects geometry (adding elements, changing width) triggers layout again, so many small layout changes in a loop are slow; changing only colors needs just a repaint.",
+    answer: "The browser parses HTML into the DOM and CSS into the CSSOM, combines them to compute each visible element's styles, calculates layout (sizes and positions — reflow), paints pixels and composites the layers. A classic <script> in the head stops HTML parsing until it has downloaded and run, so the page appears later; defer downloads in parallel and runs after parsing, in order, and async runs as soon as it downloads, in any order. Module scripts are deferred by default. Later, changing anything that affects geometry (adding elements, changing width) triggers layout again, so many small layout changes in a loop are slow; changing only colors needs just a repaint.",
     followUps: ["What is the difference between defer and async?","Why does CSS block rendering?"],
     source: { title: "MDN — Populating the page: how browsers work", url: "https://developer.mozilla.org/en-US/docs/Web/Performance/Guides/How_browsers_work" },
   },

@@ -23,7 +23,7 @@ const questions: Question[] = [
     group: "Building blocks",
     question: "What does a load balancer do, and why should application servers be stateless?",
     answer:
-      "A load balancer spreads incoming requests across several servers, stops sending traffic to unhealthy ones and removes a single point of failure. That only works cleanly if any server can handle any request, so servers should keep no user state in memory: store sessions in a shared database or cache instead. Stateless servers can then be added or removed freely.",
+      "A load balancer spreads incoming requests across several servers, stops sending traffic to unhealthy ones, so no single application server is a point of failure (the load balancer itself then needs a redundant pair or a managed service). That only works cleanly if any server can handle any request, so servers should keep no user state in memory: store sessions in a shared database or cache instead. Stateless servers can then be added or removed freely.",
     followUps: ["What is the difference between layer 4 and layer 7 load balancing?"],
     source: { title: "System Design Primer — Load balancer", url: `${SDP}#load-balancer` },
   },
@@ -38,7 +38,7 @@ const questions: Question[] = [
     group: "Building blocks",
     question: "What is caching, where can you cache, and how do you keep a cache up to date?",
     answer:
-      "A cache keeps frequently read data in fast storage, usually memory, to cut latency and database load. You can cache in the browser, a CDN, the web server, the application (for example Redis) or the database. The common pattern is cache-aside: read from the cache, and on a miss read the database and store the result with an expiry (TTL). The hard part is staleness: on writes, update or delete the cached entry, and accept that data can be briefly out of date.",
+      "A cache keeps frequently read data in fast storage, usually memory, to cut latency and database load. You can cache in the browser, a CDN, the web server, the application (for example Redis) or the database. The common pattern is cache-aside: read from the cache, and on a miss read the database and store the result with an expiry (TTL). The hard part is staleness: on writes, delete (invalidate) the cached entry rather than overwrite it, because concurrent writes can leave an old value cached; the TTL bounds how long any stale entry survives. State how stale each piece of data may be: a profile picture can lag for minutes, an account balance should not be served from a cache at all.",
     followUps: ["What would you cache in a news feed, and what would you never cache?", "What happens when a popular cache entry expires and many requests miss at once?"],
     source: { title: "System Design Primer — Cache", url: `${SDP}#cache` },
   },
@@ -53,7 +53,7 @@ const questions: Question[] = [
     group: "Building blocks",
     question: "When would you use a message queue or a background job?",
     answer:
-      "When work does not need to finish before you reply: sending email, resizing images, generating reports. The request handler puts a job on a queue and returns quickly; workers process jobs separately, retry failures and can be scaled on their own. The cost is more moving parts and eventual completion, so the user may need to see a status such as \"processing\".",
+      "When work does not need to finish before you reply: sending email, resizing images, generating reports. The request handler puts a job on a queue and returns quickly; workers process jobs separately, retry failures and can be scaled on their own. Most queues deliver at least once, so a job can run twice and must be idempotent; jobs that keep failing go to a dead-letter queue for inspection. The cost is more moving parts and eventual completion, so the user may need to see a status such as \"processing\".",
     followUps: ["Why should a job be safe to run twice?"],
     source: { title: "System Design Primer — Asynchronism: message queues and task queues", url: `${SDP}#asynchronism` },
   },
@@ -76,8 +76,8 @@ const questions: Question[] = [
     group: "Scaling & reliability",
     question: "What does the CAP theorem say?",
     answer:
-      "A distributed data store can guarantee only two of consistency (every read sees the latest write), availability (every request gets a response) and partition tolerance. Network partitions do happen, so in practice the choice is between consistency and availability while a partition lasts: a bank balance favours consistency; a social feed can favour availability. At entry level, explaining that trade-off with an example is enough.",
-    source: { title: "System Design Primer — CAP theorem", url: `${SDP}#cap-theorem` },
+      "While a network partition separates nodes, a distributed data store cannot be both consistent (every read sees the latest write, as if there were one copy) and available (every request to a working node gets a non-error response). Partitions cannot be ruled out, so the real question is what the system does during one: refuse or delay some requests to stay consistent (a bank balance), or keep answering and reconcile later (a social feed). \"Pick two of three\" is a common but misleading summary; when there is no partition, the everyday trade-off is between consistency and latency. The choice can differ per operation within one system.",
+    source: { title: "Eric Brewer — CAP Twelve Years Later: How the \"Rules\" Have Changed (InfoQ)", url: "https://www.infoq.com/articles/cap-twelve-years-later-how-the-rules-have-changed/" },
   },
   {
     group: "Scaling & reliability",

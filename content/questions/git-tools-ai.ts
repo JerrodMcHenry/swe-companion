@@ -138,14 +138,14 @@ print(is_leap_suggested(1900), is_leap(1900), is_leap(2000))        # -> True Fa
   {
     group: "AI-assisted coding",
     question: "How do you catch fabricated functions, parameters or packages in generated code?",
-    answer: "Check every unfamiliar call against the official documentation for the version you use, and run the code — fabricated functions often fail immediately, but a fabricated parameter or a wrong assumption about behavior may not. For a new dependency, confirm the exact package name on the official package index, look at its maintainers, repository and activity, and only then install it: researchers found code models recommending non-existent package names often enough for attackers to register them. Prefer the standard library or an existing project dependency when it does the job.",
+    answer: "Check every unfamiliar call against the official documentation for the version you use, and run the code — fabricated functions often fail immediately, but a fabricated parameter or a wrong assumption about behavior may not. For a new dependency, confirm the exact package name on the official package index, look at its maintainers, repository and activity, and only then install it: researchers found code models recommending non-existent package names often enough that attackers could register those names with malicious code. Prefer the standard library or an existing project dependency when it does the job.",
     followUps: ["The assistant suggests installing a package you have never heard of. What do you check first?"],
     source: { title: "Spracklen et al. — We Have a Package for You! A Comprehensive Analysis of Package Hallucinations by Code Generating LLMs (arXiv)", url: "https://arxiv.org/abs/2406.10279" },
   },
   {
     group: "AI-assisted coding",
     question: "What security checks do you apply to AI-generated code?",
-    answer: "The same as for any code, with extra care because assistants reproduce common insecure patterns confidently. I look for injection (SQL or shell commands built from input), unsafe evaluation (eval, unsafe deserialization), hard-coded or logged secrets, missing authorization checks, disabled certificate verification and unvetted new dependencies. Here a generated calculator uses eval, which runs any Python expression a user sends; a parser that only accepts literals or a small expression grammar is safe.",
+    answer: "The same as for any code, with extra care because assistants reproduce common insecure patterns confidently. I look for injection (SQL or shell commands built from input), unsafe evaluation (eval, unsafe deserialization), hard-coded or logged secrets, missing authorization checks, disabled certificate verification and unvetted new dependencies. Here a generated calculator uses eval, which runs any Python expression a user sends; a parser that only accepts literals or a small expression grammar is far safer (still limit input size: ast.literal_eval can exhaust memory or the stack on huge input).",
     code: `import ast
 
 user_input = "__import__('os').name"
@@ -154,13 +154,13 @@ try:
     ast.literal_eval(user_input)              # accepts only literals such as numbers, strings and lists
 except ValueError:
     print("rejected")                          # -> rejected`,
-    followUps: ["Which items from Security Fundamentals are most likely to appear in generated code?"],
+    followUps: ["Which of these security problems are most likely to appear in generated code, and how would you test for them?"],
     source: { title: "Python Docs — ast.literal_eval", url: "https://docs.python.org/3/library/ast.html#ast.literal_eval" },
   },
   {
     group: "AI-assisted coding",
     question: "Can you use AI tools during technical interviews?",
-    answer: "Only when the employer explicitly allows it, and only in the way it allows. Policies differ and change (as checked on 25–26 November 2026; recheck before each interview): Google states AI tools are not permitted in its interviews; Microsoft asks candidates to demonstrate their own skills without outside assistance unless explicitly permitted; Meta says many of its interviews include a built-in AI assistant candidates are expected to use. Ask your recruiter, follow the written assessment instructions, and prepare in both modes (see the AI-Assisted Coding interview guide). When AI is allowed, interviewers typically still assess your own reasoning: explain your plan, review and test what the assistant produces, and catch its mistakes out loud.",
+    answer: "Only when the employer explicitly allows it, and only in the way it allows. Policies differ and change (as checked on 25–26 November 2026; recheck before each interview): Google states AI tools are not permitted in its interviews; Microsoft asks candidates to demonstrate their own skills without outside assistance unless explicitly permitted; Meta says many of its interviews, for select roles, include a built-in AI assistant candidates are expected to use, and that no outside AI tools are allowed. Ask your recruiter, follow the written assessment instructions, and prepare in both modes. When AI is allowed, interviewers typically still assess your own reasoning: explain your plan, review and test what the assistant produces, and catch its mistakes out loud.",
     followUps: ["In an AI-assisted round, the assistant gives a solution that looks right. What do you say and do before moving on?"],
     source: { title: "Meta Careers — Hiring process (official)", url: "https://www.metacareers.com/hiring-process/" },
   },

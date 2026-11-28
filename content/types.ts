@@ -25,13 +25,18 @@ export type QuestionSet = {
   resources: Resource[]; // Interview-prep resources first; documentation as reference.
 };
 
+// `also` lists equivalent job titles, which global search matches.
 export const roles = [
   { slug: "software-engineer", title: "Software Engineer" },
   { slug: "backend-engineer", title: "Backend Engineer" },
+  { slug: "frontend-engineer", title: "Frontend Engineer", also: "Front End Engineer, UI Engineer, Web Engineer" },
   { slug: "full-stack-engineer", title: "Full-Stack Engineer" },
-  { slug: "ai-engineer", title: "AI Engineer" }, // also Applied AI Engineer
-  { slug: "forward-deployed-engineer", title: "Forward Deployed Engineer" }, // also Forward Deployed Software Engineer
-  { slug: "quant-developer", title: "Quantitative Developer" }, // also Algorithm Developer, C++ / Trading Systems / Low-Latency Engineer
+  { slug: "data-engineer", title: "Data Engineer", also: "Analytics Engineer, Data Platform Engineer, ETL Developer" },
+  { slug: "machine-learning-engineer", title: "Machine Learning Engineer", also: "ML Engineer, Software Engineer (Machine Learning)" }, // not research roles
+  { slug: "ai-engineer", title: "AI Engineer", also: "Applied AI Engineer, LLM Engineer" },
+  { slug: "forward-deployed-engineer", title: "Forward Deployed Engineer", also: "Forward Deployed Software Engineer" },
+  { slug: "solutions-engineer", title: "Solutions Engineer", also: "Solutions Architect, Sales Engineer, Solutions Consultant, Customer Engineer, Applied AI Architect" },
+  { slug: "quant-developer", title: "Quantitative Developer", also: "Quant Developer, Algorithm Developer, C++ / Trading Systems / Low-Latency Engineer" },
 ] as const;
 
 export type RoleSlug = (typeof roles)[number]["slug"];
@@ -47,6 +52,10 @@ export const categoryKeys = [
   "api-design", "auth", "debugging", "llm-basics", "rag", "agents", "ai-evals", "ai-production", "ai-security", "ai-system-design",
   "ai-practical", "customer-discovery", "customer-integration", "customer-communication",
   "cpp", "cpp-memory", "cpp-concurrency", "cpp-practical", "concurrency", "performance", "os-memory",
+  "frontend-performance", "frontend-system-design", "frontend-practical",
+  "solutions-demos", "solutions-integration", "solutions-objections", "customer-practical",
+  "analytical-sql", "data-modeling", "data-pipelines", "data-processing", "data-quality", "data-system-design", "data-practical",
+  "ml-fundamentals", "ml-features", "ml-evaluation", "ml-practical", "ml-system-design", "ml-serving", "ml-monitoring",
 ] as const;
 export type CategoryKey = (typeof categoryKeys)[number];
 
@@ -56,8 +65,6 @@ export type Company = {
   group: "Big Tech" | "AI Companies" | "Quantitative Trading" | "Types of Employer"; // homepage group
   roles?: RoleSlug[]; // roles with hiring evidence at this employer; default Software, Backend and Full-Stack Engineer
   levels?: string; // one line on who the reviewed postings target, shown when it affects eligibility
-  logo?: string; // /logos/<file>.svg for companies with an authentic logo
-  mono?: boolean; // single-colour logo that is inverted in dark mode
   icon?: string; // neutral icon name for employer types without a logo
   tagline: string; // one line under the name
   card: string; // short text on the homepage card

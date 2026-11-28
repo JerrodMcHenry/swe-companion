@@ -4,8 +4,8 @@ const company: Company = {
   slug: "google",
   name: "Google",
   group: "Big Tech",
-  logo: "/logos/google.svg",
-  tagline: "Early-career Software Engineer (commonly reported as L3)",
+  roles: ["software-engineer", "backend-engineer", "full-stack-engineer", "data-engineer", "machine-learning-engineer", "solutions-engineer"],
+  tagline: "Software engineering, plus data, ML and customer engineering roles",
   card: "Coding rounds on data structures and algorithms; no AI in interviews.",
   facts: [
     { label: "AI and Search", value: "Not permitted in interviews", evidence: "Official" },
@@ -16,12 +16,12 @@ const company: Company = {
   formats: [
     { name: "Coding interviews", detail: "Data structures and algorithms in one language, explained aloud and tested by hand; reported around LeetCode Medium, often customized. One report coded in a shared document without a compiler.", evidence: "Candidate-reported" },
     { name: "Technical screen", detail: "One coding interview of about 45 minutes before the panel.", evidence: "Candidate-reported" },
-    { name: "Behavioral", detail: "Google's tips ask for specific examples with impact (situation, task, activity, result); candidates report a dedicated \"Googleyness\" round.", evidence: "Official" },
+    { name: "Behavioral", detail: "Google's tips ask for specific examples with impact (situation, task, activity, result). Candidates separately report a dedicated behavioral round.", evidence: "Official" },
     { name: "Assessments", detail: "You may take the Google Hiring Assessment (workstyle) and sometimes a role-related coding exercise.", evidence: "Official" },
   ],
   categories: ["coding", "dsa", "python", "practical", "behavioral"],
   notes: {
-    coding: "Graphs, trees, recursion, heaps, binary search and intervals.",
+    coding: "Early-career SWE reports: graphs, trees, recursion, heaps, binary search and intervals.",
     dsa: "Clarify, brute force, optimize, test; state the complexity.",
     python: "Fluent code in one language without an IDE or AI.",
     practical: "Dry-run and test your own code by hand.",
@@ -45,11 +45,12 @@ const company: Company = {
     {
       heading: "Evidence",
       items: [
-        "Official: Google's hiring and interview-tips pages and the US early-career posting (checked 25 November 2026).",
+        "Official: Google's hiring and interview-tips pages and the US early-career posting (checked 25 November 2026). Both pages say AI tools are not permitted in interviews (re-read 27 November 2026; the pages are undated).",
         "Candidate-reported: five 2025–2026 early-career reports, three clearly independent. They show what appeared, not how often.",
         "Third-party: the L3 label (Google does not publish its levels).",
       ],
     },
+    { heading: "Other roles (postings reviewed 27 November 2026)", items: ["Machine learning software engineering postings ask about 2 years and list data structures and algorithms; data engineering postings ask 3–5+ years in the US.", "Customer Engineer and Solutions Consultant postings ask 4+ years, even at Customer Engineer I. No Google interview guidance specific to these roles was found; prepare from the posting."] },
   ],
   sources: [
     { title: "Google — How we hire (official)", url: "https://www.google.com/about/careers/applications/how-we-hire/" },
@@ -61,7 +62,7 @@ const company: Company = {
     { title: "Candidate report — Google software engineer (Aced)", url: "https://www.aced.io/experiences/google-software-engineer-interview-54740a" },
     { title: "Levels.fyi — Google software engineer levels (third-party)", url: "https://www.levels.fyi/companies/google/salaries/software-engineer" },
   ],
-  checked: "2026-11-25",
+  checked: "2026-11-27",
 };
 
 export default company;

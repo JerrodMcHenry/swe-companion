@@ -5,7 +5,7 @@ const company: Company = {
   name: "AI-focused startups",
   group: "Types of Employer",
   icon: "spark",
-  roles: ["software-engineer", "backend-engineer", "full-stack-engineer", "ai-engineer", "forward-deployed-engineer"],
+  roles: ["software-engineer", "backend-engineer", "frontend-engineer", "full-stack-engineer", "data-engineer", "machine-learning-engineer", "ai-engineer", "forward-deployed-engineer", "solutions-engineer"],
   tagline: "General software roles at AI product companies, not ML research",
   card: "Coding, debugging and basic design; AI-assisted builds at some.",
   facts: [
@@ -44,6 +44,7 @@ const company: Company = {
         "Review date: 2027-02-25, because AI interview policies change fast.",
       ],
     },
+    { heading: "Other roles (postings reviewed 27 November 2026)", items: ["Solutions engineer postings are common but ask for experience (for example 4–6 years)."] },
   ],
   sources: [
     { title: "Decagon new-grad interviews (candidate-reported, FastPrep)", url: "https://www.fastprep.io/experience/2026-decagon-new-grad-swe-interviews-1-experience-4p0yzlfvh5" },

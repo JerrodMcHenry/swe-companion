@@ -4,6 +4,7 @@ const company: Company = {
   slug: "growth-stage",
   name: "Growth-stage companies",
   group: "Types of Employer",
+  roles: ["software-engineer", "backend-engineer", "frontend-engineer", "full-stack-engineer", "data-engineer", "machine-learning-engineer", "ai-engineer", "forward-deployed-engineer", "solutions-engineer"],
   icon: "growth",
   tagline: "Scaling product companies: algorithmic screens plus realistic rounds",
   card: "Coding screens plus integration, debugging and sometimes AI-assisted rounds.",
@@ -46,6 +47,7 @@ const company: Company = {
         "Review date: 2027-05-25 (AI round policies: 2027-02-25).",
       ],
     },
+    { heading: "Other roles (postings reviewed 27 November 2026)", items: ["Frontend: some new-grad software postings list frontend as a preference (for example Stripe) and frontend internships exist; full-time frontend roles mostly ask 5+ years.", "Solutions roles are common but experienced: for example Stripe solutions architect postings ask 2+ years and Notion solutions consultant postings 1–3 years."] },
   ],
   sources: [
     { title: "Stripe new-grad phone screen and onsite (candidate-reported, FastPrep)", url: "https://www.fastprep.io/experience/2026-stripe-new-grad-swe-phone-screen-and-virtual-onsite-2-experiences-4bh59j9rh0" },

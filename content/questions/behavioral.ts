@@ -20,7 +20,7 @@ const questions: Question[] = [
     group: "How to answer",
     question: "How do you prepare for Amazon's Leadership Principles questions?",
     answer:
-      "Read the principles, then map each of your stories to the one or two principles it shows best, such as Ownership, Customer Obsession, Dive Deep or Learn and Be Curious. Candidates report principle-based questions in most Amazon rounds, so prepare more than one story for the common ones and expect detailed follow-ups. The same story bank works for other employers' values.",
+      "Read the principles, then map each of your stories to the one or two principles it shows best, such as Ownership, Customer Obsession, Dive Deep or Learn and Be Curious. Amazon's interview guide says behavioral questions in the phone screen and loop evaluate candidates against the Leadership Principles, so prepare more than one story for the common ones and expect detailed follow-ups. The same story bank works for other employers' values.",
     source: { title: "Amazon — Leadership Principles (official)", url: "https://www.amazon.jobs/content/en/our-workplace/leadership-principles" },
   },
   {
@@ -57,6 +57,7 @@ const questions: Question[] = [
     group: "Common questions",
     question: "Tell me about a failure or mistake.",
     answer: "A real mistake with real consequences, what you did to recover and what you changed afterwards. Meta's guidance notes that discussing how you learned and grew is valued.",
+    source: { title: "Meta Careers — Preparing for your software engineering interview at Meta", url: "https://www.metacareers.com/blog/preparing-for-your-software-engineering-interview-at-meta/" },
     followUps: ["How do you make sure it does not happen again?"],
   },
   {
@@ -94,7 +95,6 @@ const questions: Question[] = [
     question: "Do you have any questions for us?",
     answer: "Prepare two or three genuine questions about the team's work, how new engineers are supported, or how success is measured. Avoid questions answered on the careers page.",
   },
-
 ];
 
 export default questions;

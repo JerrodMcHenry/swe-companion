@@ -5,9 +5,11 @@ import resume from "./career-guides/resume";
 import engineeringProjects from "./career-guides/engineering-projects";
 import applicationStrategy from "./career-guides/application-strategy";
 import interviewFailureRecovery from "./career-guides/interview-failure-recovery";
+import performingInInterviews from "./career-guides/performing-in-interviews";
+import offersAndNegotiation from "./career-guides/offers-and-negotiation";
 
 // Every Getting Hired guide, in the order the Getting Hired page lists them.
-export const careerGuides: CareerGuide[] = [jobDescriptionGapAnalysis, resume, engineeringProjects, applicationStrategy, interviewFailureRecovery];
+export const careerGuides: CareerGuide[] = [applicationStrategy, jobDescriptionGapAnalysis, resume, engineeringProjects, performingInInterviews, interviewFailureRecovery, offersAndNegotiation];
 
 export function getCareerGuide(slug: string) {
   return careerGuides.find((guide) => guide.slug === slug);

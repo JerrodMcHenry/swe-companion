@@ -4,12 +4,11 @@ const company: Company = {
   slug: "apple",
   name: "Apple",
   group: "Big Tech",
-  logo: "/logos/apple.svg",
-  mono: true,
-  tagline: "Software Engineer (early career, team-specific)",
+  roles: ["software-engineer", "backend-engineer", "frontend-engineer", "full-stack-engineer", "data-engineer", "machine-learning-engineer", "solutions-engineer"],
+  tagline: "Software, frontend, data, ML and solutions engineering (team-specific)",
   card: "Each team sets its own process: language fundamentals, coding and your projects.",
   facts: [
-    { label: "Process", value: "Set by each team; no official guide", evidence: "Official" },
+    { label: "Process", value: "No official interview guide found (Nov 2026); reports say it varies by team", evidence: "Varies" },
     { label: "Language", value: "Prepare in your team's language", evidence: "Editorial" },
     { label: "Postings", value: "Few early-career roles; team-specific", evidence: "Official" },
   ],
@@ -29,7 +28,7 @@ const company: Company = {
     { title: "Apple jobs — early career search", url: "https://jobs.apple.com/en-us/search?search=%22early%20career%22&location=united-states-USA&sort=newest", note: "Official job search; read each team's posting for its language and requirements." },
   ],
   caveat:
-    "Apple publishes no software engineering interview guidance. The formats above come from one 2026 new-grad report; your recruiter's information takes priority.",
+    "No Apple software engineering interview guidance or candidate AI policy was found in our review (November 2026). The formats above come from one 2026 new-grad report; your recruiter's information takes priority.",
   details: [
     {
       heading: "Eligibility",
@@ -41,17 +40,18 @@ const company: Company = {
     {
       heading: "Evidence",
       items: [
-        "Official: postings only.",
+        "Official: postings only. No official statement on AI use in interviews was found (searched 27 November 2026); practise without AI unless told otherwise.",
         "Candidate-reported: one 2026 new-grad report; some reports at other levels mention questions about AI-tool use.",
       ],
     },
+    { heading: "Other roles (postings reviewed 27 November 2026)", items: ["One early-career Frontend Engineer posting asked for a degree and stated no years.", "Machine learning, data engineering and solutions engineering postings reviewed asked for 5+ years."] },
   ],
   sources: [
     { title: "Apple — Frontend Engineer, Early Career (official posting)", url: "https://jobs.apple.com/en-us/details/200676168-0157/frontend-engineer-ee-p-is-t-early-career" },
     { title: "Apple — Job search for \"early career\" (official)", url: "https://jobs.apple.com/en-us/search?search=%22early%20career%22&location=united-states-USA&sort=newest" },
     { title: "Candidate report — 2026 Apple new grad SWE (FastPrep)", url: "https://www.fastprep.io/experience/2026-apple-new-grad-swe-hr-call-java-questions-coding-and-manager-round-1-experi-52ej2p4ouy" },
   ],
-  checked: "2026-11-25",
+  checked: "2026-11-27",
 };
 
 export default company;

@@ -18,7 +18,7 @@ const questions: Question[] = [
   {
     group: "API design",
     question: "How would you paginate a list endpoint, and what are the trade-offs?",
-    answer: "The simplest approach is limit and offset query parameters with a maximum limit, returning the items plus a way to get the next page. It is easy to build and lets clients jump to any page, but rows skipped by OFFSET still have to be computed by the database, so large offsets get slow, and items can shift between pages when data changes. Cursor (keyset) pagination returns an opaque cursor such as the last seen id and queries \"after this id\"; it is fast and stable but cannot jump to page 50. Always use a stable ORDER BY and cap the page size.",
+    answer: "The simplest approach is limit and offset query parameters with a maximum limit, returning the items plus a way to get the next page. It is easy to build and lets clients jump to any page, but rows skipped by OFFSET still have to be computed by the database, so large offsets get slow, and items can shift between pages when data changes. Cursor (keyset) pagination returns an opaque cursor such as the last seen id and queries \"after this id\"; it is fast and stable but cannot jump to page 50. Always order by a unique key (add id as a tie-breaker, such as ORDER BY created_at, id) and cap the page size.",
     followUps: ["How do you consume an API that paginates with Link headers or a next URL?","Why is ORDER BY required for correct pagination?"],
     source: { title: "PostgreSQL Documentation — LIMIT and OFFSET", url: "https://www.postgresql.org/docs/current/queries-limit.html" },
   },
@@ -32,7 +32,7 @@ const questions: Question[] = [
   {
     group: "API design",
     question: "Your service calls a third-party API. What can go wrong, and how do you handle it?",
-    answer: "The call can hang, fail at the network level, return an error status, return unexpected or missing fields, hit a rate limit or span several pages. Always set a timeout. Catch network errors and timeouts separately from error statuses (in httpx, RequestError versus HTTPStatusError). A 4xx usually means your request is wrong, so do not retry it — except 429, where you wait for Retry-After. Retry transient failures (timeouts, 502, 503) a few times with exponential backoff, and only for idempotent requests unless the API supports idempotency keys. Validate the response before using it, log failures with context, and return a clear error (often 502 or 503) to your own client instead of passing through the third party's error or crashing.",
+    answer: "The call can hang, fail at the network level, return an error status, return unexpected or missing fields, hit a rate limit or span several pages. Always set a timeout. Catch network errors and timeouts separately from error statuses (in httpx, RequestError versus HTTPStatusError). A 4xx usually means your request is wrong, so do not retry it — except 429, where you wait for Retry-After. Retry transient failures (timeouts, 502, 503) a few times with exponential backoff and jitter, and only for idempotent requests unless the API supports idempotency keys. Validate the response before using it, log failures with context, and return a clear error (often 502 or 503) to your own client instead of passing through the third party's error or crashing.",
     followUps: ["Why must retries be limited and spaced out?","How would you stop calling an API that keeps failing?"],
     source: { title: "HTTPX — Exceptions", url: "https://www.python-httpx.org/exceptions/" },
   },
@@ -64,7 +64,7 @@ print(fetch_user(client, 7))             # -> None`,
   {
     group: "Validation & errors",
     question: "What does FastAPI do when a request fails validation, and why 422 rather than 400?",
-    answer: "FastAPI validates the path, query and body against your declared types before calling your function. If validation fails, the function is not called and FastAPI returns 422 with a detail list: for each problem, its type, location (loc, such as [\"body\", \"quantity\"]), message and input. 422 Unprocessable Content means the request was syntactically valid but its content was not acceptable; 400 Bad Request is broader. Many APIs use 400 for validation errors; what matters is choosing one convention and documenting it.",
+    answer: "FastAPI validates the path, query and body against your declared types before calling your function. If validation fails, the function is not called and FastAPI returns 422 with a detail list: for each problem, its type, location (loc, such as [\"body\", \"quantity\"]), message and input. 422 Unprocessable Content means the request was syntactically valid but its content was not acceptable; 400 Bad Request is broader. FastAPI returns 422 even for malformed JSON (error type json_invalid). Many APIs use 400 for validation errors; what matters is choosing one convention and documenting it.",
     followUps: ["How would you change the shape of FastAPI's validation errors?"],
     source: { title: "MDN — 422 Unprocessable Content", url: "https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/422" },
   },
@@ -146,9 +146,9 @@ print(json.loads(base64.urlsafe_b64decode(payload + "==")))   # no key needed to
   {
     group: "Authentication & authorization",
     question: "What are OAuth 2.0 and OpenID Connect, and how do they differ?",
-    answer: "OAuth 2.0 is an authorization framework for delegated access: a user lets an application call an API on their behalf, and the application receives an access token with limited scopes instead of the user's password. The recommended flow for most apps is the authorization code flow with PKCE. OpenID Connect is an identity layer on top of OAuth 2.0 that adds an ID token (a signed JWT about the user) so the application can log the user in — \"Sign in with Google\" is OIDC. Short version: OAuth for access to APIs, OIDC for login. In practice you use a provider and a maintained client library rather than implementing either.",
+    answer: "OAuth 2.0 is an authorization framework for delegated access: a user lets an application call an API on their behalf, and the application receives an access token with limited scopes instead of the user's password. Current best practice (RFC 9700, the OAuth 2.0 Security BCP) is the authorization code flow with PKCE — required for public clients such as browser and mobile apps, recommended for all; the implicit grant should not be used and the password grant must not be. OpenID Connect is an identity layer on top of OAuth 2.0 that adds an ID token (a signed JWT about the user) so the application can log the user in — \"Sign in with Google\" is OIDC. Short version: OAuth for access to APIs, OIDC for login. In practice you use a provider and a maintained client library rather than implementing either.",
     followUps: ["Why should an application never ask for a user's password to another service?"],
-    source: { title: "OWASP — Authentication Cheat Sheet: OAuth 2.0 and OpenID Connect", url: "https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html" },
+    source: { title: "OWASP — Authentication Cheat Sheet: OAuth 2.0 and 2.1; OpenID Connect (OIDC)", url: "https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html" },
   },
 ];
 

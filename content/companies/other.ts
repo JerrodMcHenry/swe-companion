@@ -5,8 +5,8 @@ const company: Company = {
   name: "General preparation",
   group: "Types of Employer",
   icon: "document",
-  roles: ["software-engineer", "backend-engineer", "full-stack-engineer", "ai-engineer", "forward-deployed-engineer", "quant-developer"],
-  tagline: "For any employer or a specific job posting: prioritize from the posting and the format your recruiter confirms",
+  roles: ["software-engineer", "backend-engineer", "frontend-engineer", "full-stack-engineer", "data-engineer", "machine-learning-engineer", "ai-engineer", "forward-deployed-engineer", "solutions-engineer", "quant-developer"],
+  tagline: "For any employer, including small and midsize businesses, or a specific job posting: prioritize from the posting and the format your recruiter confirms",
   card: "Any employer or a specific posting: balanced coding, practical and behavioral preparation.",
   facts: [
     { label: "How it works", value: "The posting and your recruiter's format set the priorities", evidence: "Editorial" },

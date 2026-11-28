@@ -4,9 +4,9 @@ const company: Company = {
   slug: "perplexity",
   name: "Perplexity",
   group: "AI Companies",
-  roles: ["software-engineer", "ai-engineer"],
-  levels: "The general new-grad portal closed for 2026 and is expected to reopen in 2027; of 30 software postings reviewed (27 Nov 2026), 3 stated 0–2 years.",
-  tagline: "Software and applied AI engineering",
+  roles: ["software-engineer", "machine-learning-engineer", "ai-engineer", "solutions-engineer"],
+  levels: "The general new-grad portal closed for 2026 and is expected to reopen in 2027; of 30 software postings reviewed (27 Nov 2026), 3 asked 2 years or less (lowest 1+).",
+  tagline: "Software, applied AI, ML and solutions roles",
   card: "Practical Python coding, agentic coding and a long AI-allowed project round.",
   categories: ["coding", "practical", "python", "ai", "oop", "system-design", "behavioral"],
   roleCategories: {
@@ -24,7 +24,7 @@ const company: Company = {
     { title: "Interview resources", url: "https://interviewresources.perplexity.ai/", note: "Official: every round, the expected knowledge, language advice and AI rules." },
   ],
   facts: [
-    { label: "Coding", value: "CodeSignal; Python strongly recommended; no AI except documentation", evidence: "Official" },
+    { label: "Coding", value: "CodeSignal; Python strongly recommended; no AI except documentation and library questions", evidence: "Official" },
     { label: "AI rounds", value: "Agentic Coding requires agents; Spike round allows any AI use", evidence: "Official" },
     { label: "Early career", value: "Core Expertise round instead of System Design", evidence: "Official" },
     { label: "New grad", value: "General portal closed for 2026; expected to reopen in 2027", evidence: "Official" },
@@ -46,7 +46,8 @@ const company: Company = {
         "Applied AI postings reviewed that state a minimum asked 4+ years.",
       ],
     },
-    { heading: "Evidence", items: ["Official: Perplexity's interview resources portal and postings, checked 27 November 2026."] },
+    { heading: "Evidence", items: ["Official: Perplexity's interview resources portal (undated pages) and postings, checked 27 November 2026. The AI rules differ by round: none in hands-on coding beyond documentation and library questions; agents required in Agentic Coding; unrestricted in the Spike round."] },
+    { heading: "Other roles (postings reviewed 27 November 2026)", items: ["Machine learning engineering postings (search, recommendations, ranking) ask about 5 years; intern roles exist in Belgrade and London.", "Two solutions roles ask 5+ years."] },
   ],
   sources: [
     { title: "Perplexity — Interview resources (official)", url: "https://interviewresources.perplexity.ai/" },

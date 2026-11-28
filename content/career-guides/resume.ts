@@ -3,7 +3,7 @@ import type { CareerGuide } from "../types";
 const guide: CareerGuide = {
   slug: "resume",
   title: "Resume Preparation",
-  description: "A clear, honest, one-page entry-level software engineering resume, tailored to each role.",
+  description: "A clear, honest software engineering resume tailored to each role, plus LinkedIn and GitHub, for new graduates, career switchers and experienced engineers.",
   guidance: [
     {
       heading: "Representative entry-level structure (one page)",
@@ -24,6 +24,25 @@ const guide: CareerGuide = {
         "Professional experience next, with bullets rewritten to emphasise transferable work: automation you built, data you analysed, processes you improved, stakeholders you worked with and incidents you handled.",
         "Education and training: degree, bootcamp or courses that matter for the role. Online courses do not need individual listing unless they are directly relevant.",
         "Skills, grouped as above. Do not claim professional software engineering experience you have not had; equivalent practical experience is described honestly through projects and transferable work.",
+      ],
+    },
+    {
+      heading: "Experienced engineers, including after a layoff",
+      items: [
+        "One page is enough for most engineers with under about ten years of experience; two pages are fine for longer careers if every line is relevant.",
+        "Lead each role with the scope (product, users, scale, team) and two to four results you can explain: systems you designed or improved, reliability or performance gains you measured, migrations, incidents handled, people mentored.",
+        "Match your most recent work to the target role's title and stack; older roles can shrink to one line each.",
+        "A layoff needs no apology. If asked, one honest sentence is enough: \"My role was eliminated in a company-wide layoff in March; since then I've been preparing for backend roles and finishing a small open-source contribution.\" Do not hide gaps with inaccurate dates.",
+        "Describe your actual title and level; if an internal title is unusual, you can add a clarifying phrase (\"Software Engineer II (backend, payments)\").",
+      ],
+    },
+    {
+      heading: "LinkedIn and GitHub",
+      items: [
+        "LinkedIn: a headline naming your target role and main skills (\"Backend engineer · Python, PostgreSQL, AWS\"), a short About section, the same jobs and dates as your resume, and your location and work preferences. Recruiters often search by title, skills and location.",
+        "Use the platform's open-to-work settings if you are comfortable with them; you can limit visibility to recruiters.",
+        "GitHub: pin the two to six repositories that best match your target role, each with a README that explains what it does, how to run it, your design decisions and tests. Quality matters more than activity graphs.",
+        "Remove or archive unfinished tutorial copies that you would not want an interviewer to read, and never commit secrets such as API keys.",
       ],
     },
     {
@@ -80,6 +99,7 @@ const guide: CareerGuide = {
     "Multi-column designs, graphics and skill bars that hinder reading and parsing.",
     "Typos, inconsistent dates and broken links.",
     "Two pages for an entry-level candidate without a clear reason.",
+    "Inconsistent dates or titles between your resume and LinkedIn.",
   ],
   resources: [
     {

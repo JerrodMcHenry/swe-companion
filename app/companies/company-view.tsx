@@ -19,7 +19,8 @@ function count(href: string, problems?: number) {
   const set = slug ? getQuestionSet(slug) : undefined;
   if (!set) return "Guide";
   const group = new URL(href, "https://x.invalid").searchParams.get("group");
-  return `${set.questions.filter((q) => !group || q.group === group).length} questions`;
+  const n = set.questions.filter((q) => !group || q.group === group).length;
+  return `${n} ${n === 1 ? "question" : "questions"}`;
 }
 
 export default function CompanyView({ company, role }: { company: Company; role: RoleSlug }) {
@@ -53,6 +54,11 @@ export default function CompanyView({ company, role }: { company: Company; role:
           </Link>
         ))}
       </nav>
+      {company.group === "Types of Employer" && company.slug !== "other" && role !== "software-engineer" && (
+        <p className="xs faint" style={{ marginTop: 10 }}>
+          General preparation for this type of employer, not a sign that every such employer hires for this role. Check each posting.
+        </p>
+      )}
 
       <div className="list" style={{ marginTop: 22 }}>
         {categories.map((c) => (

@@ -4,7 +4,7 @@ const questions: Question[] = [
   {
     group: "SQL",
     question: "What are primary keys and foreign keys?",
-    answer: "A primary key uniquely identifies each row in a table and cannot be NULL. A foreign key is a column that refers to the primary key of another table, linking rows and letting the database enforce that the referenced row exists. A one-to-many relationship (one customer, many orders) puts the foreign key on the \"many\" side; a many-to-many relationship (students and courses) uses a join table with two foreign keys.",
+    answer: "A primary key uniquely identifies each row in a table and cannot be NULL (SQLite is a legacy exception: non-integer primary key columns accept NULL unless declared NOT NULL). A foreign key is a column that refers to the primary key (or another unique key) of another table, linking rows and letting the database enforce that the referenced row exists. A one-to-many relationship (one customer, many orders) puts the foreign key on the \"many\" side; a many-to-many relationship (students and courses) uses a join table with two foreign keys.",
     code: `-- One customer has many orders
 -- Dialect: in SQLite, INTEGER PRIMARY KEY auto-assigns ids; PostgreSQL uses
 -- id INTEGER GENERATED ALWAYS AS IDENTITY (or SERIAL). SQLite enforces foreign keys
@@ -40,7 +40,7 @@ SELECT c.name FROM customers c LEFT JOIN orders o ON o.customer_id = c.id WHERE 
   {
     group: "SQL",
     question: "What is the difference between WHERE and HAVING? How does GROUP BY work?",
-    answer: "GROUP BY collapses rows with the same values into groups so aggregates such as COUNT or SUM are computed per group. WHERE filters individual rows before grouping; HAVING filters groups after aggregation. Every selected column must either be in the GROUP BY or be inside an aggregate function.",
+    answer: "GROUP BY collapses rows with the same values into groups so aggregates such as COUNT or SUM are computed per group. WHERE filters individual rows before grouping; HAVING filters groups after aggregation. Every selected column must either be in the GROUP BY or be inside an aggregate function (PostgreSQL also accepts columns that depend on a grouped primary key).",
     code: `-- Orders per customer
 CREATE TABLE orders (id INTEGER PRIMARY KEY, customer TEXT, total REAL);
 INSERT INTO orders (customer, total) VALUES ('Ana', 20), ('Ana', 30), ('Ben', 5), ('Cy', 50), ('Cy', 10), ('Cy', 15);
@@ -53,7 +53,7 @@ SELECT customer, COUNT(*), SUM(total) FROM orders WHERE total >= 10 GROUP BY cus
   {
     group: "SQL",
     question: "How does NULL behave in SQL?",
-    answer: "NULL means \"unknown\" or \"missing\", not zero or an empty string. Comparisons with NULL (= NULL, <> NULL) are neither true nor false, so rows are not matched; use IS NULL or IS NOT NULL. COUNT(*) counts rows, while COUNT(column) skips NULLs, and most aggregates ignore NULLs.",
+    answer: "NULL means \"unknown\" or \"missing\", not zero or an empty string. Comparisons with NULL (= NULL, <> NULL) evaluate to UNKNOWN, neither true nor false, so WHERE does not match the row; use IS NULL or IS NOT NULL. COUNT(*) counts rows, while COUNT(column) skips NULLs, and most aggregates ignore NULLs.",
     code: `-- Optional phone numbers
 CREATE TABLE users (name TEXT, phone TEXT);
 INSERT INTO users VALUES ('Ana', '555-0101'), ('Ben', NULL), ('Cy', NULL);
@@ -93,7 +93,7 @@ print(unsafe, safe)   # -> [('ana',), ('ben',)] []`,
   {
     group: "SQL",
     question: "In what order is a SELECT statement evaluated, and why does it matter?",
-    answer: "Logically: FROM and JOINs build the rows, WHERE filters them, GROUP BY forms groups, HAVING filters groups, SELECT computes the output columns (window functions run here), then DISTINCT, ORDER BY and finally LIMIT/OFFSET. That explains common errors: you cannot use a SELECT alias or an aggregate in WHERE, because neither exists yet (use HAVING, repeat the expression or wrap the query in a CTE), while ORDER BY can use aliases because it runs after SELECT. The database may physically execute things differently, but the result must match this logical order.",
+    answer: "Logically: FROM and JOINs build the rows, WHERE filters them, GROUP BY forms groups, HAVING filters groups, SELECT computes the output columns (window functions run here), then DISTINCT, ORDER BY and finally LIMIT/OFFSET. That explains common errors: you cannot use an aggregate in WHERE (use HAVING) or a SELECT alias in WHERE (repeat the expression or wrap the query in a CTE), because neither exists yet, while ORDER BY can use aliases because it runs after SELECT. Dialects relax this: SQLite accepts aliases in WHERE, and MySQL in HAVING; PostgreSQL follows the logical order. The database may physically execute things differently, but the result must match this logical order.",
     followUps: ["Why can't you filter on a window function's result in WHERE, and what do you do instead?"],
     source: { title: "SQLBolt — Lesson 12: Order of execution of a Query", url: "https://sqlbolt.com/lesson/select_queries_order_of_execution" },
   },
@@ -126,6 +126,7 @@ CREATE TABLE orders (id INTEGER PRIMARY KEY, user_id INTEGER);
 INSERT INTO users VALUES (1, 'Ana'), (2, 'Ben');
 INSERT INTO orders VALUES (10, 1), (11, NULL);
 SELECT name FROM users WHERE id NOT IN (SELECT user_id FROM orders);
+-- -> no rows
 SELECT name FROM users u WHERE NOT EXISTS (SELECT 1 FROM orders o WHERE o.user_id = u.id);
 -- -> ('Ben',)`,
     followUps: ["How would you write the same query with a LEFT JOIN?"],
@@ -134,16 +135,82 @@ SELECT name FROM users u WHERE NOT EXISTS (SELECT 1 FROM orders o WHERE o.user_i
   {
     group: "SQL",
     question: "When would you use a subquery, a JOIN or a common table expression (CTE)?",
-    answer: "Use a JOIN when you need columns from both tables in the output. Use a subquery when you only need a value or a yes/no check from another table, such as a scalar maximum or an EXISTS test. Use a CTE (WITH name AS (…)) to name an intermediate result so a multi-step query reads top to bottom, or when the same intermediate result is used more than once. They are often interchangeable for correctness; choose the clearest, then check the plan if performance matters. In current PostgreSQL a simple CTE used once is usually inlined like a subquery, so it is not automatically slower.",
+    answer: "Use a JOIN when you need columns from both tables in the output. Use a subquery when you only need a value or a yes/no check from another table, such as a scalar maximum or an EXISTS test. Use a CTE (WITH name AS (…)) to name an intermediate result so a multi-step query reads top to bottom, or when the same intermediate result is used more than once. They are often interchangeable for correctness; choose the clearest, then check the plan if performance matters. Since PostgreSQL 12, a non-recursive, side-effect-free CTE referenced once is inlined like a subquery (unless written AS MATERIALIZED), so it is not automatically slower.",
     followUps: ["Rewrite a query that filters on an aggregate using a CTE.","What is a correlated subquery?"],
     source: { title: "PostgreSQL Documentation — 7.8 WITH Queries (Common Table Expressions)", url: "https://www.postgresql.org/docs/current/queries-with.html" },
   },
   {
     group: "SQL",
     question: "How would you find the second-highest value in a column?",
-    answer: "Two common approaches: SELECT MAX(salary) FROM employees WHERE salary < (SELECT MAX(salary) FROM employees), or SELECT DISTINCT salary FROM employees ORDER BY salary DESC LIMIT 1 OFFSET 1. DISTINCT matters when the top value is duplicated. The MAX version returns NULL when there is no second value; the LIMIT version returns no row, so wrap it in a scalar subquery if the caller needs NULL. For the Nth value or per-group answers, DENSE_RANK generalizes better. State the edge cases (ties, fewer than two rows, NULLs) before writing.",
+    answer: "Two common approaches: SELECT MAX(salary) FROM employees WHERE salary < (SELECT MAX(salary) FROM employees), or SELECT DISTINCT salary FROM employees WHERE salary IS NOT NULL ORDER BY salary DESC LIMIT 1 OFFSET 1. DISTINCT matters when the top value is duplicated, and the NULL filter matters in PostgreSQL, which sorts NULLs first in descending order (MySQL and SQLite sort them last). The MAX version returns NULL when there is no second value; the LIMIT version returns no row, so wrap it in a scalar subquery if the caller needs NULL. For the Nth value or per-group answers, DENSE_RANK generalizes better. State the edge cases (ties, fewer than two rows, NULLs) before writing.",
     followUps: ["How does your query change for the Nth-highest value per department?"],
     source: { title: "PostgreSQL Documentation — 7.6 LIMIT and OFFSET", url: "https://www.postgresql.org/docs/current/queries-limit.html" },
+  },
+  {
+    group: "Analytical SQL",
+    question: "How do you remove duplicate records, keeping only the latest version of each?",
+    answer: "Number the rows within each business key, newest first, and keep row 1. ROW_NUMBER (not RANK) guarantees exactly one row per key even when timestamps tie, so add a tie-breaker column to make the choice deterministic. In a pipeline, write the result to a new table or use it in a MERGE rather than deleting in place, so a bad run can be repeated safely.",
+    code: `CREATE TABLE customers_raw (id int, email text, updated_at date);
+INSERT INTO customers_raw VALUES
+  (1, 'a@x.com', '2026-01-01'), (1, 'a@new.com', '2026-03-01'), (2, 'b@x.com', '2026-02-01');
+
+WITH ranked AS (
+  SELECT *, ROW_NUMBER() OVER (PARTITION BY id ORDER BY updated_at DESC) AS rn
+  FROM customers_raw
+)
+SELECT id, email, updated_at FROM ranked WHERE rn = 1 ORDER BY id;
+-- -> (1, 'a@new.com', 2026-03-01)
+-- -> (2, 'b@x.com', 2026-02-01)`,
+    followUps: ["How would you deduplicate exact duplicate rows that have no id?"],
+    source: { title: "PostgreSQL Documentation — Window Functions tutorial", url: "https://www.postgresql.org/docs/current/tutorial-window.html" },
+  },
+  {
+    group: "Analytical SQL",
+    question: "How do you calculate a running total and a rolling average?",
+    answer: "Use aggregate functions as window functions. SUM(...) OVER (ORDER BY day) gives a running total, because the default frame runs from the first row to the current row and its peers: rows that tie on the ORDER BY value all get the same total, so order by a unique key if you need one row at a time. For a rolling average, set the frame explicitly. ROWS BETWEEN 2 PRECEDING AND CURRENT ROW means the last three rows, which is wrong when days are missing; RANGE with an interval means the last three calendar days (PostgreSQL 11+ and MySQL 8; SQLite supports only numeric RANGE offsets). Alternatively, join to a complete calendar of dates first so every day has a row.",
+    code: `-- PostgreSQL. daily_sales(day date, revenue int): rows for Jan 1, 2, 3 and 5 (Jan 4 is missing)
+-- AVG output shown rounded; PostgreSQL prints numeric, e.g. 10.0000000000000000
+SELECT day, revenue,
+       SUM(revenue) OVER (ORDER BY day) AS running_total,
+       AVG(revenue) OVER (ORDER BY day ROWS BETWEEN 2 PRECEDING AND CURRENT ROW) AS last_3_rows,
+       AVG(revenue) OVER (ORDER BY day RANGE BETWEEN INTERVAL '2 days' PRECEDING AND CURRENT ROW) AS last_3_days
+FROM daily_sales ORDER BY day;
+-- -> (2026-01-01, 10,  10, 10.0, 10.0)
+-- -> (2026-01-02, 20,  30, 15.0, 15.0)
+-- -> (2026-01-03, 30,  60, 20.0, 20.0)
+-- -> (2026-01-05, 40, 100, 30.0, 35.0)   rows: (20+30+40)/3, days: (30+40)/2`,
+    source: { title: "PostgreSQL Documentation — Window function calls", url: "https://www.postgresql.org/docs/current/sql-expressions.html#SYNTAX-WINDOW-FUNCTIONS" },
+  },
+  {
+    group: "Analytical SQL",
+    question: "How do you compare each row with the previous one, and find consecutive streaks?",
+    answer: "LAG(column) OVER (ORDER BY …) returns the previous row's value, so revenue - LAG(revenue) is the change from the previous day; LEAD looks ahead. For streaks of consecutive days (a “gaps and islands” problem), subtract each row's ROW_NUMBER from its date: consecutive dates produce the same result, which becomes a group key. Remove duplicate dates first, or repeated logins on one day break the streak. Date minus integer is PostgreSQL syntax; other databases use a date-add function.",
+    code: `WITH days AS (SELECT DISTINCT user_id, day FROM logins),
+numbered AS (
+  SELECT user_id, day,
+         day - CAST(ROW_NUMBER() OVER (PARTITION BY user_id ORDER BY day) AS int) AS grp
+  FROM days
+)
+SELECT user_id, MIN(day) AS streak_start, COUNT(*) AS days
+FROM numbered GROUP BY user_id, grp HAVING COUNT(*) >= 2;
+-- logins: user 1 on Jan 1, 2 (twice), 3 and 5; user 2 on Jan 1 and 3
+-- -> (1, 2026-01-01, 3)`,
+    followUps: ["Find users who logged in on three or more consecutive days."],
+    source: { title: "PostgreSQL Documentation — Window functions (LAG, LEAD)", url: "https://www.postgresql.org/docs/current/functions-window.html" },
+  },
+  {
+    group: "Analytical SQL",
+    question: "How do you turn rows into columns, for example counts per status for each country?",
+    answer: "Use conditional aggregation: group by the row key and aggregate a CASE expression for each column you want. PostgreSQL and SQLite also support the shorter FILTER clause (MySQL does not). This is portable, readable and usually faster than joining the table to itself once per category. If the categories are not known in advance, produce rows instead and pivot in the reporting tool.",
+    code: `-- orders: US paid 20, US paid 40, US refunded 15, UK paid 30
+SELECT country,
+       COUNT(*) AS orders,
+       SUM(CASE WHEN status = 'paid' THEN amount ELSE 0 END) AS paid_amount,
+       COUNT(*) FILTER (WHERE status = 'refunded') AS refunds
+FROM orders GROUP BY country ORDER BY country;
+-- -> ('UK', 1, 30, 0)
+-- -> ('US', 3, 60, 1)`,
+    source: { title: "PostgreSQL Documentation — Aggregate expressions (FILTER)", url: "https://www.postgresql.org/docs/current/sql-expressions.html#SYNTAX-AGGREGATES" },
   },
   {
     group: "Database design",
@@ -182,14 +249,25 @@ SELECT name FROM users u WHERE NOT EXISTS (SELECT 1 FROM orders o WHERE o.user_i
   {
     group: "Performance & transactions",
     question: "What is a transaction, and what does ACID mean?",
-    answer: "A transaction groups several statements so they succeed or fail as one unit. ACID describes the guarantees: Atomicity (all or nothing), Consistency (constraints hold before and after), Isolation (concurrent transactions do not see each other's partial work, to a configurable degree) and Durability (committed data survives crashes). The classic example is a money transfer: the debit and the credit must both happen or neither. Weaker isolation levels can allow anomalies such as two transactions reading a balance and both overwriting it (a lost update). In Python's sqlite3, using the connection as a context manager (with db:) commits on success and rolls back on an exception.",
-    followUps: ["What is a lost update, and how can a transaction or a lock prevent it?"],
+    answer: "A transaction groups several statements so they succeed or fail as one unit. ACID describes the guarantees: Atomicity (all or nothing), Consistency (constraints hold before and after), Isolation (concurrent transactions do not see each other's partial work, to a degree set by the isolation level) and Durability (committed data survives crashes). The classic example is a money transfer: the debit and the credit must both happen or neither. In Python's sqlite3, using the connection as a context manager (with db:) commits on success and rolls back on an exception.",
     source: { title: "PostgreSQL Documentation — Tutorial: 3.4 Transactions", url: "https://www.postgresql.org/docs/current/tutorial-transactions.html" },
   },
   {
     group: "Performance & transactions",
+    question: "What are transaction isolation levels, and which anomalies does each allow?",
+    answer: "The SQL standard defines four levels by the anomalies they forbid: READ UNCOMMITTED allows dirty reads (seeing uncommitted changes); READ COMMITTED prevents those, but reading a row twice can return different values; REPEATABLE READ keeps rows you have read unchanged, but new matching rows (phantoms) may appear; SERIALIZABLE gives the same result as running the transactions one at a time. Behaviour differs by database, so name it: PostgreSQL defaults to READ COMMITTED, and its REPEATABLE READ is a snapshot that also prevents phantoms but still allows write skew, which only SERIALIZABLE prevents; MySQL InnoDB defaults to REPEATABLE READ; SQLite transactions are serializable. The anomaly interviewers ask about most is the lost update (two transactions read a balance, then both write a new value): prevent it with an atomic UPDATE, a row lock (SELECT … FOR UPDATE) or a stricter level, and retry transactions that fail with a serialization error.",
+    code: `-- PostgreSQL, two sessions; balance starts at 100, each session reads it, then sets it to 90
+-- READ COMMITTED:  both commit -> final 90 (one withdrawal lost)
+-- REPEATABLE READ: second UPDATE fails: could not serialize access due to concurrent update
+-- Atomic update instead: two concurrent sessions -> final 80
+UPDATE accounts SET balance = balance - 10 WHERE id = 1;`,
+    followUps: ["What is write skew? Give an example that REPEATABLE READ in PostgreSQL does not prevent."],
+    source: { title: "PostgreSQL Documentation — 13.2 Transaction Isolation", url: "https://www.postgresql.org/docs/current/transaction-iso.html" },
+  },
+  {
+    group: "Performance & transactions",
     question: "A query in your API is slow. How do you investigate?",
-    answer: "Reproduce it with realistic data, then run EXPLAIN (estimated plan) or EXPLAIN ANALYZE (which really executes it and shows actual rows and time). Look for a sequential scan over a large table where only a few rows are needed, estimates far from actual row counts, and expensive sorts or joins. Common fixes: add an index on the filtered or joined columns — PostgreSQL does not index foreign-key columns automatically — order a multi-column index to match the query, select only the columns you need, paginate, and avoid issuing one query per row from application code. Measure again after the change; an index costs storage and write speed, so keep only those that help.",
+    answer: "Reproduce it with realistic data, then run EXPLAIN (estimated plan) or EXPLAIN ANALYZE (which really executes it and shows actual rows and time). Look for a sequential scan over a large table where only a few rows are needed, estimates far from actual row counts, and expensive sorts or joins. Common fixes: add an index on the filtered or joined columns — PostgreSQL does not index foreign-key columns automatically (MySQL InnoDB does) — order a multi-column index to match the query, select only the columns you need, paginate, and avoid issuing one query per row from application code. Measure again after the change; an index costs storage and write speed, so keep only those that help.",
     followUps: ["Why might PostgreSQL choose a sequential scan even though an index exists?","Why does column order matter in a multi-column index?"],
     source: { title: "PostgreSQL Documentation — 14.1 Using EXPLAIN", url: "https://www.postgresql.org/docs/current/using-explain.html" },
   },

@@ -11,7 +11,7 @@ const questions: Question[] = [
   {
     group: "Processes & memory",
     question: "What is the difference between stack and heap memory?",
-    answer: "The stack stores function call frames — local variables and return addresses — and grows and shrinks automatically as functions are called and return; it is fast but limited in size, so very deep recursion overflows it (Python raises RecursionError at its recursion limit). The heap stores data whose lifetime is not tied to a single call, allocated and freed dynamically. In CPython all objects live on the heap; local variables in a frame are references to them. CPython frees objects mainly by reference counting, with a garbage collector that finds reference cycles.",
+    answer: "The stack stores function call frames — local variables and return addresses — and grows and shrinks automatically as functions are called and return; it is fast but limited in size, so very deep recursion can overflow it (Python stops earlier, raising RecursionError at its configurable recursion limit). The heap stores data whose lifetime is not tied to a single call, allocated and freed dynamically. In CPython all objects live on the heap; local variables in a frame are references to them. CPython frees objects mainly by reference counting, with a garbage collector that finds reference cycles.",
     followUps: ["What is a memory leak in a garbage-collected language like Python?"],
     source: { title: "Python Standard Library — gc: Garbage Collector interface", url: "https://docs.python.org/3/library/gc.html" },
   },
@@ -107,8 +107,8 @@ print(asyncio.run(result))       # -> {'id': 1}`,
     group: "Performance & low latency",
     question: "What is false sharing, and how do you avoid it?",
     answer:
-      "Two threads write to different variables that happen to share a cache line. The cores keep invalidating each other's copy of the line, so performance collapses even though no data is logically shared. Avoid it by giving frequently written per-thread data its own cache line (padding or alignas(64), or std::hardware_destructive_interference_size where available) and by batching updates locally before publishing them.",
-    code: `struct alignas(64) PaddedCounter {   // one counter per cache line
+      "Two threads write to different variables that happen to share a cache line. The cores keep invalidating each other's copy of the line, so throughput can drop sharply even though no data is logically shared. Avoid it by giving frequently written per-thread data its own cache line: lines are typically 64 bytes on x86-64, but some CPUs (such as Apple M-series) use 128, so pad or use alignas with std::hardware_destructive_interference_size where available, or with the measured line size for your target and by batching updates locally before publishing them.",
+    code: `struct alignas(64) PaddedCounter {   // one counter per 64-byte cache line
     std::atomic<long> value{0};
 };
 PaddedCounter perThread[4];
@@ -119,7 +119,7 @@ std::cout << sizeof(PaddedCounter) << '\\n';   // -> 64`,
     group: "Performance & low latency",
     question: "What are memory alignment and struct padding?",
     answer:
-      "Types are usually stored at addresses that are multiples of their alignment, so the compiler inserts padding between struct members and at the end. Ordering members from largest to smallest alignment often shrinks a struct, which means more objects per cache line. Misaligned access is slower on some hardware and invalid on others; alignas lets you request stronger alignment, for example for cache lines or SIMD.",
+      "Types are usually stored at addresses that are multiples of their alignment, so the compiler inserts padding between struct members and at the end. Ordering members from largest to smallest alignment often shrinks a struct, which means more objects per cache line. Misaligned access is slower on some hardware and faults on others, and in C++ accessing an object through a misaligned pointer is undefined behaviour; alignas lets you request stronger alignment, for example for cache lines or SIMD.",
     code: `struct Loose { char a; double b; char c; };   // padding after a and c
 struct Tight { double b; char a; char c; };
 std::cout << sizeof(Loose) << ' ' << sizeof(Tight) << '\\n';   // -> 24 16 (typical 64-bit platform)`,
@@ -129,21 +129,22 @@ std::cout << sizeof(Loose) << ' ' << sizeof(Tight) << '\\n';   // -> 24 16 (typi
     group: "Performance & low latency",
     question: "What does a context switch cost, and how do low-latency systems avoid it?",
     answer:
-      "Switching threads saves and restores registers, may switch address spaces, and pollutes caches and the TLB, costing microseconds directly and more through lost cache warmth. Blocking on a mutex or I/O can trigger one. Latency-critical systems pin threads to dedicated cores, avoid blocking calls on the hot path, use busy-polling instead of sleeping, and keep the number of runnable threads at or below the number of cores.",
+      "Switching threads saves and restores registers, may switch address spaces, and pollutes caches and the TLB, typically costing on the order of microseconds directly and more through lost cache warmth (it varies by CPU, kernel and workload). Blocking on a mutex or I/O can trigger one. Latency-critical systems pin threads to dedicated cores, avoid blocking calls on the hot path, use busy-polling instead of sleeping (trading a fully used core and power for lower wake-up latency), and keep the number of runnable threads at or below the number of cores.",
     source: { title: "Operating Systems: Three Easy Pieces — Limited direct execution (context switches)", url: "https://pages.cs.wisc.edu/~remzi/OSTEP/cpu-mechanisms.pdf" },
   },
   {
     group: "Performance & low latency",
     question: "When would you use atomics or a lock-free structure instead of a mutex?",
     answer:
-      "An uncontended mutex is cheap, but under contention threads block and may be descheduled, causing latency spikes. Atomics avoid blocking for simple operations such as counters, flags and single-producer single-consumer queues. General lock-free structures are hard to get right (memory ordering, the ABA problem, memory reclamation) and are not automatically faster, so use them only where measurement shows a mutex is the bottleneck, preferably via a well-tested library.",
+      "An uncontended mutex is cheap, but under contention threads block and may be descheduled, causing latency spikes. Atomics avoid blocking for simple operations such as counters, flags and single-producer single-consumer queues, but contended atomics still bounce the cache line between cores, and std::atomic<T> is only guaranteed lock-free for std::atomic_flag (check is_always_lock_free). General lock-free structures are hard to get right (memory ordering, the ABA problem, memory reclamation) and are not automatically faster, so use them only where measurement shows a mutex is the bottleneck, preferably via a well-tested library.",
     source: { title: "cppreference — std::atomic", url: "https://en.cppreference.com/w/cpp/atomic/atomic" },
   },
   {
     group: "Performance & low latency",
     question: "What is tail latency, and why does it matter more than average latency?",
     answer:
-      "Tail latency is the slow end of the distribution, such as the 99th or 99.9th percentile. Averages hide rare slow requests caused by garbage collection, page faults, cache misses, lock contention or context switches, and in a system where one request touches many components the tail dominates what users experience. Measure percentiles under realistic load and track outliers, not just the mean.",
+      "Tail latency is the slow end of the distribution, such as the 99th or 99.9th percentile. Averages hide rare slow requests caused by garbage collection, page faults, cache misses, lock contention or context switches, and in a system where one request touches many components the tail dominates what users experience: if a request fans out to 100 servers and each is slow 1% of the time, about 63% of requests hit at least one slow server. Measure percentiles under realistic load and track outliers, not just the mean.",
+    source: { title: "Dean and Barroso — The Tail at Scale (Communications of the ACM, 2013)", url: "https://research.google/pubs/the-tail-at-scale/" },
   },
   {
     group: "Performance & low latency",
@@ -156,7 +157,7 @@ std::cout << sizeof(Loose) << ' ' << sizeof(Tight) << '\\n';   // -> 24 16 (typi
     group: "Performance & low latency",
     question: "Why avoid memory allocation on the hot path?",
     answer:
-      "General-purpose allocators can take locks, touch new memory (page faults) and have unpredictable run times, which shows up as latency spikes. Low-latency code preallocates buffers at startup, reuses objects through pools or free lists, reserves container capacity, and avoids hidden allocations such as growing strings or std::function captures in tight loops.",
+      "General-purpose allocators can take locks, touch new memory (page faults) and have unpredictable run times, which shows up as latency spikes. Low-latency code preallocates buffers at startup, reuses objects through pools or free lists, reserves container capacity, and avoids hidden allocations such as growing strings or std::function objects whose captures exceed the small-buffer size in tight loops.",
   },
   {
     group: "Performance & low latency",

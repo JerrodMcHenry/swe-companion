@@ -117,7 +117,8 @@ export function SearchDialog() {
   }, [open, index]);
 
   const results = useMemo(() => {
-    const words = query.toLowerCase().split(/\s+/).filter(Boolean);
+    // Drop a plural "s" so "functions" also finds "function"; matching is by word prefix.
+    const words = query.toLowerCase().split(/\s+/).filter(Boolean).map((w) => (w.length > 3 && w.endsWith("s") && !w.endsWith("ss") ? w.slice(0, -1) : w));
     if (!index || words.length === 0) return [];
     // Each word must start a word in the entry, so "rag" finds RAG but not "average".
     const patterns = words.map((w) => new RegExp(`(^|[^a-z0-9])${w.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}`));

@@ -4,7 +4,7 @@ const questions: Question[] = [
   {
     group: "Testing",
     question: "What is the difference between unit, integration and end-to-end tests?",
-    answer: "A unit test checks one small piece of code, such as a function or class, in isolation; it is fast and pinpoints failures. An integration test checks that several pieces work together, for example code with a real database. An end-to-end test exercises the whole system as a user would, through the user interface or public API; it gives the most confidence but is slow and more brittle. A healthy suite has many unit tests, fewer integration tests and a small number of end-to-end tests.",
+    answer: "A unit test checks one small piece of code, such as a function or class, in isolation; it is fast and pinpoints failures. An integration test checks that several pieces work together, for example code with a real database. An end-to-end test exercises the whole system as a user would, through the user interface or public API; it gives the most confidence but is slow and more brittle. The common test-pyramid guideline is many unit tests, fewer integration tests and a small number of end-to-end tests; teams adjust the balance to where their bugs actually occur.",
     followUps: ["Why is a suite made mostly of end-to-end tests slow and fragile?"],
     source: { title: "Martin Fowler — The Practical Test Pyramid", url: "https://martinfowler.com/articles/practical-test-pyramid.html" },
   },
@@ -34,13 +34,13 @@ def test_average_of_empty_raises():
     group: "Testing",
     question: "What is a regression test, and why write a failing test before fixing a bug?",
     answer: "A regression test checks that a fixed bug stays fixed. Writing it before the fix proves that it reproduces the bug (it fails), then proves the fix works (it passes). It also documents the case and stops someone reintroducing the bug later.",
-    followUps: ["How would you find which commit introduced a regression? (git bisect, awareness level)"],
+    followUps: ["How would you find which commit introduced a regression? (git bisect)"],
     source: { title: "Martin Fowler — Self Testing Code", url: "https://martinfowler.com/bliki/SelfTestingCode.html" },
   },
   {
     group: "Testing",
     question: "What are fakes, stubs and mocks?",
-    answer: "They are test doubles that replace real dependencies. A stub returns fixed answers so the code under test can run. A fake is a simple working implementation, such as an in-memory store instead of a database. A mock (or spy) records how it was called so the test can verify interactions, such as \"send was called once with this message\". Prefer fakes, stubs and checking results; overusing mocks ties tests to implementation details and makes refactoring painful.",
+    answer: "They are test doubles that replace real dependencies. A stub returns fixed answers so the code under test can run. A fake is a simple working implementation, such as an in-memory store instead of a database. A mock is used to verify interactions (a spy records calls for checking afterwards; Python's unittest.mock.Mock does both), such as \"send was called once with this message\". Prefer fakes, stubs and checking results; overusing mocks ties tests to implementation details and makes refactoring painful.",
     code: `from unittest.mock import Mock
 
 class InMemoryRepo:                       # fake
@@ -348,7 +348,7 @@ new file mode 100644
     group: "Code review",
     question: "How do you respond when a reviewer questions a decision in your pull request?",
     answer: "Assume good intent and take the comment seriously. If the reviewer is right, fix it and thank them. If I made the choice deliberately, explain the reasoning with evidence — requirements, a test, a measurement or a trade-off — and ask whether it addresses their concern. If it is a matter of preference, follow the team's conventions. If the explanation was needed by the reviewer, a future reader probably needs it too, so I add a comment or improve the code. I don't take review personally or argue to win.",
-    followUps: ["Tell me about a time feedback on your code changed your approach. (Behavioral; see Behavioral Interviews.)"],
+    followUps: ["Tell me about a time feedback on your code changed your approach. (Behavioral question.)"],
     source: { title: "Google Engineering Practices — How to handle reviewer comments", url: "https://google.github.io/eng-practices/review/developer/handling-comments.html" },
   },
 ];

@@ -87,7 +87,7 @@ print(p == q, p is q, len({p, q}))   # -> True False 1`,
   {
     group: "Inheritance & composition",
     question: "What is the difference between overriding and overloading? Does Python support overloading?",
-    answer: "Overriding is a subclass replacing a parent's method of the same name. Overloading means several methods with the same name but different parameter lists, chosen by argument types at compile time, as in Java or C++. Python does not overload by signature: defining a method again replaces the earlier definition. Use default arguments, *args, or functools.singledispatch for type-based dispatch.",
+    answer: "Overriding is a subclass replacing a parent's method of the same name. Overloading means several methods with the same name but different parameter lists, chosen by argument types at compile time, as in Java or C++. Python does not overload by signature: defining a method again replaces the earlier definition. Use default arguments, *args, or functools.singledispatch (singledispatchmethod for methods) for type-based dispatch; typing.overload only describes signatures for type checkers.",
     code: `class Greeter:
     def greet(self, name):
         return f"Hi {name}"
@@ -105,7 +105,7 @@ except TypeError:
   {
     group: "Inheritance & composition",
     question: "What is the difference between an abstract class and an interface? How do you express them in Python?",
-    answer: "An abstract class defines a contract and can share some implementation; it cannot be instantiated until its abstract methods are implemented. An interface defines only the contract. Java enforces the distinction in the language. In Python, a class inheriting abc.ABC with @abstractmethod methods raises TypeError if you instantiate it (or a subclass that has not implemented them); typing.Protocol describes an interface structurally and is checked by type checkers, not at runtime; plain duck typing needs no declaration at all.",
+    answer: "An abstract class defines a contract and can share some implementation; it cannot be instantiated until its abstract methods are implemented. An interface defines the contract with little or no implementation (Java interfaces have allowed default methods since Java 8). Java and C# make interfaces a language construct. In Python, a class inheriting abc.ABC with @abstractmethod methods raises TypeError if you instantiate it (or a subclass that has not implemented them); typing.Protocol describes an interface structurally and is checked by type checkers (isinstance works only with @runtime_checkable, and then checks only that the methods exist); plain duck typing needs no declaration at all.",
     code: `from abc import ABC, abstractmethod
 
 class Notifier(ABC):
@@ -136,7 +136,7 @@ except TypeError:
   {
     group: "SOLID",
     question: "What is the Single Responsibility Principle?",
-    answer: "A class should have one reason to change: one responsibility. A class that calculates invoices and also formats and emails them changes whenever tax rules, layout or email delivery change. Splitting it means each change touches one place and each part can be tested alone. The trade-off is more classes; do not split until responsibilities genuinely differ.",
+    answer: "A class should have one reason to change; Robert C. Martin later phrased it as being responsible to one actor, meaning one group of people who request changes. A class that calculates invoices and also formats and emails them changes whenever tax rules, layout or email delivery change. Splitting it means each change touches one place and each part can be tested alone. The trade-off is more classes; do not split until responsibilities genuinely differ.",
     followUps: ["How do you decide what counts as one responsibility?"],
     source: { title: "DigitalOcean — SOLID: The First 5 Principles of Object Oriented Design", url: "https://www.digitalocean.com/community/conceptual-articles/s-o-l-i-d-the-first-five-principles-of-object-oriented-design" },
   },
@@ -183,7 +183,7 @@ print(stretch(Rectangle(2, 3)), stretch(Square(3, 3)))   # caller expects 30 bot
   {
     group: "SOLID",
     question: "What is the Dependency Inversion Principle, and how is it different from dependency injection?",
-    answer: "Dependency inversion says high-level policy code should depend on abstractions, not low-level details: an OrderService should depend on \"something that can notify\", not on a specific SMTP client. Dependency injection is a technique for how an object receives a dependency — from outside, usually through the constructor. Injection is the common way to achieve inversion, but they differ: you can inject a low-level concrete class and still violate inversion. Python needs no injection framework; passing objects in is enough.",
+    answer: "Dependency inversion says high-level policy code should not depend on low-level details; both should depend on abstractions, ideally defined by the high-level side: an OrderService should depend on \"something that can notify\", not on a specific SMTP client. Dependency injection is a technique for how an object receives a dependency — from outside, usually through the constructor. Injection is the common way to achieve inversion, but they differ: you can inject a low-level concrete class and still violate inversion. Python needs no injection framework; passing objects in is enough.",
     followUps: ["Why does dependency inversion make code easier to test?"],
     source: { title: "Brett L. Schuchert — DIP in the Wild (martinfowler.com)", url: "https://martinfowler.com/articles/dipInTheWild.html" },
   },

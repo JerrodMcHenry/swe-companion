@@ -7,23 +7,20 @@ const icons: Record<string, string> = {
   building: "M5 21V4h14v17M3 21h18M9 8h1M14 8h1M9 12h1M14 12h1M9 16h1M14 16h1",
   bank: "M3 21h18M5 21V10l7-5 7 5v11M9 21v-6h6v6",
   document: "M6 3h9l4 4v14H6zM9 12h6M9 16h4",
+  seed: "M12 21v-8M12 13c0-4 3-7 7-7 0 4-3 7-7 7zM12 13c0-3-2-6-6-6 0 3 2 6 6 6",
 };
 
 export function Logo({ company, large }: { company: Company; large?: boolean }) {
   return (
     <span className={large ? "logo lg" : "logo"} aria-hidden="true">
-      {company.logo ? (
-        // Local SVG logo assets; next/image is unnecessary for small static SVGs in a static export.
-        // eslint-disable-next-line @next/next/no-img-element
-        <img src={company.logo} alt="" className={company.mono ? "mono" : undefined} />
-      ) : company.icon ? (
+      {company.icon ? (
         <span className="gicon">
           <svg width={large ? 22 : 17} height={large ? 22 : 17} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
             <path d={icons[company.icon]} />
           </svg>
         </span>
       ) : (
-        // Neutral monogram where a company's brand rules do not permit using its logo here.
+        // Neutral monogram for every company: no brand owner has licensed its logo for this use (research/phase-e/brand-review.md).
         <span className="gicon mono-tile">{company.name[0]}</span>
       )}
     </span>

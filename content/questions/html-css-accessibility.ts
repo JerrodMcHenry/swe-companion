@@ -18,7 +18,7 @@ const questions: Question[] = [
   {
     group: "HTML & CSS",
     question: "What should an image's alt text say?",
-    answer: "The information the image conveys, briefly, as you would describe it to someone who cannot see it — and nothing the surrounding text already says. If the image is a link, the alt text (or other text in the link) must say where the link goes. If the image is purely decorative, use an empty alt=\"\" so screen readers skip it, rather than leaving the attribute out. Do not put text in images. Web Accessibility Fundamentals covers this in more depth.",
+    answer: "The information the image conveys, briefly, as you would describe it to someone who cannot see it — and nothing the surrounding text already says. If the image is a link, the alt text (or other text in the link) must say where the link goes. If the image is purely decorative, use an empty alt=\"\" so screen readers skip it, rather than leaving the attribute out. Avoid images of text (logos are the usual exception); when an image does contain text that matters, the alt repeats it.",
     followUps: ["What alt text would you give a company logo that links to the home page?"],
     source: { title: "MDN — HTML images: Alternative text", url: "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/HTML_images" },
   },
@@ -39,7 +39,7 @@ const questions: Question[] = [
   {
     group: "HTML & CSS",
     question: "Two CSS rules target the same element. Which one wins?",
-    answer: "The cascade decides. First importance and origin (an !important declaration beats a normal one); then specificity: inline styles beat ID selectors, which beat classes, attribute selectors and pseudo-classes, which beat type selectors and pseudo-elements; if specificity is equal, the rule that comes later in the source wins. Properties not set on an element may be inherited from its parent (color and font are; padding and border are not). In practice, open the Styles pane in developer tools: it shows the winning rule and crosses out the overridden ones. Prefer lowering specificity to adding !important.",
+    answer: "The cascade decides. First origin and importance (an !important declaration beats a normal one); then inline style attributes beat stylesheet rules; then cascade layers (@layer), if you use them; then specificity: ID selectors beat classes, attribute selectors and pseudo-classes, which beat type selectors and pseudo-elements; if specificity is equal, the rule that comes later in the source wins. Properties not set on an element may be inherited from its parent (color and font are; padding and border are not). In practice, open the Styles pane in developer tools: it shows the winning rule and crosses out the overridden ones. Prefer lowering specificity to adding !important.",
     followUps: ["Why is overusing IDs or !important in stylesheets a maintenance problem?"],
     source: { title: "MDN — Handling conflicts", url: "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics/Handling_conflicts" },
   },
@@ -67,7 +67,7 @@ const questions: Question[] = [
   {
     group: "HTML & CSS",
     question: "What is the difference between position: relative, absolute, fixed and sticky?",
-    answer: "relative keeps the element in normal flow and offsets it with top or left, and it becomes the reference point for absolutely positioned children. absolute removes the element from flow and positions it relative to its nearest positioned ancestor (or the page). fixed positions it relative to the viewport, so it stays in place when scrolling. sticky behaves like relative until a scroll threshold, then sticks like fixed within its container. z-index controls stacking of positioned elements.",
+    answer: "relative keeps the element in normal flow and offsets it with top or left, and it becomes the reference point for absolutely positioned children. absolute removes the element from flow and positions it relative to its nearest positioned ancestor (or the page). fixed positions it relative to the viewport, so it stays in place when scrolling (unless an ancestor has a transform or filter, which becomes its reference instead). sticky behaves like relative until a scroll threshold, then sticks like fixed within its container. z-index controls stacking of positioned elements.",
     followUps: ["How would you place a badge in the top-right corner of a card?"],
     source: { title: "MDN — Positioning", url: "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/CSS_layout/Positioning" },
   },
@@ -109,7 +109,7 @@ const questions: Question[] = [
   {
     group: "Accessibility",
     question: "What colour contrast does WCAG require?",
-    answer: "For level AA, text needs a contrast ratio of at least 4.5:1 against its background, and large text (about 18pt, or 14pt bold) at least 3:1. Check with a contrast checker or the browser's DevTools, including text on images, placeholder and disabled-looking text that still matters, and focus indicators. Contrast is separate from the rule that colour must not be the only way to convey information — a red border alone does not tell a colour-blind user which field is wrong.",
+    answer: "For level AA, text needs a contrast ratio of at least 4.5:1 against its background, and large text (about 18pt, or 14pt bold) at least 3:1. Check with a contrast checker or the browser's DevTools, including text on images and placeholder text; text in disabled controls is exempt. A separate AA rule (1.4.11 Non-text Contrast) requires 3:1 for icons, input borders and focus indicators. Contrast is separate from the rule that colour must not be the only way to convey information — a red border alone does not tell a colour-blind user which field is wrong.",
     followUps: ["How would you show an error state without relying on colour?"],
     source: { title: "W3C — Understanding SC 1.4.3: Contrast (Minimum)", url: "https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html" },
   },

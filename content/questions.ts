@@ -20,6 +20,10 @@ import projects from "./questions/projects-take-homes";
 import aiEngineering from "./questions/ai-engineering";
 import customerScenarios from "./questions/customer-scenarios";
 import cpp from "./questions/cpp";
+import frontendSystemDesign from "./questions/frontend-system-design";
+import dataEngineering from "./questions/data-engineering";
+import mlFundamentals from "./questions/ml-fundamentals";
+import mlSystemDesign from "./questions/ml-system-design";
 
 const TIH = "https://www.techinterviewhandbook.org";
 const DI = "https://github.com/Devinterview-io";
@@ -55,7 +59,7 @@ export const questionSets: QuestionSet[] = [
     resources: [
       { title: "Refactoring.Guru — design patterns", url: "https://refactoring.guru/design-patterns/catalog", note: "Clear illustrated explanations of each classic pattern. The pattern pages are free; the book and code examples package are paid." },
       { title: "DevInterview — OOP interview questions", url: `${DI}/oop-interview-questions`, note: "About 15 questions with answers are free in the GitHub README; the rest are on devinterview.io and mostly premium." },
-      { title: "Awesome Low-Level Design — OOP and SOLID", url: "https://github.com/ashishps1/awesome-low-level-design", note: "Free articles on OOP concepts, SOLID and patterns, linked from the repository's README." },
+      { title: "Awesome Low-Level Design — OOP and SOLID", url: "https://github.com/ashishps1/awesome-low-level-design#-oop-fundamentals", note: "Short articles on OOP concepts, class relationships, SOLID and patterns, linked from the README. Article text is free; the linked site's audio and video are premium." },
     ],
   },
   {
@@ -74,7 +78,7 @@ export const questionSets: QuestionSet[] = [
     description: "Entry-level design discussions: requirements, an API, a data model, components and simple scaling trade-offs.",
     questions: systemDesign,
     resources: [
-      { title: "Hello Interview — System Design in a Hurry", url: "https://www.hellointerview.com/learn/system-design/in-a-hurry/introduction", note: "A concise framework and core concepts. Free to read at the time of review; the site sells coaching." },
+      { title: "Hello Interview — System Design in a Hurry", url: "https://www.hellointerview.com/learn/system-design/in-a-hurry/introduction", note: "A concise framework and core concepts. The core pages are free without an account; some deep dives are premium." },
       { title: "System Design Primer", url: "https://github.com/donnemartin/system-design-primer", note: "The standard free reference. At entry level read the interview approach and the load balancer, database and cache sections; skip the rest unless your recruiter confirms a design round." },
     ],
   },
@@ -87,7 +91,31 @@ export const questionSets: QuestionSet[] = [
       { title: "Anthropic — Building effective agents", url: "https://www.anthropic.com/engineering/building-effective-agents", note: "Workflows versus agents and the common patterns, with when not to build an agent. Free." },
       { title: "Chip Huyen — Building a generative AI platform", url: "https://huyenchip.com/2024/07/25/genai-platform.html", note: "The best single overview of a production LLM system: context, guardrails, routing, caching and observability. Free." },
       { title: "Hamel Husain and Shreya Shankar — AI Evals FAQ", url: "https://hamel.dev/blog/posts/evals-faq/", note: "Practical answers on error analysis, LLM judges and RAG evaluation. Free (the authors also sell a course)." },
-      { title: "AI Engineering Field Guide — interview questions", url: "https://github.com/alexeygrigorev/ai-engineering-field-guide", note: "Theory and AI system design questions collected from candidate reports, each cited. Questions only, no answers. Free." },
+      { title: "AI Engineering Field Guide — interview questions", url: "https://github.com/alexeygrigorev/ai-engineering-field-guide/blob/main/interview/02-questions.md", note: "Theory, coding and AI system design questions collected from candidate reports, each cited. Questions only, no answers. Free." },
+    ],
+  },
+  {
+    slug: "ml-fundamentals",
+    title: "ML Fundamentals",
+    description: "Machine learning breadth for ML Engineer interviews: splits and validation, overfitting, features and leakage, metrics, common algorithms, experiments and ML coding.",
+    questions: mlFundamentals,
+    resources: [
+      { title: "Google ML Crash Course — Classification metrics", url: "https://developers.google.com/machine-learning/crash-course/classification/accuracy-precision-recall", note: "One short page on accuracy, precision and recall and when each matters; the next page covers ROC and AUC. Read these pages only, not the course. Free." },
+      { title: "AIMLInterviews — ML coding", url: "https://github.com/alirezadir/AIMLInterviews/blob/main/src/MLC/ml-coding.md", note: "From-scratch implementations asked in ML coding rounds (logistic regression, k-means, k-NN, softmax) with Python answers. Free (the README advertises paid coaching)." },
+      { title: "Chip Huyen — ML Interviews Book: ML questions", url: "https://huyenchip.com/ml-interviews-book/contents/8.1.2-questions.html", note: "Lists of ML breadth questions by topic, without answers; written around 2021. Free." },
+      { title: "scikit-learn — Common pitfalls and recommended practices", url: "https://scikit-learn.org/stable/common_pitfalls.html", note: "Official reference for data leakage and inconsistent preprocessing, with examples. Free." },
+    ],
+  },
+  {
+    slug: "ml-system-design",
+    title: "ML System Design",
+    description: "Designing production ML systems: problem framing, labels, training pipelines, feature stores, serving, monitoring, drift and common design scenarios. Mainly asked of experienced candidates.",
+    questions: mlSystemDesign,
+    resources: [
+      { title: "Hello Interview — ML System Design in a Hurry", url: "https://www.hellointerview.com/learn/ml-system-design/in-a-hurry/introduction", note: "A delivery framework and core concepts, with free worked breakdowns such as video recommendations and bot detection. Mostly free without an account; some sections are premium." },
+      { title: "ByteByteGo — ML System Design Interview (free chapters)", url: "https://bytebytego.com/courses/machine-learning-system-design-interview/video-recommendation-system", note: "Worked designs in book form; 4 of 11 chapters, including video recommendation, are free to read. The rest is paid." },
+      { title: "Chip Huyen — Data distribution shifts and monitoring", url: "https://huyenchip.com/2022/02/07/data-distribution-shifts-and-monitoring.html", note: "The best free explanation of covariate shift, label shift, concept drift and what to monitor. Free." },
+      { title: "Google — Rules of Machine Learning", url: "https://developers.google.com/machine-learning/guides/rules-of-ml", note: "Practical engineering rules for production ML, including training–serving skew and starting simple. Free." },
     ],
   },
   {
@@ -97,7 +125,7 @@ export const questionSets: QuestionSet[] = [
     questions: cpp,
     resources: [
       { title: "C++ Super-FAQ (isocpp.org)", url: "https://isocpp.org/wiki/faq/virtual-functions", note: "Question-and-answer reference from the Standard C++ Foundation; see also its rvalue-reference and memory-management pages. Free." },
-      { title: "LearnCpp — Smart pointers and move semantics", url: "https://www.learncpp.com/cpp-tutorial/introduction-to-smart-pointers-move-semantics/", note: "Chapter 22 explains move semantics, unique_ptr and shared_ptr clearly; chapter 25 covers virtual functions and the vtable. Free." },
+      { title: "LearnCpp — Smart pointers and move semantics", url: "https://www.learncpp.com/cpp-tutorial/introduction-to-smart-pointers-move-semantics/", note: "One clear page on why move semantics and smart pointers exist; the following lessons cover unique_ptr and shared_ptr if you need them. Free." },
       { title: "C++ Core Guidelines — Resource management", url: "https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#s-resource", note: "Authoritative rules on RAII, ownership and smart pointers to cite in answers. Free." },
     ],
   },
@@ -108,9 +136,20 @@ export const questionSets: QuestionSet[] = [
     questions: sql,
     resources: [
       { title: "LeetCode — SQL 50", url: "https://leetcode.com/studyplan/top-sql-50/", note: "Fifty SQL interview problems, mostly easy with some medium. Free; needs a LeetCode account." },
-      { title: "PostgreSQL Exercises", url: "https://pgexercises.com/questions/basic/", note: "Interactive exercises on joins, aggregates and window functions in the browser. Free, no account." },
+      { title: "PostgreSQL Exercises", url: "https://pgexercises.com/questions/basic/", note: "Interactive exercises on joins and aggregates (including window functions) in the browser. Free, no account." },
       { title: "DevInterview — SQL interview questions", url: `${DI}/sql-interview-questions`, note: "About 15 questions with answers are free in the GitHub README; the rest are on devinterview.io and mostly premium." },
       { title: "Use The Index, Luke — Anatomy of an index", url: "https://use-the-index-luke.com/sql/anatomy", note: "The clearest free explanation of how indexes work, for performance questions." },
+    ],
+  },
+  {
+    slug: "data-engineering",
+    title: "Data Engineering",
+    description: "Data modeling, pipelines, storage and distributed processing, data quality, data system design and representative data exercises. Analytical SQL is in SQL & Databases.",
+    questions: dataEngineering,
+    resources: [
+      { title: "Zach Wilson — How to pass the data engineering SQL interview", url: "https://blog.dataexpert.io/p/how-to-pass-data-engineering-sql", note: "What SQL screens look like and the window-function patterns they test. Free article (the author sells courses)." },
+      { title: "Start Data Engineering — Data engineering system design interview", url: "https://www.startdataengineering.com/post/de_interview_sd/", note: "A step-by-step framework for pipeline design rounds: requirements, modeling, pipeline design, data quality, storage and backfills. Free." },
+      { title: "Kimball Group — Dimensional modeling techniques", url: "https://www.kimballgroup.com/data-warehouse-business-intelligence-resources/kimball-techniques/dimensional-modeling-techniques/", note: "Short official definitions of facts, dimensions, grain and slowly changing dimensions from the method's originators. Free." },
     ],
   },
   {
@@ -122,7 +161,7 @@ export const questionSets: QuestionSet[] = [
       { title: "DevInterview — Concurrency interview questions", url: `${DI}/concurrency-interview-questions`, note: "Threads, locks and synchronization. About 15 questions with answers are free in the GitHub README; the rest are on devinterview.io and mostly premium." },
       { title: "Carl Cook — When a Microsecond Is an Eternity (CppCon 2017)", url: "https://www.youtube.com/watch?v=NH1Tta7purM", note: "A trading-firm engineer on low-latency C++: caches, allocation, branching and measurement. Free video." },
       { title: "Algorithmica — CPU cache", url: "https://en.algorithmica.org/hpc/cpu-cache/", note: "Clear explanation of cache lines, locality and memory bandwidth with benchmarks. Free." },
-      { title: "Erik Rigtorp — Optimizing a ring buffer for throughput", url: "https://rigtorp.se/ringbuffer/", note: "A lock-free single-producer single-consumer queue in C++, including false-sharing fixes. Free." },
+      { title: "Erik Rigtorp — Optimizing a ring buffer for throughput", url: "https://rigtorp.se/ringbuffer/", note: "A lock-free single-producer single-consumer queue in C++, including cache-line alignment to cut coherency traffic. Free." },
     ],
   },
   {
@@ -197,6 +236,18 @@ export const questionSets: QuestionSet[] = [
     ],
   },
   {
+    slug: "frontend-system-design",
+    title: "Frontend System Design & Web Performance",
+    description: "Core Web Vitals, diagnosing slow pages, rendering strategies, caching, frontend system design, frontend security and representative coding exercises.",
+    questions: frontendSystemDesign,
+    resources: [
+      { title: "Front End Interview Handbook", url: "https://www.frontendinterviewhandbook.com/introduction", note: "The clearest map of frontend interview formats: JavaScript utility functions, UI components, quiz questions and system design. Free (the site promotes GreatFrontEnd)." },
+      { title: "GreatFrontEnd — Front End System Design Playbook", url: "https://www.greatfrontend.com/front-end-system-design-playbook", note: "The RADIO framework and guide chapters are free to read without an account; of the practice questions, only Autocomplete and News Feed are free. JavaScript and UI coding questions have free prompts and tests; many solutions are premium." },
+      { title: "web.dev — Web Vitals", url: "https://web.dev/articles/vitals", note: "Google's definitions and thresholds for LCP, INP and CLS, with linked optimization guides. Free." },
+      { title: "WAI-ARIA Authoring Practices — Patterns", url: "https://www.w3.org/WAI/ARIA/apg/patterns/", note: "Keyboard and ARIA behavior for comboboxes, tabs, dialogs and menus, with working examples: the reference for accessible component exercises. Free." },
+    ],
+  },
+  {
     slug: "testing-debugging",
     title: "Testing & Debugging",
     description: "Test types and test design, debugging unfamiliar code, and code review.",
@@ -239,11 +290,12 @@ export const questionSets: QuestionSet[] = [
   {
     slug: "customer-scenarios",
     title: "Customer & Solutions Scenarios",
-    description: "Scenario questions for customer-facing engineers: discovery, building in customer environments and stakeholder communication.",
+    description: "Scenario questions for forward deployed and solutions engineers: discovery, building in customer environments, demos and proofs of concept, integration and security, objections and business value, and communication. Few strong free resources exist for these rounds, so answers are original.",
     questions: customerScenarios,
     resources: [
       { title: "The Pragmatic Engineer — What are forward deployed engineers?", url: "https://newsletter.pragmaticengineer.com/p/forward-deployed-engineers", note: "What the role involves at Palantir, OpenAI and others, and how it differs from solutions engineering. Free." },
       { title: "AI Engineering Field Guide — FDE role analysis", url: "https://github.com/alexeygrigorev/ai-engineering-field-guide/blob/main/role/06-fde.md", note: "Analysis of FDE job listings: growth, responsibilities and the skills employers ask for. Describes job expectations, not interview content. Free." },
+      { title: "AWS — Landing your early cloud career role: presentation skills", url: "https://aws.amazon.com/blogs/training-and-certification/landing-your-early-cloud-career-role-blog-3-sharpening-your-presentation-skills/", note: "Official AWS Training and Certification advice (2021) for early-career solutions architect candidates: presenting technical content to technical and non-technical audiences. Blog 2 in the series covers the technical toolkit. Free." },
     ],
   },
 ];
